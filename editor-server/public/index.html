@@ -477,7 +477,12 @@ $("#form").addEventListener("submit", async (e) => {
     return;
   }
 
+  // Bestehendes Objekt als Basis nehmen (nicht nur die im Formular vorhandenen
+  // Felder) - sonst gehen Felder, die (noch) kein eigenes Formularfeld haben
+  // (z.B. lat/lng aus dem Geocoding), bei jedem Speichern verloren.
+  const existing = currentSlug ? state.studios.find((s) => s.slug === currentSlug) : null;
   const entry = {
+    ...(existing || {}),
     slug,
     name: $("#f-name").value.trim(),
     address: $("#f-address").value.trim(),
@@ -495,7 +500,7 @@ $("#form").addEventListener("submit", async (e) => {
     special_events: $("#f-special_events").value.trim(),
     description: $("#f-description").value.trim(),
     image: $("#f-image").value.trim(),
-    quelle_hinweis: (currentSlug && state.studios.find((s) => s.slug === currentSlug) || {}).quelle_hinweis || "Manuell im Editor gepflegt.",
+    quelle_hinweis: (existing || {}).quelle_hinweis || "Manuell im Editor gepflegt.",
     hat_instagram: $("#f-hat_instagram").value.trim(),
     custom_faq: getFaqJson(),
   };
