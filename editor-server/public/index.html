@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Keramik-Verzeichnis Editor</title>
+<style>
+  * { box-sizing: border-box; }
+  body { font-family: system-ui, sans-serif; margin: 0; background: #f5f5f0; color: #222; }
+  header { background: #333; color: #fff; padding: 0.8rem 1.2rem; display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+  header h1 { font-size: 1.1rem; margin: 0; flex: 1; }
+  header button, header input, .toolbar button, .toolbar input { font-size: 0.9rem; padding: 0.4rem 0.7rem; }
+  #status { font-size: 0.85rem; color: #ffe; }
+  #status.error { color: #ffb3b3; font-weight: bold; }
+  main { padding: 1rem; max-width: 1200px; margin: 0 auto; }
+  .toolbar { display: flex; gap: 0.6rem; margin-bottom: 0.8rem; flex-wrap: wrap; align-items: center; }
+  .toolbar input[type="text"] { flex: 1; min-width: 200px; padding: 0.5rem; }
+  table { width: 100%; border-collapse: collapse; background: #fff; font-size: 0.9rem; }
+  th, td { border-bottom: 1px solid #ddd; padding: 0.5rem 0.6rem; text-align: left; }
+  th { cursor: pointer; background: #eee; user-select: none; position: sticky; top: 0; }
+  th:hover { background: #e0e0e0; }
+  tbody tr:hover { background: #f0f6ff; cursor: pointer; }
+  .badge { display: inline-block; padding: 0.1rem 0.5rem; border-radius: 10px; font-size: 0.75rem; }
+  .badge.ok { background: #d4edda; color: #155724; }
+  .badge.todo { background: #fff3cd; color: #856404; }
+  .count { color: #666; font-size: 0.85rem; margin-bottom: 0.5rem; }
+
+  /* Overlay / Formular */
+  #overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 10; overflow-y: auto; }
+  #overlay.open { display: block; }
+  #panel { background: #fff; max-width: 800px; margin: 2rem auto; padding: 1.5rem; border-radius: 8px; }
+  #panel h2 { margin-top: 0; }
+  .field { margin-bottom: 0.9rem; }
+  .field label { display: block; font-weight: 600; font-size: 0.85rem; margin-bottom: 0.25rem; }
+  .field input[type="text"], .field input[type="url"], .field input[type="tel"], .field textarea {
+    width: 100%; padding: 0.5rem; font-size: 0.9rem; border: 1px solid #ccc; border-radius: 4px; font-family: inherit;
+  }
+  .field textarea { min-height: 4rem; resize: vertical; }
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .row3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
+  .tag-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 0.3rem; }
+  .tag-grid label { font-weight: normal; display: flex; align-items: center; gap: 0.4rem; font-size: 0.85rem; }
+  .hint { font-size: 0.78rem; color: #777; margin-top: 0.2rem; }
+  fieldset { border: 1px solid #ddd; border-radius: 6px; margin-bottom: 1rem; }
+  legend { font-weight: 600; padding: 0 0.4rem; }
+  .faq-row { display: flex; gap: 0.5rem; margin-bottom: 0.4rem; align-items: flex-start; }
+  .faq-row input { flex: 1; }
+  .faq-row button, .photo-item button { background: #c0392b; color: #fff; border: none; border-radius: 4px; padding: 0.3rem 0.6rem; cursor: pointer; }
+  .photo-grid { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 0.5rem; }
+  .photo-item { position: relative; }
+  .photo-item img { width: 100px; height: 100px; object-fit: cover; border-radius: 4px; border: 1px solid #ccc; display: block; }
+  .photo-item .use-btn { margin-top: 0.2rem; font-size: 0.75rem; width: 100%; background: #2e7d32; color: #fff; border: none; border-radius: 4px; padding: 0.2rem; cursor: pointer; }
+  .photo-item .del-btn { position: absolute; top: 2px; right: 2px; padding: 0.1rem 0.4rem; font-size: 0.7rem; }
+  .actions { display: flex; gap: 0.6rem; margin-top: 1.2rem; flex-wrap: wrap; }
+  button.primary { background: #2456cc; color: #fff; border: none; padding: 0.6rem 1.2rem; border-radius: 5px; cursor: pointer; font-size: 0.95rem; }
+  button.secondary { background: #eee; border: 1px solid #ccc; padding: 0.6rem 1.2rem; border-radius: 5px; cursor: pointer; }
+  button.danger { background: #c0392b; color: #fff; border: none; padding: 0.6rem 1.2rem; border-radius: 5px; cursor: pointer; }
+  #close-panel { position: absolute; top: 1rem; right: 1.2rem; background: none; border: none; font-size: 1.4rem; cursor: pointer; }
+  #panel { position: relative; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Keramik-Verzeichnis Editor</h1>
+  <span id="status">lädt…</span>
+  <button id="btn-new">+ Neues Studio</button>
+  <button id="btn-export">CSV Export</button>
+  <button id="btn-import-trigger">CSV Import</button>
+  <input type="file" id="btn-import" accept=".csv" hidden>
+</header>
+
+<main>
+  <div class="toolbar">
+    <input type="text" id="search" placeholder="Suche nach Name, Stadt, Adresse…">
+    <label><input type="checkbox" id="only-todo"> nur unreviewte anzeigen</label>
+  </div>
+  <div class="count" id="count"></div>
+  <table>
+    <thead>
+      <tr>
+        <th data-sort="name">Name</th>
+        <th data-sort="city">Stadt</th>
+        <th data-sort="website">Website</th>
+        <th data-sort="tags">Tags</th>
+        <th data-sort="reviewed">Status</th>
+      </tr>
+    </thead>
+    <tbody id="rows"></tbody>
+  </table>
+</main>
+
+<div id="overlay">
+  <div id="panel">
+    <button id="close-panel">&times;</button>
+    <h2 id="panel-title">Studio bearbeiten</h2>
+    <form id="form">
+      <div class="row2">
+        <div class="field">
+          <label>Name *</label>
+          <input type="text" id="f-name" required>
+        </div>
+        <div class="field">
+          <label>Stadt *</label>
+          <input type="text" id="f-city" required>
+        </div>
+      </div>
+      <div class="field">
+        <label>Adresse *</label>
+        <input type="text" id="f-address" required>
+      </div>
+      <div class="field">
+        <label>Slug (URL, wird aus Name+Stadt vorgeschlagen, bei Bedarf anpassen)</label>
+        <input type="text" id="f-slug">
+        <div class="hint">Nur Kleinbuchstaben, Zahlen und Bindestriche. Ändern nach dem ersten Speichern vermeiden (Link ändert sich sonst).</div>
+      </div>
+      <div class="row2">
+        <div class="field">
+          <label>Telefon</label>
+          <input type="tel" id="f-phone">
+        </div>
+        <div class="field">
+          <label>Website</label>
+          <input type="url" id="f-website">
+        </div>
+      </div>
+      <div class="field">
+        <label>Öffnungszeiten</label>
+        <input type="text" id="f-opening_hours" placeholder="z.B. Di 16-18 Uhr, Do 16-21 Uhr">
+      </div>
+
+      <fieldset>
+        <legend>Preise</legend>
+        <div class="row3">
+          <div class="field">
+            <label>Preis ab – Tasse (price_mug)</label>
+            <input type="text" id="f-price_mug">
+          </div>
+          <div class="field">
+            <label>Preis ab – Teller/Schale (price_plate)</label>
+            <input type="text" id="f-price_plate">
+          </div>
+          <div class="field">
+            <label>Studiogebühr (studio_fee)</label>
+            <input type="text" id="f-studio_fee">
+          </div>
+        </div>
+        <div class="field">
+          <label>Preis-Hinweis / Details (price_note)</label>
+          <textarea id="f-price_note"></textarea>
+        </div>
+      </fieldset>
+
+      <div class="row2">
+        <div class="field">
+          <label>Abholzeit (pickup_time)</label>
+          <input type="text" id="f-pickup_time" placeholder="z.B. ca. 2 Wochen">
+        </div>
+        <div class="field">
+          <label>Instagram</label>
+          <input type="text" id="f-hat_instagram" placeholder="ja, https://instagram.com/...">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Besondere Events (special_events)</label>
+        <textarea id="f-special_events"></textarea>
+      </div>
+
+      <div class="field">
+        <label>Beschreibung</label>
+        <textarea id="f-description" style="min-height:6rem"></textarea>
+      </div>
+
+      <fieldset>
+        <legend>Tags</legend>
+        <div class="tag-grid" id="tag-grid"></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Häufige Fragen (FAQ)</legend>
+        <div id="faq-list"></div>
+        <button type="button" class="secondary" id="add-faq">+ Frage hinzufügen</button>
+      </fieldset>
+
+      <fieldset>
+        <legend>Bild</legend>
+        <div class="field">
+          <label>Bild-URL (wird auf der Website angezeigt)</label>
+          <input type="text" id="f-image" placeholder="https://... oder ../editor-server/fotos/<slug>/datei.jpg">
+        </div>
+        <div class="field">
+          <label>Foto hochladen (lokal, für Vorschau/Auswahl – Studio muss vorher gespeichert sein)</label>
+          <input type="file" id="photo-upload" accept="image/*" multiple>
+          <div class="hint">Hochgeladene Dateien landen unter <code>editor-server/fotos/&lt;slug&gt;/</code> und müssen zusätzlich per Git committet/gepusht werden, damit sie beim Live-Build verfügbar sind.</div>
+        </div>
+        <div class="photo-grid" id="photo-grid"></div>
+      </fieldset>
+
+      <div class="field">
+        <label><input type="checkbox" id="f-reviewed"> Als geprüft markieren (reviewed)</label>
+      </div>
+
+      <div class="actions">
+        <button type="submit" class="primary">Speichern</button>
+        <button type="button" class="secondary" id="btn-cancel">Abbrechen</button>
+        <button type="button" class="danger" id="btn-delete" style="margin-left:auto;">Studio löschen</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+const TAGS = [
+  ["kids-friendly", "Kinderfreundlich"],
+  ["birthday-parties", "Geburtstage"],
+  ["hen-party", "Junggesellinnenabschied"],
+  ["corporate-events", "Firmenevents"],
+  ["date-night", "Date-Night"],
+  ["walk-in", "Walk-in"],
+  ["reservation-empfohlen", "Reservation empfohlen"],
+  ["reservation-only", "Nur mit Reservation"],
+  ["at-home-kits", "Kits zum Mitnehmen"],
+  ["pottery-wheel", "Töpferscheibe"],
+  ["other-crafts", "Weitere Kreativangebote"],
+  ["themed-events", "Themen-Abende"],
+];
+
+let state = { studios: [], reviewed: {} };
+let currentSlug = null; // null = neues Studio
+let sortKey = "name";
+let sortDir = 1;
+
+const $ = (sel) => document.querySelector(sel);
+const statusEl = $("#status");
+
+function setStatus(text, isError) {
+  statusEl.textContent = text;
+  statusEl.classList.toggle("error", !!isError);
+}
+
+async function loadState() {
+  setStatus("lädt…");
+  try {
+    const res = await fetch("/api/state");
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    state = await res.json();
+    setStatus(`geladen – ${state.studios.length} Studios`);
+    renderTable();
+  } catch (e) {
+    setStatus("Fehler beim Laden: " + e.message, true);
+  }
+}
+
+async function saveState() {
+  setStatus("speichert…");
+  try {
+    const res = await fetch("/api/state", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(state),
+    });
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    setStatus(`gespeichert – ${state.studios.length} Studios (Backup wurde automatisch angelegt)`);
+    renderTable();
+    return true;
+  } catch (e) {
+    setStatus("Fehler beim Speichern: " + e.message, true);
+    return false;
+  }
+}
+
+function slugify(str) {
+  return String(str || "")
+    .toLowerCase()
+    .replace(/ä/g, "ae").replace(/ö/g, "oe").replace(/ü/g, "ue")
+    .replace(/é|è|ê/g, "e").replace(/à|â/g, "a").replace(/ç/g, "c")
+    .replace(/ß/g, "ss")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+function renderTable() {
+  const q = $("#search").value.trim().toLowerCase();
+  const onlyTodo = $("#only-todo").checked;
+  let rows = state.studios.filter((s) => {
+    if (onlyTodo && state.reviewed[s.slug]) return false;
+    if (!q) return true;
+    return [s.name, s.city, s.address].some((v) => (v || "").toLowerCase().includes(q));
+  });
+  rows.sort((a, b) => {
+    let av, bv;
+    if (sortKey === "reviewed") {
+      av = state.reviewed[a.slug] ? 1 : 0;
+      bv = state.reviewed[b.slug] ? 1 : 0;
+    } else {
+      av = (a[sortKey] || "").toString().toLowerCase();
+      bv = (b[sortKey] || "").toString().toLowerCase();
+    }
+    if (av < bv) return -1 * sortDir;
+    if (av > bv) return 1 * sortDir;
+    return 0;
+  });
+  $("#count").textContent = `${rows.length} von ${state.studios.length} Studios angezeigt`;
+  $("#rows").innerHTML = rows.map((s) => {
+    const reviewed = !!state.reviewed[s.slug];
+    return `<tr data-slug="${escapeAttr(s.slug)}">
+      <td>${escapeHtml(s.name)}</td>
+      <td>${escapeHtml(s.city)}</td>
+      <td>${s.website ? `<a href="${escapeAttr(s.website)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">Link</a>` : ""}</td>
+      <td>${escapeHtml((s.tags || "").split(",").filter(Boolean).length + " Tags")}</td>
+      <td><span class="badge ${reviewed ? "ok" : "todo"}">${reviewed ? "geprüft" : "offen"}</span></td>
+    </tr>`;
+  }).join("");
+  document.querySelectorAll("#rows tr").forEach((tr) => {
+    tr.addEventListener("click", () => openEditor(tr.dataset.slug));
+  });
+}
+
+function escapeHtml(v) {
+  return String(v == null ? "" : v).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+}
+function escapeAttr(v) { return escapeHtml(v); }
+
+document.querySelectorAll("th[data-sort]").forEach((th) => {
+  th.addEventListener("click", () => {
+    const key = th.dataset.sort;
+    if (sortKey === key) sortDir *= -1; else { sortKey = key; sortDir = 1; }
+    renderTable();
+  });
+});
+$("#search").addEventListener("input", renderTable);
+$("#only-todo").addEventListener("change", renderTable);
+
+// ---------- Formular ----------
+
+function buildTagGrid(selected) {
+  const sel = new Set((selected || "").split(",").map((t) => t.trim()).filter(Boolean));
+  $("#tag-grid").innerHTML = TAGS.map(([val, label]) =>
+    `<label><input type="checkbox" value="${val}" ${sel.has(val) ? "checked" : ""}> ${label}</label>`
+  ).join("");
+}
+
+function getSelectedTags() {
+  return Array.from(document.querySelectorAll("#tag-grid input:checked")).map((el) => el.value).join(", ");
+}
+
+function buildFaqList(customFaqJson) {
+  let faqs = [];
+  try { faqs = JSON.parse(customFaqJson || "[]"); } catch (e) { faqs = []; }
+  $("#faq-list").innerHTML = "";
+  faqs.forEach((f) => addFaqRow(f.q, f.a));
+}
+
+function addFaqRow(q, a) {
+  const div = document.createElement("div");
+  div.className = "faq-row";
+  div.innerHTML = `
+    <input type="text" placeholder="Frage" class="faq-q" value="${escapeAttr(q || "")}">
+    <input type="text" placeholder="Antwort" class="faq-a" value="${escapeAttr(a || "")}">
+    <button type="button">&times;</button>`;
+  div.querySelector("button").addEventListener("click", () => div.remove());
+  $("#faq-list").appendChild(div);
+}
+$("#add-faq").addEventListener("click", () => addFaqRow("", ""));
+
+function getFaqJson() {
+  const rows = Array.from(document.querySelectorAll(".faq-row")).map((row) => ({
+    q: row.querySelector(".faq-q").value.trim(),
+    a: row.querySelector(".faq-a").value.trim(),
+  })).filter((f) => f.q && f.a);
+  return JSON.stringify(rows);
+}
+
+async function loadPhotos(slug) {
+  $("#photo-grid").innerHTML = "";
+  if (!slug) return;
+  try {
+    const res = await fetch(`/api/photos/${encodeURIComponent(slug)}`);
+    const photos = await res.json();
+    renderPhotoGrid(slug, photos);
+  } catch (e) { /* ignore */ }
+}
+
+function renderPhotoGrid(slug, photos) {
+  $("#photo-grid").innerHTML = photos.map((p) => `
+    <div class="photo-item" data-name="${escapeAttr(p.name)}">
+      <img src="${escapeAttr(p.url)}" alt="">
+      <button type="button" class="del-btn">&times;</button>
+      <button type="button" class="use-btn">als Bild nutzen</button>
+    </div>
+  `).join("");
+  document.querySelectorAll(".photo-item").forEach((item) => {
+    const name = item.dataset.name;
+    const url = item.querySelector("img").src;
+    item.querySelector(".use-btn").addEventListener("click", () => {
+      // relativer Pfad, den eleventy-img beim Build lokal lesen kann
+      $("#f-image").value = `../editor-server/fotos/${slug}/${name}`;
+    });
+    item.querySelector(".del-btn").addEventListener("click", async () => {
+      if (!confirm("Dieses Foto wirklich löschen?")) return;
+      await fetch(`/api/photos/${encodeURIComponent(slug)}/${encodeURIComponent(name)}`, { method: "DELETE" });
+      loadPhotos(slug);
+    });
+  });
+}
+
+$("#photo-upload").addEventListener("change", async (e) => {
+  const slug = $("#f-slug").value.trim();
+  if (!slug) { alert("Bitte zuerst Studio speichern (Slug wird benötigt), dann Fotos hochladen."); e.target.value = ""; return; }
+  const files = e.target.files;
+  if (!files.length) return;
+  const fd = new FormData();
+  for (const f of files) fd.append("photos", f);
+  setStatus("Fotos werden hochgeladen…");
+  try {
+    const res = await fetch(`/api/photos/${encodeURIComponent(slug)}`, { method: "POST", body: fd });
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    setStatus("Fotos hochgeladen.");
+    loadPhotos(slug);
+  } catch (err) {
+    setStatus("Fehler beim Hochladen: " + err.message, true);
+  }
+  e.target.value = "";
+});
+
+function openEditor(slug) {
+  currentSlug = slug || null;
+  const s = slug ? state.studios.find((x) => x.slug === slug) : null;
+  $("#panel-title").textContent = s ? `Bearbeiten: ${s.name}` : "Neues Studio";
+  $("#btn-delete").style.display = s ? "" : "none";
+
+  const fields = ["name","address","city","phone","website","opening_hours","price_mug","price_plate","studio_fee","price_note","pickup_time","special_events","description","hat_instagram","image"];
+  fields.forEach((f) => { $("#f-" + f).value = s ? (s[f] || "") : ""; });
+  $("#f-slug").value = s ? s.slug : "";
+  $("#f-reviewed").checked = s ? !!state.reviewed[s.slug] : false;
+
+  buildTagGrid(s ? s.tags : "");
+  buildFaqList(s ? s.custom_faq : "[]");
+  loadPhotos(s ? s.slug : null);
+
+  $("#overlay").classList.add("open");
+}
+
+function closeEditor() {
+  $("#overlay").classList.remove("open");
+  currentSlug = null;
+}
+
+$("#btn-new").addEventListener("click", () => openEditor(null));
+$("#close-panel").addEventListener("click", closeEditor);
+$("#btn-cancel").addEventListener("click", closeEditor);
+
+// Slug-Vorschlag bei neuem Studio, solange der Nutzer das Slug-Feld nicht selbst angefasst hat
+let slugTouched = false;
+$("#f-slug").addEventListener("input", () => { slugTouched = true; });
+["#f-name", "#f-city"].forEach((sel) => {
+  $(sel).addEventListener("input", () => {
+    if (currentSlug || slugTouched) return;
+    $("#f-slug").value = slugify(`${$("#f-name").value} ${$("#f-city").value}`);
+  });
+});
+
+$("#form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const slug = $("#f-slug").value.trim() || slugify(`${$("#f-name").value} ${$("#f-city").value}`);
+  if (!slug) { alert("Bitte Name und Stadt angeben."); return; }
+  const isNew = !currentSlug;
+  if (isNew && state.studios.some((s) => s.slug === slug)) {
+    alert("Ein Studio mit diesem Slug existiert bereits. Bitte Slug anpassen.");
+    return;
+  }
+
+  const entry = {
+    slug,
+    name: $("#f-name").value.trim(),
+    address: $("#f-address").value.trim(),
+    city: $("#f-city").value.trim(),
+    phone: $("#f-phone").value.trim(),
+    website: $("#f-website").value.trim(),
+    opening_hours: $("#f-opening_hours").value.trim(),
+    tags: getSelectedTags(),
+    price_mug: $("#f-price_mug").value.trim(),
+    price_plate: $("#f-price_plate").value.trim(),
+    studio_fee: $("#f-studio_fee").value.trim(),
+    price_note: $("#f-price_note").value.trim(),
+    pickup_time: $("#f-pickup_time").value.trim(),
+    special_events: $("#f-special_events").value.trim(),
+    description: $("#f-description").value.trim(),
+    image: $("#f-image").value.trim(),
+    quelle_hinweis: (currentSlug && state.studios.find((s) => s.slug === currentSlug) || {}).quelle_hinweis || "Manuell im Editor gepflegt.",
+    hat_instagram: $("#f-hat_instagram").value.trim(),
+    custom_faq: getFaqJson(),
+  };
+
+  if (currentSlug) {
+    // Slug-Aenderung: alten Eintrag entfernen, reviewed-Key migrieren
+    const idx = state.studios.findIndex((s) => s.slug === currentSlug);
+    if (idx !== -1) state.studios[idx] = entry;
+    if (currentSlug !== slug) {
+      delete state.reviewed[currentSlug];
+    }
+  } else {
+    state.studios.push(entry);
+  }
+  state.reviewed[slug] = $("#f-reviewed").checked;
+  currentSlug = slug;
+
+  const ok = await saveState();
+  if (ok) closeEditor();
+});
+
+$("#btn-delete").addEventListener("click", async () => {
+  if (!currentSlug) return;
+  if (!confirm("Dieses Studio wirklich endgültig löschen?")) return;
+  state.studios = state.studios.filter((s) => s.slug !== currentSlug);
+  delete state.reviewed[currentSlug];
+  const ok = await saveState();
+  if (ok) closeEditor();
+});
+
+// ---------- CSV Export / Import ----------
+
+const CSV_FIELDS = ["slug","name","address","city","phone","website","opening_hours","tags","price_mug","price_plate","studio_fee","price_note","pickup_time","special_events","description","image","quelle_hinweis","hat_instagram","custom_faq","reviewed"];
+
+function csvEscape(v) {
+  v = v == null ? "" : String(v);
+  if (/[",\n]/.test(v)) return '"' + v.replace(/"/g, '""') + '"';
+  return v;
+}
+
+$("#btn-export").addEventListener("click", () => {
+  const lines = [CSV_FIELDS.join(",")];
+  state.studios.forEach((s) => {
+    const row = CSV_FIELDS.map((f) => f === "reviewed" ? String(!!state.reviewed[s.slug]) : csvEscape(s[f]));
+    lines.push(row.join(","));
+  });
+  const blob = new Blob(["﻿" + lines.join("\n")], { type: "text/csv;charset=utf-8;" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "studios-export.csv";
+  a.click();
+});
+
+function parseCSV(text) {
+  const rows = [];
+  let row = [], field = "", inQuotes = false;
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i], next = text[i + 1];
+    if (inQuotes) {
+      if (c === '"' && next === '"') { field += '"'; i++; }
+      else if (c === '"') { inQuotes = false; }
+      else { field += c; }
+    } else {
+      if (c === '"') inQuotes = true;
+      else if (c === ',') { row.push(field); field = ""; }
+      else if (c === '\r') { /* skip */ }
+      else if (c === '\n') { row.push(field); rows.push(row); row = []; field = ""; }
+      else field += c;
+    }
+  }
+  if (field.length || row.length) { row.push(field); rows.push(row); }
+  return rows.filter((r) => r.length > 1 || r[0] !== "");
+}
+
+$("#btn-import-trigger").addEventListener("click", () => $("#btn-import").click());
+$("#btn-import").addEventListener("change", async (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+  let text = await file.text();
+  if (text.charCodeAt(0) === 0xFEFF) text = text.slice(1);
+  const rows = parseCSV(text);
+  const header = rows[0];
+  let added = 0, updated = 0;
+  for (let i = 1; i < rows.length; i++) {
+    const obj = {};
+    header.forEach((h, idx) => { obj[h] = rows[i][idx] || ""; });
+    if (!obj.slug) continue;
+    const reviewedVal = obj.reviewed === "true";
+    delete obj.reviewed;
+    const idx2 = state.studios.findIndex((s) => s.slug === obj.slug);
+    if (idx2 !== -1) { state.studios[idx2] = obj; updated++; }
+    else { state.studios.push(obj); added++; }
+    state.reviewed[obj.slug] = reviewedVal;
+  }
+  e.target.value = "";
+  setStatus(`CSV importiert: ${added} neu, ${updated} aktualisiert. Bitte prüfen und dann irgendein Studio speichern oder Seite neu laden, um zu sichern.`);
+  const ok = await saveState();
+  if (!ok) alert("Import lokal übernommen, aber Speichern fehlgeschlagen - siehe Statuszeile.");
+});
+
+loadState();
+</script>
+</body>
+</html>
