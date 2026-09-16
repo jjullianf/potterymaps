@@ -6,3 +6,4 @@ node_modules/
 # Eleventy build output & caches (werden von der Deploy-Pipeline frisch gebaut)
 site/_site/
 site/.cache/
+editor-server/data/backups/
