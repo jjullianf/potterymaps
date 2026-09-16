@@ -1436,7 +1436,9 @@
       "image": "",
       "quelle_hinweis": "Manuell im Editor gepflegt.",
       "hat_instagram": "",
-      "custom_faq": "[]"
+      "custom_faq": "[]",
+      "lat": 47.3700486,
+      "lng": 8.5093704
     },
     {
       "slug": "creaba-kirchberg",
@@ -1458,7 +1460,9 @@
       "image": "",
       "quelle_hinweis": "Manuell im Editor gepflegt.",
       "hat_instagram": "",
-      "custom_faq": "[]"
+      "custom_faq": "[]",
+      "lat": 47.4089414,
+      "lng": 9.0390653
     }
   ],
   "reviewed": {
