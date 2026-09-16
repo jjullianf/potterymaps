@@ -23,7 +23,8 @@
   <p>Du möchtest mit einer Gruppe, für einen Anlass, einen Kindergeburtstag oder ein Firmenevent Keramik bemalen? Beschreib uns kurz, was du suchst – wir melden uns mit passenden Studios.</p>
   <p class="trust-hint"><i class="ti ti-clock"></i> Antwort innerhalb von 48 Stunden garantiert.</p>
 
-  <form class="entry-form" action="https://formspree.io/f/moevaapl" method="POST">
+  <form class="entry-form" id="anfrage-form" action="https://formspree.io/f/moevaapl" method="POST">
+    <input type="hidden" name="_next" value="{{ site.url }}/grosse-anfrage/danke/">
     <label for="a-name">Name</label>
     <input type="text" id="a-name" name="name" required>
 
@@ -49,7 +50,44 @@
     <textarea id="a-message" name="message" rows="5" required></textarea>
 
     <button type="submit">Anfrage senden</button>
+    <p class="hint" id="form-error" hidden>Senden hat leider nicht geklappt. Bitte nochmal versuchen, oder direkt an <a href="mailto:info@potterymaps.com">info@potterymaps.com</a> schreiben.</p>
   </form>
 
   <p class="alt-action-hint">Lieber selbst stöbern? <a href="/alle-staedte/">Alle Studios ansehen</a>.</p>
 </article>
+<script>
+  (function () {
+    // Gleicher Ansatz wie im Studio-Eintragen-Formular: per fetch senden statt
+    // klassischem Submit, damit die Weiterleitung auf unsere eigene Danke-Seite
+    // zuverlässig funktioniert (unabhaengig davon, ob Formspree den _next-Redirect
+    // bei einem klassischen Submit befolgt).
+    var form = document.getElementById("anfrage-form");
+    var submitBtn = form.querySelector('button[type="submit"]');
+    var errorHint = document.getElementById("form-error");
+    var nextUrl = form.querySelector('input[name="_next"]').value;
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      errorHint.hidden = true;
+      submitBtn.disabled = true;
+
+      fetch(form.action, {
+        method: "POST",
+        body: new FormData(form),
+        headers: { Accept: "application/json" },
+      })
+        .then(function (response) {
+          if (response.ok) {
+            window.location.href = nextUrl;
+          } else {
+            submitBtn.disabled = false;
+            errorHint.hidden = false;
+          }
+        })
+        .catch(function () {
+          submitBtn.disabled = false;
+          errorHint.hidden = false;
+        });
+    });
+  })();
+</script>
