@@ -60,4 +60,16 @@
   }
   if (mq.addEventListener) mq.addEventListener("change", handleBreakpointChange);
   else if (mq.addListener) mq.addListener(handleBreakpointChange);
+
+  // Dezenter Schatten/Trennlinie an der sticky Navbar, sobald die Seite
+  // gescrollt wurde - so hebt sie sich vom Inhalt ab, bleibt aber am
+  // Seitenanfang nahtlos ohne sichtbare Kante.
+  var header = document.querySelector(".site-header");
+  if (header) {
+    function updateScrolledState() {
+      header.classList.toggle("is-scrolled", window.scrollY > 4);
+    }
+    updateScrolledState();
+    window.addEventListener("scroll", updateScrolledState, { passive: true });
+  }
 })();
