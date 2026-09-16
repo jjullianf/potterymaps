@@ -21,7 +21,8 @@
       "hat_instagram": "ja, https://www.instagram.com/unique.keramik.aarberg",
       "custom_faq": "[]",
       "lat": 47.0430465,
-      "lng": 7.2737697
+      "lng": 7.2737697,
+      "price_from": 34
     },
     {
       "slug": "paint-it-easy-ceramics-studio-ceramic-painting-keramik-bemalen-basel",
@@ -44,7 +45,8 @@
       "hat_instagram": "ja, https://www.instagram.com/paintiteasystudios/",
       "custom_faq": "[]",
       "lat": 47.5569777,
-      "lng": 7.5755294
+      "lng": 7.5755294,
+      "price_from": 20
     },
     {
       "slug": "ceramix-toepferstudio-und-pottery-painting-bern",
@@ -67,7 +69,8 @@
       "hat_instagram": "ja, https://www.instagram.com/ceramix_bern/",
       "custom_faq": "[]",
       "lat": 46.9488241,
-      "lng": 7.4539203
+      "lng": 7.4539203,
+      "price_from": 15
     },
     {
       "slug": "fenetre-a-l-art-keramik-bemalen-keramik-cafe-bern",
@@ -90,7 +93,8 @@
       "hat_instagram": "ja, https://www.instagram.com/fenetrealart/",
       "custom_faq": "[]",
       "lat": 46.960472,
-      "lng": 7.4511315
+      "lng": 7.4511315,
+      "price_from": 39.9
     },
     {
       "slug": "fabrika-azteka-peinture-sur-ceramique-biel-bienne",
@@ -113,7 +117,8 @@
       "hat_instagram": "ja, https://instagram.com/fabrika_azteka",
       "custom_faq": "[]",
       "lat": 47.1404894,
-      "lng": 7.2477482
+      "lng": 7.2477482,
+      "price_from": 25
     },
     {
       "slug": "kreativ-art-box-burgdorf",
@@ -136,7 +141,8 @@
       "hat_instagram": "ja, https://www.instagram.com/kreativartbox",
       "custom_faq": "[]",
       "lat": 47.0602066,
-      "lng": 7.622049
+      "lng": 7.622049,
+      "price_from": 6
     },
     {
       "slug": "atelier-herzton-batterkinden",
@@ -159,7 +165,8 @@
       "hat_instagram": "ja, https://instagram.com/atelier_herzton",
       "custom_faq": "[]",
       "lat": 47.1286238,
-      "lng": 7.5347299
+      "lng": 7.5347299,
+      "price_from": 30
     },
     {
       "slug": "selbergmalt-ch-buelach",
@@ -182,7 +189,8 @@
       "hat_instagram": "nein",
       "custom_faq": "[]",
       "lat": 47.5206888,
-      "lng": 8.5419808
+      "lng": 8.5419808,
+      "price_from": 20
     },
     {
       "slug": "maison-ceramique-cortaillod",
@@ -205,7 +213,8 @@
       "hat_instagram": "ja, https://www.instagram.com/maison_ceramique_",
       "custom_faq": "[]",
       "lat": 46.9450504,
-      "lng": 6.8442499
+      "lng": 6.8442499,
+      "price_from": 20
     },
     {
       "slug": "keramikum-ceramic-painting-studio-zwicky-duebendorf-duebendorf",
@@ -228,7 +237,8 @@
       "hat_instagram": "ja, https://www.instagram.com/keramikum_zh",
       "custom_faq": "[{\"q\":\"Wo kann ich bei Keramikum mit dem Auto parkieren?\",\"a\":\"Entlang der Riedgarten- und Zwickystrasse gibt es mehrere kostenpflichtige Parkplätze mit Parkuhren. Zusätzlich stehen Besucherparkplätze in der Tiefgarage des Gebäudes an der Zwickystrasse 32 zur Verfügung. Das Gebäude befindet sich auf der rechten Seite kurz nach der Einfahrt ins Zwicky-Areal von der Neugutstrasse.\"}]",
       "lat": 47.4038884,
-      "lng": 8.6012212
+      "lng": 8.6012212,
+      "price_from": 15
     },
     {
       "slug": "ceramique-cafe-fribourg-fribourg",
@@ -251,7 +261,8 @@
       "hat_instagram": "ja, https://www.instagram.com/ceramique_cafe/",
       "custom_faq": "[]",
       "lat": 46.8068838,
-      "lng": 7.1557549
+      "lng": 7.1557549,
+      "price_from": 39
     },
     {
       "slug": "noon-cafe-ceramique-geneva",
@@ -274,7 +285,8 @@
       "hat_instagram": "ja, https://www.instagram.com/noon_cafeceramique/",
       "custom_faq": "[]",
       "lat": 46.204418,
-      "lng": 6.1579035
+      "lng": 6.1579035,
+      "price_from": 25
     },
     {
       "slug": "atelier-seestern-keramik-bemalen-in-kaltbrunn-region-rapperswil-kaltbrunn",
@@ -297,7 +309,8 @@
       "hat_instagram": "ja, https://instagram.com/atelier_seestern/",
       "custom_faq": "[]",
       "lat": 47.2100216,
-      "lng": 9.0395861
+      "lng": 9.0395861,
+      "price_from": 15
     },
     {
       "slug": "keramikmalerei-jasmin-agner-kriens",
@@ -320,7 +333,8 @@
       "hat_instagram": "ja, https://www.instagram.com/keramikmalerei/",
       "custom_faq": "[]",
       "lat": 47.034071,
-      "lng": 8.2786383
+      "lng": 8.2786383,
+      "price_from": 15
     },
     {
       "slug": "kreativ-pause-keramik-bemalen-laufenburg-laufenburg",
@@ -343,7 +357,8 @@
       "hat_instagram": "ja, https://www.instagram.com/kreativpause_atelier/",
       "custom_faq": "[]",
       "lat": 47.5609395,
-      "lng": 8.0592349
+      "lng": 8.0592349,
+      "price_from": 25
     },
     {
       "slug": "hello-frances-pottery-painting-keramikmalen-lucerne",
@@ -366,7 +381,8 @@
       "hat_instagram": "ja, https://www.instagram.com/hellofranceskeramik/",
       "custom_faq": "[]",
       "lat": 47.0554741,
-      "lng": 8.3118199
+      "lng": 8.3118199,
+      "price_from": 15
     },
     {
       "slug": "siya-ceramics-i-siya-keramik-i-pottery-painting-lucerne",
@@ -389,7 +405,8 @@
       "hat_instagram": "ja, https://www.instagram.com/siyaceramics/",
       "custom_faq": "[]",
       "lat": 47.0439406,
-      "lng": 8.3039914
+      "lng": 8.3039914,
+      "price_from": 20
     },
     {
       "slug": "moon-clay-painting-studio-lucerne",
@@ -412,7 +429,8 @@
       "hat_instagram": "ja, https://www.instagram.com/moonandclay/",
       "custom_faq": "[]",
       "lat": 47.0486785,
-      "lng": 8.3011147
+      "lng": 8.3011147,
+      "price_from": 15
     },
     {
       "slug": "valou-ceramics-montreux",
@@ -435,7 +453,8 @@
       "hat_instagram": "ja, https://www.instagram.com/valou.ceramics/",
       "custom_faq": "[]",
       "lat": 46.4379505,
-      "lng": 6.9091063
+      "lng": 6.9091063,
+      "price_from": 50
     },
     {
       "slug": "auerhand-offenes-atelier-murgenthal",
@@ -458,7 +477,8 @@
       "hat_instagram": "nein",
       "custom_faq": "[]",
       "lat": 47.2620076,
-      "lng": 7.8285158
+      "lng": 7.8285158,
+      "price_from": 20
     },
     {
       "slug": "keramikstudio-kreativ-live-oberhofen",
@@ -481,7 +501,8 @@
       "hat_instagram": "ja, https://www.instagram.com/kreativ_live.ch/",
       "custom_faq": "[]",
       "lat": 46.7306614,
-      "lng": 7.6693932
+      "lng": 7.6693932,
+      "price_from": 18
     },
     {
       "slug": "tom-s-tonwerk-ostermundigen",
@@ -504,7 +525,8 @@
       "hat_instagram": "ja, https://www.instagram.com/tomstonwerk/",
       "custom_faq": "[]",
       "lat": 46.9558665,
-      "lng": 7.4841495
+      "lng": 7.4841495,
+      "price_from": 10
     },
     {
       "slug": "pinselstrich-ceramic-cafe-rueti",
@@ -527,7 +549,8 @@
       "hat_instagram": "ja, https://www.instagram.com/pinselstrich_ceramic_cafe",
       "custom_faq": "[]",
       "lat": 47.2598762,
-      "lng": 8.8535522
+      "lng": 8.8535522,
+      "price_from": 15
     },
     {
       "slug": "two-room-club-keramikstudio-workshop-space-solothurn",
@@ -550,7 +573,8 @@
       "hat_instagram": "ja, https://www.instagram.com/two.room.club/",
       "custom_faq": "[]",
       "lat": 47.2088598,
-      "lng": 7.5363393
+      "lng": 7.5363393,
+      "price_from": 35
     },
     {
       "slug": "spazio-keramikmalstudio-coffee-more-sursee",
@@ -573,7 +597,8 @@
       "hat_instagram": "ja, https://www.instagram.com/spazio_sursee",
       "custom_faq": "[]",
       "lat": 47.1699847,
-      "lng": 8.0993459
+      "lng": 8.0993459,
+      "price_from": 20
     },
     {
       "slug": "creative-you-ceramic-painting-studio-thalwil-thalwil",
@@ -596,7 +621,8 @@
       "hat_instagram": "ja, https://www.instagram.com/creativeyou.ch/",
       "custom_faq": "[]",
       "lat": 47.2993961,
-      "lng": 8.56101
+      "lng": 8.56101,
+      "price_from": 30
     },
     {
       "slug": "levin-art-studio-ehem-the-rainbow-club-winterthur",
@@ -619,7 +645,8 @@
       "hat_instagram": "ja, https://www.instagram.com/levinartstudio",
       "custom_faq": "[]",
       "lat": 47.4998727,
-      "lng": 8.7294668
+      "lng": 8.7294668,
+      "price_from": 69
     },
     {
       "slug": "janella-keramikatelier-wuerenlingen",
@@ -642,7 +669,8 @@
       "hat_instagram": "ja, https://www.instagram.com/janellakeramik/",
       "custom_faq": "[]",
       "lat": 47.5327462,
-      "lng": 8.2560126
+      "lng": 8.2560126,
+      "price_from": 30
     },
     {
       "slug": "hello-frances-keramikmalen-paint-your-own-pottery-zofingen",
@@ -665,7 +693,8 @@
       "hat_instagram": "ja, https://www.instagram.com/hellofranceskeramik/",
       "custom_faq": "[]",
       "lat": 47.287687,
-      "lng": 7.9452139
+      "lng": 7.9452139,
+      "price_from": 15
     },
     {
       "slug": "creative-you-ceramic-painting-studio-zug-zug",
@@ -688,7 +717,8 @@
       "hat_instagram": "ja, https://www.instagram.com/creativeyou.ch/",
       "custom_faq": "[]",
       "lat": 47.1767252,
-      "lng": 8.4993541
+      "lng": 8.4993541,
+      "price_from": 29
     },
     {
       "slug": "atelier-alfar-zuerich",
@@ -711,7 +741,8 @@
       "hat_instagram": "ja, https://www.instagram.com/atelier_alfar/",
       "custom_faq": "[]",
       "lat": 47.3562867,
-      "lng": 8.5576071
+      "lng": 8.5576071,
+      "price_from": 68
     },
     {
       "slug": "keramik-mal-cafe-zuerich",
@@ -734,7 +765,8 @@
       "hat_instagram": "ja, https://www.instagram.com/keramik_cafe/",
       "custom_faq": "[]",
       "lat": 47.3609708,
-      "lng": 8.5620236
+      "lng": 8.5620236,
+      "price_from": 45
     },
     {
       "slug": "loki-studio-zurich-oerlikon-zuerich",
@@ -757,7 +789,8 @@
       "hat_instagram": "ja, https://www.instagram.com/lokistudio_pottery/",
       "custom_faq": "[]",
       "lat": 47.4077394,
-      "lng": 8.5465104
+      "lng": 8.5465104,
+      "price_from": 59
     },
     {
       "slug": "paint-it-easy-zuerich-creative-cafe-keramik-bemalen-zuerich",
@@ -780,7 +813,8 @@
       "hat_instagram": "ja, https://www.instagram.com/paintiteasystudios/",
       "custom_faq": "[]",
       "lat": 47.362027,
-      "lng": 8.5262436
+      "lng": 8.5262436,
+      "price_from": 20
     },
     {
       "slug": "paintlounge-paintevents-malstudio-zuerich",
@@ -803,7 +837,8 @@
       "hat_instagram": "ja, https://www.instagram.com/paintevents/",
       "custom_faq": "[]",
       "lat": 47.3824792,
-      "lng": 8.5341867
+      "lng": 8.5341867,
+      "price_from": 25
     },
     {
       "slug": "siya-ceramics-i-siya-keramik-i-pottery-painting-zuerich",
@@ -826,7 +861,8 @@
       "hat_instagram": "ja, https://www.instagram.com/siyaceramics/",
       "custom_faq": "[]",
       "lat": 47.3738663,
-      "lng": 8.5190732
+      "lng": 8.5190732,
+      "price_from": 20
     },
     {
       "slug": "ceramic-malbar-gmbh-zuerich",
@@ -849,7 +885,8 @@
       "hat_instagram": "ja, https://www.instagram.com/ceramic_malbar",
       "custom_faq": "[]",
       "lat": 47.3912303,
-      "lng": 8.5078566
+      "lng": 8.5078566,
+      "price_from": null
     },
     {
       "slug": "bisquerie-keramik-bemalen-in-zuerich-saentisstrasse-7-8008-zuerich-zuerich",
@@ -872,7 +909,8 @@
       "hat_instagram": "ja, https://www.instagram.com/bisquerie/",
       "custom_faq": "[]",
       "lat": 47.354775,
-      "lng": 8.5564942
+      "lng": 8.5564942,
+      "price_from": 45
     },
     {
       "slug": "craft-room-red-fox-liestal",
@@ -895,7 +933,8 @@
       "hat_instagram": "",
       "custom_faq": "[]",
       "lat": 47.4862311,
-      "lng": 7.7346494
+      "lng": 7.7346494,
+      "price_from": 20
     },
     {
       "slug": "craft-room-red-fox-basel",
@@ -918,7 +957,8 @@
       "hat_instagram": "",
       "custom_faq": "[]",
       "lat": 47.5473688,
-      "lng": 7.5631238
+      "lng": 7.5631238,
+      "price_from": 20
     },
     {
       "slug": "ceramigas-keramik-selbst-bemalen-basel",
@@ -941,7 +981,8 @@
       "hat_instagram": "ja, https://www.instagram.com/ceramigas_basel",
       "custom_faq": "[]",
       "lat": 47.5579459,
-      "lng": 7.5855928
+      "lng": 7.5855928,
+      "price_from": 15
     },
     {
       "slug": "herzart-winterthur-winterthur",
@@ -964,7 +1005,8 @@
       "hat_instagram": "ja, https://www.instagram.com/herzart_winterthur/",
       "custom_faq": "[]",
       "lat": 47.4985167,
-      "lng": 8.7280835
+      "lng": 8.7280835,
+      "price_from": 18
     },
     {
       "slug": "herzart-weisslingen-weisslingen",
@@ -987,7 +1029,8 @@
       "hat_instagram": "ja, https://www.instagram.com/herzart_winterthur/",
       "custom_faq": "[]",
       "lat": 47.4311628,
-      "lng": 8.7623063
+      "lng": 8.7623063,
+      "price_from": 18
     },
     {
       "slug": "lavendear-studio-luzern",
@@ -1010,7 +1053,8 @@
       "hat_instagram": "ja, https://www.instagram.com/lavendear_studio/?source=omni_redirect",
       "custom_faq": "[]",
       "lat": 47.0472233,
-      "lng": 8.3074182
+      "lng": 8.3074182,
+      "price_from": 59
     },
     {
       "slug": "teig-ton-atelier-st-gallen",
@@ -1033,7 +1077,8 @@
       "hat_instagram": "ja, https://www.instagram.com/teigundton/?hl=de",
       "custom_faq": "[{\"q\":\"Hat Teig&Ton ein offenes Atelier?\",\"a\":\"Für Personen mit Erfahrung im Umgang mit Ton oder nach dem Einsteigerkurs gibt es ein offenes Atelier für CHF 35/Stunde. Ton, Werkzeuge, über 70 Glasuren und Engoben sowie Brennkosten sind dabei inklusive. Die fertigen Stücke können nach dem Rohbrand in einem weiteren Termin bemalt werden.\"}]",
       "lat": 47.4198437,
-      "lng": 9.3691183
+      "lng": 9.3691183,
+      "price_from": 140
     },
     {
       "slug": "tonwerk-keramik-st-gallen",
@@ -1056,7 +1101,8 @@
       "hat_instagram": "",
       "custom_faq": "[]",
       "lat": 47.4149764,
-      "lng": 9.3829464
+      "lng": 9.3829464,
+      "price_from": 30
     },
     {
       "slug": "artelier39-ostermundigen",
@@ -1217,7 +1263,8 @@
       "hat_instagram": "",
       "custom_faq": "[]",
       "lat": 47.4200889,
-      "lng": 9.5741576
+      "lng": 9.5741576,
+      "price_from": 18
     },
     {
       "slug": "colore-box-bern",

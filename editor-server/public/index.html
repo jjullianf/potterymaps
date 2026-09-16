@@ -81,6 +81,7 @@
         <th data-sort="name">Name</th>
         <th data-sort="city">Stadt</th>
         <th data-sort="website">Website</th>
+        <th data-sort="price_from">Preis ab</th>
         <th data-sort="tags">Tags</th>
         <th data-sort="reviewed">Status</th>
       </tr>
@@ -130,13 +131,18 @@
 
       <fieldset>
         <legend>Preise</legend>
+        <div class="field">
+          <label>Preis ab, für Vergleich auf der Website (price_from)</label>
+          <input type="text" id="f-price_from" inputmode="decimal" placeholder="z.B. 20">
+          <div class="hint">Nur die Zahl in CHF, ohne Text (wird als „ab CHF …" auf Studio-Karten und der Detailseite angezeigt). Der niedrigste reelle Einstiegspreis (Studiogebühr <em>oder</em> günstigstes Stück, je nachdem was tatsächlich anfällt) – Zuschläge, Verlängerungen und Mindestpersonenzahl-Rabatte zählen nicht. Leer lassen, wenn kein verlässlicher Basispreis auffindbar ist.</div>
+        </div>
         <div class="row3">
           <div class="field">
-            <label>Preis ab – Tasse (price_mug)</label>
+            <label>Preis Tasse (price_mug)</label>
             <input type="text" id="f-price_mug">
           </div>
           <div class="field">
-            <label>Preis ab – Teller/Schale (price_plate)</label>
+            <label>Preis Teller/Schale (price_plate)</label>
             <input type="text" id="f-price_plate">
           </div>
           <div class="field">
@@ -307,6 +313,7 @@ function renderTable() {
       <td>${escapeHtml(s.name)}</td>
       <td>${escapeHtml(s.city)}</td>
       <td>${s.website ? `<a href="${escapeAttr(s.website)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">Link</a>` : ""}</td>
+      <td>${s.price_from ? "ab CHF " + escapeHtml(s.price_from) : "–"}</td>
       <td>${escapeHtml((s.tags || "").split(",").filter(Boolean).length + " Tags")}</td>
       <td><span class="badge ${reviewed ? "ok" : "todo"}">${reviewed ? "geprüft" : "offen"}</span></td>
     </tr>`;
@@ -429,7 +436,7 @@ function openEditor(slug) {
   $("#panel-title").textContent = s ? `Bearbeiten: ${s.name}` : "Neues Studio";
   $("#btn-delete").style.display = s ? "" : "none";
 
-  const fields = ["name","address","city","phone","website","opening_hours","price_mug","price_plate","studio_fee","price_note","pickup_time","special_events","description","hat_instagram","image"];
+  const fields = ["name","address","city","phone","website","opening_hours","price_from","price_mug","price_plate","studio_fee","price_note","pickup_time","special_events","description","hat_instagram","image"];
   fields.forEach((f) => { $("#f-" + f).value = s ? (s[f] || "") : ""; });
   $("#f-slug").value = s ? s.slug : "";
   $("#f-reviewed").checked = s ? !!state.reviewed[s.slug] : false;
@@ -479,6 +486,7 @@ $("#form").addEventListener("submit", async (e) => {
     website: $("#f-website").value.trim(),
     opening_hours: $("#f-opening_hours").value.trim(),
     tags: getSelectedTags(),
+    price_from: $("#f-price_from").value.trim(),
     price_mug: $("#f-price_mug").value.trim(),
     price_plate: $("#f-price_plate").value.trim(),
     studio_fee: $("#f-studio_fee").value.trim(),
@@ -520,7 +528,7 @@ $("#btn-delete").addEventListener("click", async () => {
 
 // ---------- CSV Export / Import ----------
 
-const CSV_FIELDS = ["slug","name","address","city","phone","website","opening_hours","tags","price_mug","price_plate","studio_fee","price_note","pickup_time","special_events","description","image","quelle_hinweis","hat_instagram","custom_faq","reviewed"];
+const CSV_FIELDS = ["slug","name","address","city","phone","website","opening_hours","tags","price_from","price_mug","price_plate","studio_fee","price_note","pickup_time","special_events","description","image","quelle_hinweis","hat_instagram","custom_faq","reviewed"];
 
 function csvEscape(v) {
   v = v == null ? "" : String(v);
