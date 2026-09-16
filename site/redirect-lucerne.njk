@@ -1,0 +1,24 @@
+---js
+{
+  permalink: "/staedte/lucerne/",
+  eleventyExcludeFromCollections: true,
+  noindex: true,
+  eleventyComputed: {
+    title: (data) => "Weitergeleitet zu Luzern | potterymaps",
+    canonicalUrl: (data) => `${data.site.url}/staedte/luzern/`,
+  },
+}
+---
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="robots" content="noindex">
+  <link rel="canonical" href="{{ canonicalUrl }}">
+  <meta http-equiv="refresh" content="0; url=/staedte/luzern/">
+  <title>{{ title }}</title>
+</head>
+<body>
+  <p>Diese Seite wurde zusammengeführt. Falls du nicht automatisch weitergeleitet wirst: <a href="/staedte/luzern/">weiter zu Luzern</a>.</p>
+</body>
+</html>
