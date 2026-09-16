@@ -65,10 +65,15 @@
 
   <header class="site-header">
     <a class="logo" href="/">{% optimizedImage "./images/logo.png", "potterymaps Logo", { widths: [452], formats: ["webp", "png"], sizes: "226px", loading: "eager", fetchpriority: "high", class: "logo-img" } %}</a>
-    <nav>
+    <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Menü öffnen">
+      <i class="ti ti-menu-2" aria-hidden="true"></i>
+    </button>
+    <div class="nav-backdrop" id="nav-backdrop" hidden></div>
+    <nav id="site-nav">
       <a href="/">Home</a>
       <a href="/alle-staedte/">Alle Städte</a>
       <a href="/events/">Event planen</a>
+      <a href="/blog/weihnachts-teamevent-ideen/">Blog</a>
       <a href="/ueber-uns/">Über uns</a>
       <a href="/kontakt/">Kontakt</a>
     </nav>
@@ -93,5 +98,6 @@
        komplett inaktiv. -->
   <script>window.GA_MEASUREMENT_ID = "{{ site.gaId }}";</script>
   <script src="/js/consent.js" defer></script>
+  <script src="/js/nav.js" defer></script>
 </body>
 </html>
