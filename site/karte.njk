@@ -1,0 +1,65 @@
+---js
+{
+  layout: "base.njk",
+  title: "Karte aller Studios | Keramik bemalen Schweiz",
+  description: "Alle Studios zum Keramik bemalen in der Schweiz auf einer Karte - finde ein Studio in deiner Nähe.",
+  permalink: "/karte/",
+  eleventyComputed: {
+    mapStudios: (data) => (data.studios || []).filter((s) => s.lat && s.lng),
+  },
+}
+---
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.Default.css">
+
+<article class="static-page">
+  <p class="breadcrumb"><a href="/">Startseite</a> &raquo; Karte</p>
+  <h1>Alle Studios auf der Karte</h1>
+  <p>Alle {{ mapStudios.length }} Studios zum Keramik bemalen in der Schweiz auf einen Blick. Klicke auf einen Pin für Details.</p>
+
+  <div id="overview-map" class="overview-map"></div>
+</article>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/leaflet.markercluster.js"></script>
+<script>
+  (function () {
+    var studios = [
+      {% for s in mapStudios %}
+      { name: "{{ s.name | escape }}", slug: "{{ s.slug }}", city: "{{ s.city | escape }}", lat: {{ s.lat }}, lng: {{ s.lng }} }{% if not loop.last %},{% endif %}
+      {% endfor %}
+    ];
+
+    var map = L.map('overview-map').setView([46.9, 8.2], 8);
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+      maxZoom: 18,
+    }).addTo(map);
+
+    var dotIcon = L.divIcon({
+      className: "map-marker-dot-wrap",
+      html: '<div class="map-marker-dot"></div>',
+      iconSize: [14, 14],
+    });
+
+    var clusterGroup = L.markerClusterGroup({
+      iconCreateFunction: function (cluster) {
+        var count = cluster.getChildCount();
+        var size = count < 10 ? 32 : count < 25 ? 40 : 48;
+        return L.divIcon({
+          html: '<div class="map-cluster-dot" style="width:' + size + 'px;height:' + size + 'px;">' + count + '</div>',
+          className: "map-cluster-wrap",
+          iconSize: L.point(size, size),
+        });
+      },
+    });
+    studios.forEach(function (s) {
+      var marker = L.marker([s.lat, s.lng], { icon: dotIcon }).bindPopup(
+        '<strong>' + s.name + '</strong><br>' + s.city + '<br><a href="/studio/' + s.slug + '/">Zur Studio-Seite</a>'
+      );
+      clusterGroup.addLayer(marker);
+    });
+    map.addLayer(clusterGroup);
+  })();
+</script>

@@ -1,0 +1,110 @@
+---js
+{
+  pagination: {
+    data: "cities",
+    size: 1,
+    alias: "cityData",
+  },
+  permalink: (data) => `/staedte/${data.cityData.slug}/`,
+  layout: "base.njk",
+  eleventyComputed: {
+    title: (data) => `Keramik bemalen ${data.cityData.name} - ${data.cityData.count} ${data.pluralize(data.cityData.count, "Studio", "Studios")} im Vergleich | potterymaps`,
+    description: (data) => `Keramik bemalen in ${data.cityData.name}: Studios für Teller-, Ton- und Porzellan bemalen sowie Keramik-Cafés – mit Preisen und Öffnungszeiten auf einen Blick.`,
+    noindex: (data) => data.cityData.noindex,
+    jsonLdItemList: (data) => data.cityData.jsonLdItemList,
+    jsonLdBreadcrumb: (data) => data.cityData.jsonLdBreadcrumb,
+  },
+}
+---
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+{% from "studio-card.njk" import card %}
+{% set c = cityData %}
+<article class="city-page">
+  <p class="breadcrumb"><a href="/">Startseite</a> &raquo; <a href="/alle-staedte/">Alle Städte</a> &raquo; {{ c.name }}</p>
+
+  <div class="city-header{% if not c.hasPhoto %} city-header-placeholder{% endif %}">
+    {% if c.hasPhoto %}{% optimizedImage "./images/cities/" + c.slug + ".jpg", "Stadtansicht von " + c.name, { widths: [500, 852], sizes: "(max-width: 900px) 100vw, 852px", loading: "eager", fetchpriority: "high", class: "city-header-img" } %}{% endif %}
+    <h1>Keramik bemalen {{ c.name }}</h1>
+  </div>
+
+  <p class="city-intro">{{ c.intro }}{% if c.introDynamic %} {{ c.introDynamic }}{% endif %}</p>
+
+  {% if c.hasAny and (c.cafeMatch or c.porzellanMatch) %}
+  <p class="city-topic-intro">
+    {% if c.porzellanMatch %}Auch Porzellan bemalen ist in {{ c.name }} möglich, z. B. bei <a href="/studio/{{ c.porzellanMatch.slug }}/">{{ c.porzellanMatch.name }}</a>.{% endif %}
+    {% if c.cafeMatch %}Wer es gemütlich mag, findet mit <a href="/studio/{{ c.cafeMatch.slug }}/">{{ c.cafeMatch.name }}</a> auch ein Keramik-Café in {{ c.name }}.{% endif %}
+  </p>
+  {% endif %}
+
+  {% if mapStudios.length %}
+  <div id="city-detail-map" class="city-detail-map"></div>
+  {% endif %}
+
+  {% if c.direct.length %}
+  <section class="studio-list">
+    <h2>Studios in {{ c.name }}</h2>
+    <ul class="studio-cards">
+      {% for s in c.direct %}{{ card(s) }}{% endfor %}
+    </ul>
+  </section>
+  {% endif %}
+
+  {% if c.nearbyTowns.length %}
+  <section class="nearby-towns">
+    <h2>Auch in der Nähe</h2>
+    <ul class="town-chips">
+      {% for t in c.nearbyTowns %}
+      <li><a class="town-chip" href="/staedte/{{ t.slug }}/">{{ t.name }} <span class="count">{{ t.count }} {{ pluralize(t.count, "Studio", "Studios") }}</span></a></li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endif %}
+
+  {% if not c.hasAny %}
+  <section class="empty-city">
+    <p>Aktuell ist uns in {{ c.name }} noch kein Studio zum Keramik bemalen bekannt.</p>
+    <p>Kennst du ein Studio hier? <a href="/studio-eintragen/">Trag es ein</a> und hilf mit, das Verzeichnis zu vervollständigen.</p>
+  </section>
+  {% else %}
+  <section class="cta-missing">
+    <h2>Dein Studio fehlt?</h2>
+    <p>Wir wachsen laufend weiter. Kennst du ein weiteres Studio in {{ c.name }}, das hier noch nicht gelistet ist?</p>
+    <a class="button" href="/studio-eintragen/">Trag es ein</a>
+  </section>
+  {% endif %}
+</article>
+
+{% if mapStudios.length %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+  (function () {
+    var studios = [
+      {% for s in mapStudios %}
+      { name: "{{ s.name | escape }}", slug: "{{ s.slug }}", lat: {{ s.lat }}, lng: {{ s.lng }} }{% if not loop.last %},{% endif %}
+      {% endfor %}
+    ];
+
+    // Fester Zoom auf das Stadtzentrum statt fitBounds, damit weiter entfernte
+    // Nachbarschafts-Studios die Karte nicht auf ganze Region herauszoomen lassen -
+    // es soll nur die Stadt selbst sichtbar sein.
+    var map = L.map('city-detail-map', { scrollWheelZoom: false }).setView([{{ c.lat }}, {{ c.lng }}], 12);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>-Mitwirkende',
+      maxZoom: 18,
+      className: "map-tiles-muted",
+    }).addTo(map);
+
+    var dotIcon = L.divIcon({
+      className: "map-marker-dot-wrap",
+      html: '<div class="map-marker-dot"></div>',
+      iconSize: [14, 14],
+    });
+
+    studios.forEach(function (s) {
+      L.marker([s.lat, s.lng], { icon: dotIcon }).addTo(map).bindPopup(
+        '<strong>' + s.name + '</strong><br><a href="/studio/' + s.slug + '/">Zur Studio-Seite</a>'
+      );
+    });
+  })();
+</script>
+{% endif %}

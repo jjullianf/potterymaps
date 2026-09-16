@@ -1,0 +1,20 @@
+{% macro card(s) %}
+<li class="studio-card">
+  <a class="studio-card-link" href="/studio/{{ s.slug }}/">
+    {{ s.cardThumbHtml | safe }}
+    <strong class="studio-card-name">{{ s.name }}</strong>
+    <p class="studio-card-location">{{ s.city }}</p>
+    {% if s.priceAtAGlance %}
+    <p class="studio-card-price-glance">{{ s.priceAtAGlance }}</p>
+    {% if s.priceIncludes %}<p class="studio-card-price-includes">{{ s.priceIncludes }}</p>{% endif %}
+    {% elif s.priceRangeShort %}
+    <p class="studio-card-price">{{ s.priceRangeShort }}</p>
+    {% endif %}
+    {% if s.topTagsObjects.length %}
+    <div class="tags">
+      {% for tag in s.topTagsObjects %}<span class="tag tag-{{ tag.category }}"><i class="ti {{ tag.icon }}"></i>{{ tag.label }}</span>{% endfor %}
+    </div>
+    {% endif %}
+  </a>
+</li>
+{% endmacro %}

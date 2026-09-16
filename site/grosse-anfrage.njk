@@ -1,0 +1,55 @@
+---js
+{
+  layout: "base.njk",
+  title: "Grössere Events & Gruppenanfragen | potterymaps",
+  description: "Plane ein Keramik-Event für deine Gruppe, deinen Anlass oder dein Firmenevent – wir vermitteln dich an ein passendes Studio.",
+  permalink: "/grosse-anfrage/",
+  eleventyComputed: {
+    jsonLdBreadcrumb: (data) => ({
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Startseite", item: `${data.site.url}/` },
+        { "@type": "ListItem", position: 2, name: "Events", item: `${data.site.url}/events/` },
+        { "@type": "ListItem", position: 3, name: "Grössere Anfrage", item: `${data.site.url}/grosse-anfrage/` },
+      ],
+    }),
+  },
+}
+---
+<article class="static-page">
+  <p class="breadcrumb"><a href="/">Startseite</a> &raquo; <a href="/events/">Events</a> &raquo; Grössere Anfrage</p>
+  <h1>Grössere Events planen</h1>
+  <p>Du möchtest mit einer Gruppe, für einen Anlass, einen Kindergeburtstag oder ein Firmenevent Keramik bemalen? Beschreib uns kurz, was du suchst – wir melden uns mit passenden Studios.</p>
+  <p class="trust-hint"><i class="ti ti-clock"></i> Antwort innerhalb von 48 Stunden garantiert.</p>
+
+  <form class="entry-form" action="https://formspree.io/f/moevaapl" method="POST">
+    <label for="a-name">Name</label>
+    <input type="text" id="a-name" name="name" required>
+
+    <label for="a-email">E-Mail</label>
+    <input type="email" id="a-email" name="email" required>
+
+    <label for="a-phone">Telefon</label>
+    <input type="tel" id="a-phone" name="phone">
+
+    <label for="a-location">Gewünschter Ort</label>
+    <input type="text" id="a-location" name="location">
+
+    <label for="a-date">Wunschtermin 1</label>
+    <input type="date" id="a-date" name="date" required>
+
+    <label for="a-date-2">Wunschtermin 2 (optional)</label>
+    <input type="date" id="a-date-2" name="date_2">
+
+    <label for="a-people">Personenzahl</label>
+    <input type="number" id="a-people" name="people" min="1">
+
+    <label for="a-message">Nachricht</label>
+    <textarea id="a-message" name="message" rows="5" required></textarea>
+
+    <button type="submit">Anfrage senden</button>
+  </form>
+
+  <p class="alt-action-hint">Lieber selbst stöbern? <a href="/alle-staedte/">Alle Studios ansehen</a>.</p>
+</article>

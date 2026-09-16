@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title }}</title>
+  <meta name="description" content="{{ description }}">
+  {% if noindex %}<meta name="robots" content="noindex">{% endif %}
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16">
+  <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="/favicon-48x48.png" type="image/png" sizes="48x48">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
+  <link rel="manifest" href="/site.webmanifest">
+
+  <!-- Fredoka jetzt self-hosted (site/fonts/) statt von Google Fonts geladen -
+       kein preconnect zu fonts.g*.com mehr noetig. Preload, da die Schrift auf
+       jeder Seite sofort gebraucht wird (h1/h2/Logo-Schriftzug etc.). -->
+  <link rel="preload" href="/fonts/fredoka-latin.woff2" as="font" type="font/woff2" crossorigin>
+
+  <link rel="stylesheet" href="/css/style.css">
+
+  <!-- Icon-Webfont (~460KB) ist nicht kritisch fuer den ersten Render - asynchron
+       nachladen (preload + onload-Swap), damit sie das Rendern des restlichen
+       Inhalts nicht blockiert. Icons poppen minimal verzoegert ein, statt die
+       ganze Seite zu verzoegern. -->
+  <link rel="preload" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.46.0/dist/tabler-icons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.46.0/dist/tabler-icons.min.css"></noscript>
+  {% if jsonLd %}
+  <script type="application/ld+json">{{ jsonLd | dump | safe }}</script>
+  {% endif %}
+  {% if jsonLdFaq %}
+  <script type="application/ld+json">{{ jsonLdFaq | dump | safe }}</script>
+  {% endif %}
+  {% if jsonLdItemList %}
+  <script type="application/ld+json">{{ jsonLdItemList | dump | safe }}</script>
+  {% endif %}
+  {% if jsonLdBreadcrumb %}
+  <script type="application/ld+json">{{ jsonLdBreadcrumb | dump | safe }}</script>
+  {% endif %}
+  {% if jsonLdOrg %}
+  <script type="application/ld+json">{{ jsonLdOrg | dump | safe }}</script>
+  {% endif %}
+</head>
+<body>
+  <div id="cookie-banner" class="cookie-banner" hidden>
+    <p class="cookie-banner-text">
+      Wir verwenden Cookies bzw. lokale Speicherung nur, wenn du zustimmst – z. B. für Statistiken (Google Analytics) und eingebettete Karten. Mehr dazu in unserer <a href="/datenschutz/">Datenschutzerklärung</a>.
+    </p>
+    <div class="cookie-banner-actions">
+      <button type="button" id="cookie-decline" class="button button-secondary">Ablehnen</button>
+      <button type="button" id="cookie-accept" class="button">Akzeptieren</button>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <a class="logo" href="/">{% optimizedImage "./images/logo.png", "potterymaps Logo", { widths: [452], formats: ["webp", "png"], sizes: "226px", loading: "eager", fetchpriority: "high", class: "logo-img" } %}</a>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/alle-staedte/">Alle Städte</a>
+      <a href="/events/">Event planen</a>
+      <a href="/ueber-uns/">Über uns</a>
+      <a href="/kontakt/">Kontakt</a>
+    </nav>
+  </header>
+  <main>
+    {{ content | safe }}
+  </main>
+  <footer class="site-footer">
+    <nav>
+      <a href="/ueber-uns/">Über uns</a>
+      <a href="/kontakt/">Kontakt</a>
+      <a href="/datenschutz/">Datenschutzerklärung</a>
+      <a href="/impressum/">Impressum</a>
+      <a href="#" id="cookie-settings-link">Cookie-Einstellungen</a>
+    </nav>
+    <p>&copy; {{ year }} potterymaps</p>
+  </footer>
+
+  <!-- GA-Tracking-ID: in site/_data/site.js (Feld "gaId") eintragen, sobald
+       vorhanden - das Skript wird erst nach "Akzeptieren" im Cookie-Banner
+       nachgeladen (siehe /js/consent.js), nie vorab. Leer = Analytics bleibt
+       komplett inaktiv. -->
+  <script>window.GA_MEASUREMENT_ID = "{{ site.gaId }}";</script>
+  <script src="/js/consent.js" defer></script>
+</body>
+</html>

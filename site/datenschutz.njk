@@ -1,0 +1,43 @@
+---js
+{
+  layout: "base.njk",
+  title: "Datenschutzerklärung | potterymaps",
+  description: "Datenschutzerklärung von potterymaps.",
+  permalink: "/datenschutz/",
+  eleventyComputed: {
+    jsonLdBreadcrumb: (data) => ({
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Startseite", item: `${data.site.url}/` },
+        { "@type": "ListItem", position: 2, name: "Datenschutzerklärung", item: `${data.site.url}/datenschutz/` },
+      ],
+    }),
+  },
+}
+---
+<article class="static-page">
+  <p class="breadcrumb"><a href="/">Startseite</a> &raquo; Datenschutzerklärung</p>
+  <h1>Datenschutzerklärung</h1>
+  <p><em>Stand: {{ year }}</em></p>
+
+  <h2>Verantwortliche Stelle</h2>
+  <p>Verantwortlich für die Datenverarbeitung auf dieser Website ist die im <a href="/impressum/">Impressum</a> genannte Person/Stelle.</p>
+
+  <h2>Erhebung und Verarbeitung von Daten</h2>
+  <p>Diese Website stellt ein Verzeichnis von Keramikmal-Studios in der Schweiz dar. Beim Besuch der Website werden durch den Hosting-Anbieter automatisch technische Zugriffsdaten (z. B. IP-Adresse, Datum und Uhrzeit des Zugriffs, aufgerufene Seite) erfasst, wie dies bei jedem Website-Aufruf technisch üblich ist.</p>
+
+  <h2>Kontaktaufnahme</h2>
+  <p>Wenn du uns per E-Mail kontaktierst, werden deine Angaben (z. B. Absenderadresse, Inhalt der Nachricht) zur Bearbeitung deiner Anfrage gespeichert.</p>
+
+  <h2>Formulare (Formspree)</h2>
+  <p>Für die Formulare auf dieser Website (z. B. "Studio eintragen" und "Grössere Anfrage") nutzen wir den Dienst <a href="https://formspree.io/" rel="nofollow noopener" target="_blank">Formspree</a>, ein Angebot von Formspree, Inc. mit Sitz in den USA. Die von dir im jeweiligen Formular eingegebenen Daten (z. B. Name, Kontaktangaben, Angaben zum Studio) werden direkt an Formspree übermittelt und uns dort zur Bearbeitung zur Verfügung gestellt. Es handelt sich dabei um eine Datenübermittlung in ein Land ausserhalb der Schweiz/EU (USA). Weitere Informationen findest du in der <a href="https://formspree.io/legal/privacy-policy/" rel="nofollow noopener" target="_blank">Datenschutzerklärung von Formspree</a>.</p>
+
+  <h2>Cookies, Analytics und eingebettete Karten</h2>
+  <p>Beim ersten Besuch dieser Website fragen wir dich per Banner, ob du der Nutzung von Google Analytics sowie eingebetteten Google-Maps-Karten zustimmst. Deine Entscheidung wird lokal in deinem Browser (localStorage) gespeichert, nicht in einem klassischen Cookie, aber mit vergleichbarem Zweck. Du kannst deine Entscheidung jederzeit über den Link "Cookie-Einstellungen" im Footer ändern.</p>
+  <p>Nur wenn du zustimmst, wird <strong>Google Analytics</strong> (Google Ireland Limited bzw. Google LLC, USA) geladen, ein Webanalyse-Dienst, der unter anderem IP-Adressen anonymisiert erfasst und Nutzungsstatistiken erstellt. Ohne deine Zustimmung wird kein Analytics-Skript geladen.</p>
+  <p>Auf den Studio-Detailseiten binden wir zur Standortanzeige eine <strong>Google-Maps</strong>-Karte ein. Auch diese wird erst geladen, wenn du entweder generell zugestimmt hast oder auf der jeweiligen Seite aktiv auf "Karte laden" klickst. Beim Laden der Karte stellt dein Browser eine Verbindung zu Servern von Google (USA) her, wobei Google unter anderem deine IP-Adresse verarbeiten kann. Weitere Informationen findest du in der <a href="https://policies.google.com/privacy" rel="nofollow noopener" target="_blank">Datenschutzerklärung von Google</a>.</p>
+
+  <h2>Deine Rechte</h2>
+  <p>Du hast das Recht, Auskunft über die zu deiner Person gespeicherten Daten zu erhalten sowie deren Berichtigung oder Löschung zu verlangen. Wende dich dazu an die im <a href="/kontakt/">Kontakt</a> genannte Adresse.</p>
+</article>

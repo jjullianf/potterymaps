@@ -1,0 +1,224 @@
+---js
+{
+  layout: "base.njk",
+  title: "Studio eintragen oder korrigieren | potterymaps",
+  description: "Kennst du ein Studio zum Keramik bemalen, das bei uns fehlt, oder ist ein Eintrag veraltet? Melde es uns hier.",
+  permalink: "/studio-eintragen/",
+  eleventyComputed: {
+    jsonLdBreadcrumb: (data) => ({
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Startseite", item: `${data.site.url}/` },
+        { "@type": "ListItem", position: 2, name: "Studio eintragen", item: `${data.site.url}/studio-eintragen/` },
+      ],
+    }),
+  },
+}
+---
+<article class="static-page">
+  <p class="breadcrumb"><a href="/">Startseite</a> &raquo; Studio eintragen</p>
+  <h1>Studio eintragen oder korrigieren</h1>
+  <p>Kennst du ein Studio zum Keramik bemalen, das bei uns noch fehlt? Oder ist ein bestehender Eintrag veraltet oder fehlerhaft? Wähle unten die passende Option – wir prüfen jede Meldung von Hand und tragen sie danach selbst im Verzeichnis nach. Es wird nichts automatisch veröffentlicht.</p>
+
+  <form class="entry-form" id="studio-form" action="https://formspree.io/f/xrpbzzvr" method="POST">
+    <input type="hidden" name="_next" value="{{ site.url }}/studio-eintragen/danke/">
+    <fieldset>
+      <legend>Was möchtest du tun?</legend>
+      <label class="radio-option">
+        <input type="radio" name="mode" value="hinweis" checked>
+        Kleiner Hinweis/Korrektur
+      </label>
+      <label class="radio-option">
+        <input type="radio" name="mode" value="profil">
+        Komplettes Profil ausfüllen (neu oder Aktualisierung)
+      </label>
+    </fieldset>
+
+    <div class="form-section active" id="section-hinweis">
+      <label for="h-name">Name des Studios</label>
+      <input type="text" id="h-name" name="studio_name" required>
+
+      <label for="h-message">Nachricht</label>
+      <textarea id="h-message" name="message" rows="5" placeholder="Was fehlt oder was ist falsch?" required></textarea>
+    </div>
+
+    <div class="form-section" id="section-profil">
+      <label for="p-name">Name</label>
+      <input type="text" id="p-name" name="profil_name">
+
+      <label for="p-address">Adresse</label>
+      <input type="text" id="p-address" name="profil_address">
+
+      <label for="p-city">Stadt</label>
+      <input type="text" id="p-city" name="profil_city">
+
+      <label for="p-telefon">Telefon</label>
+      <input type="text" id="p-telefon" name="profil_telefonnummer">
+
+      <label for="p-kontakt">E-Mail</label>
+      <input type="text" id="p-kontakt" name="profil_kontaktadresse">
+
+      <label for="p-homepage">Website</label>
+      <input type="text" id="p-homepage" name="profil_homepage" placeholder="https://...">
+
+      <label for="p-instagram">Instagram</label>
+      <input type="text" id="p-instagram" name="profil_instagram" placeholder="@studioname">
+      <p class="hint">Egal in welcher Form – "@studioname", "studioname" oder der volle Link. Wir richten es beim Prüfen selbst her.</p>
+
+      <label for="p-hours">Öffnungszeiten</label>
+      <input type="text" id="p-hours" name="profil_opening_hours">
+
+      <label>Tags (Mehrfachauswahl)</label>
+      <div class="checkbox-grid">
+        {% set tagList = [
+          ["kids-friendly", "Kinderfreundlich"],
+          ["birthday-parties", "Geburtstage"],
+          ["hen-party", "Junggesellinnenabschied"],
+          ["corporate-events", "Firmenevents"],
+          ["date-night", "Date-Night"],
+          ["walk-in", "Walk-in"],
+          ["reservation-empfohlen", "Reservation empfohlen"],
+          ["reservation-only", "Nur mit Reservation"],
+          ["at-home-kits", "Kits zum Mitnehmen"],
+          ["pottery-wheel", "Töpferscheibe"],
+          ["other-crafts", "Weitere Kreativangebote"],
+          ["themed-events", "Themen-Abende"]
+        ] %}
+        {% for t in tagList %}
+        <label class="checkbox-option">
+          <input type="checkbox" name="profil_tags" value="{{ t[0] }}">
+          {{ t[1] }}
+        </label>
+        {% endfor %}
+      </div>
+
+      <label for="p-price-mug">Preis Tasse (price_mug)</label>
+      <input type="text" id="p-price-mug" name="profil_price_mug">
+
+      <label for="p-price-plate">Preis Teller (price_plate)</label>
+      <input type="text" id="p-price-plate" name="profil_price_plate">
+
+      <label for="p-studio-fee">Studiogebühr (studio_fee)</label>
+      <input type="text" id="p-studio-fee" name="profil_studio_fee">
+
+      <label for="p-price-from">Preis ab (price_from)</label>
+      <input type="text" id="p-price-from" name="profil_price_from" placeholder="z.B. 15">
+      <p class="hint">Der günstigste Einstiegspreis, den ihr vor Ort verlangt – z. B. Eintritt + ein Stück Keramik. Nur die Zahl in CHF, ohne Text (wird bei uns als „ab CHF …“ angezeigt).</p>
+
+      <label for="p-price-note">Preis-Hinweis (price_note)</label>
+      <textarea id="p-price-note" name="profil_price_note" rows="2"></textarea>
+
+      <label for="p-pickup">Abholzeit (pickup_time)</label>
+      <input type="text" id="p-pickup" name="profil_pickup_time">
+
+      <label for="p-events">Besondere Events (special_events)</label>
+      <textarea id="p-events" name="profil_special_events" rows="2"></textarea>
+
+      <label for="p-description">Beschreibung</label>
+      <textarea id="p-description" name="profil_description" rows="4"></textarea>
+
+      <label for="p-bild">Bild</label>
+      <input type="text" id="p-bild" name="profil_bildlink" placeholder="z.B. Link zu Google Drive, Instagram oder Website">
+      <p class="hint">Ein Foto lohnt sich: Studios mit Bild fallen im Verzeichnis deutlich mehr auf und werden öfter angeklickt. Kein Datei-Upload möglich – bitte Bild z.B. bei Google Drive hochladen (Freigabe „Jeder mit Link“) und den Link hier einfügen, oder alternativ einen Hinweis wie „siehe unser Instagram und unsere Webseite“ eintragen. Bilder können auch per E-Mail an <a href="mailto:info@potterymaps.com">info@potterymaps.com</a> geschickt werden.</p>
+
+      <label class="checkbox-option" id="p-bildrechte-wrap" hidden>
+        <input type="checkbox" id="p-bildrechte" name="profil_bildrechte_bestaetigt">
+        Ich bestätige, die Rechte an diesem Bild zu besitzen bzw. zur Nutzung berechtigt zu sein.
+      </label>
+
+      <label for="p-message">Weitere Hinweise</label>
+      <textarea id="p-message" name="profil_message" rows="3"></textarea>
+    </div>
+
+    <button type="submit">Absenden</button>
+    <p class="hint" id="form-error" hidden>Senden hat leider nicht geklappt. Bitte nochmal versuchen, oder direkt an <a href="mailto:info@potterymaps.com">info@potterymaps.com</a> schreiben.</p>
+  </form>
+</article>
+<script>
+  (function () {
+    var params = new URLSearchParams(window.location.search);
+    var studio = params.get("studio");
+    if (studio) {
+      document.getElementById("h-name").value = studio;
+      document.getElementById("h-message").placeholder = "Was ist an diesem Eintrag falsch oder veraltet?";
+    }
+
+    var radios = document.querySelectorAll('input[name="mode"]');
+    var sections = {
+      hinweis: document.getElementById("section-hinweis"),
+      profil: document.getElementById("section-profil"),
+    };
+    var hName = document.getElementById("h-name");
+    var hMessage = document.getElementById("h-message");
+    var pBild = document.getElementById("p-bild");
+    var bildrechteWrap = document.getElementById("p-bildrechte-wrap");
+    var bildrechteCheckbox = document.getElementById("p-bildrechte");
+
+    // Die Rechte-Checkbox erscheint (und ist nur dann Pflicht) sobald tatsaechlich
+    // eine Bild-URL eingetragen wurde - bei leerem Bildfeld soll das Formular
+    // nicht zusaetzlich blockieren (Frictionless-Prinzip).
+    function syncBildrechte() {
+      var hasImage = pBild.value.trim().length > 0;
+      bildrechteWrap.hidden = !hasImage;
+      bildrechteCheckbox.required = hasImage;
+      if (!hasImage) bildrechteCheckbox.checked = false;
+    }
+    pBild.addEventListener("input", syncBildrechte);
+    syncBildrechte();
+
+    // Nur CSS-seitig ein-/ausblenden (kein disabled!): disabled-Felder werden vom
+    // Browser beim Submit ignoriert, auch wenn sie ausgefuellt sind - dadurch gingen
+    // im "ganzes Profil"-Modus alle Felder ausser mode/studio_name/message verloren.
+    function applyMode(mode) {
+      sections.hinweis.classList.toggle("active", mode === "hinweis");
+      sections.profil.classList.toggle("active", mode === "profil");
+      // required nur auf den Pflichtfeldern des gerade aktiven Modus, sonst wuerde
+      // ein leeres, aber unsichtbares Pflichtfeld das Absenden blockieren.
+      var hinweisRequired = mode === "hinweis";
+      hName.required = hinweisRequired;
+      hMessage.required = hinweisRequired;
+    }
+
+    radios.forEach(function (r) {
+      r.addEventListener("change", function () {
+        applyMode(r.value);
+      });
+    });
+
+    applyMode("hinweis");
+
+    // Formular per fetch senden statt per normalem Browser-Submit: so landen wir
+    // sicher auf unserer eigenen Danke-Seite, unabhaengig davon, ob Formspree den
+    // _next-Redirect bei einem klassischen Submit (z.B. auf einer noch nicht bei
+    // Formspree hinterlegten Domain) tatsaechlich befolgt.
+    var form = document.getElementById("studio-form");
+    var submitBtn = form.querySelector('button[type="submit"]');
+    var errorHint = document.getElementById("form-error");
+    var nextUrl = form.querySelector('input[name="_next"]').value;
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      errorHint.hidden = true;
+      submitBtn.disabled = true;
+
+      fetch(form.action, {
+        method: "POST",
+        body: new FormData(form),
+        headers: { Accept: "application/json" },
+      })
+        .then(function (response) {
+          if (response.ok) {
+            window.location.href = nextUrl;
+          } else {
+            submitBtn.disabled = false;
+            errorHint.hidden = false;
+          }
+        })
+        .catch(function () {
+          submitBtn.disabled = false;
+          errorHint.hidden = false;
+        });
+    });
+  })();
+</script>

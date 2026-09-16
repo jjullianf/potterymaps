@@ -1,0 +1,16 @@
+{
+  "name": "keramik-verzeichnis-site",
+  "version": "1.0.0",
+  "description": "Oeffentliche Verzeichnis-Website 'Keramik bemalen Schweiz', generiert mit Eleventy aus studios.json.",
+  "private": true,
+  "scripts": {
+    "start": "eleventy --serve --incremental",
+    "build": "eleventy"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0",
+    "@11ty/eleventy-img": "^7.0.0",
+    "clean-css": "^5.3.3",
+    "html-minifier-terser": "^7.2.0"
+  }
+}

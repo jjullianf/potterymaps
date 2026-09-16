@@ -1,0 +1,164 @@
+---js
+{
+  pagination: {
+    data: "studios",
+    size: 1,
+    alias: "studio",
+  },
+  permalink: (data) => `/studio/${data.studio.slug}/`,
+  layout: "base.njk",
+  eleventyComputed: {
+    title: (data) => `${data.studio.name} – Keramik bemalen in ${data.studio.city} | potterymaps`,
+    description: (data) => `${data.studio.name} in ${data.studio.city}: ${data.studio.address}. Öffnungszeiten, Preise und Infos zum Keramik bemalen.`,
+    jsonLd: (data) => {
+      const s = data.studio;
+      return {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        name: s.name,
+        description: s.description || undefined,
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: s.address,
+          addressLocality: s.city,
+          addressCountry: "CH",
+        },
+        openingHours: s.opening_hours || undefined,
+        priceRange: (s.price_mug || s.price_plate) ? `${s.price_mug || ""}–${s.price_plate || ""} CHF` : undefined,
+        telephone: s.phone || undefined,
+        email: s.email || undefined,
+        url: s.website || undefined,
+      };
+    },
+    jsonLdBreadcrumb: (data) => {
+      const s = data.studio;
+      const url = data.site.url;
+      return {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Startseite", item: `${url}/` },
+          { "@type": "ListItem", position: 2, name: "Alle Städte", item: `${url}/alle-staedte/` },
+          { "@type": "ListItem", position: 3, name: s.targetCityName, item: `${url}/staedte/${s.targetCitySlug}/` },
+          { "@type": "ListItem", position: 4, name: s.name, item: `${url}/studio/${s.slug}/` },
+        ],
+      };
+    },
+    jsonLdFaq: (data) => {
+      const s = data.studio;
+      if (!s.faqs || !s.faqs.length) return null;
+      return {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: s.faqs.map((f) => ({
+          "@type": "Question",
+          name: f.q,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: f.a,
+          },
+        })),
+      };
+    },
+    similarStudios: (data) => {
+      const s = data.studio;
+      const all = data.studios || [];
+      // Studios mit eigenem Bild zuerst (stabile Sortierung), damit die kleine
+      // Auswahl von nur 3-4 Eintraegen hochwertiger wirkt, solange erst wenige
+      // Studios ein Bild hinterlegt haben.
+      const imageFirst = (arr) => [...arr].sort((a, b) => (b.image ? 1 : 0) - (a.image ? 1 : 0));
+      const sameLiteralCity = all.filter((o) => o.slug !== s.slug && o.city === s.city);
+      if (sameLiteralCity.length > 0) return imageFirst(sameLiteralCity).slice(0, 3);
+      // Kein weiteres Studio am exakt gleichen Ort: auf Studios im Naehe-Cluster
+      // (gleiche naechste der 20 Hauptstaedte) ausweichen ("Nachbarschaft").
+      const cluster = all.filter((o) => o.slug !== s.slug && o.nearestHubSlug === s.nearestHubSlug);
+      return imageFirst(cluster).slice(0, 3);
+    },
+  },
+}
+---
+{% from "studio-card.njk" import card %}
+{% set s = studio %}
+<article class="studio-detail">
+  <p class="breadcrumb"><a href="/">Startseite</a> &raquo; <a href="/alle-staedte/">Alle Städte</a> &raquo; <a href="/staedte/{{ s.targetCitySlug }}/">{{ s.targetCityName }}</a> &raquo; {{ s.name }}</p>
+
+  <h1 class="studio-title">{{ s.name }}</h1>
+
+  {% studioImage s, { widths: [500, 852], sizes: "(max-width: 900px) 100vw, 852px", loading: "eager", fetchpriority: "high", wrapClass: "studio-hero-img" } %}
+
+  <section class="studio-quickfacts">
+    {% if s.priceAtAGlance %}
+    <div class="price-at-a-glance">
+      <span class="price-at-a-glance-value">{{ s.priceAtAGlance }}</span>
+      {% if s.priceIncludes %}<span class="price-at-a-glance-includes">{{ s.priceIncludes }}</span>{% endif %}
+    </div>
+    {% endif %}
+    <ul class="quickfacts-list">
+      <li><span class="qf-label">Adresse</span><span class="qf-value">{{ s.address }}</span></li>
+      {% if s.phone %}<li><span class="qf-label">Telefon</span><span class="qf-value"><a href="tel:{{ s.phone }}">{{ s.phone }}</a></span></li>{% endif %}
+      {% if s.opening_hours %}<li><span class="qf-label">Öffnungszeiten</span><span class="qf-value">{{ s.opening_hours }}</span></li>{% endif %}
+      {% if not s.priceAtAGlance and s.priceRangeText %}<li><span class="qf-label">Preisspanne</span><span class="qf-value qf-price">{{ s.priceRangeText }}</span></li>{% endif %}
+    </ul>
+    {% if s.tagsObjects.length %}
+    <div class="tags">
+      {% for tag in s.tagsObjects %}<span class="tag tag-{{ tag.category }}"><i class="ti {{ tag.icon }}"></i>{{ tag.label }}</span>{% endfor %}
+    </div>
+    {% endif %}
+  </section>
+
+  <div class="studio-map">
+    <div class="map-consent-gate" data-map-src="https://www.google.com/maps?q={{ (s.address + ' ' + s.city) | urlencode }}&output=embed" data-map-title="Karte: {{ s.name }}">
+      <p>Für die Karte wird eine Verbindung zu Google Maps hergestellt.</p>
+      <button type="button" class="button map-consent-load-btn">Karte laden</button>
+    </div>
+  </div>
+
+  {% if s.description %}<p class="studio-description">{{ s.description }}</p>{% endif %}
+
+  {% if s.price_note or s.pickup_time or s.special_events %}
+  <section class="studio-info">
+    <h2>Weitere Infos</h2>
+    <ul>
+      {% if s.price_note %}<li>{{ s.price_note }}</li>{% endif %}
+      {% if s.pickup_time %}<li><strong>Abholzeit:</strong> {{ s.pickup_time }}</li>{% endif %}
+      {% if s.special_events %}<li><strong>Besondere Events:</strong> {{ s.special_events }}</li>{% endif %}
+    </ul>
+  </section>
+  {% endif %}
+
+  <section class="studio-contact">
+    <h2>Kontakt</h2>
+    <ul>
+      {% if s.phone %}<li><strong>Telefon:</strong> <a href="tel:{{ s.phone }}">{{ s.phone }}</a></li>{% endif %}
+      {% if s.email %}<li><strong>E-Mail:</strong> <a href="mailto:{{ s.email }}">{{ s.email }}</a></li>{% endif %}
+      {% if s.website %}<li><strong>Website:</strong> <a href="{{ s.website }}" rel="nofollow noopener" target="_blank">{{ s.website }}</a></li>{% endif %}
+    </ul>
+  </section>
+
+  {% if s.faqs.length %}
+  <section class="studio-faq">
+    <h2>Häufige Fragen</h2>
+    {% for f in s.faqs %}
+    <div class="faq-item">
+      <h3 class="faq-q">{{ f.q }}</h3>
+      <p class="faq-a">{{ f.a }}</p>
+    </div>
+    {% endfor %}
+  </section>
+  {% endif %}
+
+  {% if similarStudios.length %}
+  <section class="similar-studios">
+    <h2>Ähnliche Studios in der Nähe</h2>
+    <ul class="studio-cards">
+      {% for other in similarStudios %}{{ card(other) }}{% endfor %}
+    </ul>
+  </section>
+  {% endif %}
+
+  <p class="back-to-city-link"><a href="/staedte/{{ s.targetCitySlug }}/">Alle Studios in {{ s.targetCityName }} ansehen →</a></p>
+
+  <section class="report-error">
+    <p>Etwas an diesem Eintrag stimmt nicht mehr? <a href="/studio-eintragen/?studio={{ s.name | urlencode }}">Fehler gefunden? Melden</a></p>
+  </section>
+</article>

@@ -1,0 +1,33 @@
+---js
+{
+  layout: "base.njk",
+  title: "Impressum | potterymaps",
+  description: "Impressum von potterymaps.",
+  permalink: "/impressum/",
+  eleventyComputed: {
+    jsonLdBreadcrumb: (data) => ({
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Startseite", item: `${data.site.url}/` },
+        { "@type": "ListItem", position: 2, name: "Impressum", item: `${data.site.url}/impressum/` },
+      ],
+    }),
+  },
+}
+---
+<article class="static-page">
+  <p class="breadcrumb"><a href="/">Startseite</a> &raquo; Impressum</p>
+  <h1>Impressum</h1>
+  <p>Angaben gemäss den in der Schweiz geltenden Vorschriften:</p>
+  <p>
+    Julian Frick<br>
+    Rudishaldenstrasse 14<br>
+    8800 Thalwil<br>
+    Schweiz
+  </p>
+  <p>
+    Kontakt: <a href="mailto:info@potterymaps.com">info@potterymaps.com</a> oder über die <a href="/kontakt/">Kontakt-Seite</a>.
+  </p>
+  <p>Diese Website ist ein unabhängiges Verzeichnis und steht in keiner geschäftlichen Verbindung zu den gelisteten Studios.</p>
+</article>

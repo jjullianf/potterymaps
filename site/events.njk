@@ -1,0 +1,47 @@
+---js
+{
+  layout: "base.njk",
+  title: "Keramik bemalen für Teamevents, Geburtstage & Gruppen | potterymaps",
+  description: "Keramik bemalen als Firmenevent, Kindergeburtstag, Junggesellinnenabschied oder Gruppenanlass – finde ein passendes Studio in der Schweiz und stelle eine unverbindliche Anfrage.",
+  permalink: "/events/",
+  eleventyComputed: {
+    jsonLdBreadcrumb: (data) => ({
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Startseite", item: `${data.site.url}/` },
+        { "@type": "ListItem", position: 2, name: "Events", item: `${data.site.url}/events/` },
+      ],
+    }),
+  },
+}
+---
+<article class="static-page">
+  <p class="breadcrumb"><a href="/">Startseite</a> &raquo; Events</p>
+  <h1>Keramik bemalen als Event - für Firmen, Geburtstage und Gruppen</h1>
+  <p>Ob Firmenanlass, Kindergeburtstag, Junggesellinnenabschied oder einfach eine private Feier mit Freund:innen – Keramik bemalen eignet sich hervorragend als gemeinsames Erlebnis für Gruppen. Wir vermitteln dich kostenlos an ein passendes Studio in deiner Region.</p>
+
+  <p class="event-cta-wrap"><a class="button" href="/grosse-anfrage/">Jetzt Anfrage stellen</a></p>
+
+  <section class="event-section">
+    <h2>Firmenevents &amp; Teambuilding</h2>
+    <p>Keramik bemalen als Teamevent fördert Kreativität und sorgt für einen entspannten Rahmen abseits vom Arbeitsalltag – ideal für Team-Offsites, Weihnachtsfeiern oder Kunden-Anlässe. Über {{ eventStats.corporateEvents }} Studios in der Schweiz bieten explizit Firmenevents an.</p>
+  </section>
+
+  <section class="event-section">
+    <h2>Kindergeburtstage</h2>
+    <p>Ein Keramik-Geburtstag ist eine kreative Alternative zur klassischen Geburtstagsparty – die Kinder bemalen ihr eigenes Stück und nehmen ein bleibendes Andenken mit nach Hause. {{ eventStats.birthdayParties }} Studios im Verzeichnis bieten Geburtstage an.</p>
+  </section>
+
+  <section class="event-section">
+    <h2>Junggesellinnenabschiede &amp; Polterabende</h2>
+    <p>Für den Junggesellinnenabschied oder Polterabend bietet Keramik bemalen eine entspannte, kreative Alternative zum klassischen Programm – mit Zeit zum Austausch und einem gemeinsamen Erlebnis. {{ eventStats.henParty }} Studios sind darauf eingerichtet.</p>
+  </section>
+
+  <section class="event-section">
+    <h2>Private Feiern &amp; Gruppenanlässe</h2>
+    <p>Auch für private Feiern, Vereinsanlässe oder einfach einen kreativen Abend mit Freund:innen eignet sich Keramik bemalen. {{ eventStats.themedEvents }} Studios bieten dafür eigene Themen-Abende an, viele weitere sind auch für spontane Gruppenanfragen offen.</p>
+  </section>
+
+  <p class="event-cta-wrap"><a class="button" href="/grosse-anfrage/">Jetzt Anfrage stellen</a></p>
+</article>

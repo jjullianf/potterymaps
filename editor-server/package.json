@@ -1,0 +1,14 @@
+{
+  "name": "keramik-verzeichnis-editor-server",
+  "version": "1.0.0",
+  "description": "Lokaler Server fuer den Keramik-Verzeichnis Editor - speichert Aenderungen direkt in studios.json statt im Browser.",
+  "private": true,
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "multer": "^2.0.0"
+  }
+}
