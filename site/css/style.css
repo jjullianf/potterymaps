@@ -273,6 +273,35 @@ h1, h2 { font-family: var(--font-display); font-weight: 600; color: var(--color-
 .faq-q { margin-bottom: 0.2rem; font-size: 1.05rem; }
 .faq-a { margin-top: 0; color: var(--color-text-muted); }
 
+.home-faq { margin: 2.5rem 0; }
+.faq-accordion-item {
+  border-bottom: 1px solid var(--color-border);
+  padding: 0.9rem 0;
+}
+.faq-accordion-item summary {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1.05rem;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.faq-accordion-item summary::-webkit-details-marker { display: none; }
+.faq-accordion-item summary::after {
+  content: "+";
+  color: var(--color-accent);
+  font-size: 1.3rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.faq-accordion-item[open] summary::after { content: "–"; }
+.faq-accordion-item summary:hover { color: var(--color-accent); }
+.faq-accordion-item p { margin: 0.6rem 0 0; color: var(--color-text-muted); }
+
+.home-map { margin: 1.5rem 0 2rem; }
+
 .empty-city {
   background: var(--color-bg-alt);
   border: 1px dashed var(--color-border);
@@ -298,6 +327,7 @@ h1, h2 { font-family: var(--font-display); font-weight: 600; color: var(--color-
 }
 .town-chip:hover { border-color: var(--color-accent); color: var(--color-accent); }
 .town-chip .count { font-weight: 400; color: var(--color-text-muted); font-size: 0.85rem; }
+.back-to-map-link { display: inline-block; margin-top: 0.9rem; font-weight: 500; }
 
 /* Studio-Detailseiten: Hero-Bild (echtes Foto oder Marken-Platzhalter, gleiches
    Seitenverhaeltnis in beiden Faellen, damit das Layout nicht springt) */
@@ -555,6 +585,14 @@ h1, h2 { font-family: var(--font-display); font-weight: 600; color: var(--color-
 .steps p { color: var(--color-text-muted); font-size: 0.9rem; margin: 0; }
 
 .example-studios { margin: 2rem 0; }
+/* Nur 3 Karten auf der Homepage - mit auto-fit statt auto-fill schrumpfen keine
+   leeren Grid-Spalten mit, und die max-width verhindert, dass die 3 Karten auf
+   breiten Bildschirmen zu stark auseinandergezogen werden. */
+.example-studios .studio-cards {
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  max-width: 900px;
+  margin: 0 auto;
+}
 
 .cta-missing {
   text-align: center;
@@ -743,6 +781,38 @@ h1, h2 { font-family: var(--font-display); font-weight: 600; color: var(--color-
 .map-marker-dot.is-active {
   transform: scale(1.35);
 }
+
+/* Orts-/Stadtzentrum-Pin: bewusst andere Farbe (Orange) als die Studio-Pins,
+   damit auf einen Blick klar ist, dass es sich nur um die Ortsmarkierung
+   handelt und nicht um ein weiteres Studio. */
+.map-marker-dot-town {
+  background: #d97706;
+}
+
+.map-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin: -0.75rem 0 1.5rem;
+}
+.map-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.map-legend-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  flex-shrink: 0;
+}
+.map-legend-dot.map-legend-dot-town { background: #d97706; }
+.map-legend-dot.map-legend-dot-studio { background: var(--color-accent); }
 
 .map-cluster-dot {
   display: flex;

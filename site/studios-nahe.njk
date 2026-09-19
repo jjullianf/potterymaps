@@ -50,6 +50,10 @@
 
   {% if t.nearestStudios.length %}
   <div id="city-detail-map" class="city-detail-map"></div>
+  <p class="map-legend">
+    <span class="map-legend-item"><span class="map-legend-dot map-legend-dot-town"></span>Ortszentrum</span>
+    <span class="map-legend-item"><span class="map-legend-dot map-legend-dot-studio"></span>Studio</span>
+  </p>
 
   <section class="studio-list">
     <h2>Studios in der Nähe von {{ t.name }}</h2>
@@ -94,7 +98,7 @@
 
     var townIcon = L.divIcon({
       className: "map-marker-dot-wrap",
-      html: '<div class="map-marker-dot" style="background:var(--color-accent, #b45309);"></div>',
+      html: '<div class="map-marker-dot map-marker-dot-town"></div>',
       iconSize: [14, 14],
     });
     L.marker([town.lat, town.lng], { icon: townIcon }).addTo(map).bindPopup("<strong>{{ t.name | escape }}</strong>");

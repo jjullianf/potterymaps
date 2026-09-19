@@ -65,6 +65,7 @@ module.exports = async function () {
         nearestStudios,
         nearestCityName: nearestCity ? nearestCity.name : null,
         nearestCitySlug: nearestCity ? nearestCity.slug : null,
+        nearestCityDistanceKm: nearestCity ? Math.round(nearestCityDistance) : null,
       };
     });
 };

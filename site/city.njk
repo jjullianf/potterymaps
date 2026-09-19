@@ -13,6 +13,13 @@
     noindex: (data) => data.cityData.noindex,
     jsonLdItemList: (data) => data.cityData.jsonLdItemList,
     jsonLdBreadcrumb: (data) => data.cityData.jsonLdBreadcrumb,
+    // Nur die 4 naechstgelegenen Orte ohne eigenes Studio anzeigen (Datengrundlage
+    // in nearbyTowns bleibt vollstaendig - hier wird nur die Anzeige begrenzt).
+    townsWithoutStudio: (data) =>
+      (data.nearbyTowns || [])
+        .filter((t) => t.nearestCitySlug === data.cityData.slug)
+        .sort((a, b) => a.nearestCityDistanceKm - b.nearestCityDistanceKm)
+        .slice(0, 4),
   },
 }
 ---
@@ -36,8 +43,12 @@
   </p>
   {% endif %}
 
-  {% if mapStudios.length %}
+  {% if c.mapStudios.length %}
   <div id="city-detail-map" class="city-detail-map"></div>
+  <p class="map-legend">
+    <span class="map-legend-item"><span class="map-legend-dot map-legend-dot-town"></span>Ortszentrum</span>
+    <span class="map-legend-item"><span class="map-legend-dot map-legend-dot-studio"></span>Studio</span>
+  </p>
   {% endif %}
 
   {% if c.direct.length %}
@@ -60,7 +71,6 @@
   </section>
   {% endif %}
 
-  {% set townsWithoutStudio = nearbyTowns | selectattr("nearestCitySlug", "equalto", c.slug) | list %}
   {% if townsWithoutStudio.length %}
   <section class="nearby-towns">
     <h2>Weitere Orte in der Region</h2>
@@ -69,6 +79,7 @@
       <li><a class="town-chip" href="/studios-nahe/{{ t.slug }}/">{{ t.name }}</a></li>
       {% endfor %}
     </ul>
+    <a class="back-to-map-link" href="/karte/">← Zurück zur Karte</a>
   </section>
   {% endif %}
 
@@ -91,12 +102,13 @@
   {% endif %}
 </article>
 
-{% if mapStudios.length %}
+{% if c.mapStudios.length %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script>
   (function () {
+    var townCenter = { lat: {{ c.lat }}, lng: {{ c.lng }} };
     var studios = [
-      {% for s in mapStudios %}
+      {% for s in c.mapStudios %}
       { name: "{{ s.name | escape }}", slug: "{{ s.slug }}", lat: {{ s.lat }}, lng: {{ s.lng }} }{% if not loop.last %},{% endif %}
       {% endfor %}
     ];
@@ -104,12 +116,19 @@
     // Fester Zoom auf das Stadtzentrum statt fitBounds, damit weiter entfernte
     // Nachbarschafts-Studios die Karte nicht auf ganze Region herauszoomen lassen -
     // es soll nur die Stadt selbst sichtbar sein.
-    var map = L.map('city-detail-map', { scrollWheelZoom: false }).setView([{{ c.lat }}, {{ c.lng }}], 12);
+    var map = L.map('city-detail-map', { scrollWheelZoom: false }).setView([townCenter.lat, townCenter.lng], 12);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>-Mitwirkende',
       maxZoom: 18,
       className: "map-tiles-muted",
     }).addTo(map);
+
+    var townIcon = L.divIcon({
+      className: "map-marker-dot-wrap",
+      html: '<div class="map-marker-dot map-marker-dot-town"></div>',
+      iconSize: [14, 14],
+    });
+    L.marker([townCenter.lat, townCenter.lng], { icon: townIcon }).addTo(map).bindPopup("<strong>{{ c.name | escape }}</strong>");
 
     var dotIcon = L.divIcon({
       className: "map-marker-dot-wrap",

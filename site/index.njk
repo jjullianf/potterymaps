@@ -3,6 +3,32 @@
   layout: "base.njk",
   title: "Keramik bemalen Schweiz – Studios in deiner Stadt finden | potterymaps",
   description: "Finde Studios zum Keramik bemalen in der ganzen Schweiz – Teller, Ton und Porzellan bemalen, plus gemütliche Keramik-Cafés. Alle Städte im Überblick.",
+  homeFaqs: [
+    {
+      q: "Was ist Keramik bemalen?",
+      a: "Beim Keramik bemalen (auch Pottery Painting genannt) wählst du einen vorgefertigten Keramik-Rohling – z. B. Tasse, Teller oder Schüssel – und bemalst ihn im Studio mit Spezialfarben. Anschliessend wird das Stück im Studio gebrannt und ist danach dauerhaft nutz- und spülmaschinenfest.",
+    },
+    {
+      q: "Was kostet Keramik bemalen?",
+      a: "Die Preise hängen vom gewählten Rohling ab und liegen meist zwischen CHF 15 und 50, oft zzgl. einer kleinen Studiogebühr für Farben, Brand und Nutzungsdauer. Auf jeder Studio-Seite bei potterymaps findest du die aktuellen Preise auf einen Blick.",
+    },
+    {
+      q: "Wo kann ich in der Schweiz Keramik bemalen?",
+      a: "potterymaps listet Studios und Keramik-Cafés zum Keramik bemalen in der ganzen Schweiz, u. a. in Zürich, Basel, Bern, Genf, Luzern und vielen weiteren Städten. Nutze die Suche oben, um Studios in deiner Nähe zu finden.",
+    },
+    {
+      q: "Wie lange dauert es, bis die bemalte Keramik fertig ist?",
+      a: "Nach dem Bemalen wird dein Stück im Studio glasiert und gebrannt. Das dauert je nach Studio meist 1 bis 3 Wochen, bis es zur Abholung bereitsteht – einige Studios bieten auch einen Versand nach Hause an.",
+    },
+    {
+      q: "Eignet sich Keramik bemalen für Anfänger und Kinder?",
+      a: "Ja. Keramik bemalen erfordert keine Vorkenntnisse und ist bei den meisten Studios ausdrücklich für Anfänger, Familien und Kinder geeignet – viele bieten dafür auch spezielle Kindergeburtstage an.",
+    },
+    {
+      q: "Eignet sich Keramik bemalen für Firmenevents oder Gruppen?",
+      a: "Ja, viele Studios bieten Keramik bemalen auch als Teamevent, Junggesellinnenabschied oder Firmenanlass für grössere Gruppen an. Über unsere Event-Anfrage vermitteln wir dich kostenlos an ein passendes Studio.",
+    },
+  ],
   eleventyComputed: {
     popularCities: (data) => {
       return [...(data.cities || [])].sort((a, b) => b.count - a.count);
@@ -10,14 +36,12 @@
     searchTowns: (data) => {
       return (data.nearbyTowns || []).map((t) => ({ name: t.name, slug: t.slug }));
     },
+    homeMapStudios: (data) => (data.studios || []).filter((s) => s.lat && s.lng),
     exampleStudios: (data) => {
-      // Studios mit eigenem Bild zuerst (stabile Sortierung: sonstige Reihenfolge
-      // innerhalb der beiden Gruppen bleibt erhalten), damit die begrenzte Auswahl
-      // hochwertiger wirkt, solange erst wenige Studios ein Bild hinterlegt haben.
       return (data.studios || [])
         .filter((s) => s.priceRangeText && s.topTags.length)
-        .sort((a, b) => (b.image ? 1 : 0) - (a.image ? 1 : 0))
-        .slice(0, 6);
+        .sort((a, b) => a.name.localeCompare(b.name, "de"))
+        .slice(0, 3);
     },
     cafeStudios: (data) => {
       return (data.studios || [])
@@ -41,6 +65,15 @@
       });
       return metadata.webp[0].url;
     },
+    jsonLdFaq: (data) => ({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: data.homeFaqs.map((f) => ({
+        "@type": "Question",
+        name: f.q,
+        acceptedAnswer: { "@type": "Answer", text: f.a },
+      })),
+    }),
   },
 }
 ---
@@ -59,10 +92,11 @@
     </div>
   </section>
 
-  <section class="stats-box">
-    <div class="stat"><i class="ti ti-building"></i><strong>{{ studios.length }}</strong><span>{{ pluralize(studios.length, "Studio", "Studios") }}</span></div>
-    <div class="stat-divider"></div>
-    <div class="stat"><i class="ti ti-map-pin"></i><strong>{{ cities.length }}</strong><span>Städte</span></div>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.Default.css">
+  <section class="home-map">
+    <div id="home-overview-map" class="overview-map"></div>
   </section>
 
   <section class="topic-intro">
@@ -100,6 +134,16 @@
     <h2>Dein Studio fehlt?</h2>
     <p>Wir wachsen laufend weiter. Kennst du ein Studio, das noch nicht gelistet ist?</p>
     <a class="button" href="/studio-eintragen/">Trag es ein</a>
+  </section>
+
+  <section class="home-faq">
+    <h2>Häufige Fragen zum Keramik bemalen</h2>
+    {% for f in homeFaqs %}
+    <details class="faq-accordion-item">
+      <summary>{{ f.q }}</summary>
+      <p>{{ f.a }}</p>
+    </details>
+    {% endfor %}
   </section>
 
 </article>
@@ -194,5 +238,48 @@
     document.addEventListener("click", function (e) {
       if (!box.contains(e.target) && e.target !== input) box.hidden = true;
     });
+  })();
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/leaflet.markercluster.js"></script>
+<script>
+  (function () {
+    var studios = [
+      {% for s in homeMapStudios %}
+      { name: "{{ s.name | escape }}", slug: "{{ s.slug }}", city: "{{ s.city | escape }}", lat: {{ s.lat }}, lng: {{ s.lng }} }{% if not loop.last %},{% endif %}
+      {% endfor %}
+    ];
+
+    var map = L.map('home-overview-map').setView([46.9, 8.2], 8);
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+      maxZoom: 18,
+    }).addTo(map);
+
+    var dotIcon = L.divIcon({
+      className: "map-marker-dot-wrap",
+      html: '<div class="map-marker-dot"></div>',
+      iconSize: [14, 14],
+    });
+
+    var clusterGroup = L.markerClusterGroup({
+      iconCreateFunction: function (cluster) {
+        var count = cluster.getChildCount();
+        var size = count < 10 ? 32 : count < 25 ? 40 : 48;
+        return L.divIcon({
+          html: '<div class="map-cluster-dot" style="width:' + size + 'px;height:' + size + 'px;">' + count + '</div>',
+          className: "map-cluster-wrap",
+          iconSize: L.point(size, size),
+        });
+      },
+    });
+    studios.forEach(function (s) {
+      var marker = L.marker([s.lat, s.lng], { icon: dotIcon }).bindPopup(
+        '<strong>' + s.name + '</strong><br>' + s.city + '<br><a href="/studio/' + s.slug + '/">Zur Studio-Seite</a>'
+      );
+      clusterGroup.addLayer(marker);
+    });
+    map.addLayer(clusterGroup);
   })();
 </script>
