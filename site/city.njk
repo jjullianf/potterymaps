@@ -60,6 +60,18 @@
   </section>
   {% endif %}
 
+  {% set townsWithoutStudio = nearbyTowns | selectattr("nearestCitySlug", "equalto", c.slug) | list %}
+  {% if townsWithoutStudio.length %}
+  <section class="nearby-towns">
+    <h2>Weitere Orte in der Region</h2>
+    <ul class="town-chips">
+      {% for t in townsWithoutStudio %}
+      <li><a class="town-chip" href="/studios-nahe/{{ t.slug }}/">{{ t.name }}</a></li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endif %}
+
   {% if not c.hasAny %}
   <section class="empty-city">
     <p>Aktuell ist uns in {{ c.name }} noch kein Studio zum Keramik bemalen bekannt.</p>

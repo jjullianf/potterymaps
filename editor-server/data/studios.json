@@ -1484,7 +1484,9 @@
       "image": "",
       "quelle_hinweis": "Manuell im Editor gepflegt.",
       "hat_instagram": "",
-      "custom_faq": "[]"
+      "custom_faq": "[]",
+      "lat": 47.556281,
+      "lng": 8.8979633
     }
   ],
   "reviewed": {

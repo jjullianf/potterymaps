@@ -22,4 +22,7 @@ eleventyExcludeFromCollections: true
   {% for s in studios %}
   <url><loc>{{ site.url }}/studio/{{ s.slug }}/</loc></url>
   {% endfor %}
+  {% for t in nearbyTowns %}
+  <url><loc>{{ site.url }}/studios-nahe/{{ t.slug }}/</loc></url>
+  {% endfor %}
 </urlset>

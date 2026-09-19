@@ -7,6 +7,9 @@
     popularCities: (data) => {
       return [...(data.cities || [])].sort((a, b) => b.count - a.count);
     },
+    searchTowns: (data) => {
+      return (data.nearbyTowns || []).map((t) => ({ name: t.name, slug: t.slug }));
+    },
     exampleStudios: (data) => {
       // Studios mit eigenem Bild zuerst (stabile Sortierung: sonstige Reihenfolge
       // innerhalb der beiden Gruppen bleibt erhalten), damit die begrenzte Auswahl
@@ -103,9 +106,16 @@
 <script>
   (function () {
     var cities = [
-      {% for c in popularCities %}{ name: "{{ c.name | escape }}", slug: "{{ c.slug }}" }{% if not loop.last %},{% endif %}
+      {% for c in popularCities %}{ name: "{{ c.name | escape }}", slug: "{{ c.slug }}", hasOwn: true }{% if not loop.last %},{% endif %}
       {% endfor %}
     ];
+    // Orte ohne eigenes Studio: fuehren zu einer "Studios in der Naehe von..."-Seite
+    // (/studios-nahe/<slug>/) statt zu einer eigenen Staedte-Seite.
+    var towns = [
+      {% for t in searchTowns %}{ name: "{{ t.name | escape }}", slug: "{{ t.slug }}", hasOwn: false }{% if not loop.last %},{% endif %}
+      {% endfor %}
+    ];
+    var allPlaces = cities.concat(towns);
     // Englische Alternativnamen, damit z.B. "Geneva" oder "Lucerne" trotzdem
     // beim deutschen Stadt-Hub ("Genève"/"Luzern") landen, statt ins Leere zu
     // laufen - die Stadt selbst wird intern immer einheitlich benannt.
@@ -125,9 +135,10 @@
       }
       matches.slice(0, 6).forEach(function (c) {
         var a = document.createElement("a");
-        a.href = "/staedte/" + c.slug + "/";
-        if (c.note) {
-          a.innerHTML = c.name + ' <span class="suggestion-note">' + c.note + "</span>";
+        a.href = c.hasOwn ? "/staedte/" + c.slug + "/" : "/studios-nahe/" + c.slug + "/";
+        var note = c.note || (c.hasOwn ? null : "Studios in der Nähe");
+        if (note) {
+          a.innerHTML = c.name + ' <span class="suggestion-note">' + note + "</span>";
         } else {
           a.textContent = c.name;
         }
@@ -143,7 +154,7 @@
       Object.keys(CITY_ALIASES).forEach(function (alias) {
         if (alias.indexOf(q) !== -1 || q.indexOf(alias) !== -1) aliasTarget = CITY_ALIASES[alias];
       });
-      return cities.filter(function (c) {
+      return allPlaces.filter(function (c) {
         return c.name.toLowerCase().indexOf(q) !== -1 || (aliasTarget && c.name.toLowerCase() === aliasTarget);
       });
     }
@@ -176,7 +187,7 @@
       }
       var matches = currentMatches();
       if (matches.length) {
-        window.location.href = "/staedte/" + matches[0].slug + "/";
+        window.location.href = matches[0].hasOwn ? "/staedte/" + matches[0].slug + "/" : "/studios-nahe/" + matches[0].slug + "/";
       }
     });
 
