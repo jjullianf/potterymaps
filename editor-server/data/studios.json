@@ -1463,6 +1463,28 @@
       "custom_faq": "[]",
       "lat": 47.4089414,
       "lng": 9.0390653
+    },
+    {
+      "slug": "atelier-zaya-frauenfeld",
+      "name": "Atelier ZAYA",
+      "address": "Freiestrasse 17, 8500 Frauenfeld",
+      "city": "Frauenfeld",
+      "phone": "+41 76 577 45 06",
+      "website": "https://atelier-zaya.ch/",
+      "opening_hours": "Mo geschlossen (auf Anfrage 9:00-11:30 Uhr); Di-Mi 9:00-11:30 und 13:30-18:30 Uhr; Do 9:30-12:00 und 13:30-18:30 Uhr; Fr 9:30-12:30 und 13:30-18:30 Uhr; Sa 10:00-16:00 Uhr. In den Schulferien können die regulären Zeiten abweichen; massgeblich sind die buchbaren Time-Slots.",
+      "tags": "kids-friendly, birthday-parties, hen-party, corporate-events, date-night, walk-in, reservation-empfohlen, themed-events",
+      "price_from": "25",
+      "price_mug": "",
+      "price_plate": "",
+      "studio_fee": "Keine separate Studio-Gebühr; Keramikstücke CHF 25-120 inkl. Glasur und Brand",
+      "price_note": "Die Preise richten sich nach Grösse und Gewicht des ausgewählten Keramikrohlings und liegen laut Atelier zwischen CHF 25 und 120 pro Stück. Glasur und Brand sind bereits im jeweiligen Artikelpreis enthalten; eine separate Studio- oder Brenngebühr fällt für das reguläre freie Keramikmalen nicht an. Für das freie Malen stehen jeweils 2,5 Stunden zur Verfügung. Bei exklusiven Veranstaltungen oder Buchungen ausserhalb der regulären Slots wird stattdessen ein Pauschalpreis von CHF 60 pro Person verrechnet; mit kleinem Apéro, Prosecco oder Wein kostet das exklusive Format CHF 70 pro Person.",
+      "pickup_time": "ca. 3-4 Wochen; Versand nach Hause ist ebenfalls möglich",
+      "special_events": "Atelier ZAYA bietet neben dem freien Keramikmalen verschiedene Gruppen- und Spezialformate an. Kindergeburtstage können individuell angefragt werden; auch Junggesellenabschiede und private Abende mit Freund:innen sind möglich. Für grössere Gruppen kann das Atelier ausserhalb der regulären Öffnungszeiten exklusiv gebucht werden. Bei einer solchen geschlossenen Gesellschaft beträgt die Pauschale CHF 60 pro Person, mit kleinem Apéro sowie Prosecco oder Wein CHF 70 pro Person. Für reguläre Time-Slots können maximal 12 Personen gleichzeitig malen; grössere Gruppen werden individuell über das Atelier angefragt. Zusätzlich findet ein- bis zweimal pro Monat bei genügend Anmeldungen eine «Lady's Night Painting & Wine» statt: mindestens 6 Personen, 18:30-21:00 Uhr, kleines Apéro, Wein oder Prosecco und Keramikmalen für CHF 70 pro Person. Weitere thematische Angebote umfassen beispielsweise Yoga & Keramikmalen.",
+      "description": "Atelier ZAYA ist ein offenes Keramikmal-Atelier in der Altstadt von Frauenfeld, in dem vorgefertigte Rohkeramik individuell gestaltet wird. Zur Auswahl stehen zahlreiche Rohlinge wie Tassen, Teller, Schüsseln, Vasen und Krüge in unterschiedlichen Grössen und Preiskategorien. Nach der Auswahl des Stücks stehen 2,5 Stunden zum Bemalen zur Verfügung; Farben und benötigtes Material werden im Atelier bereitgestellt. Anschliessend wird das bemalte Stück gebrannt und ist nach etwa 3 bis 4 Wochen zur Abholung bereit, alternativ ist auch ein Versand möglich. Kinder sind willkommen, wobei Kinder unter 10 Jahren während des Malens begleitet werden sollten. Neben dem spontanen oder reservierten Einzelbesuch eignet sich das Atelier auch für Familien, Paare, Geburtstage, Junggesellenabschiede, private Gruppen und thematische Abende",
+      "image": "",
+      "quelle_hinweis": "Manuell im Editor gepflegt.",
+      "hat_instagram": "",
+      "custom_faq": "[]"
     }
   ],
   "reviewed": {
@@ -1526,6 +1548,7 @@
     "ceramic-kanvas-geneva": true,
     "keramos-neuchatel": true,
     "nebu-zuerich": true,
-    "creaba-kirchberg": true
+    "creaba-kirchberg": true,
+    "atelier-zaya-frauenfeld": true
   }
 }
