@@ -98,6 +98,23 @@ module.exports = function (eleventyConfig) {
     path.join(__dirname, "..", "editor-server", "data", "studios.json")
   );
 
+  // Haengt UTM-Parameter an ausgehende Studio-Website-Links an, damit in Google
+  // Analytics erkennbar ist, dass der Traffic von potterymaps kam - funktioniert
+  // per URL-Objekt auch dann korrekt, wenn die Website-URL bereits eine eigene
+  // Query-String hat.
+  eleventyConfig.addFilter("withUtm", function (url) {
+    if (!url) return url;
+    try {
+      const parsed = new URL(url);
+      parsed.searchParams.set("utm_source", "potterymaps");
+      parsed.searchParams.set("utm_medium", "referral");
+      parsed.searchParams.set("utm_campaign", "studio_listing");
+      return parsed.toString();
+    } catch (e) {
+      return url;
+    }
+  });
+
   eleventyConfig.addFilter("slugify", function (str) {
     return String(str || "")
       .toLowerCase()

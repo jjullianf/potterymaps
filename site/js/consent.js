@@ -59,6 +59,20 @@
     gate.replaceWith(iframe);
   }
 
+  // Klick-Tracking auf ausgehende Studio-Website-Links (siehe studio.njk) - der
+  // Event-Aufruf ist ein No-Op ohne Wirkung, solange gtag() (siehe loadAnalytics)
+  // noch nicht existiert, also ohne Consent kein Tracking-Aufruf.
+  function initOutboundLinkTracking() {
+    document.addEventListener("click", function (e) {
+      var link = e.target.closest(".studio-website-link");
+      if (!link || typeof window.gtag !== "function") return;
+      window.gtag("event", "studio_link_click", {
+        studio_slug: link.getAttribute("data-studio-slug") || "",
+        studio_name: link.getAttribute("data-studio-name") || "",
+      });
+    });
+  }
+
   function initMapGates() {
     var gates = document.querySelectorAll(".map-consent-gate");
     if (!gates.length) return;
@@ -106,6 +120,7 @@
     }
 
     initMapGates();
+    initOutboundLinkTracking();
 
     var acceptBtn = document.getElementById("cookie-accept");
     var declineBtn = document.getElementById("cookie-decline");

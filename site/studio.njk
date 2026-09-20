@@ -131,7 +131,7 @@
     <ul>
       {% if s.phone %}<li><strong>Telefon:</strong> <a href="tel:{{ s.phone }}">{{ s.phone }}</a></li>{% endif %}
       {% if s.email %}<li><strong>E-Mail:</strong> <a href="mailto:{{ s.email }}">{{ s.email }}</a></li>{% endif %}
-      {% if s.website %}<li><strong>Website:</strong> <a href="{{ s.website }}" rel="nofollow noopener" target="_blank">{{ s.website }}</a></li>{% endif %}
+      {% if s.website %}<li><strong>Website:</strong> <a href="{{ s.website | withUtm }}" rel="nofollow noopener" target="_blank" class="studio-website-link" data-studio-slug="{{ s.slug }}" data-studio-name="{{ s.name | escape }}">{{ s.website }}</a></li>{% endif %}
     </ul>
   </section>
 
