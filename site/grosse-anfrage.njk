@@ -49,6 +49,11 @@
     <label for="a-message">Nachricht</label>
     <textarea id="a-message" name="message" rows="5" required></textarea>
 
+    <label class="checkbox-option checkbox-option-consent">
+      <input type="checkbox" id="a-consent" name="consent" required>
+      <span>Ich habe die <a href="/ch/datenschutz/" target="_blank">Datenschutzerklärung</a> gelesen und bin damit einverstanden, dass meine Angaben zur Bearbeitung dieser Anfrage verwendet und dafür an Formspree übermittelt werden.</span>
+    </label>
+
     <button type="submit">Anfrage senden</button>
     <p class="hint" id="form-error" hidden>Senden hat leider nicht geklappt. Bitte nochmal versuchen, oder direkt an <a href="mailto:info@potterymaps.com">info@potterymaps.com</a> schreiben.</p>
   </form>

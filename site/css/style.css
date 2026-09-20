@@ -453,6 +453,8 @@ h1, h2 { font-family: var(--font-display); font-weight: 600; color: var(--color-
   margin-top: 0.3rem;
 }
 .entry-form .checkbox-option { display: flex; align-items: center; gap: 0.4rem; font-weight: 400; }
+.entry-form .checkbox-option-consent { align-items: flex-start; }
+.entry-form .checkbox-option-consent input { margin-top: 0.2rem; }
 .entry-form .checkbox-option input { width: auto; }
 .entry-form button {
   margin-top: 1rem;
