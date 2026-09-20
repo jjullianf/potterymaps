@@ -913,3 +913,14 @@ a.country-card:hover { border-color: var(--color-accent); }
 .country-card-disabled .country-card-hint { color: var(--color-text-muted); }
 .country-select-footer { max-width: 480px; margin: 0 auto; text-align: center; }
 .country-select-footer nav a { margin: 0 0.6rem; }
+
+.draft-banner {
+  background: #fff3cd;
+  border: 1px solid #e8c468;
+  border-radius: 10px;
+  padding: 1rem 1.2rem;
+  margin-bottom: 2rem;
+  color: #6b5410;
+}
+.draft-banner strong { display: block; margin-bottom: 0.4rem; }
+.draft-banner p { margin: 0; font-size: 0.9rem; }
