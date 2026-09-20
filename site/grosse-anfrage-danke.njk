@@ -3,7 +3,7 @@
   layout: "base.njk",
   title: "Danke! | potterymaps",
   description: "Danke für deine Anfrage – wir melden uns innerhalb von 48 Stunden mit passenden Studios.",
-  permalink: "/ch/grosse-anfrage/danke/",
+  permalink: "/grosse-anfrage/danke/",
   noindex: true,
   eleventyComputed: {
     jsonLdBreadcrumb: (data) => ({
@@ -12,15 +12,15 @@
       itemListElement: [
         { "@type": "ListItem", position: 1, name: "Startseite", item: `${data.site.url}/ch/` },
         { "@type": "ListItem", position: 2, name: "Events", item: `${data.site.url}/ch/events/` },
-        { "@type": "ListItem", position: 3, name: "Grössere Anfrage", item: `${data.site.url}/ch/grosse-anfrage/` },
-        { "@type": "ListItem", position: 4, name: "Danke", item: `${data.site.url}/ch/grosse-anfrage/danke/` },
+        { "@type": "ListItem", position: 3, name: "Grössere Anfrage", item: `${data.site.url}/grosse-anfrage/` },
+        { "@type": "ListItem", position: 4, name: "Danke", item: `${data.site.url}/grosse-anfrage/danke/` },
       ],
     }),
   },
 }
 ---
 <article class="static-page thank-you-page">
-  <p class="breadcrumb"><a href="/ch/">Startseite</a> &raquo; <a href="/ch/events/">Events</a> &raquo; <a href="/ch/grosse-anfrage/">Grössere Anfrage</a> &raquo; Danke</p>
+  <p class="breadcrumb"><a href="/ch/">Startseite</a> &raquo; <a href="/ch/events/">Events</a> &raquo; <a href="/grosse-anfrage/">Grössere Anfrage</a> &raquo; Danke</p>
   <h1><i class="ti ti-circle-check"></i> Danke für deine Anfrage!</h1>
   <p>Wir haben deine Anfrage erhalten und melden uns innerhalb von 48 Stunden mit passenden Studios für dein Event.</p>
   <p>Falls du in der Zwischenzeit noch etwas ergänzen möchtest, schreib uns einfach direkt an <a href="mailto:info@potterymaps.com">info@potterymaps.com</a>.</p>

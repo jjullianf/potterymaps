@@ -5,13 +5,13 @@ const nearbyTownsFn = require("./nearbyTowns.js");
 // Statische Seiten, die es vor dem Laenderumzug bereits an der Wurzel gab und
 // die jetzt unter /ch/ liegen - "geneva"/"lucerne" sind hier bewusst nicht
 // dabei, die haben schon eigene, dauerhafte Synonym-Redirects (siehe
-// redirect-geneva.njk/redirect-lucerne.njk).
+// redirect-geneva.njk/redirect-lucerne.njk). "grosse-anfrage" ist ebenfalls
+// bewusst nicht dabei: das Formular ist laenderuebergreifend nutzbar und liegt
+// deshalb weiterhin an der Wurzel, nicht unter /ch/.
 const STATIC_PAGES = [
   "/alle-staedte/",
   "/karte/",
   "/events/",
-  "/grosse-anfrage/",
-  "/grosse-anfrage/danke/",
   "/kontakt/",
   "/ueber-uns/",
   "/impressum/",
