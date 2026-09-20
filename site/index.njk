@@ -1,286 +1,48 @@
 ---js
 {
-  layout: "base.njk",
-  title: "Keramik bemalen Schweiz – Studios in deiner Stadt finden | potterymaps",
-  description: "Finde Studios zum Keramik bemalen in der ganzen Schweiz – Teller, Ton und Porzellan bemalen, plus gemütliche Keramik-Cafés. Alle Städte im Überblick.",
-  homeFaqs: [
-    {
-      q: "Was ist Keramik bemalen?",
-      a: "Beim Keramik bemalen (auch Pottery Painting genannt) wählst du einen vorgefertigten Keramik-Rohling – z. B. Tasse, Teller oder Schüssel – und bemalst ihn im Studio mit Spezialfarben. Anschliessend wird das Stück im Studio gebrannt und ist danach dauerhaft nutz- und spülmaschinenfest.",
-    },
-    {
-      q: "Was kostet Keramik bemalen?",
-      a: "Die Preise hängen vom gewählten Rohling ab und liegen meist zwischen CHF 15 und 50, oft zzgl. einer kleinen Studiogebühr für Farben, Brand und Nutzungsdauer. Auf jeder Studio-Seite bei potterymaps findest du die aktuellen Preise auf einen Blick.",
-    },
-    {
-      q: "Wo kann ich in der Schweiz Keramik bemalen?",
-      a: "potterymaps listet Studios und Keramik-Cafés zum Keramik bemalen in der ganzen Schweiz, u. a. in Zürich, Basel, Bern, Genf, Luzern und vielen weiteren Städten. Nutze die Suche oben, um Studios in deiner Nähe zu finden.",
-    },
-    {
-      q: "Wie lange dauert es, bis die bemalte Keramik fertig ist?",
-      a: "Nach dem Bemalen wird dein Stück im Studio glasiert und gebrannt. Das dauert je nach Studio meist 1 bis 3 Wochen, bis es zur Abholung bereitsteht – einige Studios bieten auch einen Versand nach Hause an.",
-    },
-    {
-      q: "Eignet sich Keramik bemalen für Anfänger und Kinder?",
-      a: "Ja. Keramik bemalen erfordert keine Vorkenntnisse und ist bei den meisten Studios ausdrücklich für Anfänger, Familien und Kinder geeignet – viele bieten dafür auch spezielle Kindergeburtstage an.",
-    },
-    {
-      q: "Eignet sich Keramik bemalen für Firmenevents oder Gruppen?",
-      a: "Ja, viele Studios bieten Keramik bemalen auch als Teamevent, Junggesellinnenabschied oder Firmenanlass für grössere Gruppen an. Über unsere Event-Anfrage vermitteln wir dich kostenlos an ein passendes Studio.",
-    },
-  ],
-  eleventyComputed: {
-    popularCities: (data) => {
-      return [...(data.cities || [])].sort((a, b) => b.count - a.count);
-    },
-    searchTowns: (data) => {
-      return (data.nearbyTowns || []).map((t) => ({ name: t.name, slug: t.slug }));
-    },
-    homeMapStudios: (data) => (data.studios || []).filter((s) => s.lat && s.lng),
-    exampleStudios: (data) => {
-      return (data.studios || [])
-        .filter((s) => s.priceRangeText && s.topTags.length)
-        .sort((a, b) => a.name.localeCompare(b.name, "de"))
-        .slice(0, 3);
-    },
-    cafeStudios: (data) => {
-      return (data.studios || [])
-        .filter((s) => /café|cafe/i.test(s.description || ""))
-        .sort((a, b) => (b.image ? 1 : 0) - (a.image ? 1 : 0))
-        .slice(0, 3);
-    },
-    porzellanStudios: (data) => {
-      return (data.studios || [])
-        .filter((s) => /porzellan/i.test(s.description || ""))
-        .sort((a, b) => (b.image ? 1 : 0) - (a.image ? 1 : 0))
-        .slice(0, 3);
-    },
-    heroImageUrl: async () => {
-      const Image = require("@11ty/eleventy-img").default;
-      const metadata = await Image("./images/hero-keramik.jpg", {
-        widths: [1600],
-        formats: ["webp"],
-        outputDir: "./_site/images/optimized/",
-        urlPath: "/images/optimized/",
-      });
-      return metadata.webp[0].url;
-    },
-    jsonLdFaq: (data) => ({
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      mainEntity: data.homeFaqs.map((f) => ({
-        "@type": "Question",
-        name: f.q,
-        acceptedAnswer: { "@type": "Answer", text: f.a },
-      })),
-    }),
-  },
+  title: "potterymaps – Keramik bemalen Studios finden",
+  description: "potterymaps listet Studios zum Keramik bemalen. Wähle dein Land, um loszulegen.",
 }
 ---
-{% from "studio-card.njk" import card %}
-<article class="home">
-
-  <section class="hero" style="background-image: url('{{ heroImageUrl }}');">
-    <h1>Finde dein Studio zum Keramik bemalen</h1>
-    <p class="intro">Studios und Ateliers in der ganzen Schweiz – nach Stadt sortiert, mit Preisen und Öffnungszeiten auf einen Blick.</p>
-    <div class="city-search-wrap">
-      <form class="city-search" id="city-search-form" autocomplete="off">
-        <input type="text" id="city-search-input" placeholder="Wo möchtest du Keramik bemalen?" aria-label="Stadt suchen">
-        <button type="submit">Suchen</button>
-      </form>
-      <div class="city-suggestions" id="city-suggestions" hidden></div>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title }}</title>
+  <meta name="description" content="{{ description }}">
+  <link rel="canonical" href="{{ site.url }}/">
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16">
+  <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="/favicon-48x48.png" type="image/png" sizes="48x48">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="preload" href="/fonts/fredoka-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <main class="country-select">
+    <a class="logo" href="/">{% optimizedImage "./images/logo.png", "potterymaps Logo", { widths: [452], formats: ["webp", "png"], sizes: "226px", loading: "eager", fetchpriority: "high", class: "logo-img" } %}</a>
+    <h1>Wähle dein Land</h1>
+    <p class="intro">potterymaps listet Studios zum Keramik bemalen – wähle dein Land, um loszulegen.</p>
+    <div class="country-cards">
+      <a class="country-card" href="/ch/">
+        <span class="country-card-name">Schweiz</span>
+        <span class="country-card-hint">Zum Verzeichnis →</span>
+      </a>
+      <div class="country-card country-card-disabled">
+        <span class="country-card-name">Deutschland</span>
+        <span class="country-card-hint">Bald verfügbar</span>
+      </div>
     </div>
-  </section>
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.Default.css">
-  <section class="home-map">
-    <div id="home-overview-map" class="overview-map"></div>
-  </section>
-
-  <section class="topic-intro">
-    <h2>Teller, Ton oder Porzellan bemalen – oder einfach im Keramik-Café verweilen</h2>
-    <p>Bei potterymaps geht es um mehr als klassisches Keramik bemalen: Viele Studios bieten auch das Bemalen von Porzellan an{% if porzellanStudios.length %}, zum Beispiel {% for s in porzellanStudios %}<a href="/studio/{{ s.slug }}/">{{ s.name }}</a>{% if not loop.last %}, {% endif %}{% endfor %}{% endif %}. Andere sind gemütliche Keramik-Cafés, in denen du bei einer Tasse Kaffee direkt vor Ort einen Teller zum Bemalen aussuchst oder dein Stück aus Ton bemalst{% if cafeStudios.length %} – etwa bei {% for s in cafeStudios %}<a href="/studio/{{ s.slug }}/">{{ s.name }}</a>{% if not loop.last %}, {% endif %}{% endfor %}{% endif %}. Wähle unten deine Stadt und finde das passende Studio in deiner Nähe.</p>
-  </section>
-
-  <section class="how-it-works">
-    <h2>So funktioniert's</h2>
-    <ol class="steps">
-      <li><span class="step-num">1</span><strong>Stadt wählen</strong><p>Finde alle Studios in deiner Nähe.</p></li>
-      <li><span class="step-num">2</span><strong>Studio vergleichen</strong><p>Preise, Öffnungszeiten und Tags auf einen Blick.</p></li>
-      <li><span class="step-num">3</span><strong>Termin buchen</strong><p>Direkt beim Studio per Telefon, E-Mail oder Website.</p></li>
-    </ol>
-  </section>
-
-  <section class="cta-events">
-    <h2>Grössere Events planen?</h2>
-    <p>Firmenanlass, Kindergeburtstag oder Junggesellinnenabschied – wir vermitteln dich an ein passendes Studio.</p>
-    <a class="button" href="/events/">Jetzt Kontaktieren</a>
-  </section>
-
-  <section class="example-studios">
-    <h2>Studios entdecken</h2>
-    <ul class="studio-cards">
-      {% for s in exampleStudios %}{{ card(s) }}{% endfor %}
-    </ul>
-  </section>
-
-  <section class="view-all-link">
-    <a href="/alle-staedte/">Alle Städte & Karte ansehen →</a>
-  </section>
-
-  <section class="cta-missing">
-    <h2>Dein Studio fehlt?</h2>
-    <p>Wir wachsen laufend weiter. Kennst du ein Studio, das noch nicht gelistet ist?</p>
-    <a class="button" href="/studio-eintragen/">Trag es ein</a>
-  </section>
-
-  <section class="home-faq">
-    <h2>Häufige Fragen zum Keramik bemalen</h2>
-    {% for f in homeFaqs %}
-    <details class="faq-accordion-item">
-      <summary>{{ f.q }}</summary>
-      <p>{{ f.a }}</p>
-    </details>
-    {% endfor %}
-  </section>
-
-</article>
-<script>
-  (function () {
-    var cities = [
-      {% for c in popularCities %}{ name: "{{ c.name | escape }}", slug: "{{ c.slug }}", hasOwn: true }{% if not loop.last %},{% endif %}
-      {% endfor %}
-    ];
-    // Orte ohne eigenes Studio: fuehren zu einer "Studios in der Naehe von..."-Seite
-    // (/studios-nahe/<slug>/) statt zu einer eigenen Staedte-Seite.
-    var towns = [
-      {% for t in searchTowns %}{ name: "{{ t.name | escape }}", slug: "{{ t.slug }}", hasOwn: false }{% if not loop.last %},{% endif %}
-      {% endfor %}
-    ];
-    var allPlaces = cities.concat(towns);
-    // Englische Alternativnamen, damit z.B. "Geneva" oder "Lucerne" trotzdem
-    // beim deutschen Stadt-Hub ("Genève"/"Luzern") landen, statt ins Leere zu
-    // laufen - die Stadt selbst wird intern immer einheitlich benannt.
-    var CITY_ALIASES = { "geneva": "genève", "lucerne": "luzern" };
-
-    var input = document.getElementById("city-search-input");
-    var box = document.getElementById("city-suggestions");
-    var form = document.getElementById("city-search-form");
-    var activeIndex = -1;
-
-    function render(matches) {
-      box.innerHTML = "";
-      activeIndex = -1;
-      if (!matches.length) {
-        box.hidden = true;
-        return;
-      }
-      matches.slice(0, 6).forEach(function (c) {
-        var a = document.createElement("a");
-        a.href = c.hasOwn ? "/staedte/" + c.slug + "/" : "/studios-nahe/" + c.slug + "/";
-        var note = c.note || (c.hasOwn ? null : "Studios in der Nähe");
-        if (note) {
-          a.innerHTML = c.name + ' <span class="suggestion-note">' + note + "</span>";
-        } else {
-          a.textContent = c.name;
-        }
-        box.appendChild(a);
-      });
-      box.hidden = false;
-    }
-
-    function currentMatches() {
-      var q = input.value.trim().toLowerCase();
-      if (!q) return [];
-      var aliasTarget = null;
-      Object.keys(CITY_ALIASES).forEach(function (alias) {
-        if (alias.indexOf(q) !== -1 || q.indexOf(alias) !== -1) aliasTarget = CITY_ALIASES[alias];
-      });
-      return allPlaces.filter(function (c) {
-        return c.name.toLowerCase().indexOf(q) !== -1 || (aliasTarget && c.name.toLowerCase() === aliasTarget);
-      });
-    }
-
-    input.addEventListener("input", function () {
-      render(currentMatches());
-    });
-
-    input.addEventListener("keydown", function (e) {
-      var links = box.querySelectorAll("a");
-      if (e.key === "ArrowDown" && links.length) {
-        e.preventDefault();
-        activeIndex = (activeIndex + 1) % links.length;
-        links.forEach(function (l, i) { l.classList.toggle("active", i === activeIndex); });
-      } else if (e.key === "ArrowUp" && links.length) {
-        e.preventDefault();
-        activeIndex = (activeIndex - 1 + links.length) % links.length;
-        links.forEach(function (l, i) { l.classList.toggle("active", i === activeIndex); });
-      } else if (e.key === "Escape") {
-        box.hidden = true;
-      }
-    });
-
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-      var links = box.querySelectorAll("a");
-      if (activeIndex >= 0 && links[activeIndex]) {
-        window.location.href = links[activeIndex].getAttribute("href");
-        return;
-      }
-      var matches = currentMatches();
-      if (matches.length) {
-        window.location.href = matches[0].hasOwn ? "/staedte/" + matches[0].slug + "/" : "/studios-nahe/" + matches[0].slug + "/";
-      }
-    });
-
-    document.addEventListener("click", function (e) {
-      if (!box.contains(e.target) && e.target !== input) box.hidden = true;
-    });
-  })();
-</script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/leaflet.markercluster.js"></script>
-<script>
-  (function () {
-    var studios = [
-      {% for s in homeMapStudios %}
-      { name: "{{ s.name | escape }}", slug: "{{ s.slug }}", city: "{{ s.city | escape }}", lat: {{ s.lat }}, lng: {{ s.lng }} }{% if not loop.last %},{% endif %}
-      {% endfor %}
-    ];
-
-    var map = L.map('home-overview-map').setView([46.9, 8.2], 8);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>-Mitwirkende',
-      maxZoom: 18,
-      className: "map-tiles-muted",
-    }).addTo(map);
-
-    var dotIcon = L.divIcon({
-      className: "map-marker-dot-wrap",
-      html: '<div class="map-marker-dot"></div>',
-      iconSize: [14, 14],
-    });
-
-    var clusterGroup = L.markerClusterGroup({
-      iconCreateFunction: function (cluster) {
-        var count = cluster.getChildCount();
-        var size = count < 10 ? 32 : count < 25 ? 40 : 48;
-        return L.divIcon({
-          html: '<div class="map-cluster-dot" style="width:' + size + 'px;height:' + size + 'px;">' + count + '</div>',
-          className: "map-cluster-wrap",
-          iconSize: L.point(size, size),
-        });
-      },
-    });
-    studios.forEach(function (s) {
-      var marker = L.marker([s.lat, s.lng], { icon: dotIcon }).bindPopup(
-        '<strong>' + s.name + '</strong><br>' + s.city + '<br><a href="/studio/' + s.slug + '/">Zur Studio-Seite</a>'
-      );
-      clusterGroup.addLayer(marker);
-    });
-    map.addLayer(clusterGroup);
-  })();
-</script>
+  </main>
+  <footer class="site-footer country-select-footer">
+    <nav>
+      <a href="/ch/impressum/">Impressum</a>
+      <a href="/ch/datenschutz/">Datenschutzerklärung</a>
+    </nav>
+    <p>&copy; {{ year }} potterymaps</p>
+  </footer>
+</body>
+</html>

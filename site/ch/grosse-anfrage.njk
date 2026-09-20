@@ -3,28 +3,28 @@
   layout: "base.njk",
   title: "Grössere Events & Gruppenanfragen | potterymaps",
   description: "Plane ein Keramik-Event für deine Gruppe, deinen Anlass oder dein Firmenevent – wir vermitteln dich an ein passendes Studio.",
-  permalink: "/grosse-anfrage/",
+  permalink: "/ch/grosse-anfrage/",
   eleventyComputed: {
     jsonLdBreadcrumb: (data) => ({
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Startseite", item: `${data.site.url}/` },
-        { "@type": "ListItem", position: 2, name: "Events", item: `${data.site.url}/events/` },
-        { "@type": "ListItem", position: 3, name: "Grössere Anfrage", item: `${data.site.url}/grosse-anfrage/` },
+        { "@type": "ListItem", position: 1, name: "Startseite", item: `${data.site.url}/ch/` },
+        { "@type": "ListItem", position: 2, name: "Events", item: `${data.site.url}/ch/events/` },
+        { "@type": "ListItem", position: 3, name: "Grössere Anfrage", item: `${data.site.url}/ch/grosse-anfrage/` },
       ],
     }),
   },
 }
 ---
 <article class="static-page">
-  <p class="breadcrumb"><a href="/">Startseite</a> &raquo; <a href="/events/">Events</a> &raquo; Grössere Anfrage</p>
+  <p class="breadcrumb"><a href="/ch/">Startseite</a> &raquo; <a href="/ch/events/">Events</a> &raquo; Grössere Anfrage</p>
   <h1>Grössere Events planen</h1>
   <p>Du möchtest mit einer Gruppe, für einen Anlass, einen Kindergeburtstag oder ein Firmenevent Keramik bemalen? Beschreib uns kurz, was du suchst – wir melden uns mit passenden Studios.</p>
   <p class="trust-hint"><i class="ti ti-clock"></i> Antwort innerhalb von 48 Stunden garantiert.</p>
 
   <form class="entry-form" id="anfrage-form" action="https://formspree.io/f/moevaapl" method="POST">
-    <input type="hidden" name="_next" value="{{ site.url }}/grosse-anfrage/danke/">
+    <input type="hidden" name="_next" value="{{ site.url }}/ch/grosse-anfrage/danke/">
     <label for="a-name">Name</label>
     <input type="text" id="a-name" name="name" required>
 
@@ -53,7 +53,7 @@
     <p class="hint" id="form-error" hidden>Senden hat leider nicht geklappt. Bitte nochmal versuchen, oder direkt an <a href="mailto:info@potterymaps.com">info@potterymaps.com</a> schreiben.</p>
   </form>
 
-  <p class="alt-action-hint">Lieber selbst stöbern? <a href="/alle-staedte/">Alle Studios ansehen</a>.</p>
+  <p class="alt-action-hint">Lieber selbst stöbern? <a href="/ch/alle-staedte/">Alle Studios ansehen</a>.</p>
 </article>
 <script>
   (function () {

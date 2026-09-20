@@ -3,21 +3,21 @@
   layout: "base.njk",
   title: "Kontakt | potterymaps",
   description: "Kontaktiere potterymaps – melde ein neues Studio oder stell eine Anfrage für ein grösseres Event.",
-  permalink: "/kontakt/",
+  permalink: "/ch/kontakt/",
   eleventyComputed: {
     jsonLdBreadcrumb: (data) => ({
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Startseite", item: `${data.site.url}/` },
-        { "@type": "ListItem", position: 2, name: "Kontakt", item: `${data.site.url}/kontakt/` },
+        { "@type": "ListItem", position: 1, name: "Startseite", item: `${data.site.url}/ch/` },
+        { "@type": "ListItem", position: 2, name: "Kontakt", item: `${data.site.url}/ch/kontakt/` },
       ],
     }),
   },
 }
 ---
 <article class="static-page">
-  <p class="breadcrumb"><a href="/">Startseite</a> &raquo; Kontakt</p>
+  <p class="breadcrumb"><a href="/ch/">Startseite</a> &raquo; Kontakt</p>
   <h1>Kontakt</h1>
   <p>Hast du Fragen oder Feedback? Schreib uns eine E-Mail:</p>
   <p><a href="mailto:info@potterymaps.com">info@potterymaps.com</a></p>
@@ -25,12 +25,12 @@
   <p>Für die häufigsten Anliegen geht es hier direkt zum passenden Formular:</p>
 
   <div class="contact-options">
-    <a class="contact-option" href="/grosse-anfrage/">
+    <a class="contact-option" href="/ch/grosse-anfrage/">
       <i class="ti ti-users"></i>
       <strong>Grössere Anfrage stellen</strong>
       <span>Firmenevent, Kindergeburtstag, Gruppenanlass oder Junggesellinnenabschied.</span>
     </a>
-    <a class="contact-option" href="/studio-eintragen/">
+    <a class="contact-option" href="/ch/studio-eintragen/">
       <i class="ti ti-map-pin-plus"></i>
       <strong>Studio eintragen oder korrigieren</strong>
       <span>Ein neues Studio melden oder einen bestehenden Eintrag korrigieren.</span>

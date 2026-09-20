@@ -5,7 +5,7 @@
     size: 1,
     alias: "town",
   },
-  permalink: (data) => `/studios-nahe/${data.town.slug}/`,
+  permalink: (data) => `/ch/studios-nahe/${data.town.slug}/`,
   layout: "base.njk",
   eleventyComputed: {
     title: (data) => `Keramik bemalen ${data.town.name} - Studios in der Nähe | potterymaps`,
@@ -14,9 +14,9 @@
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Startseite", item: `${data.site.url}/` },
-        { "@type": "ListItem", position: 2, name: "Alle Städte", item: `${data.site.url}/alle-staedte/` },
-        { "@type": "ListItem", position: 3, name: data.town.name, item: `${data.site.url}/studios-nahe/${data.town.slug}/` },
+        { "@type": "ListItem", position: 1, name: "Startseite", item: `${data.site.url}/ch/` },
+        { "@type": "ListItem", position: 2, name: "Alle Städte", item: `${data.site.url}/ch/alle-staedte/` },
+        { "@type": "ListItem", position: 3, name: data.town.name, item: `${data.site.url}/ch/studios-nahe/${data.town.slug}/` },
       ],
     }),
     jsonLdItemList: (data) =>
@@ -28,7 +28,7 @@
               "@type": "ListItem",
               position: i + 1,
               name: s.name,
-              url: `${data.site.url}/studio/${s.slug}/`,
+              url: `${data.site.url}/ch/studio/${s.slug}/`,
             })),
           }
         : null,
@@ -38,14 +38,14 @@
 {% from "studio-card.njk" import card %}
 {% set t = town %}
 <article class="city-page">
-  <p class="breadcrumb"><a href="/">Startseite</a> &raquo; <a href="/alle-staedte/">Alle Städte</a> &raquo; {{ t.name }}</p>
+  <p class="breadcrumb"><a href="/ch/">Startseite</a> &raquo; <a href="/ch/alle-staedte/">Alle Städte</a> &raquo; {{ t.name }}</p>
 
   <div class="city-header city-header-placeholder">
     <h1>Keramik bemalen in der Nähe von {{ t.name }}</h1>
   </div>
 
   <p class="city-intro">In {{ t.name }} selbst gibt es aktuell kein Keramik-Bemalen-Studio. Die nächstgelegenen Studios sind:
-    {% for s in t.nearestStudios %}<a href="/studio/{{ s.slug }}/">{{ s.name }}</a> in {{ s.city }} ({{ s.distanceKm }} km){% if not loop.last %}, {% endif %}{% endfor %}.
+    {% for s in t.nearestStudios %}<a href="/ch/studio/{{ s.slug }}/">{{ s.name }}</a> in {{ s.city }} ({{ s.distanceKm }} km){% if not loop.last %}, {% endif %}{% endfor %}.
   </p>
 
   {% if t.nearestStudios.length %}
@@ -61,14 +61,14 @@
   {% if t.nearestCitySlug %}
   <section class="nearby-towns">
     <h2>Alle Studios in der Region</h2>
-    <p>Eine vollständige Übersicht der Studios rund um {{ t.name }} findest du auf der Seite von <a href="/staedte/{{ t.nearestCitySlug }}/">{{ t.nearestCityName }}</a>.</p>
+    <p>Eine vollständige Übersicht der Studios rund um {{ t.name }} findest du auf der Seite von <a href="/ch/staedte/{{ t.nearestCitySlug }}/">{{ t.nearestCityName }}</a>.</p>
   </section>
   {% endif %}
 
   <section class="cta-missing">
     <h2>Studio in {{ t.name }} fehlt?</h2>
     <p>Kennst du ein Studio zum Keramik bemalen in {{ t.name }}, das hier noch nicht gelistet ist?</p>
-    <a class="button" href="/studio-eintragen/">Trag es ein</a>
+    <a class="button" href="/ch/studio-eintragen/">Trag es ein</a>
   </section>
 </article>
 
@@ -106,7 +106,7 @@
 
     studios.forEach(function (s) {
       L.marker([s.lat, s.lng], { icon: dotIcon }).addTo(map).bindPopup(
-        '<strong>' + s.name + '</strong><br><a href="/studio/' + s.slug + '/">Zur Studio-Seite</a>'
+        '<strong>' + s.name + '</strong><br><a href="/ch/studio/' + s.slug + '/">Zur Studio-Seite</a>'
       );
     });
   })();

@@ -3,25 +3,25 @@
   layout: "base.njk",
   title: "Keramik bemalen für Teamevents, Geburtstage & Gruppen | potterymaps",
   description: "Keramik bemalen als Firmenevent, Kindergeburtstag, Junggesellinnenabschied oder Gruppenanlass – finde ein passendes Studio in der Schweiz und stelle eine unverbindliche Anfrage.",
-  permalink: "/events/",
+  permalink: "/ch/events/",
   eleventyComputed: {
     jsonLdBreadcrumb: (data) => ({
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Startseite", item: `${data.site.url}/` },
-        { "@type": "ListItem", position: 2, name: "Events", item: `${data.site.url}/events/` },
+        { "@type": "ListItem", position: 1, name: "Startseite", item: `${data.site.url}/ch/` },
+        { "@type": "ListItem", position: 2, name: "Events", item: `${data.site.url}/ch/events/` },
       ],
     }),
   },
 }
 ---
 <article class="static-page">
-  <p class="breadcrumb"><a href="/">Startseite</a> &raquo; Events</p>
+  <p class="breadcrumb"><a href="/ch/">Startseite</a> &raquo; Events</p>
   <h1>Keramik bemalen als Event - für Firmen, Geburtstage und Gruppen</h1>
   <p>Ob Firmenanlass, Kindergeburtstag, Junggesellinnenabschied oder einfach eine private Feier mit Freund:innen – Keramik bemalen eignet sich hervorragend als gemeinsames Erlebnis für Gruppen. Wir vermitteln dich kostenlos an ein passendes Studio in deiner Region.</p>
 
-  <p class="event-cta-wrap"><a class="button" href="/grosse-anfrage/">Jetzt Anfrage stellen</a></p>
+  <p class="event-cta-wrap"><a class="button" href="/ch/grosse-anfrage/">Jetzt Anfrage stellen</a></p>
 
   <section class="event-section">
     <h2>Firmenevents &amp; Teambuilding</h2>
@@ -43,5 +43,5 @@
     <p>Auch für private Feiern, Vereinsanlässe oder einfach einen kreativen Abend mit Freund:innen eignet sich Keramik bemalen. {{ eventStats.themedEvents }} Studios bieten dafür eigene Themen-Abende an, viele weitere sind auch für spontane Gruppenanfragen offen.</p>
   </section>
 
-  <p class="event-cta-wrap"><a class="button" href="/grosse-anfrage/">Jetzt Anfrage stellen</a></p>
+  <p class="event-cta-wrap"><a class="button" href="/ch/grosse-anfrage/">Jetzt Anfrage stellen</a></p>
 </article>

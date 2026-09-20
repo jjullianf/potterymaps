@@ -3,7 +3,7 @@
   layout: "base.njk",
   title: "Über uns | potterymaps",
   description: "potterymaps ist ein Verzeichnis von Keramik-Bemal-Studios in der Schweiz, mit Adressen, Öffnungszeiten, Preisen und Terminen.",
-  permalink: "/ueber-uns/",
+  permalink: "/ch/ueber-uns/",
   eleventyComputed: {
     jsonLd: (data) => ({
       "@context": "https://schema.org",
@@ -28,15 +28,15 @@
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Startseite", item: `${data.site.url}/` },
-        { "@type": "ListItem", position: 2, name: "Über uns", item: `${data.site.url}/ueber-uns/` },
+        { "@type": "ListItem", position: 1, name: "Startseite", item: `${data.site.url}/ch/` },
+        { "@type": "ListItem", position: 2, name: "Über uns", item: `${data.site.url}/ch/ueber-uns/` },
       ],
     }),
   },
 }
 ---
 <article class="static-page">
-  <p class="breadcrumb"><a href="/">Startseite</a> &raquo; Über uns</p>
+  <p class="breadcrumb"><a href="/ch/">Startseite</a> &raquo; Über uns</p>
   <h1>Über uns</h1>
 
   <p>potterymaps ist ein Verzeichnis von Keramik-Bemal-Studios in der Schweiz. Wir listen Studios, bei denen man ein bereits fertig gegossenes Keramikstück auswählen und direkt vor Ort bemalen kann, inklusive Adresse, Öffnungszeiten, Preisen und verfügbaren Terminen.</p>
@@ -56,5 +56,5 @@
   <p>potterymaps richtet sich an Privatpersonen, die spontan oder geplant ein Studio zum Keramik bemalen in ihrer Nähe suchen, an Familien, die einen Kindergeburtstag organisieren, sowie an Gruppen und Firmen, die einen Teamevent oder eine private Feier planen.</p>
 
   <h2>Wie die Daten entstehen</h2>
-  <p>Die Angaben zu den Studios stammen aus öffentlich zugänglichen Quellen wie den Websites der Studios selbst und werden laufend von Hand geprüft und aktualisiert. potterymaps ist ein unabhängiges Verzeichnis und steht in keiner geschäftlichen Verbindung zu den gelisteten Studios. Sollten Angaben veraltet oder falsch sein, freuen wir uns über eine <a href="/kontakt/">Nachricht</a> oder einen Hinweis über das <a href="/studio-eintragen/">Eintragen-Formular</a>.</p>
+  <p>Die Angaben zu den Studios stammen aus öffentlich zugänglichen Quellen wie den Websites der Studios selbst und werden laufend von Hand geprüft und aktualisiert. potterymaps ist ein unabhängiges Verzeichnis und steht in keiner geschäftlichen Verbindung zu den gelisteten Studios. Sollten Angaben veraltet oder falsch sein, freuen wir uns über eine <a href="/ch/kontakt/">Nachricht</a> oder einen Hinweis über das <a href="/ch/studio-eintragen/">Eintragen-Formular</a>.</p>
 </article>

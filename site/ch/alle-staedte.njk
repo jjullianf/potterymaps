@@ -1,11 +1,20 @@
 ---js
 {
   layout: "base.njk",
-  title: "Karte aller Studios | potterymaps",
-  description: "Alle Studios zum Keramik bemalen in der Schweiz auf einer Karte - finde ein Studio in deiner Nähe.",
-  permalink: "/karte/",
+  title: "Alle Städte | potterymaps",
+  description: "Alle Orte im Verzeichnis für Keramik bemalen in der Schweiz, mit Anzahl gelisteter Studios und Übersichtskarte.",
+  permalink: "/ch/alle-staedte/",
   eleventyComputed: {
+    sortedCities: (data) => [...(data.cities || [])].sort((a, b) => b.count - a.count),
     mapStudios: (data) => (data.studios || []).filter((s) => s.lat && s.lng),
+    jsonLdBreadcrumb: (data) => ({
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Startseite", item: `${data.site.url}/ch/` },
+        { "@type": "ListItem", position: 2, name: "Alle Städte", item: `${data.site.url}/ch/alle-staedte/` },
+      ],
+    }),
   },
 }
 ---
@@ -14,11 +23,29 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.Default.css">
 
 <article class="static-page">
-  <p class="breadcrumb"><a href="/">Startseite</a> &raquo; Karte</p>
-  <h1>Alle Studios auf der Karte</h1>
-  <p>Alle {{ mapStudios.length }} Studios zum Keramik bemalen in der Schweiz auf einen Blick. Klicke auf einen Pin für Details.</p>
+  <p class="breadcrumb"><a href="/ch/">Startseite</a> &raquo; Alle Städte</p>
+  <h1>Alle Städte</h1>
+  <p>Alle {{ mapStudios.length }} {{ pluralize(mapStudios.length, "Studio", "Studios") }} auf der Karte oder als Liste nach Stadt sortiert.</p>
 
   <div id="overview-map" class="overview-map"></div>
+
+  <ul class="all-cities-grid">
+    {% for c in sortedCities %}
+    <li id="city-card-{{ c.slug }}" class="{% if c.count == 0 %}city-card-empty{% endif %}">
+      {% if c.count > 0 %}
+      <a href="/ch/staedte/{{ c.slug }}/">
+        <span>{{ c.name }}</span>
+        <span class="count">{{ c.count }} {{ pluralize(c.count, "Studio", "Studios") }}</span>
+      </a>
+      {% else %}
+      <div class="city-card-empty-inner">
+        <span>{{ c.name }}</span>
+        <a class="count zero" href="/ch/studio-eintragen/">Noch kein Studio – jetzt eintragen</a>
+      </div>
+      {% endif %}
+    </li>
+    {% endfor %}
+  </ul>
 </article>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
@@ -45,6 +72,7 @@
     });
 
     var clusterGroup = L.markerClusterGroup({
+      maxClusterRadius: 40,
       iconCreateFunction: function (cluster) {
         var count = cluster.getChildCount();
         var size = count < 10 ? 32 : count < 25 ? 40 : 48;
@@ -57,7 +85,7 @@
     });
     studios.forEach(function (s) {
       var marker = L.marker([s.lat, s.lng], { icon: dotIcon }).bindPopup(
-        '<strong>' + s.name + '</strong><br>' + s.city + '<br><a href="/studio/' + s.slug + '/">Zur Studio-Seite</a>'
+        '<strong>' + s.name + '</strong><br>' + s.city + '<br><a href="/ch/studio/' + s.slug + '/">Zur Studio-Seite</a>'
       );
       clusterGroup.addLayer(marker);
     });

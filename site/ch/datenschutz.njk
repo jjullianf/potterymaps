@@ -3,26 +3,26 @@
   layout: "base.njk",
   title: "Datenschutzerklärung | potterymaps",
   description: "Datenschutzerklärung von potterymaps.",
-  permalink: "/datenschutz/",
+  permalink: "/ch/datenschutz/",
   eleventyComputed: {
     jsonLdBreadcrumb: (data) => ({
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Startseite", item: `${data.site.url}/` },
-        { "@type": "ListItem", position: 2, name: "Datenschutzerklärung", item: `${data.site.url}/datenschutz/` },
+        { "@type": "ListItem", position: 1, name: "Startseite", item: `${data.site.url}/ch/` },
+        { "@type": "ListItem", position: 2, name: "Datenschutzerklärung", item: `${data.site.url}/ch/datenschutz/` },
       ],
     }),
   },
 }
 ---
 <article class="static-page">
-  <p class="breadcrumb"><a href="/">Startseite</a> &raquo; Datenschutzerklärung</p>
+  <p class="breadcrumb"><a href="/ch/">Startseite</a> &raquo; Datenschutzerklärung</p>
   <h1>Datenschutzerklärung</h1>
   <p><em>Stand: {{ year }}</em></p>
 
   <h2>Verantwortliche Stelle</h2>
-  <p>Verantwortlich für die Datenverarbeitung auf dieser Website ist die im <a href="/impressum/">Impressum</a> genannte Person/Stelle.</p>
+  <p>Verantwortlich für die Datenverarbeitung auf dieser Website ist die im <a href="/ch/impressum/">Impressum</a> genannte Person/Stelle.</p>
 
   <h2>Erhebung und Verarbeitung von Daten</h2>
   <p>Diese Website stellt ein Verzeichnis von Keramikmal-Studios in der Schweiz dar. Beim Besuch der Website werden durch den Hosting-Anbieter automatisch technische Zugriffsdaten (z. B. IP-Adresse, Datum und Uhrzeit des Zugriffs, aufgerufene Seite) erfasst, wie dies bei jedem Website-Aufruf technisch üblich ist.</p>
@@ -40,5 +40,5 @@
   <p>Die Übersichtskarten (Startseite, "Alle Städte" sowie die einzelnen Stadt-Seiten) nutzen stattdessen die freie Kartenbibliothek <strong>Leaflet</strong> mit Kartenmaterial von <strong>OpenStreetMap</strong> bzw. CARTO. Diese Karten laden unabhängig von deiner Cookie-Entscheidung, da dabei technisch lediglich Kartenkacheln über deinen Browser abgerufen werden, ohne dass wir dafür ein Tracking- oder Analyse-Cookie setzen; dein Browser stellt dabei jedoch ebenfalls eine Verbindung zu den Servern von OpenStreetMap bzw. CARTO her, wobei technisch bedingt deine IP-Adresse übermittelt wird. Weitere Informationen findest du in der <a href="https://osmfoundation.org/wiki/Privacy_Policy" rel="nofollow noopener" target="_blank">Datenschutzerklärung der OpenStreetMap Foundation</a>.</p>
 
   <h2>Deine Rechte</h2>
-  <p>Du hast das Recht, Auskunft über die zu deiner Person gespeicherten Daten zu erhalten sowie deren Berichtigung oder Löschung zu verlangen. Wende dich dazu an die im <a href="/kontakt/">Kontakt</a> genannte Adresse.</p>
+  <p>Du hast das Recht, Auskunft über die zu deiner Person gespeicherten Daten zu erhalten sowie deren Berichtigung oder Löschung zu verlangen. Wende dich dazu an die im <a href="/ch/kontakt/">Kontakt</a> genannte Adresse.</p>
 </article>

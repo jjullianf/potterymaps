@@ -5,7 +5,7 @@
     size: 1,
     alias: "studio",
   },
-  permalink: (data) => `/studio/${data.studio.slug}/`,
+  permalink: (data) => `/ch/studio/${data.studio.slug}/`,
   layout: "base.njk",
   eleventyComputed: {
     title: (data) => `${data.studio.name} – Keramik bemalen in ${data.studio.city} | potterymaps`,
@@ -37,10 +37,10 @@
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
         itemListElement: [
-          { "@type": "ListItem", position: 1, name: "Startseite", item: `${url}/` },
-          { "@type": "ListItem", position: 2, name: "Alle Städte", item: `${url}/alle-staedte/` },
-          { "@type": "ListItem", position: 3, name: s.targetCityName, item: `${url}/staedte/${s.targetCitySlug}/` },
-          { "@type": "ListItem", position: 4, name: s.name, item: `${url}/studio/${s.slug}/` },
+          { "@type": "ListItem", position: 1, name: "Startseite", item: `${url}/ch/` },
+          { "@type": "ListItem", position: 2, name: "Alle Städte", item: `${url}/ch/alle-staedte/` },
+          { "@type": "ListItem", position: 3, name: s.targetCityName, item: `${url}/ch/staedte/${s.targetCitySlug}/` },
+          { "@type": "ListItem", position: 4, name: s.name, item: `${url}/ch/studio/${s.slug}/` },
         ],
       };
     },
@@ -80,7 +80,7 @@
 {% from "studio-card.njk" import card %}
 {% set s = studio %}
 <article class="studio-detail">
-  <p class="breadcrumb"><a href="/">Startseite</a> &raquo; <a href="/alle-staedte/">Alle Städte</a> &raquo; <a href="/staedte/{{ s.targetCitySlug }}/">{{ s.targetCityName }}</a> &raquo; {{ s.name }}</p>
+  <p class="breadcrumb"><a href="/ch/">Startseite</a> &raquo; <a href="/ch/alle-staedte/">Alle Städte</a> &raquo; <a href="/ch/staedte/{{ s.targetCitySlug }}/">{{ s.targetCityName }}</a> &raquo; {{ s.name }}</p>
 
   <h1 class="studio-title">{{ s.name }}</h1>
 
@@ -156,9 +156,9 @@
   </section>
   {% endif %}
 
-  <p class="back-to-city-link"><a href="/staedte/{{ s.targetCitySlug }}/">Alle Studios in {{ s.targetCityName }} ansehen →</a></p>
+  <p class="back-to-city-link"><a href="/ch/staedte/{{ s.targetCitySlug }}/">Alle Studios in {{ s.targetCityName }} ansehen →</a></p>
 
   <section class="report-error">
-    <p>Etwas an diesem Eintrag stimmt nicht mehr? <a href="/studio-eintragen/?studio={{ s.name | urlencode }}">Fehler gefunden? Melden</a></p>
+    <p>Etwas an diesem Eintrag stimmt nicht mehr? <a href="/ch/studio-eintragen/?studio={{ s.name | urlencode }}">Fehler gefunden? Melden</a></p>
   </section>
 </article>

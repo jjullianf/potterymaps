@@ -1,0 +1,25 @@
+---js
+{
+  pagination: {
+    data: "oldChUrls",
+    size: 1,
+    alias: "redir",
+  },
+  permalink: (data) => data.redir.oldPath,
+  eleventyExcludeFromCollections: true,
+  noindex: true,
+}
+---
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="robots" content="noindex">
+  <link rel="canonical" href="{{ site.url }}{{ redir.newPath }}">
+  <meta http-equiv="refresh" content="0; url={{ redir.newPath }}">
+  <title>Weitergeleitet | potterymaps</title>
+</head>
+<body>
+  <p>Diese Seite ist umgezogen. Falls du nicht automatisch weitergeleitet wirst: <a href="{{ redir.newPath }}">weiter</a>.</p>
+</body>
+</html>

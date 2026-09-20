@@ -80,7 +80,7 @@ module.exports = async function () {
       introDynamic = `Aktuell ${c.count === 1 ? "ist" : "sind"} hier ${c.count} ${pluralize(c.count, "Studio", "Studios")} gelistet.`;
     }
 
-    const cityUrl = `${site.url}/staedte/${c.slug}/`;
+    const cityUrl = `${site.url}/ch/staedte/${c.slug}/`;
 
     const jsonLdItemList = c.direct.length
       ? {
@@ -90,7 +90,7 @@ module.exports = async function () {
             "@type": "ListItem",
             position: i + 1,
             name: s.name,
-            url: `${site.url}/studio/${s.slug}/`,
+            url: `${site.url}/ch/studio/${s.slug}/`,
           })),
         }
       : null;
@@ -99,8 +99,8 @@ module.exports = async function () {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Startseite", item: `${site.url}/` },
-        { "@type": "ListItem", position: 2, name: "Alle Städte", item: `${site.url}/alle-staedte/` },
+        { "@type": "ListItem", position: 1, name: "Startseite", item: `${site.url}/ch/` },
+        { "@type": "ListItem", position: 2, name: "Alle Städte", item: `${site.url}/ch/alle-staedte/` },
         { "@type": "ListItem", position: 3, name: c.name, item: cityUrl },
       ],
     };

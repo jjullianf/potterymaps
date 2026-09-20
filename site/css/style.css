@@ -883,3 +883,33 @@ h1, h2 { font-family: var(--font-display); font-weight: 600; color: var(--color-
 }
 .map-consent-gate p { margin: 0 0 0.8rem; color: var(--color-text-muted); font-size: 0.9rem; }
 .map-consent-load-btn { margin-top: 0; border: none; cursor: pointer; font: inherit; }
+
+.country-select {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem 2rem;
+  text-align: center;
+}
+.country-select .logo { margin-bottom: 2rem; }
+.country-select h1 { margin-bottom: 0.5rem; }
+.country-select .intro { color: var(--color-text-muted); margin-bottom: 2rem; }
+.country-cards { display: flex; flex-direction: column; gap: 1rem; }
+.country-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 1.2rem 1.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: var(--color-card);
+  text-decoration: none;
+  color: var(--color-text);
+  transition: border-color 0.15s ease;
+}
+a.country-card:hover { border-color: var(--color-accent); }
+.country-card-name { font-family: var(--font-display); font-weight: 600; font-size: 1.2rem; }
+.country-card-hint { font-size: 0.9rem; color: var(--color-accent); }
+.country-card-disabled { opacity: 0.6; cursor: default; }
+.country-card-disabled .country-card-hint { color: var(--color-text-muted); }
+.country-select-footer { max-width: 480px; margin: 0 auto; text-align: center; }
+.country-select-footer nav a { margin: 0 0.6rem; }

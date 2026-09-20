@@ -3,26 +3,26 @@
   layout: "base.njk",
   title: "Studio eintragen oder korrigieren | potterymaps",
   description: "Kennst du ein Studio zum Keramik bemalen, das bei uns fehlt, oder ist ein Eintrag veraltet? Melde es uns hier.",
-  permalink: "/studio-eintragen/",
+  permalink: "/ch/studio-eintragen/",
   eleventyComputed: {
     jsonLdBreadcrumb: (data) => ({
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Startseite", item: `${data.site.url}/` },
-        { "@type": "ListItem", position: 2, name: "Studio eintragen", item: `${data.site.url}/studio-eintragen/` },
+        { "@type": "ListItem", position: 1, name: "Startseite", item: `${data.site.url}/ch/` },
+        { "@type": "ListItem", position: 2, name: "Studio eintragen", item: `${data.site.url}/ch/studio-eintragen/` },
       ],
     }),
   },
 }
 ---
 <article class="static-page">
-  <p class="breadcrumb"><a href="/">Startseite</a> &raquo; Studio eintragen</p>
+  <p class="breadcrumb"><a href="/ch/">Startseite</a> &raquo; Studio eintragen</p>
   <h1>Studio eintragen oder korrigieren</h1>
   <p>Kennst du ein Studio zum Keramik bemalen, das bei uns noch fehlt? Oder ist ein bestehender Eintrag veraltet oder fehlerhaft? Wähle unten die passende Option – wir prüfen jede Meldung von Hand und tragen sie danach selbst im Verzeichnis nach. Es wird nichts automatisch veröffentlicht.</p>
 
   <form class="entry-form" id="studio-form" action="https://formspree.io/f/xrpbzzvr" method="POST">
-    <input type="hidden" name="_next" value="{{ site.url }}/studio-eintragen/danke/">
+    <input type="hidden" name="_next" value="{{ site.url }}/ch/studio-eintragen/danke/">
     <fieldset>
       <legend>Was möchtest du tun?</legend>
       <label class="radio-option">

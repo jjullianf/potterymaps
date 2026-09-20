@@ -3,25 +3,25 @@
   layout: "base.njk",
   title: "Danke! | potterymaps",
   description: "Danke für deine Nachricht – wir melden uns, sobald wir sie geprüft haben.",
-  permalink: "/studio-eintragen/danke/",
+  permalink: "/ch/studio-eintragen/danke/",
   noindex: true,
   eleventyComputed: {
     jsonLdBreadcrumb: (data) => ({
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Startseite", item: `${data.site.url}/` },
-        { "@type": "ListItem", position: 2, name: "Studio eintragen", item: `${data.site.url}/studio-eintragen/` },
-        { "@type": "ListItem", position: 3, name: "Danke", item: `${data.site.url}/studio-eintragen/danke/` },
+        { "@type": "ListItem", position: 1, name: "Startseite", item: `${data.site.url}/ch/` },
+        { "@type": "ListItem", position: 2, name: "Studio eintragen", item: `${data.site.url}/ch/studio-eintragen/` },
+        { "@type": "ListItem", position: 3, name: "Danke", item: `${data.site.url}/ch/studio-eintragen/danke/` },
       ],
     }),
   },
 }
 ---
 <article class="static-page thank-you-page">
-  <p class="breadcrumb"><a href="/">Startseite</a> &raquo; <a href="/studio-eintragen/">Studio eintragen</a> &raquo; Danke</p>
+  <p class="breadcrumb"><a href="/ch/">Startseite</a> &raquo; <a href="/ch/studio-eintragen/">Studio eintragen</a> &raquo; Danke</p>
   <h1><i class="ti ti-circle-check"></i> Danke für deine Nachricht!</h1>
   <p>Wir haben deine Meldung erhalten und schauen sie uns von Hand an. Falls dein Studio neu ins Verzeichnis aufgenommen oder ein Eintrag korrigiert wird, ist es meist innerhalb ein paar Tage online.</p>
   <p>Hast du noch etwas vergessen oder möchtest du etwas ergänzen? Schreib uns einfach direkt an <a href="mailto:info@potterymaps.com">info@potterymaps.com</a>.</p>
-  <p><a class="button" href="/">Zurück zur Startseite</a></p>
+  <p><a class="button" href="/ch/">Zurück zur Startseite</a></p>
 </article>
