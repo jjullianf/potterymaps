@@ -114,7 +114,7 @@
         <input type="text" id="f-slug">
         <div class="hint">Nur Kleinbuchstaben, Zahlen und Bindestriche. Ändern nach dem ersten Speichern vermeiden (Link ändert sich sonst).</div>
       </div>
-      <div class="row2">
+      <div class="row3">
         <div class="field">
           <label>Telefon</label>
           <input type="tel" id="f-phone">
@@ -122,6 +122,10 @@
         <div class="field">
           <label>Website</label>
           <input type="url" id="f-website">
+        </div>
+        <div class="field">
+          <label>E-Mail</label>
+          <input type="email" id="f-email">
         </div>
       </div>
       <div class="field">
@@ -452,7 +456,7 @@ function openEditor(slug) {
   $("#panel-title").textContent = s ? `Bearbeiten: ${s.name}` : "Neues Studio";
   $("#btn-delete").style.display = s ? "" : "none";
 
-  const fields = ["name","address","city","phone","website","opening_hours","price_from","price_mug","price_plate","studio_fee","price_note","pickup_time","special_events","description","hat_instagram","image"];
+  const fields = ["name","address","city","phone","website","email","opening_hours","price_from","price_mug","price_plate","studio_fee","price_note","pickup_time","special_events","description","hat_instagram","image"];
   fields.forEach((f) => { $("#f-" + f).value = s ? (s[f] || "") : ""; });
   $("#f-slug").value = s ? s.slug : "";
   $("#f-reviewed").checked = s ? !!state.reviewed[s.slug] : false;
@@ -511,6 +515,7 @@ $("#form").addEventListener("submit", async (e) => {
     city: $("#f-city").value.trim(),
     phone: $("#f-phone").value.trim(),
     website: $("#f-website").value.trim(),
+    email: $("#f-email").value.trim(),
     opening_hours: $("#f-opening_hours").value.trim(),
     tags: getSelectedTags(),
     price_from: $("#f-price_from").value.trim(),
@@ -555,7 +560,7 @@ $("#btn-delete").addEventListener("click", async () => {
 
 // ---------- CSV Export / Import ----------
 
-const CSV_FIELDS = ["slug","name","address","city","phone","website","opening_hours","tags","price_from","price_mug","price_plate","studio_fee","price_note","pickup_time","special_events","description","image","quelle_hinweis","hat_instagram","custom_faq","reviewed"];
+const CSV_FIELDS = ["slug","name","address","city","phone","website","email","opening_hours","tags","price_from","price_mug","price_plate","studio_fee","price_note","pickup_time","special_events","description","image","quelle_hinweis","hat_instagram","custom_faq","reviewed"];
 
 function csvEscape(v) {
   v = v == null ? "" : String(v);

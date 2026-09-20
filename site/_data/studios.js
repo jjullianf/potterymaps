@@ -22,15 +22,16 @@ function generateAutoFAQ(s) {
   const faqs = [];
   const name = s.name || "diesem Studio";
   const city = s.city || "";
+  const currency = s.currency || "CHF";
   const hasPrice =
     (s.price_mug && s.price_mug.trim()) ||
     (s.price_plate && s.price_plate.trim()) ||
     (s.studio_fee && s.studio_fee.trim());
   if (hasPrice) {
     let parts = [];
-    if (s.price_mug) parts.push("Tasse ab CHF " + s.price_mug);
-    if (s.price_plate) parts.push("Teller ab CHF " + s.price_plate);
-    if (s.studio_fee) parts.push("Studiogebühr CHF " + s.studio_fee);
+    if (s.price_mug) parts.push("Tasse ab " + currency + " " + s.price_mug);
+    if (s.price_plate) parts.push("Teller ab " + currency + " " + s.price_plate);
+    if (s.studio_fee) parts.push("Studiogebühr " + currency + " " + s.studio_fee);
     let answer =
       "Bei " + name + (city ? " in " + city : "") + " kostet " + parts.join(", ") + ".";
     if (s.price_note) answer += " " + s.price_note;
@@ -110,7 +111,7 @@ function computePriceRangeText(s) {
     if (numbers.length) {
       const lowest = Math.min(...numbers);
       const formatted = Number.isInteger(lowest) ? lowest : lowest.toFixed(2).replace(/\.?0+$/, "");
-      return `ab CHF ${formatted}`;
+      return `ab ${s.currency || "CHF"} ${formatted}`;
     }
   }
   // studio_fee ist in den Rohdaten oft ein ganzer Beschreibungssatz statt einer
@@ -129,7 +130,7 @@ function formatPriceFrom(s) {
   const value = Number(s.price_from);
   if (Number.isNaN(value)) return null;
   const formatted = Number.isInteger(value) ? value : value.toFixed(2).replace(/\.?0+$/, "");
-  return `ab CHF ${formatted}`;
+  return `ab ${s.currency || "CHF"} ${formatted}`;
 }
 
 // Woerter/Zeichen, die alleinstehend am Ende einer gekuerzten Kartenzeile

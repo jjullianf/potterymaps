@@ -22,7 +22,12 @@
       "custom_faq": "[]",
       "lat": 47.0430465,
       "lng": 7.2737697,
-      "price_from": "34"
+      "price_from": "34",
+      "country": "CH",
+      "currency": "CHF",
+      "postcode": "3270",
+      "region": "BE",
+      "email": ""
     },
     {
       "slug": "paint-it-easy-ceramics-studio-ceramic-painting-keramik-bemalen-basel",
@@ -46,7 +51,12 @@
       "custom_faq": "[]",
       "lat": 47.5569777,
       "lng": 7.5755294,
-      "price_from": 20
+      "price_from": 20,
+      "country": "CH",
+      "currency": "CHF",
+      "postcode": "4055",
+      "region": "BS",
+      "email": ""
     },
     {
       "slug": "ceramix-toepferstudio-und-pottery-painting-bern",
@@ -70,7 +80,12 @@
       "custom_faq": "[]",
       "lat": 46.9488241,
       "lng": 7.4539203,
-      "price_from": 15
+      "price_from": 15,
+      "country": "CH",
+      "currency": "CHF",
+      "postcode": "3011",
+      "region": "BE",
+      "email": ""
     },
     {
       "slug": "fenetre-a-l-art-keramik-bemalen-keramik-cafe-bern",
@@ -94,7 +109,12 @@
       "custom_faq": "[]",
       "lat": 46.960472,
       "lng": 7.4511315,
-      "price_from": 39.9
+      "price_from": 39.9,
+      "country": "CH",
+      "currency": "CHF",
+      "postcode": "3014",
+      "region": "BE",
+      "email": ""
     },
     {
       "slug": "fabrika-azteka-peinture-sur-ceramique-biel-bienne",
@@ -118,7 +138,12 @@
       "custom_faq": "[]",
       "lat": 47.1404894,
       "lng": 7.2477482,
-      "price_from": 25
+      "price_from": 25,
+      "country": "CH",
+      "currency": "CHF",
+      "postcode": "2502",
+      "region": "BE",
+      "email": ""
     },
     {
       "slug": "kreativ-art-box-burgdorf",
@@ -142,7 +167,12 @@
       "custom_faq": "[]",
       "lat": 47.0602066,
       "lng": 7.622049,
-      "price_from": "12"
+      "price_from": "12",
+      "country": "CH",
+      "currency": "CHF",
+      "postcode": "3400",
+      "region": "BE",
+      "email": ""
     },
     {
       "slug": "atelier-herzton-batterkinden",
@@ -166,7 +196,12 @@
       "custom_faq": "[]",
       "lat": 47.1286238,
       "lng": 7.5347299,
-      "price_from": 30
+      "price_from": 30,
+      "country": "CH",
+      "currency": "CHF",
+      "postcode": "3315",
+      "region": "BE",
+      "email": ""
     },
     {
       "slug": "selbergmalt-ch-buelach",
@@ -190,7 +225,12 @@
       "custom_faq": "[]",
       "lat": 47.5206888,
       "lng": 8.5419808,
-      "price_from": "20"
+      "price_from": "20",
+      "country": "CH",
+      "currency": "CHF",
+      "postcode": "8180",
+      "region": "ZH",
+      "email": ""
     },
     {
       "slug": "maison-ceramique-cortaillod",
@@ -214,7 +254,12 @@
       "custom_faq": "[]",
       "lat": 46.9450504,
       "lng": 6.8442499,
-      "price_from": 20
+      "price_from": 20,
+      "country": "CH",
+      "currency": "CHF",
+      "postcode": "2016",
+      "region": "NE",
+      "email": ""
     },
     {
       "slug": "keramikum-ceramic-painting-studio-zwicky-duebendorf-duebendorf",
@@ -238,7 +283,12 @@
       "custom_faq": "[{\"q\":\"Wo kann ich bei Keramikum mit dem Auto parkieren?\",\"a\":\"Entlang der Riedgarten- und Zwickystrasse gibt es mehrere kostenpflichtige Parkplätze mit Parkuhren. Zusätzlich stehen Besucherparkplätze in der Tiefgarage des Gebäudes an der Zwickystrasse 32 zur Verfügung. Das Gebäude befindet sich auf der rechten Seite kurz nach der Einfahrt ins Zwicky-Areal von der Neugutstrasse.\"}]",
       "lat": 47.4038884,
       "lng": 8.6012212,
-      "price_from": "15"
+      "price_from": "15",
+      "country": "CH",
+      "currency": "CHF",
+      "postcode": "8600",
+      "region": "ZH",
+      "email": ""
     },
     {
       "slug": "ceramique-cafe-fribourg-fribourg",
@@ -262,7 +312,12 @@
       "custom_faq": "[]",
       "lat": 46.8068838,
       "lng": 7.1557549,
-      "price_from": 39
+      "price_from": 39,
+      "country": "CH",
+      "currency": "CHF",
+      "postcode": "1700",
+      "region": "FR",
+      "email": ""
     },
     {
       "slug": "noon-cafe-ceramique-geneva",
@@ -286,7 +341,12 @@
       "custom_faq": "[]",
       "lat": 46.204418,
       "lng": 6.1579035,
-      "price_from": 25
+      "price_from": 25,
+      "country": "CH",
+      "currency": "CHF",
+      "postcode": "1207",
+      "region": "GE",
+      "email": ""
     },
     {
       "slug": "atelier-seestern-keramik-bemalen-in-kaltbrunn-region-rapperswil-kaltbrunn",
@@ -310,7 +370,12 @@
       "custom_faq": "[]",
       "lat": 47.2100216,
       "lng": 9.0395861,
-      "price_from": 15
+      "price_from": 15,
+      "country": "CH",
+      "currency": "CHF",
+      "postcode": "8722",
+      "region": "SG",
+      "email": ""
     },
     {
       "slug": "keramikmalerei-jasmin-agner-kriens",
@@ -334,7 +399,12 @@
       "custom_faq": "[]",
       "lat": 47.034071,
       "lng": 8.2786383,
-      "price_from": 15
+      "price_from": 15,
+      "country": "CH",
+      "currency": "CHF",
+      "postcode": "6010",
+      "region": "LU",
+      "email": ""
     },
     {
       "slug": "kreativ-pause-keramik-bemalen-laufenburg-laufenburg",
@@ -358,7 +428,12 @@
       "custom_faq": "[]",
       "lat": 47.5609395,
       "lng": 8.0592349,
-      "price_from": 25
+      "price_from": 25,
+      "country": "CH",
+      "currency": "CHF",
+      "postcode": "5080",
+      "region": "AG",
+      "email": ""
     },
     {
       "slug": "hello-frances-pottery-painting-keramikmalen-lucerne",
@@ -382,7 +457,12 @@
       "custom_faq": "[]",
       "lat": 47.0554741,
       "lng": 8.3118199,
-      "price_from": 15
+      "price_from": 15,
+      "country": "CH",
+      "currency": "CHF",
+      "postcode": "6006",
+      "region": "LU",
+      "email": ""
     },
     {
       "slug": "siya-ceramics-i-siya-keramik-i-pottery-painting-lucerne",
@@ -406,7 +486,12 @@
       "custom_faq": "[]",
       "lat": 47.0439406,
       "lng": 8.3039914,
-      "price_from": "20"
+      "price_from": "20",
+      "country": "CH",
+      "currency": "CHF",
+      "postcode": "6003",
+      "region": "LU",
+      "email": ""
     },
     {
       "slug": "moon-clay-painting-studio-lucerne",
@@ -430,7 +515,12 @@
       "custom_faq": "[]",
       "lat": 47.0486785,
       "lng": 8.3011147,
-      "price_from": 15
+      "price_from": 15,
+      "country": "CH",
+      "currency": "CHF",
+      "postcode": null,
+      "region": "LU",
+      "email": ""
     },
     {
       "slug": "valou-ceramics-montreux",
@@ -454,7 +544,12 @@
       "custom_faq": "[]",
       "lat": 46.4379505,
       "lng": 6.9091063,
-      "price_from": 50
+      "price_from": 50,
+      "country": "CH",
+      "currency": "CHF",
+      "postcode": "1820",
+      "region": "VD",
+      "email": ""
     },
     {
       "slug": "auerhand-offenes-atelier-murgenthal",
@@ -478,7 +573,12 @@
       "custom_faq": "[]",
       "lat": 47.2620076,
       "lng": 7.8285158,
-      "price_from": 20
+      "price_from": 20,
+      "country": "CH",
+      "currency": "CHF",
+      "postcode": "4853",
+      "region": "AG",
+      "email": ""
     },
     {
       "slug": "keramikstudio-kreativ-live-oberhofen",
@@ -502,7 +602,12 @@
       "custom_faq": "[]",
       "lat": 46.7306614,
       "lng": 7.6693932,
-      "price_from": 18
+      "price_from": 18,
+      "country": "CH",
+      "currency": "CHF",
+      "postcode": "3653",
+      "region": "BE",
+      "email": ""
     },
     {
       "slug": "tom-s-tonwerk-ostermundigen",
@@ -526,7 +631,12 @@
       "custom_faq": "[]",
       "lat": 46.9558665,
       "lng": 7.4841495,
-      "price_from": 10
+      "price_from": 10,
+      "country": "CH",
+      "currency": "CHF",
+      "postcode": "3072",
+      "region": "BE",
+      "email": ""
     },
     {
       "slug": "pinselstrich-ceramic-cafe-rueti",
@@ -550,7 +660,12 @@
       "custom_faq": "[]",
       "lat": 47.2598762,
       "lng": 8.8535522,
-      "price_from": 15
+      "price_from": 15,
+      "country": "CH",
+      "currency": "CHF",
+      "postcode": "8630",
+      "region": "ZH",
+      "email": ""
     },
     {
       "slug": "two-room-club-keramikstudio-workshop-space-solothurn",
@@ -574,7 +689,12 @@
       "custom_faq": "[]",
       "lat": 47.2088598,
       "lng": 7.5363393,
-      "price_from": 35
+      "price_from": 35,
+      "country": "CH",
+      "currency": "CHF",
+      "postcode": "4500",
+      "region": "SO",
+      "email": ""
     },
     {
       "slug": "spazio-keramikmalstudio-coffee-more-sursee",
@@ -598,7 +718,12 @@
       "custom_faq": "[]",
       "lat": 47.1699847,
       "lng": 8.0993459,
-      "price_from": "20"
+      "price_from": "20",
+      "country": "CH",
+      "currency": "CHF",
+      "postcode": "6210",
+      "region": "LU",
+      "email": ""
     },
     {
       "slug": "creative-you-ceramic-painting-studio-thalwil-thalwil",
@@ -622,7 +747,12 @@
       "custom_faq": "[]",
       "lat": 47.2993961,
       "lng": 8.56101,
-      "price_from": "30"
+      "price_from": "30",
+      "country": "CH",
+      "currency": "CHF",
+      "postcode": "8800",
+      "region": "ZH",
+      "email": ""
     },
     {
       "slug": "levin-art-studio-ehem-the-rainbow-club-winterthur",
@@ -646,7 +776,12 @@
       "custom_faq": "[]",
       "lat": 47.4998727,
       "lng": 8.7294668,
-      "price_from": 69
+      "price_from": 69,
+      "country": "CH",
+      "currency": "CHF",
+      "postcode": "8400",
+      "region": "ZH",
+      "email": ""
     },
     {
       "slug": "janella-keramikatelier-wuerenlingen",
@@ -670,7 +805,12 @@
       "custom_faq": "[]",
       "lat": 47.5327462,
       "lng": 8.2560126,
-      "price_from": 30
+      "price_from": 30,
+      "country": "CH",
+      "currency": "CHF",
+      "postcode": "5303",
+      "region": "AG",
+      "email": ""
     },
     {
       "slug": "hello-frances-keramikmalen-paint-your-own-pottery-zofingen",
@@ -694,7 +834,12 @@
       "custom_faq": "[]",
       "lat": 47.287687,
       "lng": 7.9452139,
-      "price_from": 15
+      "price_from": 15,
+      "country": "CH",
+      "currency": "CHF",
+      "postcode": "4800",
+      "region": "AG",
+      "email": ""
     },
     {
       "slug": "creative-you-ceramic-painting-studio-zug-zug",
@@ -718,7 +863,12 @@
       "custom_faq": "[]",
       "lat": 47.1767252,
       "lng": 8.4993541,
-      "price_from": "29"
+      "price_from": "29",
+      "country": "CH",
+      "currency": "CHF",
+      "postcode": "6300",
+      "region": "ZG",
+      "email": ""
     },
     {
       "slug": "atelier-alfar-zuerich",
@@ -728,7 +878,7 @@
       "phone": "+41 78 893 46 65",
       "website": "https://www.atelier-alfar.com/",
       "opening_hours": "Keine klassischen Walk-in-Öffnungszeiten für Keramikmalen · Teilnahme über die jeweiligen Workshops und buchbaren Termine. Für Member gelten separate Atelierzeiten.",
-      "tags": "date-night, birthday-parties, hen-party, corporate-events, pottery-wheel, reservation-only",
+      "tags": "birthday-parties, hen-party, corporate-events, date-night, reservation-only, pottery-wheel",
       "price_mug": "",
       "price_plate": "",
       "studio_fee": "Porzellanmalen ab CHF 68 · je nach Workshop unterschiedliche Preise",
@@ -742,7 +892,12 @@
       "custom_faq": "[]",
       "lat": 47.3562867,
       "lng": 8.5576071,
-      "price_from": 68
+      "price_from": "68",
+      "country": "CH",
+      "currency": "CHF",
+      "postcode": "8008",
+      "region": "ZH",
+      "email": ""
     },
     {
       "slug": "keramik-mal-cafe-zuerich",
@@ -766,7 +921,12 @@
       "custom_faq": "[]",
       "lat": 47.3609708,
       "lng": 8.5620236,
-      "price_from": 45
+      "price_from": 45,
+      "country": "CH",
+      "currency": "CHF",
+      "postcode": "8032",
+      "region": "ZH",
+      "email": ""
     },
     {
       "slug": "loki-studio-zurich-oerlikon-zuerich",
@@ -790,7 +950,12 @@
       "custom_faq": "[]",
       "lat": 47.4077394,
       "lng": 8.5465104,
-      "price_from": 59
+      "price_from": 59,
+      "country": "CH",
+      "currency": "CHF",
+      "postcode": "8050",
+      "region": "ZH",
+      "email": ""
     },
     {
       "slug": "paint-it-easy-zuerich-creative-cafe-keramik-bemalen-zuerich",
@@ -814,7 +979,12 @@
       "custom_faq": "[]",
       "lat": 47.362027,
       "lng": 8.5262436,
-      "price_from": 20
+      "price_from": 20,
+      "country": "CH",
+      "currency": "CHF",
+      "postcode": "8002",
+      "region": "ZH",
+      "email": ""
     },
     {
       "slug": "paintlounge-paintevents-malstudio-zuerich",
@@ -838,7 +1008,12 @@
       "custom_faq": "[]",
       "lat": 47.3824792,
       "lng": 8.5341867,
-      "price_from": 25
+      "price_from": 25,
+      "country": "CH",
+      "currency": "CHF",
+      "postcode": "8005",
+      "region": "ZH",
+      "email": ""
     },
     {
       "slug": "siya-ceramics-i-siya-keramik-i-pottery-painting-zuerich",
@@ -862,7 +1037,12 @@
       "custom_faq": "[]",
       "lat": 47.3738663,
       "lng": 8.5190732,
-      "price_from": "20"
+      "price_from": "20",
+      "country": "CH",
+      "currency": "CHF",
+      "postcode": "8003",
+      "region": "ZH",
+      "email": ""
     },
     {
       "slug": "ceramic-malbar-zuerich",
@@ -886,7 +1066,12 @@
       "hat_instagram": "ja, https://www.instagram.com/ceramic_malbar",
       "custom_faq": "[]",
       "lat": 47.3912303,
-      "lng": 8.5078566
+      "lng": 8.5078566,
+      "country": "CH",
+      "currency": "CHF",
+      "postcode": "8005",
+      "region": "ZH",
+      "email": ""
     },
     {
       "slug": "bisquerie-keramik-bemalen-in-zuerich-saentisstrasse-7-8008-zuerich-zuerich",
@@ -910,7 +1095,12 @@
       "custom_faq": "[]",
       "lat": 47.354775,
       "lng": 8.5564942,
-      "price_from": 45
+      "price_from": 45,
+      "country": "CH",
+      "currency": "CHF",
+      "postcode": null,
+      "region": "ZH",
+      "email": ""
     },
     {
       "slug": "craft-room-red-fox-liestal",
@@ -934,7 +1124,12 @@
       "custom_faq": "[]",
       "lat": 47.4862311,
       "lng": 7.7346494,
-      "price_from": 20
+      "price_from": 20,
+      "country": "CH",
+      "currency": "CHF",
+      "postcode": null,
+      "region": "BL",
+      "email": ""
     },
     {
       "slug": "craft-room-red-fox-basel",
@@ -958,7 +1153,12 @@
       "custom_faq": "[]",
       "lat": 47.5473688,
       "lng": 7.5631238,
-      "price_from": 20
+      "price_from": 20,
+      "country": "CH",
+      "currency": "CHF",
+      "postcode": null,
+      "region": "BS",
+      "email": ""
     },
     {
       "slug": "ceramigas-keramik-selbst-bemalen-basel",
@@ -982,7 +1182,12 @@
       "custom_faq": "[]",
       "lat": 47.5579459,
       "lng": 7.5855928,
-      "price_from": 15
+      "price_from": 15,
+      "country": "CH",
+      "currency": "CHF",
+      "postcode": "4051",
+      "region": "BS",
+      "email": ""
     },
     {
       "slug": "herzart-winterthur-winterthur",
@@ -1006,7 +1211,12 @@
       "custom_faq": "[]",
       "lat": 47.4985167,
       "lng": 8.7280835,
-      "price_from": 18
+      "price_from": 18,
+      "country": "CH",
+      "currency": "CHF",
+      "postcode": "8400",
+      "region": "ZH",
+      "email": ""
     },
     {
       "slug": "herzart-weisslingen-weisslingen",
@@ -1030,7 +1240,12 @@
       "custom_faq": "[]",
       "lat": 47.4311628,
       "lng": 8.7623063,
-      "price_from": 18
+      "price_from": 18,
+      "country": "CH",
+      "currency": "CHF",
+      "postcode": null,
+      "region": "ZH",
+      "email": ""
     },
     {
       "slug": "lavendear-studio-luzern",
@@ -1054,7 +1269,12 @@
       "custom_faq": "[]",
       "lat": 47.0472233,
       "lng": 8.3074182,
-      "price_from": 59
+      "price_from": 59,
+      "country": "CH",
+      "currency": "CHF",
+      "postcode": "6003",
+      "region": "LU",
+      "email": ""
     },
     {
       "slug": "teig-ton-atelier-st-gallen",
@@ -1078,7 +1298,12 @@
       "custom_faq": "[{\"q\":\"Hat Teig&Ton ein offenes Atelier?\",\"a\":\"Für Personen mit Erfahrung im Umgang mit Ton oder nach dem Einsteigerkurs gibt es ein offenes Atelier für CHF 35/Stunde. Ton, Werkzeuge, über 70 Glasuren und Engoben sowie Brennkosten sind dabei inklusive. Die fertigen Stücke können nach dem Rohbrand in einem weiteren Termin bemalt werden.\"}]",
       "lat": 47.4198437,
       "lng": 9.3691183,
-      "price_from": 140
+      "price_from": 140,
+      "country": "CH",
+      "currency": "CHF",
+      "postcode": "9000",
+      "region": "SG",
+      "email": ""
     },
     {
       "slug": "tonwerk-keramik-st-gallen",
@@ -1102,7 +1327,12 @@
       "custom_faq": "[]",
       "lat": 47.4149764,
       "lng": 9.3829464,
-      "price_from": 30
+      "price_from": 30,
+      "country": "CH",
+      "currency": "CHF",
+      "postcode": "9011",
+      "region": "SG",
+      "email": ""
     },
     {
       "slug": "artelier39-ostermundigen",
@@ -1126,7 +1356,12 @@
       "hat_instagram": "",
       "custom_faq": "[]",
       "lat": 46.9568586,
-      "lng": 7.4856467
+      "lng": 7.4856467,
+      "country": "CH",
+      "currency": "CHF",
+      "postcode": "3072",
+      "region": "BE",
+      "email": ""
     },
     {
       "slug": "atelier-werkzeit-belp",
@@ -1150,7 +1385,12 @@
       "hat_instagram": "",
       "custom_faq": "[]",
       "lat": 46.8891433,
-      "lng": 7.50034
+      "lng": 7.50034,
+      "country": "CH",
+      "currency": "CHF",
+      "postcode": "3123",
+      "region": "BE",
+      "email": ""
     },
     {
       "slug": "kimkeramik-biberist",
@@ -1174,7 +1414,12 @@
       "custom_faq": "[]",
       "lat": 47.1809241,
       "lng": 7.5551,
-      "price_from": "85"
+      "price_from": "85",
+      "country": "CH",
+      "currency": "CHF",
+      "postcode": "4562",
+      "region": "SO",
+      "email": ""
     },
     {
       "slug": "atelier-pastel-fribourg",
@@ -1198,7 +1443,12 @@
       "hat_instagram": "",
       "custom_faq": "[]",
       "lat": 46.7995969,
-      "lng": 7.1533035
+      "lng": 7.1533035,
+      "country": "CH",
+      "currency": "CHF",
+      "postcode": "1700",
+      "region": "FR",
+      "email": ""
     },
     {
       "slug": "shape-it-easy-ceramics-studio-toepferstudio-by-paint-it-easy-zuerich",
@@ -1222,7 +1472,12 @@
       "custom_faq": "[]",
       "lat": 47.3703943,
       "lng": 8.5210245,
-      "price_from": "20"
+      "price_from": "20",
+      "country": "CH",
+      "currency": "CHF",
+      "postcode": "8003",
+      "region": "ZH",
+      "email": ""
     },
     {
       "slug": "keramik-loft-cham",
@@ -1246,7 +1501,12 @@
       "custom_faq": "[]",
       "lat": 47.1852712,
       "lng": 8.4588265,
-      "price_from": "30"
+      "price_from": "30",
+      "country": "CH",
+      "currency": "CHF",
+      "postcode": "6330",
+      "region": "ZG",
+      "email": ""
     },
     {
       "slug": "ceramio-reute",
@@ -1270,7 +1530,12 @@
       "hat_instagram": "",
       "custom_faq": "[]",
       "lat": 47.4200889,
-      "lng": 9.5741576
+      "lng": 9.5741576,
+      "country": "CH",
+      "currency": "CHF",
+      "postcode": "9411",
+      "region": "AR",
+      "email": ""
     },
     {
       "slug": "paintnow-malen-toepfern-in-zuerich-zuerich",
@@ -1294,7 +1559,12 @@
       "custom_faq": "[]",
       "lat": 47.3738335,
       "lng": 8.5464306,
-      "price_from": "55"
+      "price_from": "55",
+      "country": "CH",
+      "currency": "CHF",
+      "postcode": "8001",
+      "region": "ZH",
+      "email": ""
     },
     {
       "slug": "ceramics-atelier-by-mojca-vidmar-zuerich",
@@ -1318,7 +1588,12 @@
       "hat_instagram": "",
       "custom_faq": "[{\"q\":\"ann ich Keramikbemalen auch mit Kindern machen?\",\"a\":\"a. Kinder können an Keramikbemal-Sessions teilnehmen. Kinder bis 12 Jahre können in Begleitung einer erwachsenen Person kostenlos teilnehmen; verrechnet werden lediglich die Materialkosten\"}]",
       "lat": 47.3776807,
-      "lng": 8.5150227
+      "lng": 8.5150227,
+      "country": "CH",
+      "currency": "CHF",
+      "postcode": "8004",
+      "region": "ZH",
+      "email": ""
     },
     {
       "slug": "studio-mea-winterthur",
@@ -1342,7 +1617,12 @@
       "custom_faq": "[]",
       "lat": 47.4939376,
       "lng": 8.7175795,
-      "price_from": "290"
+      "price_from": "290",
+      "country": "CH",
+      "currency": "CHF",
+      "postcode": "8400",
+      "region": "ZH",
+      "email": ""
     },
     {
       "slug": "ceramigas-im-westfeld-keramik-selbst-bemalen-keramik-malstudio-basel",
@@ -1366,7 +1646,12 @@
       "hat_instagram": "ja, https://instagram.com/ceramigas",
       "custom_faq": "[{\"q\":\"Welche Zahlungsmöglichkeiten gibt es?\",\"a\":\"Bezahlt werden kann mit TWINT, Bargeld, Kreditkarte (Visa, Mastercard), Maestro und Apple Pay.\"}]",
       "lat": 47.5644501,
-      "lng": 7.5657438
+      "lng": 7.5657438,
+      "country": "CH",
+      "currency": "CHF",
+      "postcode": "4055",
+      "region": "BS",
+      "email": ""
     },
     {
       "slug": "ceramic-kanvas-geneva",
@@ -1390,7 +1675,12 @@
       "hat_instagram": "",
       "custom_faq": "[]",
       "lat": 46.1917934,
-      "lng": 6.1455814
+      "lng": 6.1455814,
+      "country": "CH",
+      "currency": "CHF",
+      "postcode": "1205",
+      "region": "GE",
+      "email": ""
     },
     {
       "slug": "keramos-neuchatel",
@@ -1414,7 +1704,12 @@
       "custom_faq": "[]",
       "lat": 46.9902805,
       "lng": 6.928171,
-      "price_from": "15"
+      "price_from": "15",
+      "country": "CH",
+      "currency": "CHF",
+      "postcode": "2000",
+      "region": "NE",
+      "email": ""
     },
     {
       "slug": "nebu-zuerich",
@@ -1438,7 +1733,12 @@
       "hat_instagram": "",
       "custom_faq": "[]",
       "lat": 47.3700486,
-      "lng": 8.5093704
+      "lng": 8.5093704,
+      "country": "CH",
+      "currency": "CHF",
+      "postcode": "8055",
+      "region": "ZH",
+      "email": ""
     },
     {
       "slug": "creaba-kirchberg",
@@ -1462,7 +1762,12 @@
       "hat_instagram": "",
       "custom_faq": "[]",
       "lat": 47.4089414,
-      "lng": 9.0390653
+      "lng": 9.0390653,
+      "country": "CH",
+      "currency": "CHF",
+      "postcode": "9533",
+      "region": "SG",
+      "email": ""
     },
     {
       "slug": "atelier-zaya-frauenfeld",
@@ -1486,7 +1791,12 @@
       "hat_instagram": "",
       "custom_faq": "[]",
       "lat": 47.556281,
-      "lng": 8.8979633
+      "lng": 8.8979633,
+      "country": "CH",
+      "currency": "CHF",
+      "postcode": "8500",
+      "region": "TG",
+      "email": ""
     }
   ],
   "reviewed": {
