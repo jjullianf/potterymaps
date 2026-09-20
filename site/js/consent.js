@@ -91,6 +91,72 @@
     });
   }
 
+  // Leaflet/MarkerCluster werden selbst gehostet (siehe .eleventy.js), aber erst
+  // bei Bedarf nachgeladen (nicht auf jeder Seite vorab), da schon das Laden der
+  // Kartenkacheln von OpenStreetMap die IP-Adresse an Dritte übertraegt - das soll
+  // genau wie beim Google-Maps-Embed erst nach Klick bzw. genereller Zustimmung
+  // passieren, nicht automatisch beim Seitenaufruf.
+  var leafletAssetsPromise = null;
+  function loadLeafletAssets() {
+    if (leafletAssetsPromise) return leafletAssetsPromise;
+    leafletAssetsPromise = new Promise(function (resolve, reject) {
+      ["/js/vendor/leaflet/leaflet.css", "/js/vendor/leaflet/MarkerCluster.css", "/js/vendor/leaflet/MarkerCluster.Default.css"].forEach(function (href) {
+        var link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = href;
+        document.head.appendChild(link);
+      });
+      var leafletScript = document.createElement("script");
+      leafletScript.src = "/js/vendor/leaflet/leaflet.js";
+      leafletScript.onerror = reject;
+      leafletScript.onload = function () {
+        var clusterScript = document.createElement("script");
+        clusterScript.src = "/js/vendor/leaflet/leaflet.markercluster.js";
+        clusterScript.onerror = reject;
+        clusterScript.onload = resolve;
+        document.body.appendChild(clusterScript);
+      };
+      document.body.appendChild(leafletScript);
+    });
+    return leafletAssetsPromise;
+  }
+
+  // Aktiviert eine einzelne Leaflet-Karte: blendet den eigentlichen Karten-Container
+  // ein, entfernt den Hinweistext/Button und ruft danach die seitenspezifische
+  // Init-Funktion (per data-init-fn benannt, z.B. window.__initHomeMap) auf, sobald
+  // Leaflet geladen ist.
+  function activateLeafletGate(gate) {
+    if (gate.dataset.loaded === "true") return;
+    gate.dataset.loaded = "true";
+    var initFn = window[gate.getAttribute("data-init-fn")];
+    var target = gate.querySelector(".leaflet-consent-target");
+    if (target) {
+      target.hidden = false;
+      gate.replaceWith(target);
+    }
+    if (typeof initFn === "function") {
+      loadLeafletAssets().then(initFn);
+    }
+  }
+
+  function initLeafletGates() {
+    var gates = document.querySelectorAll(".leaflet-consent-gate");
+    if (!gates.length) return;
+    var consent = getConsent();
+    gates.forEach(function (gate) {
+      if (consent === "accepted") {
+        activateLeafletGate(gate);
+        return;
+      }
+      var btn = gate.querySelector(".map-consent-load-btn");
+      if (btn) {
+        btn.addEventListener("click", function () {
+          activateLeafletGate(gate);
+        });
+      }
+    });
+  }
+
   function showBanner() {
     var banner = document.getElementById("cookie-banner");
     if (banner) banner.hidden = false;
@@ -107,6 +173,7 @@
     if (value === "accepted") {
       loadAnalytics();
       document.querySelectorAll(".map-consent-gate").forEach(loadMapEmbed);
+      document.querySelectorAll(".leaflet-consent-gate").forEach(activateLeafletGate);
     }
   }
 
@@ -120,6 +187,7 @@
     }
 
     initMapGates();
+    initLeafletGates();
     initOutboundLinkTracking();
 
     var acceptBtn = document.getElementById("cookie-accept");

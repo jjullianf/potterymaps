@@ -49,7 +49,13 @@
   </p>
 
   {% if t.nearestStudios.length %}
-  <div id="city-detail-map" class="city-detail-map"></div>
+  <div class="map-consent-gate leaflet-consent-gate" data-init-fn="__initTownMap">
+    <p>Für die Karte wird eine Verbindung zu OpenStreetMap-Kartenservern hergestellt, wobei deine IP-Adresse übermittelt wird.</p>
+    <button type="button" class="button map-consent-load-btn">Karte laden</button>
+    <div class="leaflet-consent-target" hidden>
+      <div id="city-detail-map" class="city-detail-map"></div>
+    </div>
+  </div>
   <section class="studio-list">
     <h2>Studios in der Nähe von {{ t.name }}</h2>
     <ul class="studio-cards">
@@ -73,10 +79,8 @@
 </article>
 
 {% if t.nearestStudios.length %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <script>
-  (function () {
+  window.__initTownMap = function () {
     var town = { lat: {{ t.lat }}, lng: {{ t.lng }} };
     var studios = [
       {% for s in t.nearestStudios %}
@@ -109,6 +113,6 @@
         '<strong>' + s.name + '</strong><br><a href="/ch/studio/' + s.slug + '/">Zur Studio-Seite</a>'
       );
     });
-  })();
+  };
 </script>
 {% endif %}

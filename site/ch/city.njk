@@ -23,7 +23,6 @@
   },
 }
 ---
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 {% from "studio-card.njk" import card %}
 {% set c = cityData %}
 <article class="city-page">
@@ -44,7 +43,13 @@
   {% endif %}
 
   {% if c.mapStudios.length %}
-  <div id="city-detail-map" class="city-detail-map"></div>
+  <div class="map-consent-gate leaflet-consent-gate" data-init-fn="__initCityMap">
+    <p>Für die Karte wird eine Verbindung zu OpenStreetMap-Kartenservern hergestellt, wobei deine IP-Adresse übermittelt wird.</p>
+    <button type="button" class="button map-consent-load-btn">Karte laden</button>
+    <div class="leaflet-consent-target" hidden>
+      <div id="city-detail-map" class="city-detail-map"></div>
+    </div>
+  </div>
   {% endif %}
 
   {% if c.direct.length %}
@@ -99,9 +104,8 @@
 </article>
 
 {% if c.mapStudios.length %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script>
-  (function () {
+  window.__initCityMap = function () {
     var townCenter = { lat: {{ c.lat }}, lng: {{ c.lng }} };
     var studios = [
       {% for s in c.mapStudios %}
@@ -137,6 +141,6 @@
         '<strong>' + s.name + '</strong><br><a href="/ch/studio/' + s.slug + '/">Zur Studio-Seite</a>'
       );
     });
-  })();
+  };
 </script>
 {% endif %}

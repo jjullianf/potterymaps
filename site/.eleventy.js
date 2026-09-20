@@ -76,6 +76,17 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("images");
   eleventyConfig.addPassthroughCopy("fonts");
   eleventyConfig.addPassthroughCopy("js");
+  // Leaflet + MarkerCluster selbst gehostet statt per CDN (cdnjs) geladen -
+  // Dateien kommen aus node_modules (npm-Pakete als Quelle der Wahrheit fuer die
+  // Version), landen aber im Build unter /js/vendor/leaflet/ wie normale eigene
+  // Assets.
+  eleventyConfig.addPassthroughCopy({
+    "node_modules/leaflet/dist/leaflet.js": "js/vendor/leaflet/leaflet.js",
+    "node_modules/leaflet/dist/leaflet.css": "js/vendor/leaflet/leaflet.css",
+    "node_modules/leaflet.markercluster/dist/leaflet.markercluster.js": "js/vendor/leaflet/leaflet.markercluster.js",
+    "node_modules/leaflet.markercluster/dist/MarkerCluster.css": "js/vendor/leaflet/MarkerCluster.css",
+    "node_modules/leaflet.markercluster/dist/MarkerCluster.Default.css": "js/vendor/leaflet/MarkerCluster.Default.css",
+  });
   eleventyConfig.addPassthroughCopy("robots.txt");
   eleventyConfig.addPassthroughCopy("favicon.ico");
   eleventyConfig.addPassthroughCopy("favicon-16x16.png");

@@ -18,16 +18,18 @@
   },
 }
 ---
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.Default.css">
-
 <article class="static-page">
   <p class="breadcrumb"><a href="/ch/">Startseite</a> &raquo; Alle Städte</p>
   <h1>Alle Städte</h1>
   <p>Alle {{ mapStudios.length }} {{ pluralize(mapStudios.length, "Studio", "Studios") }} auf der Karte oder als Liste nach Stadt sortiert.</p>
 
-  <div id="overview-map" class="overview-map"></div>
+  <div class="map-consent-gate leaflet-consent-gate" data-init-fn="__initAlleStaedteMap">
+    <p>Für die Kartenübersicht wird eine Verbindung zu OpenStreetMap-Kartenservern hergestellt, wobei deine IP-Adresse übermittelt wird.</p>
+    <button type="button" class="button map-consent-load-btn">Karte laden</button>
+    <div class="leaflet-consent-target" hidden>
+      <div id="overview-map" class="overview-map"></div>
+    </div>
+  </div>
 
   <ul class="all-cities-grid">
     {% for c in sortedCities %}
@@ -48,10 +50,8 @@
   </ul>
 </article>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/leaflet.markercluster.js"></script>
 <script>
-  (function () {
+  window.__initAlleStaedteMap = function () {
     var studios = [
       {% for s in mapStudios %}
       { name: "{{ s.name | escape }}", slug: "{{ s.slug }}", city: "{{ s.city | escape }}", lat: {{ s.lat }}, lng: {{ s.lng }} }{% if not loop.last %},{% endif %}
@@ -90,5 +90,5 @@
       clusterGroup.addLayer(marker);
     });
     map.addLayer(clusterGroup);
-  })();
+  };
 </script>
