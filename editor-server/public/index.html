@@ -340,11 +340,27 @@ $("#only-todo").addEventListener("change", renderTable);
 
 // ---------- Formular ----------
 
+// "Walk-in" (spontan, ohne Reservation moeglich) und "Nur mit Reservation"
+// schliessen sich inhaltlich aus - ein Studio kann nicht beides gleichzeitig sein.
+const MUTUALLY_EXCLUSIVE_TAGS = ["walk-in", "reservation-only"];
+
 function buildTagGrid(selected) {
   const sel = new Set((selected || "").split(",").map((t) => t.trim()).filter(Boolean));
   $("#tag-grid").innerHTML = TAGS.map(([val, label]) =>
     `<label><input type="checkbox" value="${val}" ${sel.has(val) ? "checked" : ""}> ${label}</label>`
   ).join("");
+  MUTUALLY_EXCLUSIVE_TAGS.forEach((val) => {
+    const box = $(`#tag-grid input[value="${val}"]`);
+    if (!box) return;
+    box.addEventListener("change", () => {
+      if (!box.checked) return;
+      MUTUALLY_EXCLUSIVE_TAGS.forEach((otherVal) => {
+        if (otherVal === val) return;
+        const other = $(`#tag-grid input[value="${otherVal}"]`);
+        if (other) other.checked = false;
+      });
+    });
+  });
 }
 
 function getSelectedTags() {
@@ -474,6 +490,12 @@ $("#form").addEventListener("submit", async (e) => {
   const isNew = !currentSlug;
   if (isNew && state.studios.some((s) => s.slug === slug)) {
     alert("Ein Studio mit diesem Slug existiert bereits. Bitte Slug anpassen.");
+    return;
+  }
+
+  const selectedTagsForValidation = getSelectedTags().split(",").map((t) => t.trim());
+  if (MUTUALLY_EXCLUSIVE_TAGS.every((t) => selectedTagsForValidation.includes(t))) {
+    alert('"Walk-in" und "Nur mit Reservation" schliessen sich aus - bitte nur einen der beiden Tags setzen.');
     return;
   }
 
