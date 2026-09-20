@@ -518,7 +518,7 @@
       "price_from": 15,
       "country": "CH",
       "currency": "CHF",
-      "postcode": null,
+      "postcode": "6003",
       "region": "LU",
       "email": ""
     },
@@ -1098,7 +1098,7 @@
       "price_from": 45,
       "country": "CH",
       "currency": "CHF",
-      "postcode": null,
+      "postcode": "8008",
       "region": "ZH",
       "email": ""
     },
@@ -1127,7 +1127,7 @@
       "price_from": 20,
       "country": "CH",
       "currency": "CHF",
-      "postcode": null,
+      "postcode": "4410",
       "region": "BL",
       "email": ""
     },
@@ -1156,7 +1156,7 @@
       "price_from": 20,
       "country": "CH",
       "currency": "CHF",
-      "postcode": null,
+      "postcode": "4054",
       "region": "BS",
       "email": ""
     },
@@ -1243,7 +1243,7 @@
       "price_from": 18,
       "country": "CH",
       "currency": "CHF",
-      "postcode": null,
+      "postcode": "8484",
       "region": "ZH",
       "email": ""
     },
