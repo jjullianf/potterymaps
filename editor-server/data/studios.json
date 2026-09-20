@@ -8,7 +8,7 @@
       "phone": "+41 79 226 92 02",
       "website": "https://www.unique-keramik.ch/%3Futm_source%3Dgoogle%26utm_medium%3Dwix_google_business_profile%26utm_campaign%3D16429284707584902878",
       "opening_hours": "Mo geschlossen, Di 16-18 Uhr, Mi geschlossen, Do 16-21 Uhr, Fr 16-18 Uhr, Sa 10-12 Uhr und 13:30-16 Uhr, So geschlossen (Öffnungszeiten = Malzeiten, nach Buchung)",
-      "tags": "kids-friendly, walk-in, reservation-only",
+      "tags": "kids-friendly, birthday-parties, corporate-events, reservation-only",
       "price_mug": "",
       "price_plate": "",
       "studio_fee": "CHF 42 Erwachsene · CHF 34 Kinder · CHF 66 für 1 Kind + 1 Erwachsene",
@@ -22,7 +22,7 @@
       "custom_faq": "[]",
       "lat": 47.0430465,
       "lng": 7.2737697,
-      "price_from": 34
+      "price_from": "34"
     },
     {
       "slug": "paint-it-easy-ceramics-studio-ceramic-painting-keramik-bemalen-basel",
@@ -176,7 +176,7 @@
       "phone": "+41 79 600 49 06",
       "website": "https://selbergmalt.ch/",
       "opening_hours": "Di 14–18 Uhr · Mi 9–11:30 & 14–18 Uhr · Do 14–20 Uhr · Fr 9–11:30 & 14–18 Uhr · Sa 10–16 Uhr · Mo & So geschlossen",
-      "tags": "kids-friendly, birthday-parties, hen-party, corporate-events, walk-in, reservation-only",
+      "tags": "kids-friendly, birthday-parties, hen-party, corporate-events, walk-in, reservation-empfohlen",
       "price_mug": "28",
       "price_plate": "",
       "studio_fee": "Keine separate Studiogebühr · Keramikstücke ab CHF 20",
@@ -190,7 +190,7 @@
       "custom_faq": "[]",
       "lat": 47.5206888,
       "lng": 8.5419808,
-      "price_from": 20
+      "price_from": "20"
     },
     {
       "slug": "maison-ceramique-cortaillod",
@@ -224,7 +224,7 @@
       "phone": "+41 76 393 70 74",
       "website": "https://keramikum.ch/",
       "opening_hours": "Variiert wöchentlich · aktuelle Öffnungszeiten und buchbare Zeitfenster gemäss Online-Buchungskalender.",
-      "tags": "kids-friendly, birthday-parties, hen-party, corporate-events, date-night, walk-in, reservation-only",
+      "tags": "kids-friendly, birthday-parties, hen-party, corporate-events, date-night, reservation-empfohlen",
       "price_mug": "30",
       "price_plate": "",
       "studio_fee": "CHF 15 pro Person · 2,5 Stunden offene Atelierzeit",
@@ -238,7 +238,7 @@
       "custom_faq": "[{\"q\":\"Wo kann ich bei Keramikum mit dem Auto parkieren?\",\"a\":\"Entlang der Riedgarten- und Zwickystrasse gibt es mehrere kostenpflichtige Parkplätze mit Parkuhren. Zusätzlich stehen Besucherparkplätze in der Tiefgarage des Gebäudes an der Zwickystrasse 32 zur Verfügung. Das Gebäude befindet sich auf der rechten Seite kurz nach der Einfahrt ins Zwicky-Areal von der Neugutstrasse.\"}]",
       "lat": 47.4038884,
       "lng": 8.6012212,
-      "price_from": 15
+      "price_from": "15"
     },
     {
       "slug": "ceramique-cafe-fribourg-fribourg",
@@ -392,7 +392,7 @@
       "phone": "",
       "website": "https://siyaceramics.squarespace.com/",
       "opening_hours": "Für Abholungen: Mi 16-18:30, Fr 16-18:30, Sa 13-17 Uhr (Slots gemäss Online-Kalender)",
-      "tags": "corporate-events, hen-party, birthday-parties",
+      "tags": "birthday-parties, hen-party, corporate-events, reservation-empfohlen",
       "price_mug": "27-32",
       "price_plate": "27-37",
       "studio_fee": "CHF 20 pro Person · 2 Stunden · jede weitere halbe Stunde + CHF 5",
@@ -406,7 +406,7 @@
       "custom_faq": "[]",
       "lat": 47.0439406,
       "lng": 8.3039914,
-      "price_from": 20
+      "price_from": "20"
     },
     {
       "slug": "moon-clay-painting-studio-lucerne",
@@ -584,7 +584,7 @@
       "phone": "",
       "website": "https://www.spazio-sursee.ch/",
       "opening_hours": "Mi 14–18:30 Uhr · Do 16:30–21 Uhr · Fr 14–21 Uhr · Sa 10–17 Uhr · So Paint & Brunch nach Anmeldung",
-      "tags": "kids-friendly, birthday-parties, hen-party, corporate-events, walk-in, reservation-only, themed-events, date-night",
+      "tags": "kids-friendly, birthday-parties, hen-party, corporate-events, date-night, reservation-empfohlen, themed-events",
       "price_mug": "20-45",
       "price_plate": "18-54",
       "studio_fee": "CHF 20 pro Person · 2 Stunden · inkl. 1 Getränk",
@@ -598,7 +598,7 @@
       "custom_faq": "[]",
       "lat": 47.1699847,
       "lng": 8.0993459,
-      "price_from": 20
+      "price_from": "20"
     },
     {
       "slug": "creative-you-ceramic-painting-studio-thalwil-thalwil",
@@ -608,7 +608,7 @@
       "phone": "",
       "website": "https://www.creative-you.ch/",
       "opening_hours": "Mo–Di geschlossen · Mi 13–18 Uhr · Do geschlossen · Fr 13–18 Uhr · Sa 11–18 Uhr · So geschlossen",
-      "tags": "kids-friendly, birthday-parties, hen-party, corporate-events, walk-in, reservation-only, themed-events",
+      "tags": "kids-friendly, birthday-parties, hen-party, corporate-events, walk-in, reservation-empfohlen, themed-events",
       "price_mug": "30",
       "price_plate": "30",
       "studio_fee": "Keine separate Studiogebühr · Keramikstücke ab CHF 30 inkl. Material, Glasur und Brand",
@@ -622,7 +622,7 @@
       "custom_faq": "[]",
       "lat": 47.2993961,
       "lng": 8.56101,
-      "price_from": 30
+      "price_from": "30"
     },
     {
       "slug": "levin-art-studio-ehem-the-rainbow-club-winterthur",
@@ -704,7 +704,7 @@
       "phone": "",
       "website": "https://www.creative-you.ch/creative-you-in-zug",
       "opening_hours": "Mo-Di geschlossen, Mi 1-6pm, Do geschlossen, Fr 1-6pm, Sa 11am-6pm, So geschlossen",
-      "tags": "kids-friendly, birthday-parties, hen-party, corporate-events, walk-in, reservation-only, themed-events",
+      "tags": "kids-friendly, birthday-parties, hen-party, corporate-events, walk-in, reservation-empfohlen, themed-events",
       "price_mug": "29-30",
       "price_plate": "29-30",
       "studio_fee": "Keine separate Studiogebühr · Keramikstücke ab CHF 29 · Walk-in ab CHF 29/Pers.",
@@ -718,7 +718,7 @@
       "custom_faq": "[]",
       "lat": 47.1767252,
       "lng": 8.4993541,
-      "price_from": 29
+      "price_from": "29"
     },
     {
       "slug": "atelier-alfar-zuerich",
@@ -848,7 +848,7 @@
       "phone": "",
       "website": "http://siyaceramics.squarespace.com/",
       "opening_hours": "Mi & Fr 14-20 Uhr, Do 16-20 Uhr, Sa 10-20 Uhr, So nur für gebuchte Gäste",
-      "tags": "kids-friendly, birthday-parties, hen-party, corporate-events, walk-in, reservation-only",
+      "tags": "kids-friendly, birthday-parties, hen-party, corporate-events, walk-in, reservation-empfohlen",
       "price_mug": "27-32 (Espresso 18)",
       "price_plate": "27-37",
       "studio_fee": "CHF 20 pro Person · 2 Stunden · +CHF 5 je weitere 30 Min.",
@@ -862,17 +862,17 @@
       "custom_faq": "[]",
       "lat": 47.3738663,
       "lng": 8.5190732,
-      "price_from": 20
+      "price_from": "20"
     },
     {
-      "slug": "ceramic-malbar-gmbh-zuerich",
-      "name": "ceramic malbar gmbh",
+      "slug": "ceramic-malbar-zuerich",
+      "name": "ceramic malbar",
       "address": "Pfingstweidstrasse 106, 8005 Zürich",
       "city": "Zürich",
       "phone": "+41 44 512 79 60",
       "website": "https://www.ceramic-malbar.com/",
       "opening_hours": "Mo geschlossen, Di-So 12-9pm - buchbare Zeitfenster gemäss Online-Kalender",
-      "tags": "kids-friendly, birthday-parties, corporate-events, walk-in, reservation-only, at-home-kits, themed-events",
+      "tags": "kids-friendly, birthday-parties, corporate-events, walk-in, reservation-empfohlen, at-home-kits, themed-events",
       "price_from": "",
       "price_mug": "",
       "price_plate": "",
@@ -1526,7 +1526,6 @@
     "paint-it-easy-zuerich-creative-cafe-keramik-bemalen-zuerich": true,
     "paintlounge-paintevents-malstudio-zuerich": true,
     "siya-ceramics-i-siya-keramik-i-pottery-painting-zuerich": true,
-    "ceramic-malbar-gmbh-zuerich": true,
     "bisquerie-keramik-bemalen-in-zuerich-saentisstrasse-7-8008-zuerich-zuerich": true,
     "craft-room-red-fox-liestal": true,
     "craft-room-red-fox-basel": true,
@@ -1551,6 +1550,7 @@
     "keramos-neuchatel": true,
     "nebu-zuerich": true,
     "creaba-kirchberg": true,
-    "atelier-zaya-frauenfeld": true
+    "atelier-zaya-frauenfeld": true,
+    "ceramic-malbar-zuerich": true
   }
 }
