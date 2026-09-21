@@ -86,13 +86,7 @@
 
   <h1 class="studio-title">{{ s.name }}{% if s.featured %} <span class="featured-badge">Empfohlen</span>{% endif %}</h1>
 
-  {% studioImage s, { widths: [500, 852], sizes: "(max-width: 900px) 100vw, 852px", loading: "eager", fetchpriority: "high", wrapClass: "studio-hero-img" } %}
-
-  {% if s.galleryImages.length %}
-  <div class="studio-gallery">
-    {% for img in s.galleryImages %}{% studioGalleryThumb img, s.name %}{% endfor %}
-  </div>
-  {% endif %}
+  {% studioGallery s.images, s.name %}
 
   <section class="studio-quickfacts">
     {% if s.priceAtAGlance %}

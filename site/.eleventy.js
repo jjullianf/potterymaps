@@ -32,30 +32,53 @@ async function optimizedImage(src, alt, { widths = [640], formats = ["webp", "jp
 // Funktion direkt in JS aufrufen kann (siehe Kommentar dort - noetig, weil
 // async Shortcodes innerhalb von Nunjucks-Macros keinen Output liefern).
 const studioImage = require("./_11ty/studioImage.js");
+const compareStudiosForListing = require("./_11ty/sortStudios.js");
 
-// Rendert ein einzelnes zusaetzliches Galerie-Bild (siehe studio.njk) - nutzt
-// dieselbe eleventy-img-Pipeline wie das Hauptbild, aber pro Thumbnail statt
-// vorberechnet, da studio.njk kein Macro ist und async Shortcodes hier direkt
-// funktionieren.
-async function studioGalleryThumb(url, alt) {
-  try {
-    const metadata = await Image(String(url).trim(), {
-      widths: [300],
-      formats: ["webp", "jpeg"],
-      outputDir: "./_site/images/optimized/",
-      urlPath: "/images/optimized/",
-    });
-    return generateHTML(metadata, {
-      alt: alt || "",
-      sizes: "150px",
-      loading: "lazy",
-      decoding: "async",
-      class: "studio-gallery-thumb",
-    });
-  } catch (err) {
-    console.warn(`[studioGalleryThumb] Bild "${url}" konnte nicht verarbeitet werden, wird uebersprungen: ${err.message}`);
-    return "";
+// Rendert die komplette Bilder-Galerie einer Studio-Seite als leichtgewichten,
+// abhaengigkeitsfreien Swipe-Slider (ein Bild sichtbar, Touch-Swipe, Pfeile,
+// Dots) - siehe /js/gallery.js fuer die Interaktions-Logik. Ohne Bild wird der
+// bestehende Marken-Platzhalter gezeigt, bei genau einem Bild ohne Pfeile/Dots.
+async function studioGallery(urls, alt) {
+  const list = (urls || []).map((u) => String(u).trim()).filter(Boolean);
+  const placeholderHtml = `<div class="studio-hero-img studio-image-placeholder"><img class="studio-image-placeholder-icon" src="/apple-touch-icon.png" alt="" loading="lazy"></div>`;
+  if (!list.length) return placeholderHtml;
+
+  const slides = [];
+  for (const url of list) {
+    try {
+      const metadata = await Image(url, {
+        widths: [500, 852],
+        formats: ["webp", "jpeg"],
+        outputDir: "./_site/images/optimized/",
+        urlPath: "/images/optimized/",
+      });
+      const html = generateHTML(metadata, {
+        alt: alt || "",
+        sizes: "(max-width: 900px) 100vw, 852px",
+        loading: slides.length === 0 ? "eager" : "lazy",
+        fetchpriority: slides.length === 0 ? "high" : undefined,
+        decoding: "async",
+      });
+      slides.push(`<div class="studio-gallery-slide">${html}</div>`);
+    } catch (err) {
+      console.warn(`[studioGallery] Bild "${url}" konnte nicht verarbeitet werden, wird uebersprungen: ${err.message}`);
+    }
   }
+  if (!slides.length) return placeholderHtml;
+  if (slides.length === 1) {
+    return `<div class="studio-gallery" data-studio-gallery><div class="studio-gallery-viewport"><div class="studio-gallery-track">${slides[0]}</div></div></div>`;
+  }
+
+  const dots = slides.map((_, i) => `<button type="button" class="studio-gallery-dot${i === 0 ? " is-active" : ""}" data-index="${i}" aria-label="Bild ${i + 1} von ${slides.length}"></button>`).join("");
+  return `
+    <div class="studio-gallery" data-studio-gallery>
+      <div class="studio-gallery-viewport">
+        <div class="studio-gallery-track">${slides.join("")}</div>
+        <button type="button" class="studio-gallery-arrow studio-gallery-prev" aria-label="Vorheriges Bild">&lsaquo;</button>
+        <button type="button" class="studio-gallery-arrow studio-gallery-next" aria-label="Nächstes Bild">&rsaquo;</button>
+      </div>
+      <div class="studio-gallery-dots">${dots}</div>
+    </div>`;
 }
 
 module.exports = function (eleventyConfig) {
@@ -65,10 +88,11 @@ module.exports = function (eleventyConfig) {
   // So bleibt "pluralize" sowohl in Templates ({{ pluralize(...) }}) als auch in
   // eleventyComputed-Funktionen (data.pluralize(...)) die aufrufbare Funktion.
   eleventyConfig.addGlobalData("pluralize", () => pluralize);
+  eleventyConfig.addGlobalData("compareStudiosForListing", () => compareStudiosForListing);
 
   eleventyConfig.addNunjucksAsyncShortcode("optimizedImage", optimizedImage);
   eleventyConfig.addNunjucksAsyncShortcode("studioImage", studioImage);
-  eleventyConfig.addNunjucksAsyncShortcode("studioGalleryThumb", studioGalleryThumb);
+  eleventyConfig.addNunjucksAsyncShortcode("studioGallery", studioGallery);
 
   // CSS im Build minifizieren statt das unveraenderte Quell-CSS per Passthrough
   // 1:1 auszuliefern.

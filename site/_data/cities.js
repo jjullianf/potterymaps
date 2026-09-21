@@ -5,6 +5,7 @@ const studiosFn = require("./studios.js");
 const site = require("./site.js");
 const citySlug = require("./citySlug.js");
 const pluralize = require("../_11ty/pluralize.js");
+const compareStudiosForListing = require("../_11ty/sortStudios.js");
 
 const CITY_PHOTOS_DIR = path.join(__dirname, "..", "images", "cities");
 
@@ -27,7 +28,9 @@ module.exports = async function () {
     const hubInfo = targetCities.find((c) => c.name === name);
     const isHub = !!hubInfo;
     const slug = hubInfo ? hubInfo.slug : citySlug(name);
-    const direct = studiosByCityName[name] || [];
+    // Featured zuerst, danach Studios mit eigenen Bildern vor Studios ohne
+    // eigene Bilder, danach alphabetisch (siehe _11ty/sortStudios.js).
+    const direct = (studiosByCityName[name] || []).slice().sort(compareStudiosForListing);
     const hasAny = direct.length > 0;
     const hasPhoto = isHub && fs.existsSync(path.join(CITY_PHOTOS_DIR, `${slug}.jpg`));
 

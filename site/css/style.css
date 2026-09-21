@@ -222,19 +222,72 @@ h1, h2 { font-family: var(--font-display); font-weight: 600; color: var(--color-
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
 }
 
+/* Leichtgewichtiger Swipe-Slider fuer die Studio-Bildergalerie (siehe
+   .eleventy.js studioGallery() fuer das erzeugte Markup, /js/gallery.js fuer
+   die Interaktion) - kein externes Slider-Framework, nur Flexbox + transform. */
 .studio-gallery {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin: -0.5rem 0 1.5rem;
+  margin: 1rem 0 1.5rem;
 }
-.studio-gallery-thumb {
-  width: 90px;
-  height: 90px;
-  object-fit: cover;
-  border-radius: 8px;
+.studio-gallery-viewport {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
   border: 1px solid var(--color-border);
 }
+.studio-gallery-track {
+  display: flex;
+  transition: transform 0.3s ease;
+  touch-action: pan-y;
+}
+.studio-gallery-slide {
+  flex: 0 0 100%;
+  min-width: 0;
+  aspect-ratio: 16 / 9;
+}
+.studio-gallery-slide img,
+.studio-gallery-slide picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.studio-gallery-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.85);
+  color: var(--color-text);
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+}
+.studio-gallery-arrow:hover { background: #fff; color: var(--color-accent); }
+.studio-gallery-prev { left: 0.6rem; }
+.studio-gallery-next { right: 0.6rem; }
+.studio-gallery-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.7rem;
+}
+.studio-gallery-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  background: var(--color-border);
+  cursor: pointer;
+}
+.studio-gallery-dot.is-active { background: var(--color-accent); }
 
 /* Bildchen oben in der Karte (echtes Foto oder Platzhalter) - per Negativ-Margin
    bis an den Kartenrand gezogen, damit es trotz Padding der Karte buendig sitzt. */

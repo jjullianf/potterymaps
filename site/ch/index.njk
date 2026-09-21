@@ -40,7 +40,7 @@
     exampleStudios: (data) => {
       return (data.studios || [])
         .filter((s) => s.priceRangeText && s.topTags.length)
-        .sort((a, b) => a.name.localeCompare(b.name, "de"))
+        .sort(data.compareStudiosForListing)
         .slice(0, 3);
     },
     cafeStudios: (data) => {

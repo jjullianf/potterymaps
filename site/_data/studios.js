@@ -283,6 +283,7 @@ module.exports = async function () {
       nearestHubSlug,
       cardThumbHtml,
       image: mainImage,
+      images: imageList,
       galleryImages,
       featured: s.featured === true || s.featured === "true",
     });

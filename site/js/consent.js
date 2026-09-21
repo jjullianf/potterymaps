@@ -74,7 +74,10 @@
   }
 
   function initMapGates() {
-    var gates = document.querySelectorAll(".map-consent-gate");
+    // ":not(.leaflet-consent-gate)" ist wichtig - Leaflet-Karten tragen beide
+    // Klassen (siehe initLeafletGates unten), sonst wuerden fuer denselben
+    // "Karte laden"-Button zwei verschiedene Click-Handler registriert.
+    var gates = document.querySelectorAll(".map-consent-gate:not(.leaflet-consent-gate)");
     if (!gates.length) return;
     var consent = getConsent();
     gates.forEach(function (gate) {
@@ -172,7 +175,7 @@
     hideBanner();
     if (value === "accepted") {
       loadAnalytics();
-      document.querySelectorAll(".map-consent-gate").forEach(loadMapEmbed);
+      document.querySelectorAll(".map-consent-gate:not(.leaflet-consent-gate)").forEach(loadMapEmbed);
       document.querySelectorAll(".leaflet-consent-gate").forEach(activateLeafletGate);
     }
   }
