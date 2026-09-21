@@ -32,6 +32,11 @@
   --color-card: #f6edda;
   --color-border: #e8dcc0;
   --color-price: #3d8361;
+  /* Bewusst neutrales Grau statt Creme-Ton: dient als Letterbox-Hintergrund
+     hinter unbeschnittenen Bildern (object-fit: contain) und muss sich klar
+     vom Seitenhintergrund abheben, sonst wirkt ein "contain"-Bild optisch
+     kaum anders als ein zugeschnittenes. */
+  --color-image-bg: #e9e9e6;
   --font-display: "Fredoka", -apple-system, sans-serif;
 
   --tag-terracotta-bg: #faece7;
@@ -243,7 +248,7 @@ h1, h2 { font-family: var(--font-display); font-weight: 600; color: var(--color-
   flex: 0 0 100%;
   min-width: 0;
   aspect-ratio: 16 / 9;
-  background: var(--color-bg-alt);
+  background: var(--color-image-bg);
 }
 .studio-gallery-slide img,
 .studio-gallery-slide picture {
@@ -299,7 +304,7 @@ h1, h2 { font-family: var(--font-display); font-weight: 600; color: var(--color-
   width: calc(100% + 2rem);
   aspect-ratio: 4 / 3;
   object-fit: contain;
-  background: var(--color-bg-alt);
+  background: var(--color-image-bg);
   margin: -1rem -1rem 0.75rem;
   border-radius: 10px 10px 0 0;
 }
@@ -322,7 +327,7 @@ h1, h2 { font-family: var(--font-display); font-weight: 600; color: var(--color-
   width: calc(100% + 2rem);
   aspect-ratio: 4 / 3;
   object-fit: contain;
-  background: var(--color-bg-alt);
+  background: var(--color-image-bg);
   margin: -1rem -1rem 0.75rem;
   border-radius: 10px 10px 0 0;
 }
