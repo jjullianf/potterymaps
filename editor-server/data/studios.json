@@ -924,12 +924,15 @@
       "custom_faq": "[]",
       "lat": 47.3609708,
       "lng": 8.5620236,
-      "price_from": 45,
+      "price_from": "45",
       "country": "CH",
       "currency": "CHF",
       "postcode": "8032",
       "region": "ZH",
-      "email": ""
+      "email": "",
+      "images": "[]",
+      "contacted": true,
+      "featured": false
     },
     {
       "slug": "loki-studio-zurich-oerlikon-zuerich",
@@ -982,12 +985,15 @@
       "custom_faq": "[]",
       "lat": 47.362027,
       "lng": 8.5262436,
-      "price_from": 20,
+      "price_from": "20",
       "country": "CH",
       "currency": "CHF",
       "postcode": "8002",
       "region": "ZH",
-      "email": ""
+      "email": "",
+      "images": "[]",
+      "contacted": true,
+      "featured": false
     },
     {
       "slug": "paintlounge-paintevents-malstudio-zuerich",
@@ -1011,12 +1017,15 @@
       "custom_faq": "[]",
       "lat": 47.3824792,
       "lng": 8.5341867,
-      "price_from": 25,
+      "price_from": "25",
       "country": "CH",
       "currency": "CHF",
       "postcode": "8005",
       "region": "ZH",
-      "email": ""
+      "email": "",
+      "images": "[]",
+      "contacted": true,
+      "featured": false
     },
     {
       "slug": "siya-ceramics-i-siya-keramik-i-pottery-painting-zuerich",
@@ -1045,7 +1054,10 @@
       "currency": "CHF",
       "postcode": "8003",
       "region": "ZH",
-      "email": ""
+      "email": "",
+      "images": "[]",
+      "contacted": true,
+      "featured": false
     },
     {
       "slug": "ceramic-malbar-zuerich",
@@ -1573,7 +1585,10 @@
       "currency": "CHF",
       "postcode": "8001",
       "region": "ZH",
-      "email": ""
+      "email": "",
+      "images": "[]",
+      "contacted": true,
+      "featured": false
     },
     {
       "slug": "ceramics-atelier-by-mojca-vidmar-zuerich",
