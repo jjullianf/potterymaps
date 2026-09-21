@@ -897,7 +897,10 @@
       "currency": "CHF",
       "postcode": "8008",
       "region": "ZH",
-      "email": ""
+      "email": "",
+      "images": "[]",
+      "contacted": true,
+      "featured": false
     },
     {
       "slug": "keramik-mal-cafe-zuerich",
@@ -1071,7 +1074,10 @@
       "currency": "CHF",
       "postcode": "8005",
       "region": "ZH",
-      "email": ""
+      "email": "",
+      "images": "[]",
+      "contacted": true,
+      "featured": false
     },
     {
       "slug": "bisquerie-keramik-bemalen-in-zuerich-saentisstrasse-7-8008-zuerich-zuerich",
@@ -1081,7 +1087,7 @@
       "phone": "079 575 84 48",
       "website": "https://bisquerie.ch/de",
       "opening_hours": "Aktuelle Workshops und buchbare Termine gemäss Online-Kalender · reguläre Abholzeiten Mi 15:30–17:30 Uhr · Do 15:30–17:30 Uhr · Fr 15:30–17:30 Uhr · Sa 11:30–13:30 & 15:30–17:30 Uhr.",
-      "tags": "hen-party, reservation-only, corporate-events, birthday-parties",
+      "tags": "birthday-parties, hen-party, corporate-events, reservation-only",
       "price_mug": "",
       "price_plate": "",
       "studio_fee": "CHF 45 pro Person · 2,5 Stunden · Keramikstück zusätzlich ab CHF 5",
@@ -1095,12 +1101,15 @@
       "custom_faq": "[]",
       "lat": 47.354775,
       "lng": 8.5564942,
-      "price_from": 45,
+      "price_from": "45",
       "country": "CH",
       "currency": "CHF",
       "postcode": "8008",
       "region": "ZH",
-      "email": ""
+      "email": "",
+      "images": "[]",
+      "contacted": true,
+      "featured": false
     },
     {
       "slug": "craft-room-red-fox-liestal",
@@ -1770,7 +1779,10 @@
       "currency": "CHF",
       "postcode": "9533",
       "region": "SG",
-      "email": ""
+      "email": "",
+      "images": "[]",
+      "contacted": true,
+      "featured": false
     },
     {
       "slug": "atelier-zaya-frauenfeld",
