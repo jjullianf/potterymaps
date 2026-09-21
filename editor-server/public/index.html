@@ -50,6 +50,15 @@
   .photo-item img { width: 100px; height: 100px; object-fit: cover; border-radius: 4px; border: 1px solid #ccc; display: block; }
   .photo-item .use-btn { margin-top: 0.2rem; font-size: 0.75rem; width: 100%; background: #2e7d32; color: #fff; border: none; border-radius: 4px; padding: 0.2rem; cursor: pointer; }
   .photo-item .del-btn { position: absolute; top: 2px; right: 2px; padding: 0.1rem 0.4rem; font-size: 0.7rem; }
+  .gallery-list { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 0.6rem; }
+  .gallery-row { display: flex; align-items: center; gap: 0.5rem; background: #f7f7f4; border: 1px solid #ddd; border-radius: 4px; padding: 0.4rem 0.5rem; }
+  .gallery-row img { width: 44px; height: 44px; object-fit: cover; border-radius: 3px; flex-shrink: 0; background: #eee; }
+  .gallery-row input[type="text"] { flex: 1; padding: 0.4rem; border: 1px solid #ccc; border-radius: 4px; font-family: inherit; }
+  .gallery-row .main-badge { font-size: 0.7rem; font-weight: 600; color: #2456cc; white-space: nowrap; }
+  .gallery-row button { flex-shrink: 0; padding: 0.25rem 0.5rem; font-size: 0.8rem; cursor: pointer; }
+  .filter-bar { display: flex; gap: 0.6rem; margin-bottom: 0.6rem; flex-wrap: wrap; align-items: center; }
+  .filter-bar select { padding: 0.4rem 0.5rem; font-size: 0.85rem; }
+  .filter-bar label { font-size: 0.85rem; display: flex; align-items: center; gap: 0.3rem; }
   .actions { display: flex; gap: 0.6rem; margin-top: 1.2rem; flex-wrap: wrap; }
   button.primary { background: #2456cc; color: #fff; border: none; padding: 0.6rem 1.2rem; border-radius: 5px; cursor: pointer; font-size: 0.95rem; }
   button.secondary { background: #eee; border: 1px solid #ccc; padding: 0.6rem 1.2rem; border-radius: 5px; cursor: pointer; }
@@ -74,6 +83,26 @@
     <input type="text" id="search" placeholder="Suche nach Name, Stadt, Adresse…">
     <label><input type="checkbox" id="only-todo"> nur unreviewte anzeigen</label>
   </div>
+  <div class="filter-bar">
+    <select id="filter-city"><option value="">Alle Städte</option></select>
+    <select id="filter-contacted">
+      <option value="">E-Mail-Kontakt: egal</option>
+      <option value="yes">Kontakt hatte</option>
+      <option value="no">Noch kein Kontakt</option>
+    </select>
+    <select id="filter-featured">
+      <option value="">Featured: egal</option>
+      <option value="yes">Featured</option>
+      <option value="no">Nicht featured</option>
+    </select>
+    <select id="filter-reservation">
+      <option value="">Walk-in/Reservation: egal</option>
+      <option value="walk-in">Walk-in</option>
+      <option value="reservation-only">Nur mit Reservation</option>
+    </select>
+    <label><input type="checkbox" id="filter-missing-images"> fehlende Bilder</label>
+    <button type="button" id="filter-reset" class="secondary">Filter zurücksetzen</button>
+  </div>
   <div class="count" id="count"></div>
   <table>
     <thead>
@@ -83,6 +112,9 @@
         <th data-sort="website">Website</th>
         <th data-sort="price_from">Preis ab</th>
         <th data-sort="tags">Tags</th>
+        <th>Bilder</th>
+        <th>Kontakt</th>
+        <th>Featured</th>
         <th data-sort="reviewed">Status</th>
       </tr>
     </thead>
@@ -193,21 +225,28 @@
       </fieldset>
 
       <fieldset>
-        <legend>Bild</legend>
+        <legend>Bilder</legend>
         <div class="field">
-          <label>Bild-URL (wird auf der Website angezeigt)</label>
-          <input type="text" id="f-image" placeholder="https://... oder ../editor-server/fotos/<slug>/datei.jpg">
+          <label>Galerie (erstes Bild = Hauptbild, wird auf Karten/Listings gezeigt)</label>
+          <div class="gallery-list" id="gallery-list"></div>
+          <button type="button" class="secondary" id="add-gallery-row">+ Bild-URL hinzufügen</button>
         </div>
         <div class="field">
-          <label>Foto hochladen (lokal, für Vorschau/Auswahl – Studio muss vorher gespeichert sein)</label>
+          <label>Foto hochladen (lokal – Studio muss vorher gespeichert sein)</label>
           <input type="file" id="photo-upload" accept="image/*" multiple>
-          <div class="hint">Hochgeladene Dateien landen unter <code>editor-server/fotos/&lt;slug&gt;/</code> und müssen zusätzlich per Git committet/gepusht werden, damit sie beim Live-Build verfügbar sind.</div>
+          <div class="hint">Hochgeladene Dateien landen unter <code>editor-server/fotos/&lt;slug&gt;/</code> und müssen zusätzlich per Git committet/gepusht werden, damit sie beim Live-Build verfügbar sind. Mit "zur Galerie hinzufügen" werden sie unten in die Liste übernommen.</div>
         </div>
         <div class="photo-grid" id="photo-grid"></div>
       </fieldset>
 
       <div class="field">
         <label><input type="checkbox" id="f-reviewed"> Als geprüft markieren (reviewed)</label>
+      </div>
+      <div class="field">
+        <label><input type="checkbox" id="f-contacted"> Bereits E-Mail-Kontakt hatte (nur intern, nicht auf der Website sichtbar)</label>
+      </div>
+      <div class="field">
+        <label><input type="checkbox" id="f-featured"> Featured-Badge anzeigen (auf Studio-Seite und Listings sichtbar)</label>
       </div>
 
       <div class="actions">
@@ -255,10 +294,19 @@ async function loadState() {
     if (!res.ok) throw new Error("HTTP " + res.status);
     state = await res.json();
     setStatus(`geladen – ${state.studios.length} Studios`);
+    populateCityFilter();
     renderTable();
   } catch (e) {
     setStatus("Fehler beim Laden: " + e.message, true);
   }
+}
+
+function populateCityFilter() {
+  const cities = Array.from(new Set(state.studios.map((s) => s.city).filter(Boolean))).sort((a, b) => a.localeCompare(b, "de"));
+  const sel = $("#filter-city");
+  const current = sel.value;
+  sel.innerHTML = '<option value="">Alle Städte</option>' + cities.map((c) => `<option value="${escapeAttr(c)}">${escapeHtml(c)}</option>`).join("");
+  sel.value = current;
 }
 
 async function saveState() {
@@ -289,11 +337,35 @@ function slugify(str) {
     .replace(/^-+|-+$/g, "");
 }
 
+function getImagesArray(s) {
+  try {
+    const arr = JSON.parse(s.images || "[]");
+    if (Array.isArray(arr) && arr.length) return arr.filter(Boolean);
+  } catch (e) { /* ignore */ }
+  return s.image ? [s.image] : [];
+}
+
 function renderTable() {
   const q = $("#search").value.trim().toLowerCase();
   const onlyTodo = $("#only-todo").checked;
+  const fCity = $("#filter-city").value;
+  const fContacted = $("#filter-contacted").value;
+  const fFeatured = $("#filter-featured").value;
+  const fReservation = $("#filter-reservation").value;
+  const fMissingImages = $("#filter-missing-images").checked;
+
   let rows = state.studios.filter((s) => {
     if (onlyTodo && state.reviewed[s.slug]) return false;
+    if (fCity && s.city !== fCity) return false;
+    if (fContacted === "yes" && !s.contacted) return false;
+    if (fContacted === "no" && s.contacted) return false;
+    if (fFeatured === "yes" && !s.featured) return false;
+    if (fFeatured === "no" && s.featured) return false;
+    if (fReservation) {
+      const tags = (s.tags || "").split(",").map((t) => t.trim());
+      if (!tags.includes(fReservation)) return false;
+    }
+    if (fMissingImages && getImagesArray(s).length) return false;
     if (!q) return true;
     return [s.name, s.city, s.address].some((v) => (v || "").toLowerCase().includes(q));
   });
@@ -313,12 +385,16 @@ function renderTable() {
   $("#count").textContent = `${rows.length} von ${state.studios.length} Studios angezeigt`;
   $("#rows").innerHTML = rows.map((s) => {
     const reviewed = !!state.reviewed[s.slug];
+    const imageCount = getImagesArray(s).length;
     return `<tr data-slug="${escapeAttr(s.slug)}">
       <td>${escapeHtml(s.name)}</td>
       <td>${escapeHtml(s.city)}</td>
       <td>${s.website ? `<a href="${escapeAttr(s.website)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">Link</a>` : ""}</td>
       <td>${s.price_from ? "ab CHF " + escapeHtml(s.price_from) : "–"}</td>
       <td>${escapeHtml((s.tags || "").split(",").filter(Boolean).length + " Tags")}</td>
+      <td>${imageCount ? `<span class="badge ok">${imageCount}</span>` : `<span class="badge todo">fehlt</span>`}</td>
+      <td>${s.contacted ? `<span class="badge ok">ja</span>` : `<span class="badge todo">nein</span>`}</td>
+      <td>${s.featured ? `<span class="badge ok">ja</span>` : "–"}</td>
       <td><span class="badge ${reviewed ? "ok" : "todo"}">${reviewed ? "geprüft" : "offen"}</span></td>
     </tr>`;
   }).join("");
@@ -341,6 +417,20 @@ document.querySelectorAll("th[data-sort]").forEach((th) => {
 });
 $("#search").addEventListener("input", renderTable);
 $("#only-todo").addEventListener("change", renderTable);
+["#filter-city", "#filter-contacted", "#filter-featured", "#filter-reservation"].forEach((sel) => {
+  $(sel).addEventListener("change", renderTable);
+});
+$("#filter-missing-images").addEventListener("change", renderTable);
+$("#filter-reset").addEventListener("click", () => {
+  $("#filter-city").value = "";
+  $("#filter-contacted").value = "";
+  $("#filter-featured").value = "";
+  $("#filter-reservation").value = "";
+  $("#filter-missing-images").checked = false;
+  $("#search").value = "";
+  $("#only-todo").checked = false;
+  renderTable();
+});
 
 // ---------- Formular ----------
 
@@ -398,6 +488,60 @@ function getFaqJson() {
   return JSON.stringify(rows);
 }
 
+// ---------- Bilder-Galerie ----------
+
+function buildGalleryList(s) {
+  let urls = getImagesArray(s);
+  $("#gallery-list").innerHTML = "";
+  urls.forEach((url) => addGalleryRow(url));
+}
+
+function addGalleryRow(url) {
+  const div = document.createElement("div");
+  div.className = "gallery-row";
+  div.innerHTML = `
+    <img src="${escapeAttr(url || "")}" alt="" onerror="this.style.visibility='hidden'">
+    <input type="text" class="gallery-url" placeholder="https://... oder ../editor-server/fotos/<slug>/datei.jpg" value="${escapeAttr(url || "")}">
+    <span class="main-badge"></span>
+    <button type="button" class="up-btn secondary" title="Nach oben">↑</button>
+    <button type="button" class="down-btn secondary" title="Nach unten">↓</button>
+    <button type="button" class="del-btn">&times;</button>`;
+  const urlInput = div.querySelector(".gallery-url");
+  urlInput.addEventListener("input", () => {
+    div.querySelector("img").src = urlInput.value.trim();
+    updateGalleryMainBadges();
+  });
+  div.querySelector(".up-btn").addEventListener("click", () => {
+    const prev = div.previousElementSibling;
+    if (prev) div.parentNode.insertBefore(div, prev);
+    updateGalleryMainBadges();
+  });
+  div.querySelector(".down-btn").addEventListener("click", () => {
+    const next = div.nextElementSibling;
+    if (next) div.parentNode.insertBefore(next, div);
+    updateGalleryMainBadges();
+  });
+  div.querySelector(".del-btn").addEventListener("click", () => {
+    div.remove();
+    updateGalleryMainBadges();
+  });
+  $("#gallery-list").appendChild(div);
+  updateGalleryMainBadges();
+}
+
+function updateGalleryMainBadges() {
+  const rows = Array.from(document.querySelectorAll(".gallery-row"));
+  rows.forEach((row, i) => {
+    row.querySelector(".main-badge").textContent = i === 0 ? "Hauptbild" : "";
+  });
+}
+
+$("#add-gallery-row").addEventListener("click", () => addGalleryRow(""));
+
+function getGalleryUrls() {
+  return Array.from(document.querySelectorAll(".gallery-url")).map((el) => el.value.trim()).filter(Boolean);
+}
+
 async function loadPhotos(slug) {
   $("#photo-grid").innerHTML = "";
   if (!slug) return;
@@ -413,15 +557,14 @@ function renderPhotoGrid(slug, photos) {
     <div class="photo-item" data-name="${escapeAttr(p.name)}">
       <img src="${escapeAttr(p.url)}" alt="">
       <button type="button" class="del-btn">&times;</button>
-      <button type="button" class="use-btn">als Bild nutzen</button>
+      <button type="button" class="use-btn">zur Galerie hinzufügen</button>
     </div>
   `).join("");
   document.querySelectorAll(".photo-item").forEach((item) => {
     const name = item.dataset.name;
-    const url = item.querySelector("img").src;
     item.querySelector(".use-btn").addEventListener("click", () => {
       // relativer Pfad, den eleventy-img beim Build lokal lesen kann
-      $("#f-image").value = `../editor-server/fotos/${slug}/${name}`;
+      addGalleryRow(`../editor-server/fotos/${slug}/${name}`);
     });
     item.querySelector(".del-btn").addEventListener("click", async () => {
       if (!confirm("Dieses Foto wirklich löschen?")) return;
@@ -456,13 +599,16 @@ function openEditor(slug) {
   $("#panel-title").textContent = s ? `Bearbeiten: ${s.name}` : "Neues Studio";
   $("#btn-delete").style.display = s ? "" : "none";
 
-  const fields = ["name","address","city","phone","website","email","opening_hours","price_from","price_mug","price_plate","studio_fee","price_note","pickup_time","special_events","description","hat_instagram","image"];
+  const fields = ["name","address","city","phone","website","email","opening_hours","price_from","price_mug","price_plate","studio_fee","price_note","pickup_time","special_events","description","hat_instagram"];
   fields.forEach((f) => { $("#f-" + f).value = s ? (s[f] || "") : ""; });
   $("#f-slug").value = s ? s.slug : "";
   $("#f-reviewed").checked = s ? !!state.reviewed[s.slug] : false;
+  $("#f-contacted").checked = s ? !!s.contacted : false;
+  $("#f-featured").checked = s ? !!s.featured : false;
 
   buildTagGrid(s ? s.tags : "");
   buildFaqList(s ? s.custom_faq : "[]");
+  buildGalleryList(s || {});
   loadPhotos(s ? s.slug : null);
 
   $("#overlay").classList.add("open");
@@ -526,10 +672,13 @@ $("#form").addEventListener("submit", async (e) => {
     pickup_time: $("#f-pickup_time").value.trim(),
     special_events: $("#f-special_events").value.trim(),
     description: $("#f-description").value.trim(),
-    image: $("#f-image").value.trim(),
+    images: JSON.stringify(getGalleryUrls()),
+    image: getGalleryUrls()[0] || "",
     quelle_hinweis: (existing || {}).quelle_hinweis || "Manuell im Editor gepflegt.",
     hat_instagram: $("#f-hat_instagram").value.trim(),
     custom_faq: getFaqJson(),
+    contacted: $("#f-contacted").checked,
+    featured: $("#f-featured").checked,
   };
 
   if (currentSlug) {
@@ -560,7 +709,7 @@ $("#btn-delete").addEventListener("click", async () => {
 
 // ---------- CSV Export / Import ----------
 
-const CSV_FIELDS = ["slug","name","address","city","phone","website","email","opening_hours","tags","price_from","price_mug","price_plate","studio_fee","price_note","pickup_time","special_events","description","image","quelle_hinweis","hat_instagram","custom_faq","reviewed"];
+const CSV_FIELDS = ["slug","name","address","city","phone","website","email","opening_hours","tags","price_from","price_mug","price_plate","studio_fee","price_note","pickup_time","special_events","description","image","images","contacted","featured","quelle_hinweis","hat_instagram","custom_faq","reviewed"];
 
 function csvEscape(v) {
   v = v == null ? "" : String(v);
@@ -617,6 +766,8 @@ $("#btn-import").addEventListener("change", async (e) => {
     if (!obj.slug) continue;
     const reviewedVal = obj.reviewed === "true";
     delete obj.reviewed;
+    obj.contacted = obj.contacted === "true";
+    obj.featured = obj.featured === "true";
     const idx2 = state.studios.findIndex((s) => s.slug === obj.slug);
     if (idx2 !== -1) { state.studios[idx2] = obj; updated++; }
     else { state.studios.push(obj); added++; }

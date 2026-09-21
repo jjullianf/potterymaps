@@ -33,6 +33,31 @@ async function optimizedImage(src, alt, { widths = [640], formats = ["webp", "jp
 // async Shortcodes innerhalb von Nunjucks-Macros keinen Output liefern).
 const studioImage = require("./_11ty/studioImage.js");
 
+// Rendert ein einzelnes zusaetzliches Galerie-Bild (siehe studio.njk) - nutzt
+// dieselbe eleventy-img-Pipeline wie das Hauptbild, aber pro Thumbnail statt
+// vorberechnet, da studio.njk kein Macro ist und async Shortcodes hier direkt
+// funktionieren.
+async function studioGalleryThumb(url, alt) {
+  try {
+    const metadata = await Image(String(url).trim(), {
+      widths: [300],
+      formats: ["webp", "jpeg"],
+      outputDir: "./_site/images/optimized/",
+      urlPath: "/images/optimized/",
+    });
+    return generateHTML(metadata, {
+      alt: alt || "",
+      sizes: "150px",
+      loading: "lazy",
+      decoding: "async",
+      class: "studio-gallery-thumb",
+    });
+  } catch (err) {
+    console.warn(`[studioGalleryThumb] Bild "${url}" konnte nicht verarbeitet werden, wird uebersprungen: ${err.message}`);
+    return "";
+  }
+}
+
 module.exports = function (eleventyConfig) {
   // Als Global-Data registriert (Factory-Funktion, die die eigentliche Funktion
   // zurueckgibt) statt als Datei unter _data/ - dort wuerde Eleventy die Funktion
@@ -43,7 +68,7 @@ module.exports = function (eleventyConfig) {
 
   eleventyConfig.addNunjucksAsyncShortcode("optimizedImage", optimizedImage);
   eleventyConfig.addNunjucksAsyncShortcode("studioImage", studioImage);
-  eleventyConfig.addNunjucksAsyncShortcode("studioImage", studioImage);
+  eleventyConfig.addNunjucksAsyncShortcode("studioGalleryThumb", studioGalleryThumb);
 
   // CSS im Build minifizieren statt das unveraenderte Quell-CSS per Passthrough
   // 1:1 auszuliefern.

@@ -84,9 +84,15 @@
 <article class="studio-detail">
   <p class="breadcrumb"><a href="/ch/">Startseite</a> &raquo; <a href="/ch/alle-staedte/">Alle Städte</a> &raquo; <a href="/ch/staedte/{{ s.targetCitySlug }}/">{{ s.targetCityName }}</a> &raquo; {{ s.name }}</p>
 
-  <h1 class="studio-title">{{ s.name }}</h1>
+  <h1 class="studio-title">{{ s.name }}{% if s.featured %} <span class="featured-badge">Empfohlen</span>{% endif %}</h1>
 
   {% studioImage s, { widths: [500, 852], sizes: "(max-width: 900px) 100vw, 852px", loading: "eager", fetchpriority: "high", wrapClass: "studio-hero-img" } %}
+
+  {% if s.galleryImages.length %}
+  <div class="studio-gallery">
+    {% for img in s.galleryImages %}{% studioGalleryThumb img, s.name %}{% endfor %}
+  </div>
+  {% endif %}
 
   <section class="studio-quickfacts">
     {% if s.priceAtAGlance %}

@@ -189,6 +189,7 @@ h1, h2 { font-family: var(--font-display); font-weight: 600; color: var(--color-
   gap: 1rem;
 }
 .studio-card {
+  position: relative;
   background: var(--color-card);
   border: 1px solid var(--color-border);
   border-radius: 10px;
@@ -197,6 +198,43 @@ h1, h2 { font-family: var(--font-display); font-weight: 600; color: var(--color-
 }
 .studio-card:hover { border-color: var(--color-accent); box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); }
 .studio-card-link { display: block; padding: 1rem; text-decoration: none; color: var(--color-text); }
+
+/* "Featured"-Badge: Grundlage fuer spaetere kostenpflichtige Featured-Listings
+   (siehe s.featured in studios.json) - blauer Akzent, passend zum Brand. */
+.featured-badge {
+  display: inline-block;
+  background: var(--color-accent);
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  vertical-align: middle;
+}
+.studio-title .featured-badge { font-size: 0.9rem; margin-left: 0.4rem; }
+.featured-badge-card {
+  position: absolute;
+  top: 0.7rem;
+  left: 0.7rem;
+  z-index: 1;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+}
+
+.studio-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: -0.5rem 0 1.5rem;
+}
+.studio-gallery-thumb {
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+}
 
 /* Bildchen oben in der Karte (echtes Foto oder Platzhalter) - per Negativ-Margin
    bis an den Kartenrand gezogen, damit es trotz Padding der Karte buendig sitzt. */

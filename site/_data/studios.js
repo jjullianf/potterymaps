@@ -4,6 +4,7 @@ const citySlug = require("./citySlug.js");
 const neighborMap = require("./neighborMap.js");
 const targetCities = require("./targetCities.js");
 const studioImage = require("../_11ty/studioImage.js");
+const { getImageList } = require("../_11ty/studioImages.js");
 
 const STUDIOS_JSON_PATH = path.join(
   __dirname,
@@ -244,11 +245,20 @@ module.exports = async function () {
 
     const topTags = computeTopTags(tags);
 
+    // Bilderliste (siehe _11ty/studioImages.js) - erstes Element ist das
+    // Hauptbild und ersetzt/normalisiert das alte einzelne "image"-Feld ueberall
+    // unten (Karten, Sortierung nach "hat Bild", og:image etc.), auch fuer
+    // Studios, die noch das alte Format haben.
+    const imageList = getImageList(s);
+    const mainImage = imageList[0] || "";
+    const galleryImages = imageList.slice(1);
+    const studioForImage = Object.assign({}, s, { image: mainImage });
+
     // Vorberechnet statt als async Shortcode direkt im studio-card.njk-Macro
     // aufgerufen - async Shortcodes liefern innerhalb eines Nunjucks-Macros
     // keinen Output (bekannte Einschraenkung), daher wird das fertige
     // <picture>/Platzhalter-HTML hier einmalig erzeugt und mitgegeben.
-    const cardThumbHtml = await studioImage(s, {
+    const cardThumbHtml = await studioImage(studioForImage, {
       widths: [400],
       sizes: "400px",
       loading: "lazy",
@@ -272,6 +282,9 @@ module.exports = async function () {
       nearestHubName,
       nearestHubSlug,
       cardThumbHtml,
+      image: mainImage,
+      galleryImages,
+      featured: s.featured === true || s.featured === "true",
     });
   }));
 };
