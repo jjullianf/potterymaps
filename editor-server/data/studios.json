@@ -1568,8 +1568,8 @@
     },
     {
       "slug": "ceramics-atelier-by-mojca-vidmar-zuerich",
-      "name": "Ceramics Atelier by Mojca Vidmar",
-      "address": "Agnesstrasse 12, 8004 Zürich",
+      "name": "STUDIO ROKA",
+      "address": "Seebahnstrasse 109, 8003 Zürich",
       "city": "Zürich",
       "phone": "+41 77 267 38 37",
       "website": "http://www.studio-roka.com/",
@@ -1582,7 +1582,7 @@
       "price_note": "Beim Keramikbemalen ist ein vorgebranntes Keramikstück im Preis inbegriffen; weitere Stücke können zusätzlich bemalt werden. Der konkrete Preis für die Keramikbemal-Session ist auf der zugänglichen Website nicht verlässlich ersichtlich",
       "pickup_time": "ca. 2-3 Wochen",
       "special_events": "Private Events für Gruppen bis 25 Personen werden angeboten, darunter Teamevents, Geburtstage und Junggesell:innenabschiede. Auf Wunsch können Apéro und Getränke organisiert werden",
-      "description": "TUDIO ROKA ist ein Keramikstudio an der Seebahnstrasse in Zürich mit Angeboten rund um Töpfern, Keramikbemalen und offene Atelierarbeit. Beim Keramikbemalen werden vorgebrannte Keramikstücke ausgewählt und anschliessend selbst gestaltet. Das Studio bietet ausserdem Kurse an der Töpferscheibe und im Handaufbau sowie regelmässige thematische Workshops. Kinder können an Keramikbemal-Sessions teilnehmen; für Kinder unter 12 Jahren ist die Teilnahme in Begleitung einer erwachsenen Person kostenlos, wobei nur die Materialkosten anfallen",
+      "description": "STUDIO ROKA ist ein Keramikstudio an der Seebahnstrasse in Zürich mit Angeboten rund um Töpfern, Keramikbemalen und offene Atelierarbeit. Beim Keramikbemalen werden vorgebrannte Keramikstücke ausgewählt und anschliessend selbst gestaltet. Das Studio bietet ausserdem Kurse an der Töpferscheibe und im Handaufbau sowie regelmässige thematische Workshops. Im angeschlossenen Keramikshop werden neben eigenen Werken auch Werkzeuge zum Töpfern und Bemalen verkauft. Kinder können an Keramikbemal-Sessions teilnehmen; für Kinder unter 12 Jahren ist die Teilnahme in Begleitung einer erwachsenen Person kostenlos, wobei nur die Materialkosten anfallen.",
       "image": "",
       "quelle_hinweis": "Aus Nutzer-Excel ergaenzt, Angaben (Preise/Tags/Beschreibung) noch nicht redaktionell geprueft.",
       "hat_instagram": "",
@@ -1593,7 +1593,10 @@
       "currency": "CHF",
       "postcode": "8004",
       "region": "ZH",
-      "email": ""
+      "email": "hello@studio-roka.com",
+      "images": "[]",
+      "contacted": true,
+      "featured": false
     },
     {
       "slug": "studio-mea-winterthur",
