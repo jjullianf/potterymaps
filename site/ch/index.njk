@@ -38,8 +38,12 @@
     },
     homeMapStudios: (data) => (data.studios || []).filter((s) => s.lat && s.lng),
     exampleStudios: (data) => {
+      // Kein priceRangeText mehr vorausgesetzt: das schloss Studios mit echten
+      // eigenen Fotos, aber (noch) fehlenden Preisangaben, komplett aus der
+      // Auswahl aus - noch bevor die Bild-Priorisierung ueberhaupt zum Tragen
+      // kam (siehe compareStudiosForListing).
       return (data.studios || [])
-        .filter((s) => s.priceRangeText && s.topTags.length)
+        .filter((s) => s.topTags.length)
         .sort(data.compareStudiosForListing)
         .slice(0, 3);
     },
