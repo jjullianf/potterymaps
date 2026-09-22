@@ -1827,6 +1827,32 @@
       "postcode": "8500",
       "region": "TG",
       "email": ""
+    },
+    {
+      "slug": "toepferei-rundwerk-winterthur",
+      "name": "Töpferei Rundwerk",
+      "address": "Ida Sträuli Strasse 73c",
+      "city": "Winterthur",
+      "phone": "0793998943",
+      "website": "https://www.rundwerk.com/",
+      "email": "rundwerk@ik.me",
+      "opening_hours": "Di/Mi/Fr 13:30-18, Sa 13-16",
+      "tags": "birthday-parties, hen-party, corporate-events, date-night, reservation-only, pottery-wheel, other-crafts",
+      "price_from": "15",
+      "price_mug": "36",
+      "price_plate": "44",
+      "studio_fee": "10",
+      "price_note": "Rohlinge kosten je nach Grösse und Art CHF 15–88 (Tasse ab CHF 36, Teller ab CHF 44). Die Studio-Gebühr von CHF 10 pro Person deckt Farben, Werkzeuge, Schablonen, Drehscheiben, Beratung sowie Glasieren und Brennen ab. Für Gruppenbuchungen gilt ein Mindestbetrag von CHF 350, bei Events wird eine Anzahlung von CHF 200 fällig.",
+      "pickup_time": "ca. 1-2 Wochen",
+      "special_events": "Das Studio bietet Keramikmalen und Töpferkurse für Gruppen und Einzelpersonen an, z. B. für Geburtstage, Junggesellenabschiede (Polterabende) oder Firmen-/Teamevents. Zusätzlich gibt es Drehkurse auf der Töpferscheibe sowie einen Siebdruck-Workshop. Für die Drehkurse werden regelmässig Samstags-Termine angeboten (10:15–12:00 Uhr, min. 4 bis max. 6 Teilnehmer).",
+      "description": "Keramik malen und Töpferkurse unter einem Dach, in einem hellen Studio am Rande des Eulachparks in Winterthur. Das Atelier bietet Platz für bis zu 12 Personen und eignet sich sowohl für Einzelbesuche als auch für Gruppen. Zur Auswahl stehen über 100 verschiedene Keramikrohlinge, dazu gibt's eine Einführung in verschiedene Gestaltungstechniken. Gute ÖV-Anbindung und kostenlose Parkplätze in der Tiefgarage machen die Anreise einfach.",
+      "images": "[\"../editor-server/fotos/toepferei-rundwerk-winterthur/1790091285331-ChatGPT-Image-Sep-22-2026-05_34_34-PM.png\"]",
+      "image": "../editor-server/fotos/toepferei-rundwerk-winterthur/1790091285331-ChatGPT-Image-Sep-22-2026-05_34_34-PM.png",
+      "quelle_hinweis": "Manuell im Editor gepflegt.",
+      "hat_instagram": "ja, https://www.instagram.com/malwerkrundwerk/",
+      "custom_faq": "[]",
+      "contacted": true,
+      "featured": false
     }
   ],
   "reviewed": {
@@ -1891,6 +1917,7 @@
     "nebu-zuerich": true,
     "creaba-kirchberg": true,
     "atelier-zaya-frauenfeld": true,
-    "ceramic-malbar-zuerich": true
+    "ceramic-malbar-zuerich": true,
+    "toepferei-rundwerk-winterthur": true
   }
 }
