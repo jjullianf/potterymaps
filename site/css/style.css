@@ -296,6 +296,11 @@ h1, h2 { font-family: var(--font-display); font-weight: 600; color: var(--color-
 .studio-card-thumb {
   display: block;
   width: calc(100% + 2rem);
+  /* "height: auto" ist noetig, obwohl aspect-ratio gesetzt ist: eleventy-img
+     schreibt width/height als HTML-Attribute aufs <img> (CLS-Vermeidung beim
+     Laden). Ohne explizites "height: auto" gilt die Hoehe dadurch als bereits
+     definiert (aus dem Attribut) und aspect-ratio greift dann gar nicht mehr. */
+  height: auto;
   aspect-ratio: 4 / 3;
   object-fit: cover;
   margin: -1rem -1rem 0.75rem;
@@ -318,6 +323,11 @@ h1, h2 { font-family: var(--font-display); font-weight: 600; color: var(--color-
 .studio-card-thumb {
   display: block;
   width: calc(100% + 2rem);
+  /* "height: auto" ist noetig, obwohl aspect-ratio gesetzt ist: eleventy-img
+     schreibt width/height als HTML-Attribute aufs <img> (CLS-Vermeidung beim
+     Laden). Ohne explizites "height: auto" gilt die Hoehe dadurch als bereits
+     definiert (aus dem Attribut) und aspect-ratio greift dann gar nicht mehr. */
+  height: auto;
   aspect-ratio: 4 / 3;
   object-fit: cover;
   margin: -1rem -1rem 0.75rem;
