@@ -1867,7 +1867,9 @@
       "hat_instagram": "ja, https://www.instagram.com/malwerkrundwerk/",
       "custom_faq": "[]",
       "contacted": true,
-      "featured": false
+      "featured": false,
+      "lat": 47.5047733,
+      "lng": 8.7655095
     }
   ],
   "reviewed": {
