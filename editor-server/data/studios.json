@@ -37,7 +37,7 @@
       "phone": "+41 77 209 46 31",
       "website": "https://paintiteasy.ch/ceramic-painting-studio-basel/",
       "opening_hours": "Mi-Fr 14.00-21.00, Sa 10.00-20.00, So 10.00-18.00. Aktuelle Öffnungszeiten und buchbare Zeitfenster gemäss Online-Kalender.",
-      "tags": "birthday-parties, hen-party, corporate-events, walk-in, kids-friendly",
+      "tags": "kids-friendly, birthday-parties, hen-party, corporate-events, walk-in",
       "price_mug": "35",
       "price_plate": "42.5",
       "studio_fee": "Keine separate Studiogebühr · Keramikstück CHF 20–75 inkl. bis 2,5 Stunden Atelierzeit",
@@ -51,12 +51,15 @@
       "custom_faq": "[]",
       "lat": 47.5569777,
       "lng": 7.5755294,
-      "price_from": 20,
+      "price_from": "20",
       "country": "CH",
       "currency": "CHF",
       "postcode": "4055",
       "region": "BS",
-      "email": ""
+      "email": "",
+      "images": "[]",
+      "contacted": true,
+      "featured": false
     },
     {
       "slug": "ceramix-toepferstudio-und-pottery-painting-bern",
@@ -1145,12 +1148,15 @@
       "custom_faq": "[]",
       "lat": 47.4862311,
       "lng": 7.7346494,
-      "price_from": 20,
+      "price_from": "20",
       "country": "CH",
       "currency": "CHF",
       "postcode": "4410",
       "region": "BL",
-      "email": ""
+      "email": "",
+      "images": "[]",
+      "contacted": true,
+      "featured": false
     },
     {
       "slug": "craft-room-red-fox-basel",
@@ -1174,12 +1180,15 @@
       "custom_faq": "[]",
       "lat": 47.5473688,
       "lng": 7.5631238,
-      "price_from": 20,
+      "price_from": "20",
       "country": "CH",
       "currency": "CHF",
       "postcode": "4054",
       "region": "BS",
-      "email": ""
+      "email": "",
+      "images": "[]",
+      "contacted": true,
+      "featured": false
     },
     {
       "slug": "ceramigas-keramik-selbst-bemalen-basel",
@@ -1189,7 +1198,7 @@
       "phone": "",
       "website": "https://ceramigas.ch",
       "opening_hours": "Aktuell ist das Offene Atelier vor allem Mittwochnachmittag buchbar; weitere Termine werden laufend ergänzt",
-      "tags": "kids-friendly, birthday-parties, hen-party, corporate-events, other-crafts, themed-events, reservation-only",
+      "tags": "kids-friendly, birthday-parties, hen-party, corporate-events, reservation-only, other-crafts, themed-events",
       "price_mug": "20-42",
       "price_plate": "30-65",
       "studio_fee": "CHF 15 pro Person / 2h",
@@ -1203,12 +1212,15 @@
       "custom_faq": "[]",
       "lat": 47.5579459,
       "lng": 7.5855928,
-      "price_from": 15,
+      "price_from": "15",
       "country": "CH",
       "currency": "CHF",
       "postcode": "4051",
       "region": "BS",
-      "email": ""
+      "email": "",
+      "images": "[]",
+      "contacted": true,
+      "featured": false
     },
     {
       "slug": "herzart-winterthur-winterthur",
@@ -1678,7 +1690,10 @@
       "currency": "CHF",
       "postcode": "4055",
       "region": "BS",
-      "email": ""
+      "email": "",
+      "images": "[]",
+      "contacted": true,
+      "featured": false
     },
     {
       "slug": "ceramic-kanvas-geneva",
@@ -1844,7 +1859,7 @@
       "studio_fee": "10",
       "price_note": "Rohlinge kosten je nach Grösse und Art CHF 15–88 (Tasse ab CHF 36, Teller ab CHF 44). Die Studio-Gebühr von CHF 10 pro Person deckt Farben, Werkzeuge, Schablonen, Drehscheiben, Beratung sowie Glasieren und Brennen ab. Für Gruppenbuchungen gilt ein Mindestbetrag von CHF 350, bei Events wird eine Anzahlung von CHF 200 fällig.",
       "pickup_time": "ca. 1-2 Wochen",
-      "special_events": "Das Studio bietet Keramikmalen und Töpferkurse für Gruppen und Einzelpersonen an, z. B. für Geburtstage, Junggesellenabschiede (Polterabende) oder Firmen-/Teamevents. Zusätzlich gibt es Drehkurse auf der Töpferscheibe sowie einen Siebdruck-Workshop. Für die Drehkurse werden regelmässig Samstags-Termine angeboten (10:15–12:00 Uhr, min. 4 bis max. 6 Teilnehmer).",
+      "special_events": "Das Studio bietet Keramikmalen und Töpferkurse für Gruppen und Einzelpersonen an, z. B. für Geburtstage, Junggesellenabschiede (Polterabende) oder Firmen-/Teamevents. Der Siebdruck-Workshop findet an ausgewählten Samstagen statt. Die Drehkurse auf der Töpferscheibe finden an Mittwochabenden statt, mit max. 4 Teilnehmenden.",
       "description": "Keramik malen und Töpferkurse unter einem Dach, in einem hellen Studio am Rande des Eulachparks in Winterthur. Das Atelier bietet Platz für bis zu 12 Personen und eignet sich sowohl für Einzelbesuche als auch für Gruppen. Zur Auswahl stehen über 100 verschiedene Keramikrohlinge, dazu gibt's eine Einführung in verschiedene Gestaltungstechniken. Gute ÖV-Anbindung und kostenlose Parkplätze in der Tiefgarage machen die Anreise einfach.",
       "images": "[\"../editor-server/fotos/toepferei-rundwerk-winterthur/1790091285331-ChatGPT-Image-Sep-22-2026-05_34_34-PM.png\"]",
       "image": "../editor-server/fotos/toepferei-rundwerk-winterthur/1790091285331-ChatGPT-Image-Sep-22-2026-05_34_34-PM.png",
@@ -1852,9 +1867,7 @@
       "hat_instagram": "ja, https://www.instagram.com/malwerkrundwerk/",
       "custom_faq": "[]",
       "contacted": true,
-      "featured": false,
-      "lat": 47.5047733,
-      "lng": 8.7655095
+      "featured": false
     }
   ],
   "reviewed": {
