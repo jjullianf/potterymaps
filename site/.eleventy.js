@@ -145,6 +145,9 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("android-chrome-192x192.png");
   eleventyConfig.addPassthroughCopy("android-chrome-512x512.png");
   eleventyConfig.addPassthroughCopy("site.webmanifest");
+  // Badge-Grafik fuer Partner-Websites, die "gelistet auf potterymaps"
+  // verlinken - muss unter der festen URL /badge.png erreichbar sein.
+  eleventyConfig.addPassthroughCopy("badge.png");
   // Fuer GitHub Pages: haelt die Custom-Domain-Zuordnung ueber jeden Deploy hinweg
   // aufrecht (beim Actions-basierten Deploy wird sonst nichts automatisch gesetzt).
   eleventyConfig.addPassthroughCopy("CNAME");
