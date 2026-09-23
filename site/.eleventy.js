@@ -90,6 +90,17 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addGlobalData("pluralize", () => pluralize);
   eleventyConfig.addGlobalData("compareStudiosForListing", () => compareStudiosForListing);
 
+  // Alle Artikel unter ch/blog/ (Tag "blog" kommt aus ch/blog/blog.11tydata.js),
+  // neueste zuerst; bei gleichem Datum entscheidet das Feld blogOrder (kleiner =
+  // weiter oben), damit die Reihenfolge nicht vom Dateinamen abhaengt.
+  eleventyConfig.addCollection("blogPosts", function (api) {
+    return api.getFilteredByTag("blog").sort((a, b) => {
+      const dateDiff = String(b.data.datePublished).localeCompare(String(a.data.datePublished));
+      if (dateDiff !== 0) return dateDiff;
+      return (a.data.blogOrder || 0) - (b.data.blogOrder || 0);
+    });
+  });
+
   eleventyConfig.addNunjucksAsyncShortcode("optimizedImage", optimizedImage);
   eleventyConfig.addNunjucksAsyncShortcode("studioImage", studioImage);
   eleventyConfig.addNunjucksAsyncShortcode("studioGallery", studioGallery);

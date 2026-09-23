@@ -1,129 +1,62 @@
 ---js
 {
-  layout: "base.njk",
   title: "Weihnachts-Teamevent Ideen 2026: Keramik bemalen als Firmenevent | potterymaps",
   description: "Weihnachts-Teamevent-Idee für Zürich, Basel, Bern, Luzern, Winterthur und St. Gallen: Keramik bemalen mit dem Team – entspannt, kreativ, ohne Leistungsdruck. Preise, Ablauf und Studios im Überblick.",
-  permalink: "/ch/blog/weihnachts-teamevent-ideen/",
-  eleventyComputed: {
-    jsonLd: (data) => ({
-      "@context": "https://schema.org",
-      "@type": "Article",
-      headline: "Weihnachts-Teamevent Ideen: Keramik bemalen als Firmenevent in der Schweiz",
-      description: "Warum Keramik bemalen eine der besten Weihnachts-Teamevent-Ideen ist, plus Studios in Zürich, Basel, Bern, Luzern, Winterthur und St. Gallen.",
-      author: { "@type": "Organization", name: "potterymaps" },
-      publisher: { "@type": "Organization", name: "potterymaps", logo: { "@type": "ImageObject", url: `${data.site.url}/images/logo.png` } },
-      datePublished: "2026-09-17",
-      dateModified: "2026-09-17",
-      mainEntityOfPage: `${data.site.url}/ch/blog/weihnachts-teamevent-ideen/`,
-      image: `${data.site.url}/images/hero-keramik.jpg`,
-    }),
-    jsonLdFaq: (data) => ({
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      mainEntity: [
-        {
-          "@type": "Question",
-          name: "Was kostet ein Keramik-Teamevent pro Person?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Je nach Studio und gewähltem Keramikstück meist zwischen CHF 15 und CHF 45 pro Person. Der Preis umfasst in der Regel den Rohling, Farben, Glasur und das Brennen. Grössere Stücke oder Studiogebühren für längere Zeitfenster können den Preis erhöhen.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "Ab wie vielen Personen lohnt sich ein Keramikmal-Event?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Viele Studios nehmen bereits ab 6-8 Personen Gruppenanfragen an, oft mit eigenem Zeitfenster oder reserviertem Bereich. Für grössere Teams ab 15-20 Personen lohnt sich eine frühzeitige Anfrage, da nicht jedes Studio genug Platz oder Rohlinge auf Vorrat hat.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "Muss man vorher Erfahrung im Töpfern oder Bemalen haben?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Nein. Beim Keramik bemalen wird ein bereits fertig geformtes Stück nur noch mit Farbe gestaltet, das funktioniert ohne jede Vorerfahrung. Das macht es zu einem der wenigen Teamevents, bei dem wirklich alle im Team auf demselben Niveau starten.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "Kann man das Event mit Essen oder Drinks kombinieren?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Ja, viele der gelisteten Studios sind gleichzeitig Cafés oder erlauben es, eigene Getränke und Snacks mitzubringen bzw. bieten einen Apéro dazu an. Das lockert die Stimmung zusätzlich, ganz ohne dass Alkohol dafür nötig wäre.",
-          },
-        },
-      ],
-    }),
-    jsonLdBreadcrumb: (data) => ({
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Startseite", item: `${data.site.url}/ch/` },
-        { "@type": "ListItem", position: 2, name: "Blog", item: `${data.site.url}/ch/blog/weihnachts-teamevent-ideen/` },
-        { "@type": "ListItem", position: 3, name: "Weihnachts-Teamevent Ideen", item: `${data.site.url}/ch/blog/weihnachts-teamevent-ideen/` },
-      ],
-    }),
-  },
+  headline: "Weihnachts-Teamevent Ideen: Warum Keramik bemalen das perfekte Firmenevent ist",
+  teaser: "Warum Keramik bemalen eine der besten Weihnachts-Teamevent-Ideen ist – entspannt, ohne Leistungsdruck, mit Apéro kombinierbar. Plus Studios in Zürich, Basel, Bern, Luzern, Winterthur und St. Gallen.",
+  datePublished: "2026-09-17",
+  blogOrder: 0,
+  ctaHeading: "Grösseres Weihnachts-Teamevent planen?",
+  faqs: [
+    {
+      q: "Was kostet ein Keramik-Teamevent pro Person?",
+      a: "Je nach Studio und gewähltem Keramikstück meist zwischen CHF 15 und CHF 45 pro Person. Der Preis umfasst in der Regel den Rohling, Farben, Glasur und das Brennen. Grössere Stücke oder Studiogebühren für längere Zeitfenster können den Preis erhöhen.",
+    },
+    {
+      q: "Ab wie vielen Personen lohnt sich ein Keramikmal-Event?",
+      a: "Viele Studios nehmen bereits ab 6-8 Personen Gruppenanfragen an, oft mit eigenem Zeitfenster oder reserviertem Bereich. Für grössere Teams ab 15-20 Personen lohnt sich eine frühzeitige Anfrage, da nicht jedes Studio genug Platz oder Rohlinge auf Vorrat hat.",
+    },
+    {
+      q: "Muss man vorher Erfahrung im Töpfern oder Bemalen haben?",
+      a: "Nein. Beim Keramik bemalen wird ein bereits fertig geformtes Stück nur noch mit Farbe gestaltet, das funktioniert ohne jede Vorerfahrung. Das macht es zu einem der wenigen Teamevents, bei dem wirklich alle im Team auf demselben Niveau starten.",
+    },
+    {
+      q: "Kann man das Event mit Essen oder Drinks kombinieren?",
+      a: "Ja, viele der gelisteten Studios sind gleichzeitig Cafés oder erlauben es, eigene Getränke und Snacks mitzubringen bzw. bieten einen Apéro dazu an. Das lockert die Stimmung zusätzlich, ganz ohne dass Alkohol dafür nötig wäre.",
+    },
+  ],
 }
 ---
-<article class="static-page blog-article">
-  <p class="breadcrumb"><a href="/ch/">Startseite</a> &raquo; <a href="/ch/blog/weihnachts-teamevent-ideen/">Blog</a> &raquo; Weihnachts-Teamevent Ideen</p>
+<p class="topic-intro"><strong>Kurz gesagt:</strong> Keramik bemalen ist eine der besten Weihnachts-Teamevent-Ideen für Teams jeder Grösse – es ist entspannt statt leistungsorientiert, fördert nebenbei echte Gespräche, funktioniert für jedes Fitnesslevel und jedes Alter, und lässt sich problemlos mit Apéro oder Drinks kombinieren. Am Ende nimmt jede:r im Team sein eigenes, selbst bemaltes Stück mit nach Hause – ein Weihnachtsgeschenk, das man vorher gemeinsam erlebt hat.</p>
 
-  <h1>Weihnachts-Teamevent Ideen: Warum Keramik bemalen das perfekte Firmenevent ist</h1>
+<h2>Warum Keramik bemalen das perfekte Weihnachts-Teamevent ist</h2>
+<ul>
+  <li><strong>Team-Bonding durch gemeinsames kreatives Tun:</strong> Statt nebeneinander zuzuschauen, gestaltet jede:r aktiv ein eigenes Stück – das schafft ein gemeinsames Erlebnis ohne Wettbewerbsdruck.</li>
+  <li><strong>Entspannte Atmosphäre statt Leistungsdruck:</strong> Es gibt kein Richtig oder Falsch beim Bemalen. Anders als bei Teambuilding-Challenges mit Gewinner:innen und Verlierer:innen bleibt die Stimmung durchgehend locker.</li>
+  <li><strong>Gespräche entstehen nebenbei:</strong> Während die Hände beschäftigt sind, ergeben sich Gespräche viel natürlicher als am klassischen Weihnachtsessen, wo man sich oft nur gegenübersitzt.</li>
+  <li><strong>Bonus: ein Geschenk zum Mitnehmen:</strong> Jede:r nimmt das eigene, selbst bemalte Stück mit nach Hause – praktischerweise gleich ein persönliches Weihnachtsgeschenk für sich selbst oder die Liebsten.</li>
+  <li><strong>Kombinierbar mit Apéro und Drinks:</strong> Viele Studios erlauben eigene Getränke oder bieten selbst einen Apéro an – für eine lockere Stimmung, ganz ohne dass Alkohol dafür nötig wäre.</li>
+</ul>
 
-  <p class="topic-intro"><strong>Kurz gesagt:</strong> Keramik bemalen ist eine der besten Weihnachts-Teamevent-Ideen für Teams jeder Grösse – es ist entspannt statt leistungsorientiert, fördert nebenbei echte Gespräche, funktioniert für jedes Fitnesslevel und jedes Alter, und lässt sich problemlos mit Apéro oder Drinks kombinieren. Am Ende nimmt jede:r im Team sein eigenes, selbst bemaltes Stück mit nach Hause – ein Weihnachtsgeschenk, das man vorher gemeinsam erlebt hat.</p>
+<h2>Keramik bemalen als Teamevent in deiner Stadt</h2>
+<p>potterymaps listet Keramik-Bemal-Studios in der ganzen Schweiz. Hier eine Auswahl grösserer Städte:</p>
 
-  <h2>Warum Keramik bemalen das perfekte Weihnachts-Teamevent ist</h2>
-  <ul>
-    <li><strong>Team-Bonding durch gemeinsames kreatives Tun:</strong> Statt nebeneinander zuzuschauen, gestaltet jede:r aktiv ein eigenes Stück – das schafft ein gemeinsames Erlebnis ohne Wettbewerbsdruck.</li>
-    <li><strong>Entspannte Atmosphäre statt Leistungsdruck:</strong> Es gibt kein Richtig oder Falsch beim Bemalen. Anders als bei Teambuilding-Challenges mit Gewinner:innen und Verlierer:innen bleibt die Stimmung durchgehend locker.</li>
-    <li><strong>Gespräche entstehen nebenbei:</strong> Während die Hände beschäftigt sind, ergeben sich Gespräche viel natürlicher als am klassischen Weihnachtsessen, wo man sich oft nur gegenübersitzt.</li>
-    <li><strong>Bonus: ein Geschenk zum Mitnehmen:</strong> Jede:r nimmt das eigene, selbst bemalte Stück mit nach Hause – praktischerweise gleich ein persönliches Weihnachtsgeschenk für sich selbst oder die Liebsten.</li>
-    <li><strong>Kombinierbar mit Apéro und Drinks:</strong> Viele Studios erlauben eigene Getränke oder bieten selbst einen Apéro an – für eine lockere Stimmung, ganz ohne dass Alkohol dafür nötig wäre.</li>
-  </ul>
+<h3><a href="/ch/staedte/{{ "Zürich" | slugify }}/">Zürich</a></h3>
+<p>Als grösste Stadt der Schweiz hat Zürich die grösste Auswahl an Studios für Keramik bemalen – von Café-Ateliers bis zu reinen Malstudios mit grosser Rohling-Auswahl, viele davon zentral erreichbar für Teams aus der ganzen Stadt.</p>
 
-  <h2>Keramik bemalen als Teamevent in deiner Stadt</h2>
-  <p>potterymaps listet Keramik-Bemal-Studios in der ganzen Schweiz. Hier eine Auswahl grösserer Städte:</p>
+<h3><a href="/ch/staedte/{{ "Basel" | slugify }}/">Basel</a></h3>
+<p>Basel mit seiner lebendigen Kunst- und Kulturszene bietet mehrere Studios zum Keramik bemalen, die sich auch für Firmengruppen eignen.</p>
 
-  <h3><a href="/ch/staedte/{{ "Zürich" | slugify }}/">Zürich</a></h3>
-  <p>Als grösste Stadt der Schweiz hat Zürich die grösste Auswahl an Studios für Keramik bemalen – von Café-Ateliers bis zu reinen Malstudios mit grosser Rohling-Auswahl, viele davon zentral erreichbar für Teams aus der ganzen Stadt.</p>
+<h3><a href="/ch/staedte/{{ "Bern" | slugify }}/">Bern</a></h3>
+<p>In der Bundesstadt gibt es gemütliche Ateliers, in denen sich Teams in Ruhe zurückziehen und gemeinsam kreativ werden können.</p>
 
-  <h3><a href="/ch/staedte/{{ "Basel" | slugify }}/">Basel</a></h3>
-  <p>Basel mit seiner lebendigen Kunst- und Kulturszene bietet mehrere Studios zum Keramik bemalen, die sich auch für Firmengruppen eignen.</p>
+<h3><a href="/ch/staedte/{{ "Luzern" | slugify }}/">Luzern</a></h3>
+<p>Luzern verbindet die malerische Altstadt mit mehreren Keramikmal-Studios – ein schönes Ziel auch für ein Teamevent mit Ausflugscharakter.</p>
 
-  <h3><a href="/ch/staedte/{{ "Bern" | slugify }}/">Bern</a></h3>
-  <p>In der Bundesstadt gibt es gemütliche Ateliers, in denen sich Teams in Ruhe zurückziehen und gemeinsam kreativ werden können.</p>
+<h3><a href="/ch/staedte/{{ "Winterthur" | slugify }}/">Winterthur</a></h3>
+<p>Die Kunststadt im Zürcher Umland bietet eigene Studios zum Keramik bemalen, ideal für Teams, die nicht extra in die Grossstadt fahren möchten.</p>
 
-  <h3><a href="/ch/staedte/{{ "Luzern" | slugify }}/">Luzern</a></h3>
-  <p>Luzern verbindet die malerische Altstadt mit mehreren Keramikmal-Studios – ein schönes Ziel auch für ein Teamevent mit Ausflugscharakter.</p>
+<h3><a href="/ch/staedte/{{ "St. Gallen" | slugify }}/">St. Gallen</a></h3>
+<p>Auch in St. Gallen lässt sich Keramik bemalen als kreative Teamevent-Auszeit vom Arbeitsalltag geniessen.</p>
 
-  <h3><a href="/ch/staedte/{{ "Winterthur" | slugify }}/">Winterthur</a></h3>
-  <p>Die Kunststadt im Zürcher Umland bietet eigene Studios zum Keramik bemalen, ideal für Teams, die nicht extra in die Grossstadt fahren möchten.</p>
-
-  <h3><a href="/ch/staedte/{{ "St. Gallen" | slugify }}/">St. Gallen</a></h3>
-  <p>Auch in St. Gallen lässt sich Keramik bemalen als kreative Teamevent-Auszeit vom Arbeitsalltag geniessen.</p>
-
-  <p><a href="/ch/alle-staedte/">Alle Städte und Studios im Verzeichnis ansehen →</a></p>
-
-  <h2>Häufige Fragen zum Keramik-Teamevent</h2>
-
-  <h3>Was kostet ein Keramik-Teamevent pro Person?</h3>
-  <p>Je nach Studio und gewähltem Keramikstück meist zwischen CHF 15 und CHF 45 pro Person. Der Preis umfasst in der Regel den Rohling, Farben, Glasur und das Brennen. Grössere Stücke oder Studiogebühren für längere Zeitfenster können den Preis erhöhen.</p>
-
-  <h3>Ab wie vielen Personen lohnt sich ein Keramikmal-Event?</h3>
-  <p>Viele Studios nehmen bereits ab 6-8 Personen Gruppenanfragen an, oft mit eigenem Zeitfenster oder reserviertem Bereich. Für grössere Teams ab 15-20 Personen lohnt sich eine frühzeitige Anfrage, da nicht jedes Studio genug Platz oder Rohlinge auf Vorrat hat.</p>
-
-  <h3>Muss man vorher Erfahrung im Töpfern oder Bemalen haben?</h3>
-  <p>Nein. Beim Keramik bemalen wird ein bereits fertig geformtes Stück nur noch mit Farbe gestaltet, das funktioniert ohne jede Vorerfahrung. Das macht es zu einem der wenigen Teamevents, bei dem wirklich alle im Team auf demselben Niveau starten.</p>
-
-  <h3>Kann man das Event mit Essen oder Drinks kombinieren?</h3>
-  <p>Ja, viele der gelisteten Studios sind gleichzeitig Cafés oder erlauben es, eigene Getränke und Snacks mitzubringen bzw. bieten einen Apéro dazu an. Das lockert die Stimmung zusätzlich, ganz ohne dass Alkohol dafür nötig wäre.</p>
-
-  <section class="cta-events">
-    <h2>Grösseres Weihnachts-Teamevent planen?</h2>
-    <p>Beschreib uns kurz Teamgrösse, Wunschort und -termin – wir vermitteln dich kostenlos an ein passendes Studio.</p>
-    <p class="trust-hint"><i class="ti ti-clock"></i> Antwort innerhalb von 48 Stunden garantiert.</p>
-    <a class="button" href="/grosse-anfrage/">Jetzt Anfrage stellen</a>
-  </section>
-</article>
+<p><a href="/ch/alle-staedte/">Alle Städte und Studios im Verzeichnis ansehen →</a></p>

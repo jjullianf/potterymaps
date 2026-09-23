@@ -1,0 +1,25 @@
+---
+layout: base.njk
+---
+<article class="static-page blog-article">
+  <p class="breadcrumb"><a href="/ch/">Startseite</a> &raquo; <a href="/ch/blog/">Blog</a> &raquo; {{ headline }}</p>
+
+  <h1>{{ headline }}</h1>
+
+  {{ content | safe }}
+
+  {% if faqs and faqs.length %}
+  <h2>Häufige Fragen</h2>
+  {% for f in faqs %}
+  <h3>{{ f.q }}</h3>
+  <p>{{ f.a }}</p>
+  {% endfor %}
+  {% endif %}
+
+  <section class="cta-events">
+    <h2>{{ ctaHeading or "Event planen?" }}</h2>
+    <p>{{ ctaText or "Beschreib uns kurz Gruppengrösse, Wunschort und -termin – wir vermitteln dich kostenlos an ein passendes Studio." }}</p>
+    <p class="trust-hint"><i class="ti ti-clock"></i> Antwort innerhalb von 48 Stunden garantiert.</p>
+    <a class="button" href="/grosse-anfrage/">Jetzt Kontaktieren</a>
+  </section>
+</article>

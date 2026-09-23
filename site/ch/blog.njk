@@ -1,0 +1,35 @@
+---js
+{
+  layout: "base.njk",
+  title: "Blog: Tipps rund ums Keramik bemalen in der Schweiz | potterymaps",
+  description: "Ratgeber rund ums Keramik bemalen: Preise, Tipps für Anfänger, Kindergeburtstag, Junggesellenabschied und Teamevents – mit Studios in der ganzen Schweiz.",
+  permalink: "/ch/blog/",
+  eleventyComputed: {
+    jsonLdBreadcrumb: (data) => ({
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Startseite", item: `${data.site.url}/ch/` },
+        { "@type": "ListItem", position: 2, name: "Blog", item: `${data.site.url}/ch/blog/` },
+      ],
+    }),
+  },
+}
+---
+<article class="static-page blog-overview">
+  <p class="breadcrumb"><a href="/ch/">Startseite</a> &raquo; Blog</p>
+  <h1>Blog: Tipps rund ums Keramik bemalen</h1>
+  <p>Preise, Ablauf, Ideen für Gruppenevents und praktische Tipps – kurz und konkret, mit Studios aus dem potterymaps-Verzeichnis.</p>
+
+  <ul class="blog-cards">
+    {% for post in collections.blogPosts %}
+    <li class="blog-card">
+      <a class="blog-card-link" href="{{ post.url }}">
+        <h2 class="blog-card-title">{{ post.data.headline }}</h2>
+        <p class="blog-card-teaser">{{ post.data.teaser }}</p>
+        <span class="blog-card-more">Weiterlesen &rarr;</span>
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+</article>
