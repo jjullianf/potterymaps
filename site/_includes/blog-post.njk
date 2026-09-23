@@ -19,7 +19,7 @@ layout: base.njk
   <section class="cta-events">
     <h2>{{ ctaHeading or "Event planen?" }}</h2>
     <p>{{ ctaText or "Beschreib uns kurz Gruppengrösse, Wunschort und -termin – wir vermitteln dich kostenlos an ein passendes Studio." }}</p>
-    <p class="trust-hint"><i class="ti ti-clock"></i> Antwort innerhalb von 48 Stunden garantiert.</p>
-    <a class="button" href="/grosse-anfrage/">Jetzt Kontaktieren</a>
+    {% if not ctaHref %}<p class="trust-hint"><i class="ti ti-clock"></i> Antwort innerhalb von 48 Stunden garantiert.</p>{% endif %}
+    <a class="button" href="{{ ctaHref or '/grosse-anfrage/' }}">{{ ctaLabel or "Jetzt Kontaktieren" }}</a>
   </section>
 </article>

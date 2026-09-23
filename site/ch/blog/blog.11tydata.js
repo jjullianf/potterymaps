@@ -23,8 +23,11 @@ module.exports = {
       mainEntityOfPage: `${data.site.url}/ch/blog/${data.page.fileSlug}/`,
       image: data.ogImage || `${data.site.url}/images/hero-keramik.jpg`,
     }),
+    // Array.isArray statt nur "data.faqs &&": Artikel duerfen faqs auch per
+    // eleventyComputed erzeugen (z. B. aus den Studio-Daten) - beim Abhaengigkeits-
+    // Check von Eleventy ist data.faqs dann kurz ein Platzhalter-Objekt.
     jsonLdFaq: (data) =>
-      data.faqs && data.faqs.length
+      Array.isArray(data.faqs) && data.faqs.length
         ? {
             "@context": "https://schema.org",
             "@type": "FAQPage",

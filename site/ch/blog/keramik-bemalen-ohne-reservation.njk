@@ -1,0 +1,118 @@
+---js
+{
+  title: "Keramik bemalen ohne Reservation (Walk-in): Studios Schweiz & Zürich | potterymaps",
+  description: "Keramik bemalen ohne Reservation: Alle Walk-in-Studios in der Schweiz, wo du spontan Teller oder Tassen bemalen kannst, mit Fokus Zürich, Preisen und Tipps für den spontanen Besuch.",
+  headline: "Keramik bemalen ohne Reservation: Alle Walk-in-Studios in der Schweiz",
+  teaser: "Spontan Teller oder Tasse bemalen, ohne Termin: Diese Studios in der Schweiz und in Zürich sind Walk-in, was es kostet und was du für den spontanen Besuch wissen solltest.",
+  datePublished: "2026-09-23",
+  blogOrder: 0,
+  ctaHeading: "Mehr Studios entdecken",
+  ctaText: "Vergleiche alle Studios nach Stadt, Preis und Reservations-Regel und finde das passende für dich.",
+  ctaLabel: "Alle Studios ansehen",
+  ctaHref: "/ch/alle-staedte/",
+  eleventyComputed: {
+    // FAQ-Antworten aus den Studio-Daten, damit Namen/Zahlen (Schema.org und
+    // sichtbarer Text) nach Aenderungen im Editor automatisch stimmen.
+    faqs: (data) => {
+      const studios = Array.isArray(data.studios) ? data.studios : [];
+      const walkIn = studios
+        .filter((s) => Array.isArray(s.tagsArray) && s.tagsArray.includes("walk-in"))
+        .sort((a, b) => String(a.name).localeCompare(String(b.name), "de"));
+      const zh = walkIn.filter((s) => s.city === "Zürich");
+      const zhNames = zh.map((s) => s.name.split(/ [|–-] /)[0].trim()).join(", ");
+      const prices = walkIn.map((s) => Number(s.price_from)).filter((n) => n > 0);
+      const min = prices.length ? Math.min(...prices) : 15;
+      const max = prices.length ? Math.max(...prices) : 30;
+      const cities = Array.from(new Set(walkIn.map((s) => s.city)));
+      return [
+        {
+          q: "Kann ich Keramik bemalen ohne Reservation?",
+          a: `Ja. Im potterymaps-Verzeichnis sind ${walkIn.length} Studios als Walk-in gekennzeichnet, verteilt auf ${cities.length} Orte. Dort kannst du während der Öffnungszeiten spontan vorbeikommen. Einen freien Platz garantieren die meisten trotzdem nicht, bei mehreren Personen oder an gut besuchten Tagen ist eine Reservation empfohlen.`,
+        },
+        {
+          q: "Wo kann ich in Zürich Keramik bemalen ohne Reservation?",
+          a: zh.length
+            ? `In Zürich sind aktuell ${zh.length} Studios als Walk-in gelistet: ${zhNames}. Öffnungszeiten und Preise stehen auf der jeweiligen Studio-Seite. Bei einigen Studios ist eine Reservation empfohlen, aber nicht zwingend.`
+            : "In Zürich sind aktuell keine Walk-in-Studios gelistet.",
+        },
+        {
+          q: "Kann ich spontan einen Teller bemalen, ohne zu reservieren?",
+          a: `Ja, in den Walk-in-Studios suchst du vor Ort einen Teller (oder eine Tasse, Schale) aus dem Sortiment aus und bemalst ihn direkt. Der günstigste Einstiegspreis liegt bei den Walk-in-Studios zwischen CHF ${min} und CHF ${max}, ein Teller kostet je nach Grösse und Studio meist CHF 17 bis 65.`,
+        },
+        {
+          q: "Was bedeutet «Reservation empfohlen» bei Walk-in-Studios?",
+          a: "Spontane Besuche sind möglich, aber nicht garantiert. Ein Studio schreibt ausdrücklich, spontane Besuche seien «ohne Platzgarantie» möglich. Wer reserviert, sichert sich Platz und Zeitfenster, was vor allem an Wochenenden, in den Ferien und mit mehreren Personen sinnvoll ist.",
+        },
+        {
+          q: "Brauche ich für eine Gruppe eine Reservation?",
+          a: "Ja, bei Gruppen ab etwa 4 bis 6 Personen ist eine Reservation dringend zu empfehlen, auch bei Walk-in-Studios. Ein Walk-in-Studio empfiehlt die Online-Reservation ausdrücklich bei mehreren Personen und an gut besuchten Tagen. Für Gruppenevents mit Apéro oder exklusiver Buchung ist immer eine Anfrage nötig.",
+        },
+        {
+          q: "Wann komme ich am besten spontan vorbei?",
+          a: "Unter der Woche am Nachmittag ist meist am ruhigsten, am Wochenende ist mehr los. Prüfe vorher die Öffnungszeiten: Viele Walk-in-Studios sind nur an 3 bis 4 Tagen pro Woche geöffnet, oft Mittwoch, Freitag und Samstag. Plane 2 bis 2,5 Stunden Malzeit ein.",
+        },
+      ];
+    },
+  },
+}
+---
+{% set walkIn = [] %}
+{% set zhList = [] %}
+{% set otherList = [] %}
+{% set cityNames = [] %}
+{% for s in studios | sort(attribute="city") %}
+  {% if "walk-in" in s.tagsArray %}
+    {% set walkIn = (walkIn.push(s), walkIn) %}
+    {% if s.city == "Zürich" %}{% set zhList = (zhList.push(s), zhList) %}{% else %}{% set otherList = (otherList.push(s), otherList) %}{% endif %}
+    {% if not (s.city in cityNames) %}{% set cityNames = (cityNames.push(s.city), cityNames) %}{% endif %}
+  {% endif %}
+{% endfor %}
+
+<p class="topic-intro"><strong>Kurz gesagt:</strong> Keramik bemalen ohne Reservation ist in der Schweiz bei <strong>{{ walkIn.length }} Studios</strong> im Verzeichnis möglich (Walk-in), davon {{ zhList.length }} in Zürich. Du kommst während der Öffnungszeiten spontan vorbei, wählst vor Ort einen Teller oder eine Tasse und malst los, meist 2 bis 2,5 Stunden lang. Eine Platzgarantie gibt es meist nicht: Bei mehreren Personen und an Wochenenden lohnt sich trotzdem eine Reservation.</p>
+
+<p class="blog-note">Grundlage: die im potterymaps-Verzeichnis als «Walk-in» gekennzeichneten Studios. Die Liste wird automatisch aktualisiert. Öffnungszeiten und Regeln ändern sich, bitte kurz beim Studio prüfen.</p>
+
+<h2>Was bedeutet Walk-in beim Keramik bemalen?</h2>
+<p>Walk-in heisst: Du brauchst keinen fixen Termin. Du kommst in den Öffnungszeiten vorbei, das Studio setzt dich an einen freien Tisch, und du suchst deinen Rohling aus. Bei vielen Studios in der Schweiz ist dagegen eine Reservation Pflicht. Walk-in-Studios sind daher die richtige Wahl für spontane Nachmittage, Regenwetter oder wenn Freund:innen kurzfristig Zeit haben.</p>
+<ul>
+  <li><strong>Walk-in:</strong> Du kannst ohne Reservation vorbeikommen.</li>
+  <li><strong>Walk-in mit «Reservation empfohlen»:</strong> Spontan möglich, aber ohne Platzgarantie. Reservieren sichert Tisch und Zeitfenster.</li>
+</ul>
+
+<h2>Walk-in-Studios in Zürich: Keramik bemalen ohne Reservation</h2>
+{% if zhList.length %}
+<p>Diese {{ zhList.length }} Studios in Zürich sind als Walk-in gelistet:</p>
+<ul class="blog-studio-list">
+  {% for s in zhList %}
+  <li><a href="/ch/studio/{{ s.slug }}/">{{ s.name }}</a>{% if s.price_from %}, ab CHF {{ s.price_from }}{% endif %}{% if "reservation-empfohlen" in s.tagsArray %} (Reservation empfohlen){% endif %}</li>
+  {% endfor %}
+</ul>
+<p>Teller, Tassen und Schalen bemalst du in allen diesen Studios direkt vor Ort. Öffnungszeiten, Adresse und Preise stehen auf der jeweiligen Studio-Seite. Alle Zürcher Studios, auch die mit Reservation, findest du unter <a href="/ch/staedte/zuerich/">Keramik bemalen Zürich</a>.</p>
+{% else %}
+<p>Aktuell ist in Zürich kein Walk-in-Studio gelistet. Alle Studios findest du unter <a href="/ch/staedte/zuerich/">Keramik bemalen Zürich</a>.</p>
+{% endif %}
+
+<h2>Walk-in-Studios in weiteren Städten</h2>
+<ul class="blog-studio-list">
+  {% for s in otherList %}
+  <li><a href="/ch/studio/{{ s.slug }}/">{{ s.name }}</a> ({{ s.city }}){% if s.price_from %}, ab CHF {{ s.price_from }}{% endif %}{% if "reservation-empfohlen" in s.tagsArray %} (Reservation empfohlen){% endif %}</li>
+  {% endfor %}
+</ul>
+
+<h2>Tipps für den spontanen Besuch</h2>
+<ul>
+  <li><strong>Öffnungszeiten prüfen:</strong> Viele Walk-in-Studios sind nur an 3 bis 4 Tagen pro Woche geöffnet, oft Mittwoch, Freitag und Samstag.</li>
+  <li><strong>Genug Zeit einplanen:</strong> Rechne mit 2 bis 2,5 Stunden. Komm nicht kurz vor Ladenschluss.</li>
+  <li><strong>Unter der Woche kommen:</strong> Am Nachmittag ist meist mehr Platz als am Wochenende.</li>
+  <li><strong>Bei mehreren Personen reservieren:</strong> Ab etwa 4 bis 6 Personen ist eine Reservation sinnvoll, auch im Walk-in-Studio.</li>
+  <li><strong>Kleines Stück wählen:</strong> Eine Tasse oder ein kleiner Teller ist in der Zeit gut machbar. Tipps dazu im <a href="/ch/blog/keramik-bemalen-anfaenger/">Anfänger-Ratgeber</a>.</li>
+  <li><strong>Preis vergleichen:</strong> Die Einstiegspreise stehen als «ab CHF …» auf jeder Studio-Seite, Details im Artikel <a href="/ch/blog/was-kostet-keramik-bemalen/">Was kostet Keramik bemalen?</a>.</li>
+</ul>
+
+<h2>Wann sich eine Reservation trotzdem lohnt</h2>
+<ul>
+  <li>Wochenenden, Ferien und die Wochen vor Weihnachten</li>
+  <li>Gruppen, Geburtstage, Junggesellenabschiede und Teamevents (siehe <a href="/ch/blog/kindergeburtstag-keramik-bemalen/">Kindergeburtstag</a> und <a href="/ch/blog/junggesellenabschied-polterabend-keramik-bemalen/">JGA</a>)</li>
+  <li>Wenn du einen bestimmten Rohling oder ein grosses Stück bemalen möchtest</li>
+</ul>
+<p>Viele weitere Studios arbeiten nur mit Reservation. Sie sind auf den <a href="/ch/alle-staedte/">Städte-Seiten</a> mit dem Tag «Nur mit Reservation» gekennzeichnet.</p>
