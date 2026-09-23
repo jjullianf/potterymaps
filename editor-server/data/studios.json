@@ -98,7 +98,7 @@
       "phone": "",
       "website": "https://fenetrealart.ch/",
       "opening_hours": "So 13:30-18:30, Mi/Do 13:30-18:30, Fr/Sa 13:00-20:30, Mo/Di geschlossen",
-      "tags": "walk-in, kids-friendly, birthday-parties, corporate-events, hen-party",
+      "tags": "kids-friendly, birthday-parties, hen-party, corporate-events, reservation-empfohlen",
       "price_mug": "",
       "price_plate": "",
       "studio_fee": "Ab CHF 39.90 pro Person, abhängig vom gewählten Keramikstück",
@@ -112,12 +112,15 @@
       "custom_faq": "[]",
       "lat": 46.960472,
       "lng": 7.4511315,
-      "price_from": 39.9,
+      "price_from": "39.9",
       "country": "CH",
       "currency": "CHF",
       "postcode": "3014",
       "region": "BE",
-      "email": ""
+      "email": "",
+      "images": "[]",
+      "contacted": false,
+      "featured": false
     },
     {
       "slug": "fabrika-azteka-peinture-sur-ceramique-biel-bienne",
@@ -233,7 +236,10 @@
       "currency": "CHF",
       "postcode": "8180",
       "region": "ZH",
-      "email": ""
+      "email": "",
+      "images": "[]",
+      "contacted": false,
+      "featured": false
     },
     {
       "slug": "maison-ceramique-cortaillod",
@@ -1233,7 +1239,7 @@
       "phone": "+41 52 550 20 12",
       "website": "https://herzart.ch/",
       "opening_hours": "Mo geschlossen · Di geschlossen · Mi 10:00–12:30 & 13:30–18:30 · Do 10:00–12:30 & 13:30–18:30 · Fr 13:30–18:30 · Sa 10:00–17:30 · So geschlossen",
-      "tags": "kids-friendly, birthday-parties, hen-party, corporate-events, walk-in, at-home-kits, other-crafts, themed-events",
+      "tags": "kids-friendly, birthday-parties, hen-party, corporate-events, reservation-empfohlen, at-home-kits, other-crafts, themed-events",
       "price_mug": "20-43",
       "price_plate": "32-59",
       "studio_fee": "Keine separate Studiogebühr – der Preis des gewählten Keramikobjekts beinhaltet Rohkeramik, Malzeit, Farben, Transparentglasur und Brennen.",
@@ -1247,12 +1253,15 @@
       "custom_faq": "[]",
       "lat": 47.4985167,
       "lng": 8.7280835,
-      "price_from": 18,
+      "price_from": "18",
       "country": "CH",
       "currency": "CHF",
       "postcode": "8400",
       "region": "ZH",
-      "email": ""
+      "email": "",
+      "images": "[]",
+      "contacted": false,
+      "featured": false
     },
     {
       "slug": "herzart-weisslingen-weisslingen",
