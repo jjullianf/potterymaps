@@ -20,7 +20,7 @@ module.exports = {
       },
       datePublished: data.datePublished,
       dateModified: data.dateModified || data.datePublished,
-      mainEntityOfPage: `${data.site.url}/ch/blog/${data.page.fileSlug}/`,
+      mainEntityOfPage: `${data.site.url}${data.page.url}`,
       image: data.ogImage || `${data.site.url}/images/hero-keramik.jpg`,
     }),
     // Array.isArray statt nur "data.faqs &&": Artikel duerfen faqs auch per
@@ -44,7 +44,7 @@ module.exports = {
       itemListElement: [
         { "@type": "ListItem", position: 1, name: "Startseite", item: `${data.site.url}/ch/` },
         { "@type": "ListItem", position: 2, name: "Blog", item: `${data.site.url}/ch/blog/` },
-        { "@type": "ListItem", position: 3, name: data.headline, item: `${data.site.url}/ch/blog/${data.page.fileSlug}/` },
+        { "@type": "ListItem", position: 3, name: data.headline, item: `${data.site.url}${data.page.url}` },
       ],
     }),
   },

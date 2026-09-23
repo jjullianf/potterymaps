@@ -1,0 +1,89 @@
+---js
+{
+  pagination: {
+    data: "cityGuides",
+    size: 1,
+    alias: "guide",
+    // Sonst landet nur die erste Seite in collections.blogPosts (Uebersicht, Sitemap).
+    addAllPagesToCollections: true,
+  },
+  permalink: (data) => `/ch/blog/keramik-bemalen-${data.guide.slug}/`,
+  datePublished: "2026-09-23",
+  eleventyComputed: {
+    title: (data) => data.guide.title,
+    description: (data) => data.guide.description,
+    headline: (data) => data.guide.headline,
+    teaser: (data) => data.guide.teaser,
+    heroImage: (data) => data.guide.heroImage,
+    heroAlt: (data) => data.guide.heroAlt,
+    faqs: (data) => data.guide.faqs,
+    blogOrder: (data) => 5 + data.guide.index,
+    ctaHeading: (data) => `Keramik bemalen in ${data.guide.name}`,
+    ctaText: (data) => `Vergleiche alle Studios in ${data.guide.name} nach Preis, Reservation und Angebot.`,
+    ctaLabel: (data) => `Alle Keramik-Studios in ${data.guide.name} entdecken →`,
+    ctaHref: (data) => `/ch/staedte/${data.guide.slug}/`,
+  },
+}
+---
+{% set g = guide %}
+<p class="topic-intro"><strong>Kurz gesagt:</strong> {{ g.intro }}</p>
+<p>{{ g.flavor }}</p>
+
+<p class="blog-note">Die Angaben zu Studios, Preisen und Reservation stammen direkt aus dem potterymaps-Verzeichnis und werden automatisch aktualisiert. Preise und Regeln bitte immer beim Studio prüfen.</p>
+
+<h2>Die Studios in {{ g.name }} im Vergleich</h2>
+{% if g.studios.length %}
+<div class="blog-table-wrap">
+  <table class="blog-table">
+    <thead>
+      <tr><th>Studio</th><th>Einstieg ab</th><th>Reservation</th><th>Geeignet für</th></tr>
+    </thead>
+    <tbody>
+      {% for s in g.studios %}
+      <tr>
+        <td><a href="/ch/studio/{{ s.slug }}/" target="_blank" rel="noopener">{{ s.shortName }}</a></td>
+        <td>{% if s.priceFrom %}CHF {{ s.priceFrom }}{% else %}–{% endif %}</td>
+        <td>{{ s.reservationLabel }}</td>
+        <td>{{ s.suitable }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<h2>Keramik bemalen in {{ g.name }}: Studio für Studio</h2>
+{% for s in g.studios %}
+<h3>{{ s.shortName }}</h3>
+<p>{{ s.blurb }} <a href="/ch/studio/{{ s.slug }}/" target="_blank" rel="noopener">Zum Studio-Profil &rarr;</a></p>
+{% endfor %}
+{% else %}
+<p>Aktuell ist in {{ g.name }} kein Studio gelistet.</p>
+{% endif %}
+
+{% if g.cafes.length %}
+<h2>Keramik-Café in {{ g.name }}: Bemalen mit Kaffee</h2>
+<p>Wer beim Bemalen etwas trinken oder essen möchte, findet in {{ g.name }} {{ "ein Keramik-Café" if g.cafes.length == 1 else g.cafes.length + " Keramik-Cafés" }}:</p>
+<ul class="blog-studio-list">
+  {% for c in g.cafes %}
+  <li><a href="/ch/studio/{{ c.slug }}/" target="_blank" rel="noopener">{{ c.shortName }}</a>{% if c.priceFrom %}, ab CHF {{ c.priceFrom }}{% endif %}</li>
+  {% endfor %}
+</ul>
+{% endif %}
+
+{% if g.nearby.length %}
+<h2>Keramik bemalen in der Umgebung von {{ g.name }}</h2>
+<p>Auch in der Nähe von {{ g.name }} (bis ca. {{ g.radiusKm }} km) gibt es Studios, zum Beispiel in {% for c in g.nearbyNames %}{{ c }}{% if not loop.last %}{% if loop.revindex == 2 %} und {% else %}, {% endif %}{% endif %}{% endfor %}:</p>
+<ul class="blog-studio-list">
+  {% for s in g.nearby %}
+  <li><a href="/ch/studio/{{ s.slug }}/" target="_blank" rel="noopener">{{ s.shortName }}</a> ({{ s.city }}, ca. {{ s.km }} km){% if s.priceFrom %}, ab CHF {{ s.priceFrom }}{% endif %}</li>
+  {% endfor %}
+</ul>
+{% endif %}
+
+<h2>Keramik bemalen in weiteren Städten</h2>
+<ul class="blog-studio-list">
+  {% for o in g.otherGuides %}
+  <li><a href="/ch/blog/keramik-bemalen-{{ o.slug }}/">Keramik bemalen in {{ o.name }}</a></li>
+  {% endfor %}
+</ul>
+<p>Mehr Praxis-Tipps: <a href="/ch/blog/was-kostet-keramik-bemalen/">Was kostet Keramik bemalen?</a>, <a href="/ch/blog/keramik-bemalen-ohne-reservation/">Keramik bemalen ohne Reservation</a> und <a href="/ch/blog/keramik-bemalen-anfaenger/">Keramik bemalen für Anfänger</a>.</p>

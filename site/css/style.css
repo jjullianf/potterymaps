@@ -1033,3 +1033,21 @@ h1, h2 { font-family: var(--font-display); font-weight: 600; color: var(--color-
 .blog-article .blog-studio-list { padding-left: 1.2rem; }
 .blog-article .blog-studio-list li { margin: 0.25rem 0; }
 .blog-article .blog-note { color: var(--color-text-muted); font-size: 0.9rem; }
+
+/* Blog: Titelbild (Stadt-Ratgeber) und Vergleichstabelle */
+.blog-hero { margin: 1rem 0 1.5rem; }
+.blog-hero-img {
+  display: block;
+  width: 100%;
+  /* height: auto noetig, da eleventy-img width/height als HTML-Attribute setzt und
+     aspect-ratio sonst ignoriert wuerde */
+  height: auto;
+  aspect-ratio: 16 / 7;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid var(--color-border);
+}
+.blog-table-wrap { overflow-x: auto; margin: 1rem 0 1.5rem; }
+.blog-table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+.blog-table th, .blog-table td { text-align: left; padding: 0.55rem 0.7rem; border-bottom: 1px solid var(--color-border); vertical-align: top; }
+.blog-table th { font-family: var(--font-display); font-weight: 600; color: var(--color-text); white-space: nowrap; }

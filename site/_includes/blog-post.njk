@@ -6,6 +6,10 @@ layout: base.njk
 
   <h1>{{ headline }}</h1>
 
+  {% if heroImage %}
+  <div class="blog-hero">{% optimizedImage heroImage, heroAlt, { widths: [500, 852], sizes: "(max-width: 900px) 100vw, 852px", loading: "eager", fetchpriority: "high", class: "blog-hero-img" } %}</div>
+  {% endif %}
+
   {{ content | safe }}
 
   {% if faqs and faqs.length %}
