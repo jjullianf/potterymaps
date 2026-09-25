@@ -12,12 +12,17 @@
   <meta property="og:site_name" content="potterymaps">
   <meta property="og:title" content="{{ title }}">
   <meta property="og:description" content="{{ description }}">
-  <meta property="og:image" content="{{ ogImage or (site.url + '/images/hero-keramik.jpg') }}">
+  <meta property="og:image" content="{{ ogImage or (site.url + '/images/potterymaps-keramik-bemalen-schweiz.jpg') }}">
+  {% if not ogImage %}
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="potterymaps: Keramik bemalen in der Schweiz, Studios in deiner Stadt finden">
+  {% endif %}
   <meta property="og:url" content="{{ site.url }}{{ page.url }}">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{{ title }}">
   <meta name="twitter:description" content="{{ description }}">
-  <meta name="twitter:image" content="{{ ogImage or (site.url + '/images/hero-keramik.jpg') }}">
+  <meta name="twitter:image" content="{{ ogImage or (site.url + '/images/potterymaps-keramik-bemalen-schweiz.jpg') }}">
   <link rel="icon" href="/favicon.ico" sizes="48x48">
   <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16">
   <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">

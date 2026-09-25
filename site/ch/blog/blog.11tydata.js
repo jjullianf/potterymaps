@@ -21,7 +21,7 @@ module.exports = {
       datePublished: data.datePublished,
       dateModified: data.dateModified || data.datePublished,
       mainEntityOfPage: `${data.site.url}${data.page.url}`,
-      image: data.ogImage || `${data.site.url}/images/hero-keramik.jpg`,
+      image: data.ogImage || `${data.site.url}/images/potterymaps-keramik-bemalen-schweiz.jpg`,
     }),
     // Array.isArray statt nur "data.faqs &&": Artikel duerfen faqs auch per
     // eleventyComputed erzeugen (z. B. aus den Studio-Daten) - beim Abhaengigkeits-
