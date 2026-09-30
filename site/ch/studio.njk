@@ -65,13 +65,13 @@
     similarStudios: (data) => {
       const s = data.studio;
       const all = data.studios || [];
-      // Studios mit eigenem Bild zuerst (stabile Sortierung), damit die kleine
+      // Ateliers mit eigenem Bild zuerst (stabile Sortierung), damit die kleine
       // Auswahl von nur 3-4 Eintraegen hochwertiger wirkt, solange erst wenige
-      // Studios ein Bild hinterlegt haben.
+      // Ateliers ein Bild hinterlegt haben.
       const imageFirst = (arr) => [...arr].sort((a, b) => (b.image ? 1 : 0) - (a.image ? 1 : 0));
       const sameLiteralCity = all.filter((o) => o.slug !== s.slug && o.city === s.city);
       if (sameLiteralCity.length > 0) return imageFirst(sameLiteralCity).slice(0, 3);
-      // Kein weiteres Studio am exakt gleichen Ort: auf Studios im Naehe-Cluster
+      // Kein weiteres Atelier am exakt gleichen Ort: auf Ateliers im Naehe-Cluster
       // (gleiche naechste der 20 Hauptstaedte) ausweichen ("Nachbarschaft").
       const cluster = all.filter((o) => o.slug !== s.slug && o.nearestHubSlug === s.nearestHubSlug);
       return imageFirst(cluster).slice(0, 3);
@@ -151,14 +151,14 @@
 
   {% if similarStudios.length %}
   <section class="similar-studios">
-    <h2>Ähnliche Studios in der Nähe</h2>
+    <h2>Ähnliche Ateliers in der Nähe</h2>
     <ul class="studio-cards">
       {% for other in similarStudios %}{{ card(other) }}{% endfor %}
     </ul>
   </section>
   {% endif %}
 
-  <p class="back-to-city-link"><a href="/ch/staedte/{{ s.targetCitySlug }}/">Alle Studios in {{ s.targetCityName }} ansehen →</a></p>
+  <p class="back-to-city-link"><a href="/ch/staedte/{{ s.targetCitySlug }}/">Alle Ateliers in {{ s.targetCityName }} ansehen →</a></p>
 
   <section class="report-error">
     <p>Etwas an diesem Eintrag stimmt nicht mehr? <a href="/ch/studio-eintragen/?studio={{ s.name | urlencode }}">Fehler gefunden? Melden</a></p>

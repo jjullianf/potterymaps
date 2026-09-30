@@ -1,8 +1,8 @@
 ---js
 {
   layout: "base.njk",
-  title: "Studio eintragen oder korrigieren | potterymaps",
-  description: "Kennst du ein Studio zum Keramik bemalen, das bei uns fehlt, oder ist ein Eintrag veraltet? Melde es uns hier.",
+  title: "Atelier eintragen oder korrigieren | potterymaps",
+  description: "Kennst du ein Atelier zum Keramik bemalen, das bei uns fehlt, oder ist ein Eintrag veraltet? Melde es uns hier.",
   permalink: "/ch/studio-eintragen/",
   eleventyComputed: {
     jsonLdBreadcrumb: (data) => ({
@@ -10,16 +10,16 @@
       "@type": "BreadcrumbList",
       itemListElement: [
         { "@type": "ListItem", position: 1, name: "Startseite", item: `${data.site.url}/ch/` },
-        { "@type": "ListItem", position: 2, name: "Studio eintragen", item: `${data.site.url}/ch/studio-eintragen/` },
+        { "@type": "ListItem", position: 2, name: "Atelier eintragen", item: `${data.site.url}/ch/studio-eintragen/` },
       ],
     }),
   },
 }
 ---
 <article class="static-page">
-  <p class="breadcrumb"><a href="/ch/">Startseite</a> &raquo; Studio eintragen</p>
-  <h1>Studio eintragen oder korrigieren</h1>
-  <p>Kennst du ein Studio zum Keramik bemalen, das bei uns noch fehlt? Oder ist ein bestehender Eintrag veraltet oder fehlerhaft? Wähle unten die passende Option – wir prüfen jede Meldung von Hand und tragen sie danach selbst im Verzeichnis nach. Es wird nichts automatisch veröffentlicht.</p>
+  <p class="breadcrumb"><a href="/ch/">Startseite</a> &raquo; Atelier eintragen</p>
+  <h1>Atelier eintragen oder korrigieren</h1>
+  <p>Kennst du ein Atelier zum Keramik bemalen, das bei uns noch fehlt? Oder ist ein bestehender Eintrag veraltet oder fehlerhaft? Wähle unten die passende Option – wir prüfen jede Meldung von Hand und tragen sie danach selbst im Verzeichnis nach. Es wird nichts automatisch veröffentlicht.</p>
 
   <form class="entry-form" id="studio-form" action="https://formspree.io/f/xrpbzzvr" method="POST">
     <input type="hidden" name="_next" value="{{ site.url }}/ch/studio-eintragen/danke/">
@@ -36,7 +36,7 @@
     </fieldset>
 
     <div class="form-section active" id="section-hinweis">
-      <label for="h-name">Name des Studios</label>
+      <label for="h-name">Name des Ateliers</label>
       <input type="text" id="h-name" name="studio_name" required>
 
       <label for="h-message">Nachricht</label>
@@ -63,8 +63,8 @@
       <input type="text" id="p-homepage" name="profil_homepage" placeholder="https://...">
 
       <label for="p-instagram">Instagram</label>
-      <input type="text" id="p-instagram" name="profil_instagram" placeholder="@studioname">
-      <p class="hint">Egal in welcher Form – "@studioname", "studioname" oder der volle Link. Wir richten es beim Prüfen selbst her.</p>
+      <input type="text" id="p-instagram" name="profil_instagram" placeholder="@ateliername">
+      <p class="hint">Egal in welcher Form – "@ateliername", "ateliername" oder der volle Link. Wir richten es beim Prüfen selbst her.</p>
 
       <label for="p-hours">Öffnungszeiten</label>
       <input type="text" id="p-hours" name="profil_opening_hours">
@@ -99,7 +99,7 @@
       <label for="p-price-plate">Preis Teller</label>
       <input type="text" id="p-price-plate" name="profil_price_plate">
 
-      <label for="p-studio-fee">Studiogebühr</label>
+      <label for="p-studio-fee">Ateliergebühr</label>
       <input type="text" id="p-studio-fee" name="profil_studio_fee">
 
       <label for="p-price-from">Preis ab</label>
@@ -120,7 +120,7 @@
 
       <label for="p-bild">Bild</label>
       <input type="text" id="p-bild" name="profil_bildlink" placeholder="z.B. Link zu Google Drive, Instagram oder Website">
-      <p class="hint">Ein Foto lohnt sich: Studios mit Bild fallen im Verzeichnis deutlich mehr auf und werden öfter angeklickt. Kein Datei-Upload möglich – bitte Bild z.B. bei Google Drive hochladen (Freigabe „Jeder mit Link“) und den Link hier einfügen, oder alternativ einen Hinweis wie „siehe unser Instagram und unsere Webseite“ eintragen. Bilder können auch per E-Mail an <a href="mailto:info@potterymaps.com">info@potterymaps.com</a> geschickt werden.</p>
+      <p class="hint">Ein Foto lohnt sich: Ateliers mit Bild fallen im Verzeichnis deutlich mehr auf und werden öfter angeklickt. Kein Datei-Upload möglich – bitte Bild z.B. bei Google Drive hochladen (Freigabe „Jeder mit Link“) und den Link hier einfügen, oder alternativ einen Hinweis wie „siehe unser Instagram und unsere Webseite“ eintragen. Bilder können auch per E-Mail an <a href="mailto:info@potterymaps.com">info@potterymaps.com</a> geschickt werden.</p>
 
       <label class="checkbox-option" id="p-bildrechte-wrap" hidden>
         <input type="checkbox" id="p-bildrechte" name="profil_bildrechte_bestaetigt">

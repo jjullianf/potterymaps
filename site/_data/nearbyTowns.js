@@ -5,20 +5,20 @@ const citiesFn = require("./cities.js");
 const { haversineKm } = require("./geo.js");
 
 const MAX_RESULTS = 6;
-const FAR_RADIUS_KM = 60; // Studios innerhalb dieses Radius werden immer gezeigt.
+const FAR_RADIUS_KM = 60; // Ateliers innerhalb dieses Radius werden immer gezeigt.
 const MIN_RESULTS = 3; // Falls weniger als das im Radius liegen, trotzdem die naechsten 3 zeigen.
 
 // Baut fuer jeden der ca. 180 garantierten Schweizer Orte OHNE eigene
-// Staedte-Seite (city.njk) eine eigene "Studios in der Naehe von [Ort]"-Seite
+// Staedte-Seite (city.njk) eine eigene "Ateliers in der Naehe von [Ort]"-Seite
 // (studios-nahe.njk) - Orte, die bereits eine Seite haben (mind. 1 eigenes
-// Studio oder eine der 20 Hauptstaedte), werden hier ausgeschlossen, damit keine
+// Atelier oder eine der 20 Hauptstaedte), werden hier ausgeschlossen, damit keine
 // zwei Seiten um dieselbe Anfrage konkurrieren.
 module.exports = async function () {
   const studios = await studiosFn();
   const cities = await citiesFn();
   const existingSlugs = new Set(cities.map((c) => c.slug));
   const studiosWithCoords = studios.filter((s) => s.lat && s.lng);
-  // Nur Staedte mit mind. einem eigenen Studio kommen als "naechstgelegene
+  // Nur Staedte mit mind. einem eigenen Atelier kommen als "naechstgelegene
   // Hauptstadt" fuer die Rueckverlinkung infrage - reine leere Hub-Platzhalter
   // (noindex) waeren kein sinnvolles Linkziel.
   const linkableCities = cities.filter((c) => c.hasAny && c.lat && c.lng);

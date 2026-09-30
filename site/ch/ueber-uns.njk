@@ -2,21 +2,21 @@
 {
   layout: "base.njk",
   title: "Über uns | potterymaps",
-  description: "potterymaps ist ein Verzeichnis von Keramik-Bemal-Studios in der Schweiz, mit Adressen, Öffnungszeiten, Preisen und Terminen.",
+  description: "potterymaps ist ein Verzeichnis von Keramik-Bemal-Ateliers in der Schweiz, mit Adressen, Öffnungszeiten, Preisen und Terminen.",
   permalink: "/ch/ueber-uns/",
   eleventyComputed: {
     jsonLd: (data) => ({
       "@context": "https://schema.org",
       "@type": "WebSite",
       name: "potterymaps",
-      description: "Verzeichnis von Keramik-Bemal-Studios in der Schweiz mit Adressen, Öffnungszeiten, Preisen und Terminen.",
+      description: "Verzeichnis von Keramik-Bemal-Ateliers in der Schweiz mit Adressen, Öffnungszeiten, Preisen und Terminen.",
       url: data.site.url,
     }),
     jsonLdOrg: (data) => ({
       "@context": "https://schema.org",
       "@type": "Organization",
       name: "potterymaps",
-      description: "potterymaps ist ein unabhängiges Verzeichnis von Keramik-Bemal-Studios in der Schweiz.",
+      description: "potterymaps ist ein unabhängiges Verzeichnis von Keramik-Bemal-Ateliers in der Schweiz.",
       url: data.site.url,
       logo: `${data.site.url}/images/logo.png`,
       areaServed: {
@@ -39,22 +39,22 @@
   <p class="breadcrumb"><a href="/ch/">Startseite</a> &raquo; Über uns</p>
   <h1>Über uns</h1>
 
-  <p>potterymaps ist ein Verzeichnis von Keramik-Bemal-Studios in der Schweiz. Wir listen Studios, bei denen man ein bereits fertig gegossenes Keramikstück auswählen und direkt vor Ort bemalen kann, inklusive Adresse, Öffnungszeiten, Preisen und verfügbaren Terminen.</p>
+  <p>potterymaps ist ein Verzeichnis von Keramik-Bemal-Ateliers in der Schweiz. Wir listen Ateliers, bei denen man ein bereits fertig gegossenes Keramikstück auswählen und direkt vor Ort bemalen kann, inklusive Adresse, Öffnungszeiten, Preisen und verfügbaren Terminen.</p>
 
   <h2>Was ist Keramik bemalen?</h2>
-  <p>Beim Keramik bemalen (auch "Pottery Painting" oder "Paint your own pottery" genannt) wählt man in einem Studio ein bereits vorgefertigtes, ungebranntes oder bereits gebranntes Keramikstück aus – zum Beispiel eine Tasse, einen Teller oder eine Vase – und bemalt es vor Ort mit Farben und Glasur. Das Studio brennt das Stück danach im Ofen; die Abholung erfolgt meist einige Tage bis Wochen später. Das unterscheidet Keramik bemalen vom Töpfern an der Drehscheibe, das manche der gelisteten Studios zusätzlich anbieten.</p>
+  <p>Beim Keramik bemalen (auch "Pottery Painting" oder "Paint your own pottery" genannt) wählt man in einem Atelier ein bereits vorgefertigtes, ungebranntes oder bereits gebranntes Keramikstück aus – zum Beispiel eine Tasse, einen Teller oder eine Vase – und bemalt es vor Ort mit Farben und Glasur. Das Atelier brennt das Stück danach im Ofen; die Abholung erfolgt meist einige Tage bis Wochen später. Das unterscheidet Keramik bemalen vom Töpfern an der Drehscheibe, das manche der gelisteten Ateliers zusätzlich anbieten.</p>
 
   <h2>Was potterymaps konkret bietet</h2>
   <ul>
-    <li>Aktuell {{ studios.length }} {{ pluralize(studios.length, "Studio", "Studios") }} in {{ cities.length }} Regionen der Schweiz.</li>
-    <li>Pro Studio: Adresse, Öffnungszeiten, Preisspanne, Kontaktangaben (Telefon, E-Mail, Website) und eine Karte zur Lage.</li>
+    <li>Aktuell {{ studios.length }} {{ pluralize(studios.length, "Atelier", "Ateliers") }} in {{ cities.length }} Regionen der Schweiz.</li>
+    <li>Pro Atelier: Adresse, Öffnungszeiten, Preisspanne, Kontaktangaben (Telefon, E-Mail, Website) und eine Karte zur Lage.</li>
     <li>Filterbare Zusatzinfos wie Kinderfreundlichkeit, Reservationspflicht, Eignung für Geburtstage, Firmenevents oder Junggesellinnenabschiede.</li>
-    <li>Eine Übersicht aller Studios auf einer Karte der Schweiz.</li>
+    <li>Eine Übersicht aller Ateliers auf einer Karte der Schweiz.</li>
   </ul>
 
   <h2>Für wen ist potterymaps gedacht?</h2>
-  <p>potterymaps richtet sich an Privatpersonen, die spontan oder geplant ein Studio zum Keramik bemalen in ihrer Nähe suchen, an Familien, die einen Kindergeburtstag organisieren, sowie an Gruppen und Firmen, die einen Teamevent oder eine private Feier planen.</p>
+  <p>potterymaps richtet sich an Privatpersonen, die spontan oder geplant ein Atelier zum Keramik bemalen in ihrer Nähe suchen, an Familien, die einen Kindergeburtstag organisieren, sowie an Gruppen und Firmen, die einen Teamevent oder eine private Feier planen.</p>
 
   <h2>Wie die Daten entstehen</h2>
-  <p>Die Angaben zu den Studios stammen aus öffentlich zugänglichen Quellen wie den Websites der Studios selbst und werden laufend von Hand geprüft und aktualisiert. potterymaps ist ein unabhängiges Verzeichnis und steht in keiner geschäftlichen Verbindung zu den gelisteten Studios. Sollten Angaben veraltet oder falsch sein, freuen wir uns über eine <a href="/ch/kontakt/">Nachricht</a> oder einen Hinweis über das <a href="/ch/studio-eintragen/">Eintragen-Formular</a>.</p>
+  <p>Die Angaben zu den Ateliers stammen aus öffentlich zugänglichen Quellen wie den Websites der Ateliers selbst und werden laufend von Hand geprüft und aktualisiert. potterymaps ist ein unabhängiges Verzeichnis und steht in keiner geschäftlichen Verbindung zu den gelisteten Ateliers. Sollten Angaben veraltet oder falsch sein, freuen wir uns über eine <a href="/ch/kontakt/">Nachricht</a> oder einen Hinweis über das <a href="/ch/studio-eintragen/">Eintragen-Formular</a>.</p>
 </article>

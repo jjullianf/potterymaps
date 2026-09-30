@@ -13,8 +13,8 @@ module.exports = async function () {
   const studios = await studiosFn();
   const hubNames = new Set(targetCities.map((c) => c.name));
 
-  // Jeder Ort mit mind. einem echten Studio bekommt eine eigene Seite - nicht nur
-  // die 20 garantierten Hauptstaedte. Orte ohne eigenes Studio bleiben unsichtbar
+  // Jeder Ort mit mind. einem echten Atelier bekommt eine eigene Seite - nicht nur
+  // die 20 garantierten Hauptstaedte. Orte ohne eigenes Atelier bleiben unsichtbar
   // (sie tauchen nur als "Auch in der Nähe"-Verweis auf der zustaendigen
   // Hauptstadt-Seite auf, ueber studios[].nearestHubSlug).
   const studiosByCityName = {};
@@ -28,7 +28,7 @@ module.exports = async function () {
     const hubInfo = targetCities.find((c) => c.name === name);
     const isHub = !!hubInfo;
     const slug = hubInfo ? hubInfo.slug : citySlug(name);
-    // Featured zuerst, danach Studios mit eigenen Bildern vor Studios ohne
+    // Featured zuerst, danach Ateliers mit eigenen Bildern vor Ateliers ohne
     // eigene Bilder, danach alphabetisch (siehe _11ty/sortStudios.js).
     const direct = (studiosByCityName[name] || []).slice().sort(compareStudiosForListing);
     const hasAny = direct.length > 0;
@@ -44,7 +44,7 @@ module.exports = async function () {
       }
     }
 
-    const intro = hubInfo ? hubInfo.intro : `Keramik bemalen in ${name}: Finde hier dein Studio mit Adresse, Öffnungszeiten und Preisen.`;
+    const intro = hubInfo ? hubInfo.intro : `Keramik bemalen in ${name}: Finde hier dein Atelier mit Adresse, Öffnungszeiten und Preisen.`;
 
     return {
       name,
@@ -57,9 +57,9 @@ module.exports = async function () {
       hasAny,
       count: direct.length,
       hasPhoto,
-      // Bei den 20 garantierten Staedten ohne eigenes Studio gilt weiterhin
-      // noindex, bis ein Studio dazukommt. Neue Ortsseiten entstehen nur, wenn
-      // bereits ein Studio existiert, sind also nie leer.
+      // Bei den 20 garantierten Staedten ohne eigenes Atelier gilt weiterhin
+      // noindex, bis ein Atelier dazukommt. Neue Ortsseiten entstehen nur, wenn
+      // bereits ein Atelier existiert, sind also nie leer.
       noindex: isHub && !hasAny,
     };
   });
@@ -78,9 +78,9 @@ module.exports = async function () {
 
     let introDynamic = "";
     if (c.count > 0 && c.count === maxCount) {
-      introDynamic = `${c.name} führt das Verzeichnis aktuell mit ${c.count} gelisteten ${pluralize(c.count, "Studio", "Studios")} an.`;
+      introDynamic = `${c.name} führt das Verzeichnis aktuell mit ${c.count} gelisteten ${pluralize(c.count, "Atelier", "Ateliers")} an.`;
     } else if (c.count > 0) {
-      introDynamic = `Aktuell ${c.count === 1 ? "ist" : "sind"} hier ${c.count} ${pluralize(c.count, "Studio", "Studios")} gelistet.`;
+      introDynamic = `Aktuell ${c.count === 1 ? "ist" : "sind"} hier ${c.count} ${pluralize(c.count, "Atelier", "Ateliers")} gelistet.`;
     }
 
     const cityUrl = `${site.url}/ch/staedte/${c.slug}/`;
@@ -108,7 +108,7 @@ module.exports = async function () {
       ],
     };
 
-    // Fuer die SEO-Zusatzsaetze auf den Stadtseiten: falls ein lokales Studio
+    // Fuer die SEO-Zusatzsaetze auf den Stadtseiten: falls ein lokales Atelier
     // explizit Keramik-Cafe oder Porzellan bemalen in seiner Beschreibung erwaehnt,
     // dorthin verlinken statt eine generische, unverlinkte Floskel zu zeigen.
     const cafeMatch = c.direct.find((s) => /café|cafe/i.test(s.description || ""));
@@ -116,9 +116,9 @@ module.exports = async function () {
 
     return Object.assign({}, c, {
       nearbyTowns,
-      // "Auch in der Nähe" zeigte frueher Studio-Karten aus Nachbarorten direkt auf
+      // "Auch in der Nähe" zeigte frueher Atelier-Karten aus Nachbarorten direkt auf
       // der Hauptstadt-Seite - jetzt haben diese Orte eigene Seiten, daher zeigt
-      // die Karte hier nur noch die eigenen Studios.
+      // die Karte hier nur noch die eigenen Ateliers.
       mapStudios: c.direct.filter((s) => s.lat && s.lng),
       introDynamic,
       cafeMatch,

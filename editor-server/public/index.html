@@ -72,7 +72,7 @@
 <header>
   <h1>Keramik-Verzeichnis Editor</h1>
   <span id="status">lädt…</span>
-  <button id="btn-new">+ Neues Studio</button>
+  <button id="btn-new">+ Neues Atelier</button>
   <button id="btn-export">CSV Export</button>
   <button id="btn-import-trigger">CSV Import</button>
   <input type="file" id="btn-import" accept=".csv" hidden>
@@ -125,7 +125,7 @@
 <div id="overlay">
   <div id="panel">
     <button id="close-panel">&times;</button>
-    <h2 id="panel-title">Studio bearbeiten</h2>
+    <h2 id="panel-title">Atelier bearbeiten</h2>
     <form id="form">
       <div class="row2">
         <div class="field">
@@ -170,7 +170,7 @@
         <div class="field">
           <label>Preis ab, für Vergleich auf der Website (price_from)</label>
           <input type="text" id="f-price_from" inputmode="decimal" placeholder="z.B. 20">
-          <div class="hint">Nur die Zahl in CHF, ohne Text (wird als „ab CHF …" auf Studio-Karten und der Detailseite angezeigt). Der niedrigste reelle Einstiegspreis (Studiogebühr <em>oder</em> günstigstes Stück, je nachdem was tatsächlich anfällt) – Zuschläge, Verlängerungen und Mindestpersonenzahl-Rabatte zählen nicht. Leer lassen, wenn kein verlässlicher Basispreis auffindbar ist.</div>
+          <div class="hint">Nur die Zahl in CHF, ohne Text (wird als „ab CHF …" auf Atelier-Karten und der Detailseite angezeigt). Der niedrigste reelle Einstiegspreis (Ateliergebühr <em>oder</em> günstigstes Stück, je nachdem was tatsächlich anfällt) – Zuschläge, Verlängerungen und Mindestpersonenzahl-Rabatte zählen nicht. Leer lassen, wenn kein verlässlicher Basispreis auffindbar ist.</div>
         </div>
         <div class="row3">
           <div class="field">
@@ -182,7 +182,7 @@
             <input type="text" id="f-price_plate">
           </div>
           <div class="field">
-            <label>Studiogebühr (studio_fee)</label>
+            <label>Ateliergebühr (studio_fee)</label>
             <input type="text" id="f-studio_fee">
           </div>
         </div>
@@ -232,7 +232,7 @@
           <button type="button" class="secondary" id="add-gallery-row">+ Bild-URL hinzufügen</button>
         </div>
         <div class="field">
-          <label>Foto hochladen (lokal – Studio muss vorher gespeichert sein)</label>
+          <label>Foto hochladen (lokal – Atelier muss vorher gespeichert sein)</label>
           <input type="file" id="photo-upload" accept="image/*" multiple>
           <div class="hint">Hochgeladene Dateien landen unter <code>editor-server/fotos/&lt;slug&gt;/</code> und müssen zusätzlich per Git committet/gepusht werden, damit sie beim Live-Build verfügbar sind. Mit "zur Galerie hinzufügen" werden sie unten in die Liste übernommen.</div>
         </div>
@@ -246,13 +246,13 @@
         <label><input type="checkbox" id="f-contacted"> Bereits E-Mail-Kontakt hatte (nur intern, nicht auf der Website sichtbar)</label>
       </div>
       <div class="field">
-        <label><input type="checkbox" id="f-featured"> Featured-Badge anzeigen (auf Studio-Seite und Listings sichtbar)</label>
+        <label><input type="checkbox" id="f-featured"> Featured-Badge anzeigen (auf Atelier-Seite und Listings sichtbar)</label>
       </div>
 
       <div class="actions">
         <button type="submit" class="primary">Speichern</button>
         <button type="button" class="secondary" id="btn-cancel">Abbrechen</button>
-        <button type="button" class="danger" id="btn-delete" style="margin-left:auto;">Studio löschen</button>
+        <button type="button" class="danger" id="btn-delete" style="margin-left:auto;">Atelier löschen</button>
       </div>
     </form>
   </div>
@@ -275,7 +275,7 @@ const TAGS = [
 ];
 
 let state = { studios: [], reviewed: {} };
-let currentSlug = null; // null = neues Studio
+let currentSlug = null; // null = neues Atelier
 let sortKey = "name";
 let sortDir = 1;
 
@@ -293,7 +293,7 @@ async function loadState() {
     const res = await fetch("/api/state");
     if (!res.ok) throw new Error("HTTP " + res.status);
     state = await res.json();
-    setStatus(`geladen – ${state.studios.length} Studios`);
+    setStatus(`geladen – ${state.studios.length} Ateliers`);
     populateCityFilter();
     renderTable();
   } catch (e) {
@@ -318,7 +318,7 @@ async function saveState() {
       body: JSON.stringify(state),
     });
     if (!res.ok) throw new Error("HTTP " + res.status);
-    setStatus(`gespeichert – ${state.studios.length} Studios (Backup wurde automatisch angelegt)`);
+    setStatus(`gespeichert – ${state.studios.length} Ateliers (Backup wurde automatisch angelegt)`);
     renderTable();
     return true;
   } catch (e) {
@@ -382,7 +382,7 @@ function renderTable() {
     if (av > bv) return 1 * sortDir;
     return 0;
   });
-  $("#count").textContent = `${rows.length} von ${state.studios.length} Studios angezeigt`;
+  $("#count").textContent = `${rows.length} von ${state.studios.length} Ateliers angezeigt`;
   $("#rows").innerHTML = rows.map((s) => {
     const reviewed = !!state.reviewed[s.slug];
     const imageCount = getImagesArray(s).length;
@@ -435,7 +435,7 @@ $("#filter-reset").addEventListener("click", () => {
 // ---------- Formular ----------
 
 // "Walk-in" (spontan, ohne Reservation moeglich) und "Nur mit Reservation"
-// schliessen sich inhaltlich aus - ein Studio kann nicht beides gleichzeitig sein.
+// schliessen sich inhaltlich aus - ein Atelier kann nicht beides gleichzeitig sein.
 const MUTUALLY_EXCLUSIVE_TAGS = ["walk-in", "reservation-only"];
 
 function buildTagGrid(selected) {
@@ -576,7 +576,7 @@ function renderPhotoGrid(slug, photos) {
 
 $("#photo-upload").addEventListener("change", async (e) => {
   const slug = $("#f-slug").value.trim();
-  if (!slug) { alert("Bitte zuerst Studio speichern (Slug wird benötigt), dann Fotos hochladen."); e.target.value = ""; return; }
+  if (!slug) { alert("Bitte zuerst Atelier speichern (Slug wird benötigt), dann Fotos hochladen."); e.target.value = ""; return; }
   const files = e.target.files;
   if (!files.length) return;
   const fd = new FormData();
@@ -596,7 +596,7 @@ $("#photo-upload").addEventListener("change", async (e) => {
 function openEditor(slug) {
   currentSlug = slug || null;
   const s = slug ? state.studios.find((x) => x.slug === slug) : null;
-  $("#panel-title").textContent = s ? `Bearbeiten: ${s.name}` : "Neues Studio";
+  $("#panel-title").textContent = s ? `Bearbeiten: ${s.name}` : "Neues Atelier";
   $("#btn-delete").style.display = s ? "" : "none";
 
   const fields = ["name","address","city","phone","website","email","opening_hours","price_from","price_mug","price_plate","studio_fee","price_note","pickup_time","special_events","description","hat_instagram"];
@@ -623,7 +623,7 @@ $("#btn-new").addEventListener("click", () => openEditor(null));
 $("#close-panel").addEventListener("click", closeEditor);
 $("#btn-cancel").addEventListener("click", closeEditor);
 
-// Slug-Vorschlag bei neuem Studio, solange der Nutzer das Slug-Feld nicht selbst angefasst hat
+// Slug-Vorschlag bei neuem Atelier, solange der Nutzer das Slug-Feld nicht selbst angefasst hat
 let slugTouched = false;
 $("#f-slug").addEventListener("input", () => { slugTouched = true; });
 ["#f-name", "#f-city"].forEach((sel) => {
@@ -639,7 +639,7 @@ $("#form").addEventListener("submit", async (e) => {
   if (!slug) { alert("Bitte Name und Stadt angeben."); return; }
   const isNew = !currentSlug;
   if (isNew && state.studios.some((s) => s.slug === slug)) {
-    alert("Ein Studio mit diesem Slug existiert bereits. Bitte Slug anpassen.");
+    alert("Ein Atelier mit diesem Slug existiert bereits. Bitte Slug anpassen.");
     return;
   }
 
@@ -700,7 +700,7 @@ $("#form").addEventListener("submit", async (e) => {
 
 $("#btn-delete").addEventListener("click", async () => {
   if (!currentSlug) return;
-  if (!confirm("Dieses Studio wirklich endgültig löschen?")) return;
+  if (!confirm("Dieses Atelier wirklich endgültig löschen?")) return;
   state.studios = state.studios.filter((s) => s.slug !== currentSlug);
   delete state.reviewed[currentSlug];
   const ok = await saveState();
@@ -774,7 +774,7 @@ $("#btn-import").addEventListener("change", async (e) => {
     state.reviewed[obj.slug] = reviewedVal;
   }
   e.target.value = "";
-  setStatus(`CSV importiert: ${added} neu, ${updated} aktualisiert. Bitte prüfen und dann irgendein Studio speichern oder Seite neu laden, um zu sichern.`);
+  setStatus(`CSV importiert: ${added} neu, ${updated} aktualisiert. Bitte prüfen und dann irgendein Atelier speichern oder Seite neu laden, um zu sichern.`);
   const ok = await saveState();
   if (!ok) alert("Import lokal übernommen, aber Speichern fehlgeschlagen - siehe Statuszeile.");
 });

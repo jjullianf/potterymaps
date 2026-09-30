@@ -2,7 +2,7 @@
 {
   layout: "base.njk",
   title: "Grössere Events & Gruppenanfragen | potterymaps",
-  description: "Plane ein Keramik-Event für deine Gruppe, deinen Anlass oder dein Firmenevent – wir vermitteln dich an ein passendes Studio.",
+  description: "Plane ein Keramik-Event für deine Gruppe, deinen Anlass oder dein Firmenevent – wir vermitteln dich an ein passendes Atelier.",
   permalink: "/grosse-anfrage/",
   eleventyComputed: {
     jsonLdBreadcrumb: (data) => ({
@@ -20,7 +20,7 @@
 <article class="static-page">
   <p class="breadcrumb"><a href="/ch/">Startseite</a> &raquo; <a href="/ch/events/">Events</a> &raquo; Grössere Anfrage</p>
   <h1>Grössere Events planen</h1>
-  <p>Du möchtest mit einer Gruppe, für einen Anlass, einen Kindergeburtstag oder ein Firmenevent Keramik bemalen? Beschreib uns kurz, was du suchst – wir melden uns mit passenden Studios.</p>
+  <p>Du möchtest mit einer Gruppe, für einen Anlass, einen Kindergeburtstag oder ein Firmenevent Keramik bemalen? Beschreib uns kurz, was du suchst – wir melden uns mit passenden Ateliers.</p>
   <p class="trust-hint"><i class="ti ti-clock"></i> Antwort innerhalb von 48 Stunden garantiert.</p>
 
   <form class="entry-form" id="anfrage-form" action="https://formspree.io/f/moevaapl" method="POST">
@@ -58,11 +58,11 @@
     <p class="hint" id="form-error" hidden>Senden hat leider nicht geklappt. Bitte nochmal versuchen, oder direkt an <a href="mailto:info@potterymaps.com">info@potterymaps.com</a> schreiben.</p>
   </form>
 
-  <p class="alt-action-hint">Lieber selbst stöbern? <a href="/ch/alle-staedte/">Alle Studios ansehen</a>.</p>
+  <p class="alt-action-hint">Lieber selbst stöbern? <a href="/ch/alle-staedte/">Alle Ateliers ansehen</a>.</p>
 </article>
 <script>
   (function () {
-    // Gleicher Ansatz wie im Studio-Eintragen-Formular: per fetch senden statt
+    // Gleicher Ansatz wie im Atelier-Eintragen-Formular: per fetch senden statt
     // klassischem Submit, damit die Weiterleitung auf unsere eigene Danke-Seite
     // zuverlässig funktioniert (unabhaengig davon, ob Formspree den _next-Redirect
     // bei einem klassischen Submit befolgt).

@@ -2,11 +2,15 @@
 {
   layout: "base.njk",
   title: "Alle Städte | potterymaps",
-  description: "Alle Orte im Verzeichnis für Keramik bemalen in der Schweiz, mit Anzahl gelisteter Studios und Übersichtskarte.",
+  description: "Alle Orte im Verzeichnis für Keramik bemalen in der Schweiz, mit Anzahl gelisteter Ateliers und Übersichtskarte.",
   permalink: "/ch/alle-staedte/",
   eleventyComputed: {
     sortedCities: (data) => [...(data.cities || [])].sort((a, b) => b.count - a.count),
     mapStudios: (data) => (data.studios || []).filter((s) => s.lat && s.lng),
+    mapStudiosForJs: (data) =>
+      (data.studios || [])
+        .filter((s) => s.lat && s.lng)
+        .map((s) => ({ lat: s.lat, lng: s.lng, popupHtml: s.mapPopupHtml })),
     jsonLdBreadcrumb: (data) => ({
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
@@ -21,7 +25,7 @@
 <article class="static-page">
   <p class="breadcrumb"><a href="/ch/">Startseite</a> &raquo; Alle Städte</p>
   <h1>Alle Städte</h1>
-  <p>Alle {{ mapStudios.length }} {{ pluralize(mapStudios.length, "Studio", "Studios") }} auf der Karte oder als Liste nach Stadt sortiert.</p>
+  <p>Alle {{ mapStudios.length }} {{ pluralize(mapStudios.length, "Atelier", "Ateliers") }} auf der Karte oder als Liste nach Stadt sortiert.</p>
 
   <div class="map-consent-gate leaflet-consent-gate" data-init-fn="__initAlleStaedteMap">
     <p>Für die Kartenübersicht wird eine Verbindung zu OpenStreetMap-Kartenservern hergestellt, wobei deine IP-Adresse übermittelt wird.</p>
@@ -37,12 +41,12 @@
       {% if c.count > 0 %}
       <a href="/ch/staedte/{{ c.slug }}/">
         <span>{{ c.name }}</span>
-        <span class="count">{{ c.count }} {{ pluralize(c.count, "Studio", "Studios") }}</span>
+        <span class="count">{{ c.count }} {{ pluralize(c.count, "Atelier", "Ateliers") }}</span>
       </a>
       {% else %}
       <div class="city-card-empty-inner">
         <span>{{ c.name }}</span>
-        <a class="count zero" href="/ch/studio-eintragen/">Noch kein Studio – jetzt eintragen</a>
+        <a class="count zero" href="/ch/studio-eintragen/">Noch kein Atelier – jetzt eintragen</a>
       </div>
       {% endif %}
     </li>
@@ -52,11 +56,7 @@
 
 <script>
   window.__initAlleStaedteMap = function () {
-    var studios = [
-      {% for s in mapStudios %}
-      { name: "{{ s.name | escape }}", slug: "{{ s.slug }}", city: "{{ s.city | escape }}", lat: {{ s.lat }}, lng: {{ s.lng }} }{% if not loop.last %},{% endif %}
-      {% endfor %}
-    ];
+    var studios = {{ mapStudiosForJs | dump | safe }};
 
     var map = L.map('overview-map').setView([46.9, 8.2], 8);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -84,9 +84,8 @@
       },
     });
     studios.forEach(function (s) {
-      var marker = L.marker([s.lat, s.lng], { icon: dotIcon }).bindPopup(
-        '<strong>' + s.name + '</strong><br>' + s.city + '<br><a href="/ch/studio/' + s.slug + '/">Zur Studio-Seite</a>'
-      );
+      var marker = L.marker([s.lat, s.lng], { icon: dotIcon }).bindPopup(s.popupHtml);
+      window.potterymapsAttachHoverPopup(marker);
       clusterGroup.addLayer(marker);
     });
     map.addLayer(clusterGroup);

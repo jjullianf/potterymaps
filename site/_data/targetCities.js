@@ -9,7 +9,7 @@ const TARGET_CITY_NAMES = [
 ];
 
 const INTROS = {
-  "Zürich": "Zürich ist die grösste Stadt der Schweiz und bietet gleich mehrere Studios zum Keramik bemalen – ideal für einen kreativen Nachmittag, ein Date oder einen Kindergeburtstag.",
+  "Zürich": "Zürich ist die grösste Stadt der Schweiz und bietet gleich mehrere Ateliers zum Keramik bemalen – ideal für einen kreativen Nachmittag, ein Date oder einen Kindergeburtstag.",
   "Genève": "In Genève lässt sich Keramik bemalen wunderbar mit einem Spaziergang am See verbinden – ein entspanntes Freizeitangebot für Einheimische und Besucher.",
   "Basel": "Basel mit seiner lebendigen Kunst- und Kulturszene hat auch für Keramikmal-Fans einiges zu bieten.",
   "Lausanne": "Lausanne am Genfersee ist bekannt für Kunst und Design – auch Keramik bemalen findet hier in der Region seinen Platz.",
