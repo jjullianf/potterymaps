@@ -1026,9 +1026,12 @@ h1, h2 { font-family: var(--font-display); font-weight: 600; color: var(--color-
    Karte selbst. */
 .map-popup-compact {
   width: auto;
-  max-width: 170px;
-  gap: 0.25rem;
-  padding: 0.55rem 0.7rem;
+  max-width: 230px;
+  gap: 0.3rem;
+  padding: 0.55rem 0.75rem;
+}
+.map-popup-compact .map-popup-badge {
+  white-space: nowrap;
 }
 
 .contact-options {
