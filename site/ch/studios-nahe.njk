@@ -33,7 +33,7 @@
           }
         : null,
     mapStudiosForJs: (data) =>
-      (data.town.nearestStudios || []).map((s) => ({ lat: s.lat, lng: s.lng, popupHtml: s.mapPopupHtml })),
+      (data.town.nearestStudios || []).map((s) => ({ lat: s.lat, lng: s.lng, popupHtml: s.mapPopupHtmlCompact })),
   },
 }
 ---

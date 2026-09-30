@@ -257,6 +257,21 @@ function buildMapPopupHtml(s, { thumbHtml, price, walkin }) {
   );
 }
 
+// Kompakte Variante ohne Bild - fuer die kleinen 280px-Karten (Stadtseite,
+// Umgebungs-Seiten), wo das volle Popup mit Bild hoeher als die Karte selbst
+// wirkte. Nur Name, Preis und Walk-in-Badge.
+function buildMapPopupHtmlCompact(s, { price, walkin }) {
+  return (
+    '<a class="map-popup map-popup-compact" href="/ch/studio/' + s.slug + '/">' +
+    '<strong class="map-popup-name">' + escapeHtml(s.name) + "</strong>" +
+    (price ? '<span class="map-popup-price">' + escapeHtml(price) + "</span>" : "") +
+    (walkin
+      ? '<span class="map-popup-badge map-popup-badge-' + walkin.cls + '">' + walkin.label + "</span>"
+      : "") +
+    "</a>"
+  );
+}
+
 module.exports = async function () {
   const raw = JSON.parse(fs.readFileSync(STUDIOS_JSON_PATH, "utf-8"));
   const studios = raw.studios || [];
@@ -321,6 +336,10 @@ module.exports = async function () {
       price: priceAtAGlance,
       walkin: computeWalkinBadge(tags),
     });
+    const mapPopupHtmlCompact = buildMapPopupHtmlCompact(s, {
+      price: priceAtAGlance,
+      walkin: computeWalkinBadge(tags),
+    });
 
     return Object.assign({}, s, {
       tagsArray: tags,
@@ -340,6 +359,7 @@ module.exports = async function () {
       nearestHubSlug,
       cardThumbHtml,
       mapPopupHtml,
+      mapPopupHtmlCompact,
       image: mainImage,
       images: imageList,
       galleryImages,

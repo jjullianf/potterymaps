@@ -1021,6 +1021,16 @@ h1, h2 { font-family: var(--font-display); font-weight: 600; color: var(--color-
   color: var(--tag-blue-text);
 }
 
+/* Bildlose, kompakte Variante fuer die kleinen 280px-Karten (Stadtseite,
+   Umgebungs-Seiten) - das volle Popup mit Bild wirkte dort hoeher als die
+   Karte selbst. */
+.map-popup-compact {
+  width: auto;
+  max-width: 170px;
+  gap: 0.25rem;
+  padding: 0.55rem 0.7rem;
+}
+
 .contact-options {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));

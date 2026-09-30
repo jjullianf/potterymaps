@@ -21,7 +21,7 @@
         .sort((a, b) => a.nearestCityDistanceKm - b.nearestCityDistanceKm)
         .slice(0, 4),
     mapStudiosForJs: (data) =>
-      (data.cityData.mapStudios || []).map((s) => ({ lat: s.lat, lng: s.lng, popupHtml: s.mapPopupHtml })),
+      (data.cityData.mapStudios || []).map((s) => ({ lat: s.lat, lng: s.lng, popupHtml: s.mapPopupHtmlCompact })),
   },
 }
 ---
