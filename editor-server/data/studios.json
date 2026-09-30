@@ -263,12 +263,15 @@
       "custom_faq": "[]",
       "lat": 46.9450504,
       "lng": 6.8442499,
-      "price_from": 20,
+      "price_from": "20",
       "country": "CH",
       "currency": "CHF",
       "postcode": "2016",
       "region": "NE",
-      "email": ""
+      "email": "hello@maison-ceramique.ch",
+      "images": "[]",
+      "contacted": false,
+      "featured": false
     },
     {
       "slug": "keramikum-ceramic-painting-studio-zwicky-duebendorf-duebendorf",
@@ -941,7 +944,7 @@
       "currency": "CHF",
       "postcode": "8032",
       "region": "ZH",
-      "email": "",
+      "email": "info@keramikmal-cafe.ch",
       "images": "[]",
       "contacted": true,
       "featured": false
@@ -1372,12 +1375,15 @@
       "custom_faq": "[]",
       "lat": 47.4149764,
       "lng": 9.3829464,
-      "price_from": 30,
+      "price_from": "30",
       "country": "CH",
       "currency": "CHF",
       "postcode": "9011",
       "region": "SG",
-      "email": ""
+      "email": "info@tonwerk-keramik.ch",
+      "images": "[]",
+      "contacted": false,
+      "featured": false
     },
     {
       "slug": "artelier39-ostermundigen",
@@ -1493,7 +1499,10 @@
       "currency": "CHF",
       "postcode": "1700",
       "region": "FR",
-      "email": ""
+      "email": "info@atelierpastel.ch",
+      "images": "[]",
+      "contacted": false,
+      "featured": false
     },
     {
       "slug": "shape-it-easy-ceramics-studio-toepferstudio-by-paint-it-easy-zuerich",
@@ -1734,7 +1743,10 @@
       "currency": "CHF",
       "postcode": "1205",
       "region": "GE",
-      "email": ""
+      "email": "hello@ceramickanvas.ch",
+      "images": "[]",
+      "contacted": false,
+      "featured": false
     },
     {
       "slug": "keramos-neuchatel",
