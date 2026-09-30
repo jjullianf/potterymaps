@@ -937,6 +937,90 @@ h1, h2 { font-family: var(--font-display); font-weight: 600; color: var(--color-
   filter: grayscale(35%) brightness(1.08) contrast(0.92) saturate(0.6);
 }
 
+/* Karten-Popup (Leaflet-Grundgeruest hier ueberschrieben, Inhalt in
+   .map-popup) - passt sich dem Card-Design des Rests der Seite an:
+   Creme-Karten-Hintergrund, abgerundete Ecken, dezenter Schatten. */
+.leaflet-popup-content-wrapper {
+  background: var(--color-card);
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+  padding: 0;
+  overflow: hidden;
+}
+.leaflet-popup-content {
+  margin: 0;
+  width: auto !important;
+}
+.leaflet-popup-tip {
+  background: var(--color-card);
+}
+.map-popup {
+  display: flex;
+  flex-direction: column;
+  width: 180px;
+  text-decoration: none;
+  color: var(--color-text);
+  font-family: var(--font-display);
+}
+.map-popup-thumb {
+  display: block;
+  width: 100%;
+  /* "height: auto" noetig trotz aspect-ratio, siehe .studio-card-thumb weiter
+     oben - eleventy-img schreibt width/height als HTML-Attribute aufs <img>. */
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+.map-popup-thumb.studio-image-placeholder {
+  background: var(--color-bg-alt);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 4 / 3;
+}
+.map-popup-thumb.studio-image-placeholder .studio-image-placeholder-icon {
+  width: 28%;
+  max-width: 40px;
+  opacity: 0.55;
+}
+.map-popup-body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
+  padding: 0.6rem 0.7rem 0.7rem;
+}
+.map-popup-name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-text);
+  line-height: 1.25;
+}
+.map-popup:hover .map-popup-name {
+  color: var(--color-accent);
+}
+.map-popup-price {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-price);
+}
+.map-popup-badge {
+  display: inline-block;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+.map-popup-badge-walkin {
+  background: var(--tag-gold-bg);
+  color: var(--tag-gold-text);
+}
+.map-popup-badge-empfohlen,
+.map-popup-badge-only {
+  background: var(--tag-blue-bg);
+  color: var(--tag-blue-text);
+}
+
 .contact-options {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));

@@ -8,18 +8,20 @@
   permalink: (data) => `/ch/staedte/${data.cityData.slug}/`,
   layout: "base.njk",
   eleventyComputed: {
-    title: (data) => `Keramik bemalen ${data.cityData.name} - ${data.cityData.count} ${data.pluralize(data.cityData.count, "Studio", "Studios")} im Vergleich | potterymaps`,
-    description: (data) => `Keramik bemalen in ${data.cityData.name}: Studios für Teller-, Ton- und Porzellan bemalen sowie Keramik-Cafés – mit Preisen und Öffnungszeiten auf einen Blick.`,
+    title: (data) => `Keramik bemalen ${data.cityData.name} - ${data.cityData.count} ${data.pluralize(data.cityData.count, "Atelier", "Ateliers")} im Vergleich | potterymaps`,
+    description: (data) => `Keramik bemalen in ${data.cityData.name}: Ateliers für Teller-, Ton- und Porzellan bemalen sowie Keramik-Cafés – mit Preisen und Öffnungszeiten auf einen Blick.`,
     noindex: (data) => data.cityData.noindex,
     jsonLdItemList: (data) => data.cityData.jsonLdItemList,
     jsonLdBreadcrumb: (data) => data.cityData.jsonLdBreadcrumb,
-    // Nur die 4 naechstgelegenen Orte ohne eigenes Studio anzeigen (Datengrundlage
+    // Nur die 4 naechstgelegenen Orte ohne eigenes Atelier anzeigen (Datengrundlage
     // in nearbyTowns bleibt vollstaendig - hier wird nur die Anzeige begrenzt).
     townsWithoutStudio: (data) =>
       (data.nearbyTowns || [])
         .filter((t) => t.nearestCitySlug === data.cityData.slug)
         .sort((a, b) => a.nearestCityDistanceKm - b.nearestCityDistanceKm)
         .slice(0, 4),
+    mapStudiosForJs: (data) =>
+      (data.cityData.mapStudios || []).map((s) => ({ lat: s.lat, lng: s.lng, popupHtml: s.mapPopupHtml })),
   },
 }
 ---
@@ -54,7 +56,7 @@
 
   {% if c.direct.length %}
   <section class="studio-list">
-    <h2>Studios in {{ c.name }}</h2>
+    <h2>Ateliers in {{ c.name }}</h2>
     <ul class="studio-cards">
       {% for s in c.direct %}{{ card(s) }}{% endfor %}
     </ul>
@@ -66,7 +68,7 @@
     <h2>Auch in der Nähe</h2>
     <ul class="town-chips">
       {% for t in c.nearbyTowns %}
-      <li><a class="town-chip" href="/ch/staedte/{{ t.slug }}/">{{ t.name }} <span class="count">{{ t.count }} {{ pluralize(t.count, "Studio", "Studios") }}</span></a></li>
+      <li><a class="town-chip" href="/ch/staedte/{{ t.slug }}/">{{ t.name }} <span class="count">{{ t.count }} {{ pluralize(t.count, "Atelier", "Ateliers") }}</span></a></li>
       {% endfor %}
     </ul>
   </section>
@@ -86,18 +88,18 @@
 
   {% if not c.hasAny %}
   <section class="empty-city">
-    <p>Aktuell ist uns in {{ c.name }} noch kein Studio zum Keramik bemalen bekannt.</p>
-    <p>Kennst du ein Studio hier? <a href="/ch/studio-eintragen/">Trag es ein</a> und hilf mit, das Verzeichnis zu vervollständigen.</p>
+    <p>Aktuell ist uns in {{ c.name }} noch kein Atelier zum Keramik bemalen bekannt.</p>
+    <p>Kennst du ein Atelier hier? <a href="/ch/studio-eintragen/">Trag es ein</a> und hilf mit, das Verzeichnis zu vervollständigen.</p>
   </section>
   {% else %}
   <section class="cta-events">
     <h2>Grösseres Event in {{ c.name }} planen?</h2>
-    <p>Firmenanlass, Weihnachts-Teamevent, Kindergeburtstag oder Junggesellinnenabschied – wir vermitteln dich kostenlos an ein passendes Studio in {{ c.name }}.</p>
+    <p>Firmenanlass, Weihnachts-Teamevent, Kindergeburtstag oder Junggesellinnenabschied – wir vermitteln dich kostenlos an ein passendes Atelier in {{ c.name }}.</p>
     <a class="button" href="/grosse-anfrage/">Jetzt Anfrage stellen</a>
   </section>
   <section class="cta-missing">
-    <h2>Dein Studio fehlt?</h2>
-    <p>Wir wachsen laufend weiter. Kennst du ein weiteres Studio in {{ c.name }}, das hier noch nicht gelistet ist?</p>
+    <h2>Dein Atelier fehlt?</h2>
+    <p>Wir wachsen laufend weiter. Kennst du ein weiteres Atelier in {{ c.name }}, das hier noch nicht gelistet ist?</p>
     <a class="button" href="/ch/studio-eintragen/">Trag es ein</a>
   </section>
   {% endif %}
@@ -107,14 +109,10 @@
 <script>
   window.__initCityMap = function () {
     var townCenter = { lat: {{ c.lat }}, lng: {{ c.lng }} };
-    var studios = [
-      {% for s in c.mapStudios %}
-      { name: "{{ s.name | escape }}", slug: "{{ s.slug }}", lat: {{ s.lat }}, lng: {{ s.lng }} }{% if not loop.last %},{% endif %}
-      {% endfor %}
-    ];
+    var studios = {{ mapStudiosForJs | dump | safe }};
 
     // Fester Zoom auf das Stadtzentrum statt fitBounds, damit weiter entfernte
-    // Nachbarschafts-Studios die Karte nicht auf ganze Region herauszoomen lassen -
+    // Nachbarschafts-Ateliers die Karte nicht auf ganze Region herauszoomen lassen -
     // es soll nur die Stadt selbst sichtbar sein.
     var map = L.map('city-detail-map', { scrollWheelZoom: false }).setView([townCenter.lat, townCenter.lng], 12);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -137,9 +135,8 @@
     });
 
     studios.forEach(function (s) {
-      L.marker([s.lat, s.lng], { icon: dotIcon }).addTo(map).bindPopup(
-        '<strong>' + s.name + '</strong><br><a href="/ch/studio/' + s.slug + '/">Zur Studio-Seite</a>'
-      );
+      var marker = L.marker([s.lat, s.lng], { icon: dotIcon }).addTo(map).bindPopup(s.popupHtml);
+      window.potterymapsAttachHoverPopup(marker);
     });
   };
 </script>

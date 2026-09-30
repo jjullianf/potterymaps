@@ -21,7 +21,7 @@ const targetSlugSet = new Set(targetCities.map((c) => c.slug));
 // damit die FAQ auf der oeffentlichen Seite identisch zum Editor ist.
 function generateAutoFAQ(s) {
   const faqs = [];
-  const name = s.name || "diesem Studio";
+  const name = s.name || "diesem Atelier";
   const city = s.city || "";
   const currency = s.currency || "CHF";
   const hasPrice =
@@ -32,7 +32,7 @@ function generateAutoFAQ(s) {
     let parts = [];
     if (s.price_mug) parts.push("Tasse ab " + currency + " " + s.price_mug);
     if (s.price_plate) parts.push("Teller ab " + currency + " " + s.price_plate);
-    if (s.studio_fee) parts.push("Studiogebühr " + currency + " " + s.studio_fee);
+    if (s.studio_fee) parts.push("Ateliergebühr " + currency + " " + s.studio_fee);
     let answer =
       "Bei " + name + (city ? " in " + city : "") + " kostet " + parts.join(", ") + ".";
     if (s.price_note) answer += " " + s.price_note;
@@ -117,7 +117,7 @@ function computePriceRangeText(s) {
   }
   // studio_fee ist in den Rohdaten oft ein ganzer Beschreibungssatz statt einer
   // reinen Zahl (z.B. "CHF 15 pro Person - 2 Stunden") - unveraendert uebernehmen
-  // statt mit "CHF ... Studiogebühr" zu verfaelschen.
+  // statt mit "CHF ... Ateliergebühr" zu verfaelschen.
   if (fee) return fee;
   return null;
 }
@@ -153,7 +153,7 @@ function truncate(text, maxLen) {
 
 // Fuer die kompakte Kartenansicht (Stadtseiten, Startseite) werden die
 // entscheidungsrelevantesten Tags zuerst gezeigt, in dieser festen Prioritaet -
-// die 3 hoechstprioren, tatsaechlich gesetzten Tags eines Studios werden gezeigt.
+// die 3 hoechstprioren, tatsaechlich gesetzten Tags eines Ateliers werden gezeigt.
 const TOP_TAG_PRIORITY = [
   "walk-in",
   "reservation-empfohlen",
@@ -215,6 +215,48 @@ function toTagObjects(tags) {
   });
 }
 
+// Walk-in-Badge fuers Karten-Popup - gleiche Prioritaet wie TOP_TAG_PRIORITY:
+// ein Atelier hat immer nur einen dieser drei Reservation-Tags gleichzeitig.
+const WALKIN_BADGE = {
+  "walk-in": { label: "Walk-in möglich", cls: "walkin" },
+  "reservation-empfohlen": { label: "Reservation empfohlen", cls: "empfohlen" },
+  "reservation-only": { label: "Nur Reservation", cls: "only" },
+};
+
+function computeWalkinBadge(tags) {
+  if (tags.includes("walk-in")) return WALKIN_BADGE["walk-in"];
+  if (tags.includes("reservation-empfohlen")) return WALKIN_BADGE["reservation-empfohlen"];
+  if (tags.includes("reservation-only")) return WALKIN_BADGE["reservation-only"];
+  return null;
+}
+
+function escapeHtml(str) {
+  return String(str || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
+// Fertiges HTML fuer das Leaflet-Popup auf allen Kartenseiten (Startseite,
+// Karte, Stadtseiten, Umgebungs-Seiten) - hier einmal zentral gebaut statt in
+// jedem der 5 Kartentemplates einzeln, damit Bild/Preis/Badge ueberall gleich
+// aussehen. Wird als JSON in die Karten-Templates eingebettet (siehe
+// js/map-popup.js), daher rohes HTML statt escaped Nunjucks-String.
+function buildMapPopupHtml(s, { thumbHtml, price, walkin }) {
+  return (
+    '<a class="map-popup" href="/ch/studio/' + s.slug + '/">' +
+    '<span class="map-popup-thumb">' + thumbHtml + "</span>" +
+    '<span class="map-popup-body">' +
+    '<strong class="map-popup-name">' + escapeHtml(s.name) + "</strong>" +
+    (price ? '<span class="map-popup-price">' + escapeHtml(price) + "</span>" : "") +
+    (walkin
+      ? '<span class="map-popup-badge map-popup-badge-' + walkin.cls + '">' + walkin.label + "</span>"
+      : "") +
+    "</span>" +
+    "</a>"
+  );
+}
+
 module.exports = async function () {
   const raw = JSON.parse(fs.readFileSync(STUDIOS_JSON_PATH, "utf-8"));
   const studios = raw.studios || [];
@@ -231,10 +273,10 @@ module.exports = async function () {
 
     const cityName = s.city || "";
     const cSlug = citySlug(cityName);
-    // Jeder Ort mit mind. einem Studio bekommt eine eigene Seite - "targetCity"
+    // Jeder Ort mit mind. einem Atelier bekommt eine eigene Seite - "targetCity"
     // ist daher immer der eigene Ort. "nearestHub" bleibt fuer Faelle relevant, in
     // denen auf die naechste der 20 garantierten Staedte verwiesen wird (z.B.
-    // Fallback fuer "Aehnliche Studios" bei Orten mit nur einem Studio).
+    // Fallback fuer "Aehnliche Ateliers" bei Orten mit nur einem Atelier).
     const isHub = targetSlugSet.has(cSlug);
     const nearestHubName = isHub ? cityName : neighborMap[cityName] || cityName;
     const nearestHubSlug = citySlug(nearestHubName);
@@ -248,7 +290,7 @@ module.exports = async function () {
     // Bilderliste (siehe _11ty/studioImages.js) - erstes Element ist das
     // Hauptbild und ersetzt/normalisiert das alte einzelne "image"-Feld ueberall
     // unten (Karten, Sortierung nach "hat Bild", og:image etc.), auch fuer
-    // Studios, die noch das alte Format haben.
+    // Ateliers, die noch das alte Format haben.
     const imageList = getImageList(s);
     const mainImage = imageList[0] || "";
     const galleryImages = imageList.slice(1);
@@ -263,6 +305,21 @@ module.exports = async function () {
       sizes: "400px",
       loading: "lazy",
       wrapClass: "studio-card-thumb",
+    });
+
+    // Kleineres Bild eigens fuers Karten-Popup (200px reicht dort, siehe
+    // .map-popup-thumb in style.css - gleiches Seitenverhaeltnis/object-fit
+    // wie auf den Listing-Karten, nur schmaler).
+    const mapPopupThumbHtml = await studioImage(studioForImage, {
+      widths: [220],
+      sizes: "220px",
+      loading: "lazy",
+      wrapClass: "map-popup-thumb",
+    });
+    const mapPopupHtml = buildMapPopupHtml(s, {
+      thumbHtml: mapPopupThumbHtml,
+      price: priceAtAGlance,
+      walkin: computeWalkinBadge(tags),
     });
 
     return Object.assign({}, s, {
@@ -282,6 +339,7 @@ module.exports = async function () {
       nearestHubName,
       nearestHubSlug,
       cardThumbHtml,
+      mapPopupHtml,
       image: mainImage,
       images: imageList,
       galleryImages,

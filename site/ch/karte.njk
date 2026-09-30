@@ -1,18 +1,22 @@
 ---js
 {
   layout: "base.njk",
-  title: "Karte aller Studios | potterymaps",
-  description: "Alle Studios zum Keramik bemalen in der Schweiz auf einer Karte - finde ein Studio in deiner Nähe.",
+  title: "Karte aller Ateliers | potterymaps",
+  description: "Alle Ateliers zum Keramik bemalen in der Schweiz auf einer Karte - finde ein Atelier in deiner Nähe.",
   permalink: "/ch/karte/",
   eleventyComputed: {
     mapStudios: (data) => (data.studios || []).filter((s) => s.lat && s.lng),
+    mapStudiosForJs: (data) =>
+      (data.studios || [])
+        .filter((s) => s.lat && s.lng)
+        .map((s) => ({ lat: s.lat, lng: s.lng, popupHtml: s.mapPopupHtml })),
   },
 }
 ---
 <article class="static-page">
   <p class="breadcrumb"><a href="/ch/">Startseite</a> &raquo; Karte</p>
-  <h1>Alle Studios auf der Karte</h1>
-  <p>Alle {{ mapStudios.length }} Studios zum Keramik bemalen in der Schweiz auf einen Blick. Klicke auf einen Pin für Details.</p>
+  <h1>Alle Ateliers auf der Karte</h1>
+  <p>Alle {{ mapStudios.length }} Ateliers zum Keramik bemalen in der Schweiz auf einen Blick. Klicke auf einen Pin für Details.</p>
 
   <div class="map-consent-gate leaflet-consent-gate" data-init-fn="__initKarteMap">
     <p>Für die Karte wird eine Verbindung zu OpenStreetMap-Kartenservern hergestellt, wobei deine IP-Adresse übermittelt wird.</p>
@@ -25,11 +29,7 @@
 
 <script>
   window.__initKarteMap = function () {
-    var studios = [
-      {% for s in mapStudios %}
-      { name: "{{ s.name | escape }}", slug: "{{ s.slug }}", city: "{{ s.city | escape }}", lat: {{ s.lat }}, lng: {{ s.lng }} }{% if not loop.last %},{% endif %}
-      {% endfor %}
-    ];
+    var studios = {{ mapStudiosForJs | dump | safe }};
 
     var map = L.map('overview-map').setView([46.9, 8.2], 8);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -56,9 +56,8 @@
       },
     });
     studios.forEach(function (s) {
-      var marker = L.marker([s.lat, s.lng], { icon: dotIcon }).bindPopup(
-        '<strong>' + s.name + '</strong><br>' + s.city + '<br><a href="/ch/studio/' + s.slug + '/">Zur Studio-Seite</a>'
-      );
+      var marker = L.marker([s.lat, s.lng], { icon: dotIcon }).bindPopup(s.popupHtml);
+      window.potterymapsAttachHoverPopup(marker);
       clusterGroup.addLayer(marker);
     });
     map.addLayer(clusterGroup);

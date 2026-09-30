@@ -1,32 +1,32 @@
 ---js
 {
   layout: "base.njk",
-  title: "Keramik bemalen Schweiz – Studios in deiner Stadt finden | potterymaps",
-  description: "Finde Studios zum Keramik bemalen in der ganzen Schweiz – Teller, Ton und Porzellan bemalen, plus gemütliche Keramik-Cafés. Alle Städte im Überblick.",
+  title: "Keramik bemalen Schweiz – Ateliers in deiner Stadt finden | potterymaps",
+  description: "Finde Ateliers zum Keramik bemalen in der ganzen Schweiz – Teller, Ton und Porzellan bemalen, plus gemütliche Keramik-Cafés. Alle Städte im Überblick.",
   homeFaqs: [
     {
       q: "Was ist Keramik bemalen?",
-      a: "Beim Keramik bemalen (auch Pottery Painting genannt) wählst du einen vorgefertigten Keramik-Rohling – z. B. Tasse, Teller oder Schüssel – und bemalst ihn im Studio mit Spezialfarben. Anschliessend wird das Stück im Studio gebrannt und ist danach dauerhaft nutz- und spülmaschinenfest.",
+      a: "Beim Keramik bemalen (auch Pottery Painting genannt) wählst du einen vorgefertigten Keramik-Rohling – z. B. Tasse, Teller oder Schüssel – und bemalst ihn im Atelier mit Spezialfarben. Anschliessend wird das Stück im Atelier gebrannt und ist danach dauerhaft nutz- und spülmaschinenfest.",
     },
     {
       q: "Was kostet Keramik bemalen?",
-      a: "Die Preise hängen vom gewählten Rohling ab und liegen meist zwischen CHF 15 und 50, oft zzgl. einer kleinen Studiogebühr für Farben, Brand und Nutzungsdauer. Auf jeder Studio-Seite bei potterymaps findest du die aktuellen Preise auf einen Blick.",
+      a: "Die Preise hängen vom gewählten Rohling ab und liegen meist zwischen CHF 15 und 50, oft zzgl. einer kleinen Ateliergebühr für Farben, Brand und Nutzungsdauer. Auf jeder Atelier-Seite bei potterymaps findest du die aktuellen Preise auf einen Blick.",
     },
     {
       q: "Wo kann ich in der Schweiz Keramik bemalen?",
-      a: "potterymaps listet Studios und Keramik-Cafés zum Keramik bemalen in der ganzen Schweiz, u. a. in Zürich, Basel, Bern, Genf, Luzern und vielen weiteren Städten. Nutze die Suche oben, um Studios in deiner Nähe zu finden.",
+      a: "potterymaps listet Ateliers und Keramik-Cafés zum Keramik bemalen in der ganzen Schweiz, u. a. in Zürich, Basel, Bern, Genf, Luzern und vielen weiteren Städten. Nutze die Suche oben, um Ateliers in deiner Nähe zu finden.",
     },
     {
       q: "Wie lange dauert es, bis die bemalte Keramik fertig ist?",
-      a: "Nach dem Bemalen wird dein Stück im Studio glasiert und gebrannt. Das dauert je nach Studio meist 1 bis 3 Wochen, bis es zur Abholung bereitsteht – einige Studios bieten auch einen Versand nach Hause an.",
+      a: "Nach dem Bemalen wird dein Stück im Atelier glasiert und gebrannt. Das dauert je nach Atelier meist 1 bis 3 Wochen, bis es zur Abholung bereitsteht – einige Ateliers bieten auch einen Versand nach Hause an.",
     },
     {
       q: "Eignet sich Keramik bemalen für Anfänger und Kinder?",
-      a: "Ja. Keramik bemalen erfordert keine Vorkenntnisse und ist bei den meisten Studios ausdrücklich für Anfänger, Familien und Kinder geeignet – viele bieten dafür auch spezielle Kindergeburtstage an.",
+      a: "Ja. Keramik bemalen erfordert keine Vorkenntnisse und ist bei den meisten Ateliers ausdrücklich für Anfänger, Familien und Kinder geeignet – viele bieten dafür auch spezielle Kindergeburtstage an.",
     },
     {
       q: "Eignet sich Keramik bemalen für Firmenevents oder Gruppen?",
-      a: "Ja, viele Studios bieten Keramik bemalen auch als Teamevent, Junggesellinnenabschied oder Firmenanlass für grössere Gruppen an. Über unsere Event-Anfrage vermitteln wir dich kostenlos an ein passendes Studio.",
+      a: "Ja, viele Ateliers bieten Keramik bemalen auch als Teamevent, Junggesellinnenabschied oder Firmenanlass für grössere Gruppen an. Über unsere Event-Anfrage vermitteln wir dich kostenlos an ein passendes Atelier.",
     },
   ],
   eleventyComputed: {
@@ -36,9 +36,12 @@
     searchTowns: (data) => {
       return (data.nearbyTowns || []).map((t) => ({ name: t.name, slug: t.slug }));
     },
-    homeMapStudios: (data) => (data.studios || []).filter((s) => s.lat && s.lng),
+    homeMapStudios: (data) =>
+      (data.studios || [])
+        .filter((s) => s.lat && s.lng)
+        .map((s) => ({ lat: s.lat, lng: s.lng, popupHtml: s.mapPopupHtml })),
     exampleStudios: (data) => {
-      // Kein priceRangeText mehr vorausgesetzt: das schloss Studios mit echten
+      // Kein priceRangeText mehr vorausgesetzt: das schloss Ateliers mit echten
       // eigenen Fotos, aber (noch) fehlenden Preisangaben, komplett aus der
       // Auswahl aus - noch bevor die Bild-Priorisierung ueberhaupt zum Tragen
       // kam (siehe compareStudiosForListing).
@@ -85,8 +88,8 @@
 <article class="home">
 
   <section class="hero" style="background-image: url('{{ heroImageUrl }}');">
-    <h1>Finde dein Studio zum Keramik bemalen</h1>
-    <p class="intro">Studios und Ateliers in der ganzen Schweiz – nach Stadt sortiert, mit Preisen und Öffnungszeiten auf einen Blick.</p>
+    <h1>Finde dein Atelier zum Keramik bemalen</h1>
+    <p class="intro">Ateliers und Keramik-Cafés in der ganzen Schweiz – nach Stadt sortiert, mit Preisen und Öffnungszeiten auf einen Blick.</p>
     <div class="city-search-wrap">
       <form class="city-search" id="city-search-form" autocomplete="off">
         <input type="text" id="city-search-input" placeholder="Wo möchtest du Keramik bemalen?" aria-label="Stadt suchen">
@@ -108,26 +111,26 @@
 
   <section class="topic-intro">
     <h2>Teller, Ton oder Porzellan bemalen – oder einfach im Keramik-Café verweilen</h2>
-    <p>Bei potterymaps geht es um mehr als klassisches Keramik bemalen: Viele Studios bieten auch das Bemalen von Porzellan an{% if porzellanStudios.length %}, zum Beispiel {% for s in porzellanStudios %}<a href="/ch/studio/{{ s.slug }}/">{{ s.name }}</a>{% if not loop.last %}, {% endif %}{% endfor %}{% endif %}. Andere sind gemütliche Keramik-Cafés, in denen du bei einer Tasse Kaffee direkt vor Ort einen Teller zum Bemalen aussuchst oder dein Stück aus Ton bemalst{% if cafeStudios.length %} – etwa bei {% for s in cafeStudios %}<a href="/ch/studio/{{ s.slug }}/">{{ s.name }}</a>{% if not loop.last %}, {% endif %}{% endfor %}{% endif %}. Wähle unten deine Stadt und finde das passende Studio in deiner Nähe.</p>
+    <p>Bei potterymaps geht es um mehr als klassisches Keramik bemalen: Viele Ateliers bieten auch das Bemalen von Porzellan an{% if porzellanStudios.length %}, zum Beispiel {% for s in porzellanStudios %}<a href="/ch/studio/{{ s.slug }}/">{{ s.name }}</a>{% if not loop.last %}, {% endif %}{% endfor %}{% endif %}. Andere sind gemütliche Keramik-Cafés, in denen du bei einer Tasse Kaffee direkt vor Ort einen Teller zum Bemalen aussuchst oder dein Stück aus Ton bemalst{% if cafeStudios.length %} – etwa bei {% for s in cafeStudios %}<a href="/ch/studio/{{ s.slug }}/">{{ s.name }}</a>{% if not loop.last %}, {% endif %}{% endfor %}{% endif %}. Wähle unten deine Stadt und finde das passende Atelier in deiner Nähe.</p>
   </section>
 
   <section class="how-it-works">
     <h2>So funktioniert's</h2>
     <ol class="steps">
-      <li><span class="step-num">1</span><strong>Stadt wählen</strong><p>Finde alle Studios in deiner Nähe.</p></li>
-      <li><span class="step-num">2</span><strong>Studio vergleichen</strong><p>Preise, Öffnungszeiten und Tags auf einen Blick.</p></li>
-      <li><span class="step-num">3</span><strong>Termin buchen</strong><p>Direkt beim Studio per Telefon, E-Mail oder Website.</p></li>
+      <li><span class="step-num">1</span><strong>Stadt wählen</strong><p>Finde alle Ateliers in deiner Nähe.</p></li>
+      <li><span class="step-num">2</span><strong>Atelier vergleichen</strong><p>Preise, Öffnungszeiten und Tags auf einen Blick.</p></li>
+      <li><span class="step-num">3</span><strong>Termin buchen</strong><p>Direkt beim Atelier per Telefon, E-Mail oder Website.</p></li>
     </ol>
   </section>
 
   <section class="cta-events">
     <h2>Grössere Events planen?</h2>
-    <p>Firmenanlass, Kindergeburtstag oder Junggesellinnenabschied – wir vermitteln dich an ein passendes Studio.</p>
+    <p>Firmenanlass, Kindergeburtstag oder Junggesellinnenabschied – wir vermitteln dich an ein passendes Atelier.</p>
     <a class="button" href="/ch/events/">Jetzt Kontaktieren</a>
   </section>
 
   <section class="example-studios">
-    <h2>Studios entdecken</h2>
+    <h2>Ateliers entdecken</h2>
     <ul class="studio-cards">
       {% for s in exampleStudios %}{{ card(s) }}{% endfor %}
     </ul>
@@ -138,8 +141,8 @@
   </section>
 
   <section class="cta-missing">
-    <h2>Dein Studio fehlt?</h2>
-    <p>Wir wachsen laufend weiter. Kennst du ein Studio, das noch nicht gelistet ist?</p>
+    <h2>Dein Atelier fehlt?</h2>
+    <p>Wir wachsen laufend weiter. Kennst du ein Atelier, das noch nicht gelistet ist?</p>
     <a class="button" href="/ch/studio-eintragen/">Trag es ein</a>
   </section>
 
@@ -160,7 +163,7 @@
       {% for c in popularCities %}{ name: "{{ c.name | escape }}", slug: "{{ c.slug }}", hasOwn: true }{% if not loop.last %},{% endif %}
       {% endfor %}
     ];
-    // Orte ohne eigenes Studio: fuehren zu einer "Studios in der Naehe von..."-Seite
+    // Orte ohne eigenes Atelier: fuehren zu einer "Ateliers in der Naehe von..."-Seite
     // (/studios-nahe/<slug>/) statt zu einer eigenen Staedte-Seite.
     var towns = [
       {% for t in searchTowns %}{ name: "{{ t.name | escape }}", slug: "{{ t.slug }}", hasOwn: false }{% if not loop.last %},{% endif %}
@@ -187,7 +190,7 @@
       matches.slice(0, 6).forEach(function (c) {
         var a = document.createElement("a");
         a.href = c.hasOwn ? "/ch/staedte/" + c.slug + "/" : "/ch/studios-nahe/" + c.slug + "/";
-        var note = c.note || (c.hasOwn ? null : "Studios in der Nähe");
+        var note = c.note || (c.hasOwn ? null : "Ateliers in der Nähe");
         if (note) {
           a.innerHTML = c.name + ' <span class="suggestion-note">' + note + "</span>";
         } else {
@@ -250,11 +253,7 @@
 
 <script>
   window.__initHomeMap = function () {
-    var studios = [
-      {% for s in homeMapStudios %}
-      { name: "{{ s.name | escape }}", slug: "{{ s.slug }}", city: "{{ s.city | escape }}", lat: {{ s.lat }}, lng: {{ s.lng }} }{% if not loop.last %},{% endif %}
-      {% endfor %}
-    ];
+    var studios = {{ homeMapStudios | dump | safe }};
 
     var map = L.map('home-overview-map').setView([46.9, 8.2], 8);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -281,9 +280,8 @@
       },
     });
     studios.forEach(function (s) {
-      var marker = L.marker([s.lat, s.lng], { icon: dotIcon }).bindPopup(
-        '<strong>' + s.name + '</strong><br>' + s.city + '<br><a href="/ch/studio/' + s.slug + '/">Zur Studio-Seite</a>'
-      );
+      var marker = L.marker([s.lat, s.lng], { icon: dotIcon }).bindPopup(s.popupHtml);
+      window.potterymapsAttachHoverPopup(marker);
       clusterGroup.addLayer(marker);
     });
     map.addLayer(clusterGroup);
