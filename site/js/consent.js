@@ -65,7 +65,15 @@
   function initOutboundLinkTracking() {
     document.addEventListener("click", function (e) {
       var link = e.target.closest(".studio-website-link");
-      if (!link || typeof window.gtag !== "function") return;
+      if (!link) return;
+      // Umami (cookielos, ohne Consent) - zaehlt Klicks auf Studio-Websites
+      if (window.umami && typeof window.umami.track === "function") {
+        window.umami.track("studio_link_click", {
+          studio_slug: link.getAttribute("data-studio-slug") || "",
+          studio_name: link.getAttribute("data-studio-name") || "",
+        });
+      }
+      if (typeof window.gtag !== "function") return;
       window.gtag("event", "studio_link_click", {
         studio_slug: link.getAttribute("data-studio-slug") || "",
         studio_name: link.getAttribute("data-studio-name") || "",

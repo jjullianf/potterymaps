@@ -58,6 +58,9 @@
   {% if jsonLdOrg %}
   <script type="application/ld+json">{{ jsonLdOrg | dump | safe }}</script>
   {% endif %}
+  <!-- Umami: cookielose Besucherstatistik, zaehlt alle Besucher ohne Consent.
+       data-domains verhindert, dass lokale Dev-Aufrufe (localhost) mitgezaehlt werden. -->
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="37e9cec5-1291-48e4-b6af-1c06958bfbf7" data-domains="potterymaps.com,www.potterymaps.com"></script>
 </head>
 <body>
   <div id="cookie-banner" class="cookie-banner" hidden>
