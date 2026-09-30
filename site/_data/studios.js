@@ -215,12 +215,14 @@ function toTagObjects(tags) {
   });
 }
 
-// Walk-in-Badge fuers Karten-Popup - gleiche Prioritaet wie TOP_TAG_PRIORITY:
-// ein Atelier hat immer nur einen dieser drei Reservation-Tags gleichzeitig.
+// Walk-in-Badge fuers Karten-Popup und die Studio-Detailseite - gleiche
+// Prioritaet wie TOP_TAG_PRIORITY: ein Atelier hat immer nur einen dieser
+// drei Reservation-Tags gleichzeitig. Icons passend zu TAG_META oben.
+const RESERVATION_TAGS = ["walk-in", "reservation-empfohlen", "reservation-only"];
 const WALKIN_BADGE = {
-  "walk-in": { label: "Walk-in möglich", cls: "walkin" },
-  "reservation-empfohlen": { label: "Reservation empfohlen", cls: "empfohlen" },
-  "reservation-only": { label: "Nur Reservation", cls: "only" },
+  "walk-in": { label: "Walk-in möglich", cls: "walkin", icon: "ti-door-enter" },
+  "reservation-empfohlen": { label: "Reservation empfohlen", cls: "empfohlen", icon: "ti-calendar-check" },
+  "reservation-only": { label: "Nur Reservation", cls: "only", icon: "ti-lock" },
 };
 
 function computeWalkinBadge(tags) {
@@ -344,6 +346,11 @@ module.exports = async function () {
     return Object.assign({}, s, {
       tagsArray: tags,
       tagsObjects: toTagObjects(tags),
+      // Fuer die Detailseite: Walk-in/Reservation als eigene hervorgehobene
+      // Zeile statt normalem Tag, daher hier aus der uebrigen Tag-Liste
+      // entfernt (siehe .studio-walkin-badge in ch/studio.njk).
+      tagsObjectsNoWalkin: toTagObjects(tags.filter((t) => !RESERVATION_TAGS.includes(t))),
+      walkinBadge: computeWalkinBadge(tags),
       topTags,
       topTagsObjects: toTagObjects(topTags),
       priceRangeText,

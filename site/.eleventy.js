@@ -54,7 +54,10 @@ async function studioGallery(urls, alt) {
       });
       const html = generateHTML(metadata, {
         alt: alt || "",
-        sizes: "(max-width: 900px) 100vw, 852px",
+        // Bild ist auf der Studio-Detailseite jetzt klein (rechts neben den
+        // Hauptinfos, 260px) statt hoch aufgeloest ueber die volle Breite -
+        // Hauptgewicht fuer Fotos liegt auf Karte/Listing-Karten.
+        sizes: "(min-width: 640px) 260px, 100vw",
         loading: slides.length === 0 ? "eager" : "lazy",
         fetchpriority: slides.length === 0 ? "high" : undefined,
         decoding: "async",

@@ -492,25 +492,66 @@ h1, h2 { font-family: var(--font-display); font-weight: 600; color: var(--color-
   opacity: 0.55;
 }
 
-/* Studio-Detailseiten: Quickfacts-Box */
-.studio-quickfacts {
-  background: var(--color-bg-alt);
-  border: 1px solid var(--color-border);
-  border-radius: 10px;
-  padding: 1.25rem 1.5rem;
+/* Studio-Detailseiten: Kopfbereich - Hauptinfos (Preis, Walk-in-Status,
+   Öffnungszeiten, Tags) links, kleines Bild rechts. Reihenfolge im Markup ist
+   bewusst Text-zuerst-dann-Bild, damit Mobile (Flex-Spalte, Standardrichtung)
+   automatisch "Text oben, Bild unten" zeigt; Desktop dreht das per Media
+   Query auf eine Zeile mit dem Bild rechts. */
+.studio-hero {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
   margin: 1rem 0 1.5rem;
 }
-.price-at-a-glance { margin-bottom: 1rem; }
+.studio-hero-main { min-width: 0; }
+.studio-hero-image { flex-shrink: 0; }
+.studio-hero-image .studio-gallery { margin: 0; }
+.studio-hero-image .studio-hero-img { margin: 0; }
+
+@media (min-width: 640px) {
+  .studio-hero {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  .studio-hero-main { flex: 1 1 auto; }
+  .studio-hero-image { flex: 0 0 260px; width: 260px; }
+}
+
+.price-at-a-glance { margin-bottom: 0.9rem; }
 .price-at-a-glance-value { display: block; font-size: 1.8rem; font-weight: 700; color: var(--color-price); line-height: 1.2; }
 .price-at-a-glance-includes { display: block; font-size: 0.85rem; color: var(--color-text-muted); margin-top: 0.2rem; }
 
-.quickfacts-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.5rem; }
-.quickfacts-list li { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+/* Walk-in/Reservation als eigene, farblich hervorgehobene Zeile statt Teil
+   der normalen Tag-Liste - gleiche Farblogik wie das Karten-Popup
+   (.map-popup-badge-*). */
+.studio-walkin-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0 0 0.9rem;
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+.studio-walkin-badge-walkin { background: var(--tag-gold-bg); color: var(--tag-gold-text); }
+.studio-walkin-badge-empfohlen,
+.studio-walkin-badge-only { background: var(--tag-blue-bg); color: var(--tag-blue-text); }
+
+.studio-hours { margin: 0 0 0.9rem; display: flex; gap: 0.5rem; flex-wrap: wrap; }
 .qf-label { color: var(--color-text-muted); min-width: 130px; font-size: 0.9rem; }
 .qf-value { font-weight: 500; }
 .qf-price { color: var(--color-price); font-weight: 600; }
 .qf-value a { color: var(--color-accent); }
-.studio-quickfacts .tags { margin-top: 0.9rem; }
+.studio-hero-main .tags { margin-top: 0.9rem; }
+
+.studio-address {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0 0 0.6rem;
+  color: var(--color-text-muted);
+}
 
 .studio-map {
   margin: 0 0 1.5rem;

@@ -86,28 +86,40 @@
 
   <h1 class="studio-title">{{ s.name }}{% if s.featured %} <span class="featured-badge">Empfohlen</span>{% endif %}</h1>
 
-  {% studioGallery s.images, s.name %}
+  <div class="studio-hero">
+    <div class="studio-hero-main">
+      {% if s.priceAtAGlance %}
+      <div class="price-at-a-glance">
+        <span class="price-at-a-glance-value">{{ s.priceAtAGlance }}</span>
+        {% if s.priceIncludes %}<span class="price-at-a-glance-includes">{{ s.priceIncludes }}</span>{% endif %}
+      </div>
+      {% elif s.priceRangeText %}
+      <div class="price-at-a-glance">
+        <span class="price-at-a-glance-value qf-price">{{ s.priceRangeText }}</span>
+      </div>
+      {% endif %}
 
-  <section class="studio-quickfacts">
-    {% if s.priceAtAGlance %}
-    <div class="price-at-a-glance">
-      <span class="price-at-a-glance-value">{{ s.priceAtAGlance }}</span>
-      {% if s.priceIncludes %}<span class="price-at-a-glance-includes">{{ s.priceIncludes }}</span>{% endif %}
-    </div>
-    {% endif %}
-    <ul class="quickfacts-list">
-      <li><span class="qf-label">Adresse</span><span class="qf-value">{{ s.address }}</span></li>
-      {% if s.phone %}<li><span class="qf-label">Telefon</span><span class="qf-value"><a href="tel:{{ s.phone }}">{{ s.phone }}</a></span></li>{% endif %}
-      {% if s.opening_hours %}<li><span class="qf-label">Öffnungszeiten</span><span class="qf-value">{{ s.opening_hours }}</span></li>{% endif %}
-      {% if not s.priceAtAGlance and s.priceRangeText %}<li><span class="qf-label">Preisspanne</span><span class="qf-value qf-price">{{ s.priceRangeText }}</span></li>{% endif %}
-    </ul>
-    {% if s.tagsObjects.length %}
-    <div class="tags">
-      {% for tag in s.tagsObjects %}<span class="tag tag-{{ tag.category }}"><i class="ti {{ tag.icon }}"></i>{{ tag.label }}</span>{% endfor %}
-    </div>
-    {% endif %}
-  </section>
+      {% if s.walkinBadge %}
+      <p class="studio-walkin-badge studio-walkin-badge-{{ s.walkinBadge.cls }}"><i class="ti {{ s.walkinBadge.icon }}"></i>{{ s.walkinBadge.label }}</p>
+      {% endif %}
 
+      {% if s.opening_hours %}
+      <p class="studio-hours"><span class="qf-label">Öffnungszeiten</span><span class="qf-value">{{ s.opening_hours }}</span></p>
+      {% endif %}
+
+      {% if s.tagsObjectsNoWalkin.length %}
+      <div class="tags">
+        {% for tag in s.tagsObjectsNoWalkin %}<span class="tag tag-{{ tag.category }}"><i class="ti {{ tag.icon }}"></i>{{ tag.label }}</span>{% endfor %}
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="studio-hero-image">
+      {% studioGallery s.images, s.name %}
+    </div>
+  </div>
+
+  <p class="studio-address"><i class="ti ti-map-pin"></i> {{ s.address }}</p>
   <div class="studio-map">
     <div class="map-consent-gate" data-map-src="https://www.google.com/maps?q={{ (s.address + ' ' + s.city) | urlencode }}&output=embed" data-map-title="Karte: {{ s.name }}">
       <p>Für die Karte wird eine Verbindung zu Google Maps hergestellt.</p>
