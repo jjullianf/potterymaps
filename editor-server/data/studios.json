@@ -27,7 +27,8 @@
       "currency": "CHF",
       "postcode": "3270",
       "region": "BE",
-      "email": "unique.keramik@icloud.com"
+      "email": "unique.keramik@icloud.com",
+      "contacted": true
     },
     {
       "slug": "paint-it-easy-ceramics-studio-ceramic-painting-keramik-bemalen-basel",
@@ -149,7 +150,8 @@
       "currency": "CHF",
       "postcode": "2502",
       "region": "BE",
-      "email": "info@fabrika-azteka.ch"
+      "email": "info@fabrika-azteka.ch",
+      "contacted": true
     },
     {
       "slug": "kreativ-art-box-burgdorf",
@@ -178,7 +180,8 @@
       "currency": "CHF",
       "postcode": "3400",
       "region": "BE",
-      "email": "kreativartbox@gmail.com"
+      "email": "kreativartbox@gmail.com",
+      "contacted": true
     },
     {
       "slug": "atelier-herzton-batterkinden",
@@ -207,7 +210,8 @@
       "currency": "CHF",
       "postcode": "3315",
       "region": "BE",
-      "email": "info@atelierherzton.ch"
+      "email": "info@atelierherzton.ch",
+      "contacted": true
     },
     {
       "slug": "selbergmalt-ch-buelach",
@@ -238,7 +242,7 @@
       "region": "ZH",
       "email": "hoi@selbergmalt.ch",
       "images": "[]",
-      "contacted": false,
+      "contacted": true,
       "featured": false
     },
     {
@@ -300,7 +304,8 @@
       "currency": "CHF",
       "postcode": "8600",
       "region": "ZH",
-      "email": "keramikum.studio@gmail.com"
+      "email": "keramikum.studio@gmail.com",
+      "contacted": true
     },
     {
       "slug": "ceramique-cafe-fribourg-fribourg",
@@ -387,7 +392,8 @@
       "currency": "CHF",
       "postcode": "8722",
       "region": "SG",
-      "email": "info@atelier-seestern.ch"
+      "email": "info@atelier-seestern.ch",
+      "contacted": true
     },
     {
       "slug": "keramikmalerei-jasmin-agner-kriens",
@@ -416,7 +422,8 @@
       "currency": "CHF",
       "postcode": "6010",
       "region": "LU",
-      "email": "info@keramikmalerei.ch"
+      "email": "info@keramikmalerei.ch",
+      "contacted": true
     },
     {
       "slug": "kreativ-pause-keramik-bemalen-laufenburg-laufenburg",
@@ -445,7 +452,8 @@
       "currency": "CHF",
       "postcode": "5080",
       "region": "AG",
-      "email": "info@kreativ-pause.com"
+      "email": "info@kreativ-pause.com",
+      "contacted": true
     },
     {
       "slug": "hello-frances-pottery-painting-keramikmalen-lucerne",
@@ -590,7 +598,8 @@
       "currency": "CHF",
       "postcode": "4853",
       "region": "AG",
-      "email": "info@auerhand.ch"
+      "email": "info@auerhand.ch",
+      "contacted": true
     },
     {
       "slug": "keramikstudio-kreativ-live-oberhofen",
@@ -619,7 +628,8 @@
       "currency": "CHF",
       "postcode": "3653",
       "region": "BE",
-      "email": "info@kreativ-live.ch"
+      "email": "info@kreativ-live.ch",
+      "contacted": true
     },
     {
       "slug": "tom-s-tonwerk-ostermundigen",
@@ -679,7 +689,7 @@
       "region": "ZH",
       "email": "keramik@pinselstrich.ch",
       "images": "[]",
-      "contacted": false,
+      "contacted": true,
       "featured": false
     },
     {
@@ -709,7 +719,8 @@
       "currency": "CHF",
       "postcode": "4500",
       "region": "SO",
-      "email": "info@tworoomclub.ch"
+      "email": "info@tworoomclub.ch",
+      "contacted": true
     },
     {
       "slug": "spazio-keramikmalstudio-coffee-more-sursee",
@@ -738,7 +749,8 @@
       "currency": "CHF",
       "postcode": "6210",
       "region": "LU",
-      "email": "mail@spazio-sursee.ch"
+      "email": "mail@spazio-sursee.ch",
+      "contacted": true
     },
     {
       "slug": "creative-you-ceramic-painting-studio-thalwil-thalwil",
@@ -767,7 +779,8 @@
       "currency": "CHF",
       "postcode": "8800",
       "region": "ZH",
-      "email": "info@creative-you.ch"
+      "email": "info@creative-you.ch",
+      "contacted": true
     },
     {
       "slug": "levin-art-studio-ehem-the-rainbow-club-winterthur",
@@ -825,7 +838,8 @@
       "currency": "CHF",
       "postcode": "5303",
       "region": "AG",
-      "email": "atelier@janella.ch"
+      "email": "atelier@janella.ch",
+      "contacted": true
     },
     {
       "slug": "hello-frances-keramikmalen-paint-your-own-pottery-zofingen",
@@ -854,7 +868,8 @@
       "currency": "CHF",
       "postcode": "4800",
       "region": "AG",
-      "email": "info@hellofrances.ch"
+      "email": "info@hellofrances.ch",
+      "contacted": true
     },
     {
       "slug": "creative-you-ceramic-painting-studio-zug-zug",
@@ -883,7 +898,8 @@
       "currency": "CHF",
       "postcode": "6300",
       "region": "ZG",
-      "email": "info@creative-you.ch"
+      "email": "info@creative-you.ch",
+      "contacted": true
     },
     {
       "slug": "atelier-alfar-zuerich",
@@ -1293,7 +1309,8 @@
       "currency": "CHF",
       "postcode": "8484",
       "region": "ZH",
-      "email": "info@herzart.ch"
+      "email": "info@herzart.ch",
+      "contacted": true
     },
     {
       "slug": "lavendear-studio-luzern",
@@ -1441,7 +1458,8 @@
       "currency": "CHF",
       "postcode": "3123",
       "region": "BE",
-      "email": "magda.humbel@gmail.com"
+      "email": "magda.humbel@gmail.com",
+      "contacted": true
     },
     {
       "slug": "kimkeramik-biberist",
@@ -1470,7 +1488,8 @@
       "currency": "CHF",
       "postcode": "4562",
       "region": "SO",
-      "email": "kimkeramik@hotmail.com"
+      "email": "kimkeramik@hotmail.com",
+      "contacted": true
     },
     {
       "slug": "atelier-pastel-fribourg",
@@ -1560,7 +1579,8 @@
       "currency": "CHF",
       "postcode": "6330",
       "region": "ZG",
-      "email": "info@keramikloft.ch"
+      "email": "info@keramikloft.ch",
+      "contacted": true
     },
     {
       "slug": "ceramio-reute",
@@ -1589,7 +1609,8 @@
       "currency": "CHF",
       "postcode": "9411",
       "region": "AR",
-      "email": "info@ceramio.ch"
+      "email": "info@ceramio.ch",
+      "contacted": true
     },
     {
       "slug": "paintnow-malen-toepfern-in-zuerich-zuerich",
@@ -1865,7 +1886,8 @@
       "currency": "CHF",
       "postcode": "8500",
       "region": "TG",
-      "email": "info@likandley.com"
+      "email": "info@likandley.com",
+      "contacted": true
     },
     {
       "slug": "toepferei-rundwerk-winterthur",
