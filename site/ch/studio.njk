@@ -30,6 +30,7 @@
         telephone: s.phone || undefined,
         email: s.email || undefined,
         url: s.website || undefined,
+        sameAs: s.instagramUrl ? [s.instagramUrl] : undefined,
       };
     },
     jsonLdBreadcrumb: (data) => {
@@ -104,7 +105,7 @@
       {% endif %}
 
       {% if s.opening_hours %}
-      <p class="studio-hours"><span class="qf-label">Öffnungszeiten</span><span class="qf-value">{{ s.opening_hours }}</span></p>
+      <p class="studio-hours"><span class="qf-label">Öffnungszeiten</span><span class="qf-value">{{ s.opening_hours | linkify | safe }}</span></p>
       {% endif %}
 
       {% if s.tagsObjectsNoWalkin.length %}
@@ -127,15 +128,15 @@
     </div>
   </div>
 
-  {% if s.description %}<p class="studio-description">{{ s.description }}</p>{% endif %}
+  {% if s.description %}<p class="studio-description">{{ s.description | linkify | safe }}</p>{% endif %}
 
   {% if s.price_note or s.pickup_time or s.special_events %}
   <section class="studio-info">
     <h2>Weitere Infos</h2>
     <ul>
-      {% if s.price_note %}<li>{{ s.price_note }}</li>{% endif %}
-      {% if s.pickup_time %}<li><strong>Abholzeit:</strong> {{ s.pickup_time }}</li>{% endif %}
-      {% if s.special_events %}<li><strong>Besondere Events:</strong> {{ s.special_events }}</li>{% endif %}
+      {% if s.price_note %}<li>{{ s.price_note | linkify | safe }}</li>{% endif %}
+      {% if s.pickup_time %}<li><strong>Abholzeit:</strong> {{ s.pickup_time | linkify | safe }}</li>{% endif %}
+      {% if s.special_events %}<li><strong>Besondere Events:</strong> {{ s.special_events | linkify | safe }}</li>{% endif %}
     </ul>
   </section>
   {% endif %}
@@ -145,6 +146,7 @@
     <ul>
       {% if s.phone %}<li><strong>Telefon:</strong> <a href="tel:{{ s.phone }}">{{ s.phone }}</a></li>{% endif %}
       {% if s.email %}<li><strong>E-Mail:</strong> <a href="mailto:{{ s.email }}">{{ s.email }}</a></li>{% endif %}
+      {% if s.instagramUrl %}<li><strong>Instagram:</strong> <a href="{{ s.instagramUrl }}" rel="nofollow noopener" target="_blank">@{{ s.instagramHandle }}</a></li>{% endif %}
       {% if s.website %}<li><strong>Website:</strong> <a href="{{ s.website | withUtm }}" rel="nofollow noopener" target="_blank" class="studio-website-link" data-studio-slug="{{ s.slug }}" data-studio-name="{{ s.name | escape }}">{{ s.website }}</a></li>{% endif %}
     </ul>
   </section>
@@ -155,7 +157,7 @@
     {% for f in s.faqs %}
     <div class="faq-item">
       <h3 class="faq-q">{{ f.q }}</h3>
-      <p class="faq-a">{{ f.a }}</p>
+      <p class="faq-a">{{ f.a | linkify | safe }}</p>
     </div>
     {% endfor %}
   </section>

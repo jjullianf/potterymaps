@@ -343,7 +343,15 @@ module.exports = async function () {
       walkin: computeWalkinBadge(tags),
     });
 
+    // hat_instagram steht als "ja, https://www.instagram.com/<handle>/" (oder
+    // "nein"/leer) - daraus Link und @handle fuer die Detailseite ziehen.
+    const igMatch = String(s.hat_instagram || "").match(/https?:\/\/(?:www\.)?instagram\.com\/([A-Za-z0-9._]+)/i);
+    const instagramHandle = igMatch ? igMatch[1] : null;
+    const instagramUrl = instagramHandle ? `https://www.instagram.com/${instagramHandle}/` : null;
+
     return Object.assign({}, s, {
+      instagramHandle,
+      instagramUrl,
       tagsArray: tags,
       tagsObjects: toTagObjects(tags),
       // Fuer die Detailseite: Walk-in/Reservation als eigene hervorgehobene

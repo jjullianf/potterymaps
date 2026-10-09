@@ -179,6 +179,20 @@ module.exports = function (eleventyConfig) {
   // Analytics erkennbar ist, dass der Traffic von potterymaps kam - funktioniert
   // per URL-Objekt auch dann korrekt, wenn die Website-URL bereits eine eigene
   // Query-String hat.
+  // Macht http(s)-URLs in Freitext-Feldern (Öffnungszeiten, Preis-Notiz, FAQ ...)
+  // klickbar. Text wird zuerst HTML-escaped, daher nur mit "| safe" verwenden.
+  eleventyConfig.addFilter("linkify", function (text) {
+    const escaped = String(text || "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+    return escaped.replace(/https?:\/\/[^\s<]*[^\s<.,;:!?)]/g, (url) => {
+      const label = url.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "");
+      return `<a href="${url}" rel="nofollow noopener" target="_blank">${label}</a>`;
+    });
+  });
+
   eleventyConfig.addFilter("withUtm", function (url) {
     if (!url) return url;
     try {
