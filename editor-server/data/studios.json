@@ -1967,7 +1967,7 @@
       "email": "hoi@kugelfisch.ch",
       "opening_hours": "Di, Mi, Fr 14–19.30 Uhr, Sa 10–16 Uhr",
       "tags": "kids-friendly, birthday-parties, hen-party, corporate-events, date-night, walk-in, reservation-empfohlen, at-home-kits, themed-events",
-      "price_from": 15,
+      "price_from": "15",
       "price_mug": "30",
       "price_plate": "36",
       "studio_fee": "",
@@ -1975,8 +1975,8 @@
       "pickup_time": "ca. 7 Werktagen (Abholung während der Öffnungszeiten)",
       "special_events": "Farbnacht (entspannter Malabend mit Anmeldung), Baby Hand & Fuss (Abdruck auf Keramik), Geschenke-Werkstatt für Kinder und Malbox2go zum Mitnehmen (Box «Solo» für 1–4, Box «Gruppe» für 5–8 Personen). Feiern auf Anfrage: Kindergeburtstage, Junggesellinnenabschiede, Babyshowers und Teamevents.",
       "description": "Lust, Keramik zu bemalen und dabei richtig abzuschalten? Im «Kugelfisch» in Kreuzlingen findest du genau den Ort dafür: ein gemütliches Atelier, in dem du dein eigenes Keramik-Unikat gestaltest – kreativ, entspannt und ganz in deinem Tempo. Ob allein, mit Freunden, der Familie oder zu einem besonderen Anlass: Bei uns kannst du zur Ruhe kommen und dich beim Malen frei entfalten. Dank unserer zentralen Lage direkt am Bodensee sind wir auch aus Konstanz, Weinfelden und Frauenfeld schnell erreichbar – ein beliebtes Ausflugsziel für alle, die im Thurgau und der Bodenseeregion nach einer kreativen Auszeit suchen.",
-      "images": "[]",
-      "image": "",
+      "images": "[\"../editor-server/fotos/atelier-kugelfisch-kreuzlingen/1791724337307-IMG_6656.JPG\"]",
+      "image": "../editor-server/fotos/atelier-kugelfisch-kreuzlingen/1791724337307-IMG_6656.JPG",
       "quelle_hinweis": "Eintrag über das Formular «Atelier eintragen», ergänzt mit Angaben von kugelfisch.ch.",
       "hat_instagram": "ja, https://www.instagram.com/kugelfisch.atelier/",
       "custom_faq": "[]",
@@ -2054,6 +2054,7 @@
     "atelier-zaya-frauenfeld": true,
     "ceramic-malbar-zuerich": true,
     "toepferei-rundwerk-winterthur": true,
-    "die-werkerei-villmergen": true
+    "die-werkerei-villmergen": true,
+    "atelier-kugelfisch-kreuzlingen": true
   }
 }
