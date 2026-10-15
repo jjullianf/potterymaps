@@ -130,7 +130,7 @@ function formatPriceFrom(s) {
   if (s.price_from === null || s.price_from === undefined || s.price_from === "") return null;
   const value = Number(s.price_from);
   if (Number.isNaN(value)) return null;
-  const formatted = Number.isInteger(value) ? value : value.toFixed(2).replace(/\.?0+$/, "");
+  const formatted = Number.isInteger(value) ? value : value.toFixed(2);
   return `ab ${s.currency || "CHF"} ${formatted}`;
 }
 
