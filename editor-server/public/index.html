@@ -84,6 +84,11 @@
     <label><input type="checkbox" id="only-todo"> nur unreviewte anzeigen</label>
   </div>
   <div class="filter-bar">
+    <select id="filter-country">
+      <option value="">Alle Länder</option>
+      <option value="CH">Schweiz</option>
+      <option value="DE">Deutschland</option>
+    </select>
     <select id="filter-city"><option value="">Alle Städte</option></select>
     <select id="filter-contacted">
       <option value="">E-Mail-Kontakt: egal</option>
@@ -135,6 +140,23 @@
         <div class="field">
           <label>Stadt *</label>
           <input type="text" id="f-city" required>
+        </div>
+      </div>
+      <div class="row3">
+        <div class="field">
+          <label>Land</label>
+          <select id="f-country">
+            <option value="CH">Schweiz</option>
+            <option value="DE">Deutschland</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>PLZ</label>
+          <input type="text" id="f-postcode">
+        </div>
+        <div class="field">
+          <label>Kanton / Bundesland (Kürzel, z.B. ZH, BY)</label>
+          <input type="text" id="f-region">
         </div>
       </div>
       <div class="field">
@@ -348,6 +370,7 @@ function getImagesArray(s) {
 function renderTable() {
   const q = $("#search").value.trim().toLowerCase();
   const onlyTodo = $("#only-todo").checked;
+  const fCountry = $("#filter-country").value;
   const fCity = $("#filter-city").value;
   const fContacted = $("#filter-contacted").value;
   const fFeatured = $("#filter-featured").value;
@@ -356,6 +379,7 @@ function renderTable() {
 
   let rows = state.studios.filter((s) => {
     if (onlyTodo && state.reviewed[s.slug]) return false;
+    if (fCountry && (s.country || "CH") !== fCountry) return false;
     if (fCity && s.city !== fCity) return false;
     if (fContacted === "yes" && !s.contacted) return false;
     if (fContacted === "no" && s.contacted) return false;
@@ -417,11 +441,12 @@ document.querySelectorAll("th[data-sort]").forEach((th) => {
 });
 $("#search").addEventListener("input", renderTable);
 $("#only-todo").addEventListener("change", renderTable);
-["#filter-city", "#filter-contacted", "#filter-featured", "#filter-reservation"].forEach((sel) => {
+["#filter-country", "#filter-city", "#filter-contacted", "#filter-featured", "#filter-reservation"].forEach((sel) => {
   $(sel).addEventListener("change", renderTable);
 });
 $("#filter-missing-images").addEventListener("change", renderTable);
 $("#filter-reset").addEventListener("click", () => {
+  $("#filter-country").value = "";
   $("#filter-city").value = "";
   $("#filter-contacted").value = "";
   $("#filter-featured").value = "";
@@ -599,8 +624,9 @@ function openEditor(slug) {
   $("#panel-title").textContent = s ? `Bearbeiten: ${s.name}` : "Neues Atelier";
   $("#btn-delete").style.display = s ? "" : "none";
 
-  const fields = ["name","address","city","phone","website","email","opening_hours","price_from","price_mug","price_plate","studio_fee","price_note","pickup_time","special_events","description","hat_instagram"];
+  const fields = ["name","address","city","phone","website","email","opening_hours","price_from","price_mug","price_plate","studio_fee","price_note","pickup_time","special_events","description","hat_instagram","postcode","region"];
   fields.forEach((f) => { $("#f-" + f).value = s ? (s[f] || "") : ""; });
+  $("#f-country").value = s ? (s.country || "CH") : "CH";
   $("#f-slug").value = s ? s.slug : "";
   $("#f-reviewed").checked = s ? !!state.reviewed[s.slug] : false;
   $("#f-contacted").checked = s ? !!s.contacted : false;
@@ -659,6 +685,10 @@ $("#form").addEventListener("submit", async (e) => {
     name: $("#f-name").value.trim(),
     address: $("#f-address").value.trim(),
     city: $("#f-city").value.trim(),
+    country: $("#f-country").value,
+    currency: $("#f-country").value === "DE" ? "EUR" : "CHF",
+    postcode: $("#f-postcode").value.trim(),
+    region: $("#f-region").value.trim().toUpperCase(),
     phone: $("#f-phone").value.trim(),
     website: $("#f-website").value.trim(),
     email: $("#f-email").value.trim(),
@@ -709,7 +739,7 @@ $("#btn-delete").addEventListener("click", async () => {
 
 // ---------- CSV Export / Import ----------
 
-const CSV_FIELDS = ["slug","name","address","city","phone","website","email","opening_hours","tags","price_from","price_mug","price_plate","studio_fee","price_note","pickup_time","special_events","description","image","images","contacted","featured","quelle_hinweis","hat_instagram","custom_faq","reviewed"];
+const CSV_FIELDS = ["slug","name","address","city","phone","website","email","opening_hours","tags","price_from","price_mug","price_plate","studio_fee","price_note","pickup_time","special_events","description","image","images","contacted","featured","quelle_hinweis","hat_instagram","custom_faq","country","currency","postcode","region","lat","lng","reviewed"];
 
 function csvEscape(v) {
   v = v == null ? "" : String(v);
@@ -766,6 +796,12 @@ $("#btn-import").addEventListener("change", async (e) => {
     if (!obj.slug) continue;
     const reviewedVal = obj.reviewed === "true";
     delete obj.reviewed;
+    obj.country = (obj.country || "CH").trim().toUpperCase();
+    obj.currency = obj.currency || (obj.country === "DE" ? "EUR" : "CHF");
+    ["lat", "lng"].forEach((k) => {
+      const n = parseFloat(obj[k]);
+      if (Number.isFinite(n)) obj[k] = n; else delete obj[k];
+    });
     obj.contacted = obj.contacted === "true";
     obj.featured = obj.featured === "true";
     const idx2 = state.studios.findIndex((s) => s.slug === obj.slug);

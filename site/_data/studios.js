@@ -274,9 +274,28 @@ function buildMapPopupHtmlCompact(s, { price, walkin }) {
   );
 }
 
-module.exports = async function () {
+// Land pro Atelier (studios.json, Feld "country"); fehlt es, gilt "CH" - so
+// bleiben alle bisherigen Eintraege automatisch Schweizer Ateliers.
+const DEFAULT_COUNTRY = "CH";
+const DEFAULT_CURRENCY = { CH: "CHF", DE: "EUR" };
+
+function normalizeCountry(s) {
+  return String(s.country || DEFAULT_COUNTRY).trim().toUpperCase();
+}
+
+// Liefert nur die Ateliers des angegebenen Landes. Ohne Argument (so ruft
+// Eleventy die globale Datei "studios" auf) bleibt es bei der Schweiz, damit
+// ein deutsches Atelier in studios.json nie auf Schweizer Seiten, in Karten,
+// Zaehlern, Sitemap oder "in der Naehe"-Seiten auftaucht. Fuer den /de/-Teil
+// spaeter: require("./studios.js").forCountry("DE").
+async function loadStudios(country) {
   const raw = JSON.parse(fs.readFileSync(STUDIOS_JSON_PATH, "utf-8"));
-  const studios = raw.studios || [];
+  const studios = (raw.studios || [])
+    .map((s) => {
+      const c = normalizeCountry(s);
+      return Object.assign({}, s, { country: c, currency: s.currency || DEFAULT_CURRENCY[c] || "CHF" });
+    })
+    .filter((s) => s.country === country);
 
   return Promise.all(studios.map(async (s) => {
     const tags = (s.tags || "")
@@ -381,4 +400,9 @@ module.exports = async function () {
       featured: s.featured === true || s.featured === "true",
     });
   }));
+}
+
+module.exports = async function () {
+  return loadStudios(DEFAULT_COUNTRY);
 };
+module.exports.forCountry = loadStudios;
