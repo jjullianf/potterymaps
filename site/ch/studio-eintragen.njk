@@ -3,6 +3,7 @@
   layout: "base.njk",
   title: "Atelier eintragen oder korrigieren | potterymaps",
   description: "Kennst du ein Atelier zum Keramik bemalen, das bei uns fehlt, oder ist ein Eintrag veraltet? Melde es uns hier.",
+  pagination: { data: "countries", size: 1, alias: "country" },
   permalink: (data) => `${data.country.path}/studio-eintragen/`,
   eleventyComputed: {
     jsonLdBreadcrumb: (data) => ({

@@ -28,6 +28,17 @@ const COUNTRIES = {
   },
 };
 
+// Welche Laender tatsaechlich Seiten erzeugen: "enabled" oben, oder voruebergehend
+// per Umgebungsvariable (z.B. POTTERYMAPS_COUNTRIES=ch,de npx eleventy), um
+// einen Land-Teil lokal zu bauen, ohne ihn live zu schalten.
+function enabledCountries() {
+  const forced = String(process.env.POTTERYMAPS_COUNTRIES || "")
+    .split(",")
+    .map((s) => s.trim().toLowerCase())
+    .filter(Boolean);
+  return Object.values(COUNTRIES).filter((c) => (forced.length ? forced.includes(c.code) : c.enabled));
+}
+
 const byIso = (iso) => Object.values(COUNTRIES).find((c) => c.iso === String(iso || "").toUpperCase());
 
-module.exports = { COUNTRIES, byIso };
+module.exports = { COUNTRIES, byIso, enabledCountries };

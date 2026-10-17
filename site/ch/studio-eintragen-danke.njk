@@ -3,6 +3,7 @@
   layout: "base.njk",
   title: "Danke! | potterymaps",
   description: "Danke für deine Nachricht – wir melden uns, sobald wir sie geprüft haben.",
+  pagination: { data: "countries", size: 1, alias: "country" },
   permalink: (data) => `${data.country.path}/studio-eintragen/danke/`,
   noindex: true,
   eleventyComputed: {

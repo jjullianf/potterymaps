@@ -1,7 +1,7 @@
 const studiosFn = require("./studios.js");
 
-module.exports = async function () {
-  const studios = await studiosFn();
+async function loadEventStats(iso) {
+  const studios = await studiosFn.forCountry(iso);
 
   function countTag(tag) {
     return studios.filter((s) => s.tagsArray.includes(tag)).length;
@@ -14,4 +14,9 @@ module.exports = async function () {
     themedEvents: countTag("themed-events"),
     total: studios.length,
   };
+}
+
+module.exports = async function () {
+  return loadEventStats("CH");
 };
+module.exports.forCountry = loadEventStats;

@@ -3,6 +3,7 @@
   layout: "base.njk",
   title: "Alle Städte | potterymaps",
   description: "Alle Orte im Verzeichnis für Keramik bemalen in der Schweiz, mit Anzahl gelisteter Ateliers und Übersichtskarte.",
+  pagination: { data: "countries", size: 1, alias: "country" },
   permalink: (data) => `${data.country.path}/alle-staedte/`,
   eleventyComputed: {
     sortedCities: (data) => [...(data.cities || [])].sort((a, b) => b.count - a.count),

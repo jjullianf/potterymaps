@@ -3,6 +3,7 @@
   layout: "base.njk",
   title: "Karte aller Ateliers | potterymaps",
   description: "Alle Ateliers zum Keramik bemalen in der Schweiz auf einer Karte - finde ein Atelier in deiner Nähe.",
+  pagination: { data: "countries", size: 1, alias: "country" },
   permalink: (data) => `${data.country.path}/karte/`,
   eleventyComputed: {
     mapStudios: (data) => (data.studios || []).filter((s) => s.lat && s.lng),

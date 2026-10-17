@@ -3,6 +3,7 @@ const townCoords = require("./townCoords.js");
 const studiosFn = require("./studios.js");
 const citiesFn = require("./cities.js");
 const { haversineKm } = require("./geo.js");
+const { COUNTRIES, byIso } = require("../_11ty/countries.js");
 
 const MAX_RESULTS = 6;
 const FAR_RADIUS_KM = 60; // Ateliers innerhalb dieses Radius werden immer gezeigt.
@@ -13,9 +14,14 @@ const MIN_RESULTS = 3; // Falls weniger als das im Radius liegen, trotzdem die n
 // (studios-nahe.njk) - Orte, die bereits eine Seite haben (mind. 1 eigenes
 // Atelier oder eine der 20 Hauptstaedte), werden hier ausgeschlossen, damit keine
 // zwei Seiten um dieselbe Anfrage konkurrieren.
-module.exports = async function () {
-  const studios = await studiosFn();
-  const cities = await citiesFn();
+// Orte-Listen pro Land; fuer Deutschland gibt es noch keine (townCoords ist Schweizer).
+const TOWN_LISTS = { CH: townCoords, DE: [] };
+
+async function loadNearbyTowns(iso) {
+  const COUNTRY = byIso(iso) || COUNTRIES.ch;
+  const towns = TOWN_LISTS[COUNTRY.iso] || [];
+  const studios = await studiosFn.forCountry(COUNTRY.iso);
+  const cities = await citiesFn.forCountry(COUNTRY.iso);
   const existingSlugs = new Set(cities.map((c) => c.slug));
   const studiosWithCoords = studios.filter((s) => s.lat && s.lng);
   // Nur Staedte mit mind. einem eigenen Atelier kommen als "naechstgelegene
@@ -25,7 +31,7 @@ module.exports = async function () {
 
   const seen = new Set();
 
-  return townCoords
+  return towns
     .filter((t) => {
       const slug = citySlug(t.name);
       if (existingSlugs.has(slug) || seen.has(slug)) return false;
@@ -66,6 +72,13 @@ module.exports = async function () {
         nearestCityName: nearestCity ? nearestCity.name : null,
         nearestCitySlug: nearestCity ? nearestCity.slug : null,
         nearestCityDistanceKm: nearestCity ? Math.round(nearestCityDistance) : null,
+        countryCode: COUNTRY.code,
+        country: COUNTRY,
       };
     });
+}
+
+module.exports = async function () {
+  return loadNearbyTowns("CH");
 };
+module.exports.forCountry = loadNearbyTowns;

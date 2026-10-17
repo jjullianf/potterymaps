@@ -3,6 +3,7 @@
   layout: "base.njk",
   title: "Über uns | potterymaps",
   description: "potterymaps ist ein Verzeichnis von Keramik-Bemal-Ateliers in der Schweiz, mit Adressen, Öffnungszeiten, Preisen und Terminen.",
+  pagination: { data: "countries", size: 1, alias: "country" },
   permalink: (data) => `${data.country.path}/ueber-uns/`,
   eleventyComputed: {
     jsonLd: (data) => ({

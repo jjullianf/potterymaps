@@ -3,6 +3,7 @@
   layout: "base.njk",
   title: "Kontakt | potterymaps",
   description: "Kontaktiere potterymaps – melde ein neues Atelier oder stell eine Anfrage für ein Event.",
+  pagination: { data: "countries", size: 1, alias: "country" },
   permalink: (data) => `${data.country.path}/kontakt/`,
   eleventyComputed: {
     jsonLdBreadcrumb: (data) => ({

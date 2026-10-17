@@ -1,13 +1,15 @@
 ---js
 {
   pagination: {
-    data: "cities",
+    data: "allCities",
     size: 1,
     alias: "cityData",
   },
-  permalink: (data) => `${data.country.path}/staedte/${data.cityData.slug}/`,
+  // Land direkt aus dem Eintrag: permalink wird vor eleventyComputed ausgewertet.
+  permalink: (data) => `${data.cityData.country.path}/staedte/${data.cityData.slug}/`,
   layout: "base.njk",
   eleventyComputed: {
+    country: (data) => data.cityData.country,
     title: (data) => `Keramik bemalen ${data.cityData.name} - ${data.cityData.count} ${data.pluralize(data.cityData.count, "Atelier", "Ateliers")} im Vergleich | potterymaps`,
     description: (data) => `Keramik bemalen in ${data.cityData.name}: Ateliers für Teller-, Ton- und Porzellan bemalen sowie Keramik-Cafés – mit Preisen und Öffnungszeiten auf einen Blick.`,
     noindex: (data) => data.cityData.noindex,

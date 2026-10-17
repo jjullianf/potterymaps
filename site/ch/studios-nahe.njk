@@ -1,13 +1,15 @@
 ---js
 {
   pagination: {
-    data: "nearbyTowns",
+    data: "allTowns",
     size: 1,
     alias: "town",
   },
-  permalink: (data) => `${data.country.path}/studios-nahe/${data.town.slug}/`,
+  // Land direkt aus dem Eintrag: permalink wird vor eleventyComputed ausgewertet.
+  permalink: (data) => `${data.town.country.path}/studios-nahe/${data.town.slug}/`,
   layout: "base.njk",
   eleventyComputed: {
+    country: (data) => data.town.country,
     title: (data) => `Keramik bemalen ${data.town.name} - Ateliers in der Nähe | potterymaps`,
     description: (data) => `In ${data.town.name} gibt es aktuell kein eigenes Keramik-Bemalen-Atelier. Die nächstgelegenen Ateliers inkl. Distanz und Preisen findest du hier.`,
     jsonLdBreadcrumb: (data) => ({

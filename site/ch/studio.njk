@@ -1,13 +1,15 @@
 ---js
 {
   pagination: {
-    data: "studios",
+    data: "allStudios",
     size: 1,
     alias: "studio",
   },
-  permalink: (data) => `${data.country.path}/studio/${data.studio.slug}/`,
+  // Land direkt aus dem Eintrag: permalink wird vor eleventyComputed ausgewertet.
+  permalink: (data) => `${data.studio.countryConfig.path}/studio/${data.studio.slug}/`,
   layout: "base.njk",
   eleventyComputed: {
+    country: (data) => data.studio.countryConfig,
     title: (data) => `${data.studio.name} – Keramik bemalen in ${data.studio.city} | potterymaps`,
     description: (data) => `${data.studio.name} in ${data.studio.city}: ${data.studio.address}. Öffnungszeiten, Preise und Infos zum Keramik bemalen.`,
     jsonLd: (data) => {

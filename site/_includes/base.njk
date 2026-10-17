@@ -99,6 +99,11 @@
       <a href="{{ country.path }}/impressum/">Impressum</a>
       <a href="#" id="cookie-settings-link">Cookie-Einstellungen</a>
     </nav>
+    {% if countries.length > 1 %}
+    <nav class="country-switch" aria-label="Land wählen">
+      {% for c in countries %}<a href="{{ c.path }}/"{% if c.code == country.code %} aria-current="true"{% endif %}>{{ c.name }}</a>{% endfor %}
+    </nav>
+    {% endif %}
     <p>&copy; {{ year }} potterymaps</p>
   </footer>
 

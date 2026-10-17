@@ -3,6 +3,7 @@
   layout: "base.njk",
   title: "Keramik bemalen für Teamevents, Geburtstage & Gruppen | potterymaps",
   description: "Keramik bemalen als Firmenevent, Kindergeburtstag, Junggesellinnenabschied oder Gruppenanlass – finde ein passendes Atelier in der Schweiz und stelle eine unverbindliche Anfrage.",
+  pagination: { data: "countries", size: 1, alias: "country" },
   permalink: (data) => `${data.country.path}/events/`,
   eleventyComputed: {
     jsonLdBreadcrumb: (data) => ({

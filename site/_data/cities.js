@@ -3,18 +3,22 @@ const path = require("path");
 const targetCities = require("./targetCities.js");
 const studiosFn = require("./studios.js");
 const site = require("./site.js");
-const { COUNTRIES } = require("../_11ty/countries.js");
-
-const COUNTRY = COUNTRIES.ch;
+const { COUNTRIES, byIso } = require("../_11ty/countries.js");
 const citySlug = require("./citySlug.js");
 const pluralize = require("../_11ty/pluralize.js");
 const compareStudiosForListing = require("../_11ty/sortStudios.js");
 
 const CITY_PHOTOS_DIR = path.join(__dirname, "..", "images", "cities");
 
-module.exports = async function () {
-  const studios = await studiosFn();
-  const hubNames = new Set(targetCities.map((c) => c.name));
+// Garantierte Hauptstaedte (mit eigenen Texten) je Land; Deutschland startet ohne
+// feste Hauptstaedte - dort entstehen Stadtseiten nur fuer Orte mit Atelier.
+const HUB_CITIES = { CH: targetCities, DE: [] };
+
+async function loadCities(iso) {
+  const COUNTRY = byIso(iso) || COUNTRIES.ch;
+  const hubCities = HUB_CITIES[COUNTRY.iso] || [];
+  const studios = await studiosFn.forCountry(COUNTRY.iso);
+  const hubNames = new Set(hubCities.map((c) => c.name));
 
   // Jeder Ort mit mind. einem echten Atelier bekommt eine eigene Seite - nicht nur
   // die 20 garantierten Hauptstaedte. Orte ohne eigenes Atelier bleiben unsichtbar
@@ -28,7 +32,7 @@ module.exports = async function () {
   const allNames = new Set([...hubNames, ...Object.keys(studiosByCityName)]);
 
   const base = Array.from(allNames).map((name) => {
-    const hubInfo = targetCities.find((c) => c.name === name);
+    const hubInfo = hubCities.find((c) => c.name === name);
     const isHub = !!hubInfo;
     const slug = hubInfo ? hubInfo.slug : citySlug(name);
     // Featured zuerst, danach Ateliers mit eigenen Bildern vor Ateliers ohne
@@ -118,6 +122,8 @@ module.exports = async function () {
     const porzellanMatch = c.direct.find((s) => /porzellan/i.test(s.description || ""));
 
     return Object.assign({}, c, {
+      countryCode: COUNTRY.code,
+      country: COUNTRY,
       nearbyTowns,
       // "Auch in der Nähe" zeigte frueher Atelier-Karten aus Nachbarorten direkt auf
       // der Hauptstadt-Seite - jetzt haben diese Orte eigene Seiten, daher zeigt
@@ -130,4 +136,9 @@ module.exports = async function () {
       jsonLdBreadcrumb,
     });
   });
+}
+
+module.exports = async function () {
+  return loadCities("CH");
 };
+module.exports.forCountry = loadCities;

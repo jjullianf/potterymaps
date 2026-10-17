@@ -288,7 +288,20 @@ function normalizeCountry(s) {
 // ein deutsches Atelier in studios.json nie auf Schweizer Seiten, in Karten,
 // Zaehlern, Sitemap oder "in der Naehe"-Seiten auftaucht. Fuer den /de/-Teil
 // spaeter: require("./studios.js").forCountry("DE").
-async function loadStudios(country) {
+const studiosCache = new Map();
+
+function loadStudios(country) {
+  // Mehrere Daten-Module (Staedte, Umgebung, Statistik, Laender-Daten) brauchen
+  // dieselben Ateliers - pro Land und Dateistand nur einmal berechnen.
+  const mtime = fs.statSync(STUDIOS_JSON_PATH).mtimeMs;
+  const hit = studiosCache.get(country);
+  if (hit && hit.mtime === mtime) return hit.promise;
+  const promise = buildStudios(country);
+  studiosCache.set(country, { mtime, promise });
+  return promise;
+}
+
+async function buildStudios(country) {
   const raw = JSON.parse(fs.readFileSync(STUDIOS_JSON_PATH, "utf-8"));
   const studios = (raw.studios || [])
     .map((s) => {
@@ -298,6 +311,7 @@ async function loadStudios(country) {
         country: c,
         currency: s.currency || cfg.currency,
         pagePath: `${cfg.path}/studio/${s.slug}/`,
+        countryConfig: cfg,
       });
     })
     .filter((s) => s.country === country);

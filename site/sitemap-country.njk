@@ -1,0 +1,36 @@
+---js
+{
+  pagination: { data: "countries", size: 1, alias: "country" },
+  permalink: (data) => `/sitemap-${data.country.code}.xml`,
+  eleventyExcludeFromCollections: true,
+}
+---<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>{{ site.url }}{{ country.path }}/</loc></url>
+  <url><loc>{{ site.url }}{{ country.path }}/alle-staedte/</loc></url>
+  <url><loc>{{ site.url }}{{ country.path }}/karte/</loc></url>
+  <url><loc>{{ site.url }}{{ country.path }}/events/</loc></url>
+  {% if country.code == "ch" %}<url><loc>{{ site.url }}/grosse-anfrage/</loc></url>{% endif %}
+  <url><loc>{{ site.url }}{{ country.path }}/studio-eintragen/</loc></url>
+  {% if country.hasBlog %}
+  <url><loc>{{ site.url }}{{ country.path }}/blog/</loc></url>
+  {% for post in collections.blogPosts %}
+  <url><loc>{{ site.url }}{{ post.url }}</loc></url>
+  {% endfor %}
+  {% endif %}
+  <url><loc>{{ site.url }}{{ country.path }}/ueber-uns/</loc></url>
+  <url><loc>{{ site.url }}{{ country.path }}/kontakt/</loc></url>
+  <url><loc>{{ site.url }}{{ country.path }}/datenschutz/</loc></url>
+  <url><loc>{{ site.url }}{{ country.path }}/impressum/</loc></url>
+  {% for c in countryData[country.code].cities %}
+  {% if not c.noindex %}
+  <url><loc>{{ site.url }}{{ country.path }}/staedte/{{ c.slug }}/</loc></url>
+  {% endif %}
+  {% endfor %}
+  {% for s in countryData[country.code].studios %}
+  <url><loc>{{ site.url }}{{ country.path }}/studio/{{ s.slug }}/</loc></url>
+  {% endfor %}
+  {% for t in countryData[country.code].nearbyTowns %}
+  <url><loc>{{ site.url }}{{ country.path }}/studios-nahe/{{ t.slug }}/</loc></url>
+  {% endfor %}
+</urlset>

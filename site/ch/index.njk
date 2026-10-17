@@ -1,6 +1,8 @@
 ---js
 {
   layout: "base.njk",
+  pagination: { data: "countries", size: 1, alias: "country" },
+  permalink: (data) => `${data.country.path}/`,
   title: "Keramik bemalen Schweiz – Ateliers in deiner Stadt finden | potterymaps",
   description: "Finde Ateliers zum Keramik bemalen in der ganzen Schweiz – Teller, Ton und Porzellan bemalen, plus gemütliche Keramik-Cafés. Alle Städte im Überblick.",
   homeFaqs: [
