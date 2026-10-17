@@ -1,0 +1,176 @@
+{
+ "KOELN:1": {
+  "name": "Pottery Lab - Südstadt - Keramik bemalen in Köln",
+  "site": "https://potterylab.de/",
+  "emails": {
+   "info@pottery-lab.de": [
+    "https://potterylab.de/",
+    "https://potterylab.de/kontakt",
+    "https://potterylab.de/datenschutz",
+    "https://potterylab.de/impressum",
+    "https://potterylab.de/agb"
+   ],
+   "potterylabkoeln@outlook.de": [
+    "https://potterylab.de/datenschutz",
+    "https://potterylab.de/impressum"
+   ],
+   "poststelle@ldi.nrw.de": [
+    "https://potterylab.de/datenschutz"
+   ]
+  }
+ },
+ "KOELN:2": {
+  "name": "Pottery Lab - Innenstadt - Keramik bemalen in Köln",
+  "site": "https://www.potterylab.de/",
+  "emails": {
+   "info@pottery-lab.de": [
+    "https://potterylab.de/",
+    "https://potterylab.de/kontakt",
+    "https://potterylab.de/datenschutz",
+    "https://potterylab.de/impressum",
+    "https://potterylab.de/agb"
+   ],
+   "potterylabkoeln@outlook.de": [
+    "https://potterylab.de/datenschutz",
+    "https://potterylab.de/impressum"
+   ],
+   "poststelle@ldi.nrw.de": [
+    "https://potterylab.de/datenschutz"
+   ]
+  }
+ },
+ "KOELN:3": {
+  "name": "pottery art café (Sülz)",
+  "site": "http://www.pottery-art-cafe.de/",
+  "emails": {
+   "info_suelz@pottery-art-cafe.de": [
+    "https://www.pottery-art-cafe.de/",
+    "https://www.pottery-art-cafe.de/kontakt/",
+    "https://www.pottery-art-cafe.de/impressum/",
+    "https://www.pottery-art-cafe.de/datenschutz/"
+   ],
+   "info@pottery-art-cafe.de": [
+    "https://www.pottery-art-cafe.de/",
+    "https://www.pottery-art-cafe.de/kontakt/",
+    "https://www.pottery-art-cafe.de/impressum/",
+    "https://www.pottery-art-cafe.de/datenschutz/"
+   ]
+  }
+ },
+ "KOELN:5": {
+  "name": "ceramify Studio - Keramik selber bemalen",
+  "site": "https://ceramify-studio.de/koeln-dellbrueck",
+  "emails": {
+   "info@ceramify-studio.de": [
+    "https://ceramify-studio.de/koeln-dellbrueck",
+    "https://ceramify-studio.de/impressum",
+    "https://ceramify-studio.de/datenschutz"
+   ]
+  }
+ },
+ "KOELN:6": {
+  "name": "layers - Keramik bemalen in Köln",
+  "site": "https://layers-studios.de/koeln",
+  "emails": {
+   "koeln@layers-studios.de": [
+    "https://layers-studios.de/koeln/kontakt",
+    "https://layers-studios.de/koeln/datenschutz",
+    "https://layers-studios.de/koeln/agb"
+   ],
+   "hallo@layers-studios.de": [
+    "https://layers-studios.de/koeln/agb",
+    "https://layers-studios.de/koeln/impressum"
+   ]
+  }
+ },
+ "KOELN:8": {
+  "name": "Studio Fein – Keramik Bemalen Köln",
+  "site": "http://www.studiofein.com/",
+  "emails": {
+   "info@studiofein.com": [
+    "https://www.studiofein.com/",
+    "https://www.studiofein.com/datenschutzerklaerung",
+    "https://www.studiofein.com/impressum",
+    "https://www.studiofein.com/agb"
+   ]
+  }
+ },
+ "KOELN:9": {
+  "name": "ceramify Studio - Keramik selber bemalen",
+  "site": "https://ceramify-studio.de/koeln-innenstadt",
+  "emails": {
+   "info@ceramify-studio.de": [
+    "https://ceramify-studio.de/koeln-innenstadt",
+    "https://ceramify-studio.de/impressum",
+    "https://ceramify-studio.de/datenschutz"
+   ]
+  }
+ },
+ "KOELN:10": {
+  "name": "glaze - Keramik bemalen in Köln",
+  "site": "http://www.glazestudioo.de/",
+  "emails": {
+   "info@glazestudioo.de": [
+    "https://www.glazestudioo.de/",
+    "https://www.glazestudioo.de/contact-us",
+    "https://www.glazestudioo.de/impressum",
+    "https://www.glazestudioo.de/datenschutzerklarung"
+   ]
+  }
+ },
+ "KOELN:11": {
+  "name": "pottery art cafe (center)",
+  "site": "http://www.pottery-art-cafe.de/",
+  "emails": {
+   "info_suelz@pottery-art-cafe.de": [
+    "https://www.pottery-art-cafe.de/",
+    "https://www.pottery-art-cafe.de/kontakt/",
+    "https://www.pottery-art-cafe.de/impressum/",
+    "https://www.pottery-art-cafe.de/datenschutz/"
+   ],
+   "info@pottery-art-cafe.de": [
+    "https://www.pottery-art-cafe.de/",
+    "https://www.pottery-art-cafe.de/kontakt/",
+    "https://www.pottery-art-cafe.de/impressum/",
+    "https://www.pottery-art-cafe.de/datenschutz/"
+   ]
+  }
+ },
+ "LEIPZIG:0": {
+  "name": "Kreativwerk Leipzig | Keramik selbst bemalen",
+  "site": "http://kreativwerk-leipzig.de/",
+  "emails": {
+   "kontakt@kreativhaus-oldenburg.de": [
+    "http://kreativwerk-leipzig.de/impressum/"
+   ],
+   "kontakt@kreativwerk-leipzig.de": [
+    "http://kreativwerk-leipzig.de/impressum/",
+    "http://kreativwerk-leipzig.de/kontakt/"
+   ]
+  }
+ },
+ "LEIPZIG:1": {
+  "name": "Made by you Leipzig",
+  "site": "http://www.madebyyou-leipzig.de/",
+  "emails": {}
+ },
+ "LEIPZIG:3": {
+  "name": "Tirod-Art Keramik",
+  "site": "https://www.tirodart.de/",
+  "emails": {}
+ },
+ "LEIPZIG:4": {
+  "name": "OH! Keramik Leipzig",
+  "site": "https://ohkeramik.de/",
+  "emails": {
+   "hello@ohkeramik.de": [
+    "https://ohkeramik.de/impressum/"
+   ]
+  }
+ },
+ "LEIPZIG:16": {
+  "name": "Kopffüssler Keramik- und Kreativwerkstatt",
+  "site": "http://www.xn--kopffssler-eeb.com/",
+  "emails": {}
+ }
+}
