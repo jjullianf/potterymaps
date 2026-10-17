@@ -10,7 +10,7 @@
   <url><loc>{{ site.url }}{{ country.path }}/alle-staedte/</loc></url>
   <url><loc>{{ site.url }}{{ country.path }}/karte/</loc></url>
   <url><loc>{{ site.url }}{{ country.path }}/events/</loc></url>
-  {% if country.code == "ch" %}<url><loc>{{ site.url }}/grosse-anfrage/</loc></url>{% endif %}
+  <url><loc>{{ site.url }}{{ country.eventFormPath }}</loc></url>
   <url><loc>{{ site.url }}{{ country.path }}/studio-eintragen/</loc></url>
   {% if country.hasBlog %}
   <url><loc>{{ site.url }}{{ country.path }}/blog/</loc></url>

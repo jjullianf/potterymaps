@@ -2,10 +2,12 @@
 {
   layout: "base.njk",
   title: "Karte aller Ateliers | potterymaps",
-  description: "Alle Ateliers zum Keramik bemalen in der Schweiz auf einer Karte - finde ein Atelier in deiner Nähe.",
   pagination: { data: "countries", size: 1, alias: "country" },
+  // Gleichwertige Seite in den anderen Laendern (hreflang), siehe base.njk
+  pageKey: "karte/",
   permalink: (data) => `${data.country.path}/karte/`,
   eleventyComputed: {
+    description: (data) => `Alle Ateliers zum Keramik bemalen ${data.country.nameIn} auf einer Karte - finde ein Atelier in deiner Nähe.`,
     mapStudios: (data) => (data.studios || []).filter((s) => s.lat && s.lng),
     mapStudiosForJs: (data) =>
       (data.studios || [])
@@ -17,7 +19,7 @@
 <article class="static-page">
   <p class="breadcrumb"><a href="{{ country.path }}/">Startseite</a> &raquo; Karte</p>
   <h1>Alle Ateliers auf der Karte</h1>
-  <p>Alle {{ mapStudios.length }} Ateliers zum Keramik bemalen in der Schweiz auf einen Blick. Klicke auf einen Pin für Details.</p>
+  <p>Alle {{ mapStudios.length }} Ateliers zum Keramik bemalen {{ country.nameIn }} auf einen Blick. Klicke auf einen Pin für Details.</p>
 
   <div class="map-consent-gate leaflet-consent-gate" data-init-fn="__initKarteMap">
     <p>Für die Karte wird eine Verbindung zu OpenStreetMap-Kartenservern hergestellt, wobei deine IP-Adresse übermittelt wird.</p>

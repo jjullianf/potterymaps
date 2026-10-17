@@ -2,27 +2,29 @@
 {
   layout: "base.njk",
   title: "Über uns | potterymaps",
-  description: "potterymaps ist ein Verzeichnis von Keramik-Bemal-Ateliers in der Schweiz, mit Adressen, Öffnungszeiten, Preisen und Terminen.",
   pagination: { data: "countries", size: 1, alias: "country" },
+  // Gleichwertige Seite in den anderen Laendern (hreflang), siehe base.njk
+  pageKey: "ueber-uns/",
   permalink: (data) => `${data.country.path}/ueber-uns/`,
   eleventyComputed: {
+    description: (data) => `potterymaps ist ein Verzeichnis von Keramik-Bemal-Ateliers ${data.country.nameIn}, mit Adressen, Öffnungszeiten, Preisen und Terminen.`,
     jsonLd: (data) => ({
       "@context": "https://schema.org",
       "@type": "WebSite",
       name: "potterymaps",
-      description: "Verzeichnis von Keramik-Bemal-Ateliers in der Schweiz mit Adressen, Öffnungszeiten, Preisen und Terminen.",
+      description: `Verzeichnis von Keramik-Bemal-Ateliers ${data.country.nameIn} mit Adressen, Öffnungszeiten, Preisen und Terminen.`,
       url: data.site.url,
     }),
     jsonLdOrg: (data) => ({
       "@context": "https://schema.org",
       "@type": "Organization",
       name: "potterymaps",
-      description: "potterymaps ist ein unabhängiges Verzeichnis von Keramik-Bemal-Ateliers in der Schweiz.",
+      description: `potterymaps ist ein unabhängiges Verzeichnis von Keramik-Bemal-Ateliers ${data.country.nameIn}.`,
       url: data.site.url,
       logo: `${data.site.url}/images/logo.png`,
       areaServed: {
         "@type": "Country",
-        name: "Schweiz",
+        name: data.country.name,
       },
     }),
     jsonLdBreadcrumb: (data) => ({
@@ -40,17 +42,17 @@
   <p class="breadcrumb"><a href="{{ country.path }}/">Startseite</a> &raquo; Über uns</p>
   <h1>Über uns</h1>
 
-  <p>potterymaps ist ein Verzeichnis von Keramik-Bemal-Ateliers in der Schweiz. Wir listen Ateliers, bei denen man ein bereits fertig gegossenes Keramikstück auswählen und direkt vor Ort bemalen kann, inklusive Adresse, Öffnungszeiten, Preisen und verfügbaren Terminen.</p>
+  <p>potterymaps ist ein Verzeichnis von Keramik-Bemal-Ateliers {{ country.nameIn }}. Wir listen Ateliers, bei denen man ein bereits fertig gegossenes Keramikstück auswählen und direkt vor Ort bemalen kann, inklusive Adresse, Öffnungszeiten, Preisen und verfügbaren Terminen.</p>
 
   <h2>Was ist Keramik bemalen?</h2>
   <p>Beim Keramik bemalen (auch "Pottery Painting" oder "Paint your own pottery" genannt) wählt man in einem Atelier ein bereits vorgefertigtes, ungebranntes oder bereits gebranntes Keramikstück aus – zum Beispiel eine Tasse, einen Teller oder eine Vase – und bemalt es vor Ort mit Farben und Glasur. Das Atelier brennt das Stück danach im Ofen; die Abholung erfolgt meist einige Tage bis Wochen später. Das unterscheidet Keramik bemalen vom Töpfern an der Drehscheibe, das manche der gelisteten Ateliers zusätzlich anbieten.</p>
 
   <h2>Was potterymaps konkret bietet</h2>
   <ul>
-    <li>Aktuell {{ studios.length }} {{ pluralize(studios.length, "Atelier", "Ateliers") }} in {{ cities.length }} Regionen der Schweiz.</li>
+    <li>Aktuell {{ studios.length }} {{ pluralize(studios.length, "Atelier", "Ateliers") }} in {{ cities.length }} {{ country.regionsPhrase }}.</li>
     <li>Pro Atelier: Adresse, Öffnungszeiten, Preisspanne, Kontaktangaben (Telefon, E-Mail, Website) und eine Karte zur Lage.</li>
     <li>Filterbare Zusatzinfos wie Kinderfreundlichkeit, Reservationspflicht, Eignung für Geburtstage, Firmenevents oder Junggesellinnenabschiede.</li>
-    <li>Eine Übersicht aller Ateliers auf einer Karte der Schweiz.</li>
+    <li>Eine Übersicht aller Ateliers auf {{ country.mapOf }}.</li>
   </ul>
 
   <h2>Für wen ist potterymaps gedacht?</h2>

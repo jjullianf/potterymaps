@@ -33,6 +33,7 @@ async function optimizedImage(src, alt, { widths = [640], formats = ["webp", "jp
 // async Shortcodes innerhalb von Nunjucks-Macros keinen Output liefern).
 const studioImage = require("./_11ty/studioImage.js");
 const compareStudiosForListing = require("./_11ty/sortStudios.js");
+const { fillCountryText } = require("./_11ty/countries.js");
 
 // Rendert die komplette Bilder-Galerie einer Studio-Seite als leichtgewichten,
 // abhaengigkeitsfreien Swipe-Slider (ein Bild sichtbar, Touch-Swipe, Pfeile,
@@ -92,6 +93,7 @@ module.exports = function (eleventyConfig) {
   // eleventyComputed-Funktionen (data.pluralize(...)) die aufrufbare Funktion.
   eleventyConfig.addGlobalData("pluralize", () => pluralize);
   eleventyConfig.addGlobalData("compareStudiosForListing", () => compareStudiosForListing);
+  eleventyConfig.addGlobalData("fillCountryText", () => fillCountryText);
 
   // Alle Artikel unter ch/blog/ (Tag "blog" kommt aus ch/blog/blog.11tydata.js),
   // neueste zuerst; bei gleichem Datum entscheidet das Feld blogOrder (kleiner =
@@ -115,6 +117,34 @@ module.exports = function (eleventyConfig) {
       return new CleanCSS({}).minify(content).styles;
     }
     return content;
+  });
+
+  // Deutsche Rechtschreibung (ß) fuer die /de/-Seiten: Die Seitentexte sind in
+  // Schweizer Schreibweise geschrieben (ss statt ß). Ersetzt wird nur in
+  // sichtbarem Text, JSON-LD und Text-Attributen (content/alt/title/aria-label/
+  // placeholder), nie in URLs (href/src/action) oder Ortsnamen und Adressen.
+  const NOT_WORD_OR_URL = "(?![\\wäöüÄÖÜ/-])";
+  const DE_SPELLING = [
+    [/([Gg])rösste/g, "$1rößte"],
+    [/([Gg])rösser/g, "$1rößer"],
+    [/([Gg])rösse/g, "$1röße"],
+    [new RegExp("\\b([Gg])ross(e[nmrs]?)?" + NOT_WORD_OR_URL, "g"), (m, g, end) => g + "roß" + (end || "")],
+    [/\b([Aa])usser/g, "$1ußer"],
+    [/gemäss/g, "gemäß"],
+    [/Gemäss/g, "Gemäß"],
+    [/([Ss])chliess/g, "$1chließ"],
+    [/([Hh])eisst/g, "$1eißt"],
+    [new RegExp("\\b([Ww])eiss" + NOT_WORD_OR_URL, "g"), "$1eiß"],
+    [new RegExp("\\b([Ss])pass" + NOT_WORD_OR_URL, "g"), "$1paß"],
+  ];
+  const toGerman = (s) => DE_SPELLING.reduce((acc, [re, rep]) => acc.replace(re, rep), s);
+  eleventyConfig.addTransform("de-spelling", function (content, outputPath) {
+    if (!outputPath || !outputPath.endsWith(".html") || !this.page || !String(this.page.url).startsWith("/de/")) {
+      return content;
+    }
+    return content
+      .replace(/>([^<]+)</g, (m, text) => ">" + toGerman(text) + "<")
+      .replace(/\b(content|alt|title|aria-label|placeholder)="([^"]*)"/g, (m, attr, val) => `${attr}="${toGerman(val)}"`);
   });
 
   // HTML-Output minifizieren (Whitespace/Kommentare entfernen) - kleinere

@@ -24,6 +24,6 @@ layout: base.njk
     <h2>{{ ctaHeading or "Event planen?" }}</h2>
     <p>{{ ctaText or "Beschreib uns kurz Gruppengrösse, Wunschort und -termin – wir vermitteln dich kostenlos an ein passendes Atelier." }}</p>
     {% if not ctaHref %}<p class="trust-hint"><i class="ti ti-clock"></i> Antwort innerhalb von 48 Stunden garantiert.</p>{% endif %}
-    <a class="button" href="{{ ctaHref or '/grosse-anfrage/' }}" data-umami-event="event-cta-click" data-umami-event-quelle="blog">{{ ctaLabel or "Event anfragen" }}</a>
+    <a class="button" href="{{ ctaHref or country.eventFormPath }}" data-umami-event="event-cta-click" data-umami-event-quelle="blog">{{ ctaLabel or "Event anfragen" }}</a>
   </section>
 </article>

@@ -4,6 +4,8 @@
   title: "Kontakt | potterymaps",
   description: "Kontaktiere potterymaps – melde ein neues Atelier oder stell eine Anfrage für ein Event.",
   pagination: { data: "countries", size: 1, alias: "country" },
+  // Gleichwertige Seite in den anderen Laendern (hreflang), siehe base.njk
+  pageKey: "kontakt/",
   permalink: (data) => `${data.country.path}/kontakt/`,
   eleventyComputed: {
     jsonLdBreadcrumb: (data) => ({
@@ -26,7 +28,7 @@
   <p>Für die häufigsten Anliegen geht es hier direkt zum passenden Formular:</p>
 
   <div class="contact-options">
-    <a class="contact-option" href="/grosse-anfrage/">
+    <a class="contact-option" href="{{ country.eventFormPath }}">
       <i class="ti ti-users"></i>
       <strong>Event-Anfrage stellen</strong>
       <span>Firmenevent, Kindergeburtstag, Gruppenanlass oder Junggesellinnenabschied.</span>

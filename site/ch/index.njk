@@ -2,9 +2,9 @@
 {
   layout: "base.njk",
   pagination: { data: "countries", size: 1, alias: "country" },
+  // Gleichwertige Seite in den anderen Laendern (hreflang), siehe base.njk
+  pageKey: "",
   permalink: (data) => `${data.country.path}/`,
-  title: "Keramik bemalen Schweiz – Ateliers in deiner Stadt finden | potterymaps",
-  description: "Finde Ateliers zum Keramik bemalen in der ganzen Schweiz – Teller, Ton und Porzellan bemalen, plus gemütliche Keramik-Cafés. Alle Städte im Überblick.",
   homeFaqs: [
     {
       q: "Was ist Keramik bemalen?",
@@ -12,11 +12,11 @@
     },
     {
       q: "Was kostet Keramik bemalen?",
-      a: "Die Preise hängen vom gewählten Rohling ab und liegen meist zwischen CHF 15 und 50, oft zzgl. einer kleinen Ateliergebühr für Farben, Brand und Nutzungsdauer. Auf jeder Atelier-Seite bei potterymaps findest du die aktuellen Preise auf einen Blick.",
+      a: "Die Preise hängen vom gewählten Rohling ab{{PRICE_LEAD}} oft zzgl. einer kleinen Ateliergebühr für Farben, Brand und Nutzungsdauer. Auf jeder Atelier-Seite bei potterymaps findest du die aktuellen Preise auf einen Blick.",
     },
     {
-      q: "Wo kann ich in der Schweiz Keramik bemalen?",
-      a: "potterymaps listet Ateliers und Keramik-Cafés zum Keramik bemalen in der ganzen Schweiz, u. a. in Zürich, Basel, Bern, Genf, Luzern und vielen weiteren Städten. Nutze die Suche oben, um Ateliers in deiner Nähe zu finden.",
+      q: "Wo kann ich {{NAME_IN}} Keramik bemalen?",
+      a: "potterymaps listet Ateliers und Keramik-Cafés zum Keramik bemalen {{NAME_IN_ALL}}{{EXAMPLE_CITIES}}. Nutze die Suche oben, um Ateliers in deiner Nähe zu finden.",
     },
     {
       q: "Wie lange dauert es, bis die bemalte Keramik fertig ist?",
@@ -32,6 +32,11 @@
     },
   ],
   eleventyComputed: {
+    title: (data) => `Keramik bemalen ${data.country.name} – Ateliers in deiner Stadt finden | potterymaps`,
+    description: (data) => `Finde Ateliers zum Keramik bemalen ${data.country.nameInAll} – Teller, Ton und Porzellan bemalen, plus gemütliche Keramik-Cafés. Alle Städte im Überblick.`,
+    // homeFaqs enthaelt Platzhalter ({{NAME_IN}} usw.), die hier pro Land gefuellt werden.
+    homeFaqsLocal: (data) =>
+      data.homeFaqs.map((f) => ({ q: data.fillCountryText(data.country, f.q), a: data.fillCountryText(data.country, f.a) })),
     popularCities: (data) => {
       return [...(data.cities || [])].sort((a, b) => b.count - a.count);
     },
@@ -79,8 +84,8 @@
       "@type": "FAQPage",
       mainEntity: data.homeFaqs.map((f) => ({
         "@type": "Question",
-        name: f.q,
-        acceptedAnswer: { "@type": "Answer", text: f.a },
+        name: data.fillCountryText(data.country, f.q),
+        acceptedAnswer: { "@type": "Answer", text: data.fillCountryText(data.country, f.a) },
       })),
     }),
   },
@@ -91,7 +96,7 @@
 
   <section class="hero" style="background-image: url('{{ heroImageUrl }}');">
     <h1>Finde dein Atelier zum Keramik bemalen</h1>
-    <p class="intro">Ateliers und Keramik-Cafés in der ganzen Schweiz – nach Stadt sortiert, mit Preisen und Öffnungszeiten auf einen Blick.</p>
+    <p class="intro">Ateliers und Keramik-Cafés {{ country.nameInAll }} – nach Stadt sortiert, mit Preisen und Öffnungszeiten auf einen Blick.</p>
     <div class="city-search-wrap">
       <form class="city-search" id="city-search-form" autocomplete="off">
         <input type="text" id="city-search-input" placeholder="Wo möchtest du Keramik bemalen?" aria-label="Stadt suchen">
@@ -128,7 +133,7 @@
   <section class="cta-events">
     <h2>Event planen?</h2>
     <p>Firmenanlass, Kindergeburtstag oder Junggesellinnenabschied – wir vermitteln dich an ein passendes Atelier.</p>
-    <a class="button" href="/grosse-anfrage/" data-umami-event="event-cta-click" data-umami-event-quelle="startseite">Event anfragen</a>
+    <a class="button" href="{{ country.eventFormPath }}" data-umami-event="event-cta-click" data-umami-event-quelle="startseite">Event anfragen</a>
   </section>
 
   <section class="example-studios">
@@ -150,7 +155,7 @@
 
   <section class="home-faq">
     <h2>Häufige Fragen zum Keramik bemalen</h2>
-    {% for f in homeFaqs %}
+    {% for f in homeFaqsLocal %}
     <details class="faq-accordion-item">
       <summary>{{ f.q }}</summary>
       <p>{{ f.a }}</p>

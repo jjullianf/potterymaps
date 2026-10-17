@@ -81,6 +81,10 @@ a { color: var(--color-accent); }
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
 }
 .site-footer { border-top: 1px solid var(--color-border); margin-top: 3rem; font-size: 0.9rem; }
+/* Laender-Umschalter im Footer (erscheint nur bei mehr als einem aktiven Land) */
+.country-switch a { margin-left: 0.8rem; color: var(--color-text-muted); }
+.country-switch a:first-child { margin-left: 0; }
+.country-switch a[aria-current] { color: var(--color-text); font-weight: 600; }
 
 .logo { display: inline-flex; align-items: center; text-decoration: none; }
 .logo-img { height: 42px; width: auto; display: block; }

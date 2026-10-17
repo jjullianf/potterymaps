@@ -2,10 +2,12 @@
 {
   layout: "base.njk",
   title: "Keramik bemalen für Teamevents, Geburtstage & Gruppen | potterymaps",
-  description: "Keramik bemalen als Firmenevent, Kindergeburtstag, Junggesellinnenabschied oder Gruppenanlass – finde ein passendes Atelier in der Schweiz und stelle eine unverbindliche Anfrage.",
   pagination: { data: "countries", size: 1, alias: "country" },
+  // Gleichwertige Seite in den anderen Laendern (hreflang), siehe base.njk
+  pageKey: "events/",
   permalink: (data) => `${data.country.path}/events/`,
   eleventyComputed: {
+    description: (data) => `Keramik bemalen als Firmenevent, Kindergeburtstag, Junggesellinnenabschied oder Gruppenanlass – finde ein passendes Atelier ${data.country.nameIn} und stelle eine unverbindliche Anfrage.`,
     jsonLdBreadcrumb: (data) => ({
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
@@ -22,27 +24,27 @@
   <h1>Keramik bemalen als Event - für Firmen, Geburtstage und Gruppen</h1>
   <p>Ob Firmenanlass, Kindergeburtstag, Junggesellinnenabschied oder einfach eine private Feier mit Freund:innen – Keramik bemalen eignet sich hervorragend als gemeinsames Erlebnis für Gruppen. Wir vermitteln dich kostenlos an ein passendes Atelier in deiner Region.</p>
 
-  <p class="event-cta-wrap"><a class="button" href="/grosse-anfrage/" data-umami-event="event-cta-click" data-umami-event-quelle="events-seite">Event anfragen</a></p>
+  <p class="event-cta-wrap"><a class="button" href="{{ country.eventFormPath }}" data-umami-event="event-cta-click" data-umami-event-quelle="events-seite">Event anfragen</a></p>
 
   <section class="event-section">
     <h2>Firmenevents &amp; Teambuilding</h2>
-    <p>Keramik bemalen als Teamevent fördert Kreativität und sorgt für einen entspannten Rahmen abseits vom Arbeitsalltag – ideal für Team-Offsites, Weihnachtsfeiern oder Kunden-Anlässe. Über {{ eventStats.corporateEvents }} Ateliers in der Schweiz bieten explizit Firmenevents an.</p>
+    <p>Keramik bemalen als Teamevent fördert Kreativität und sorgt für einen entspannten Rahmen abseits vom Arbeitsalltag – ideal für Team-Offsites, Weihnachtsfeiern oder Kunden-Anlässe.{% if eventStats.corporateEvents >= 5 %} Über {{ eventStats.corporateEvents }} Ateliers {{ country.nameIn }} bieten explizit Firmenevents an.{% endif %}</p>
   </section>
 
   <section class="event-section">
     <h2>Kindergeburtstage</h2>
-    <p>Ein Keramik-Geburtstag ist eine kreative Alternative zur klassischen Geburtstagsparty – die Kinder bemalen ihr eigenes Stück und nehmen ein bleibendes Andenken mit nach Hause. {{ eventStats.birthdayParties }} Ateliers im Verzeichnis bieten Geburtstage an.</p>
+    <p>Ein Keramik-Geburtstag ist eine kreative Alternative zur klassischen Geburtstagsparty – die Kinder bemalen ihr eigenes Stück und nehmen ein bleibendes Andenken mit nach Hause.{% if eventStats.birthdayParties >= 5 %} {{ eventStats.birthdayParties }} Ateliers im Verzeichnis bieten Geburtstage an.{% endif %}</p>
   </section>
 
   <section class="event-section">
     <h2>Junggesellinnenabschiede &amp; Polterabende</h2>
-    <p>Für den Junggesellinnenabschied oder Polterabend bietet Keramik bemalen eine entspannte, kreative Alternative zum klassischen Programm – mit Zeit zum Austausch und einem gemeinsamen Erlebnis. {{ eventStats.henParty }} Ateliers sind darauf eingerichtet.</p>
+    <p>Für den Junggesellinnenabschied oder Polterabend bietet Keramik bemalen eine entspannte, kreative Alternative zum klassischen Programm – mit Zeit zum Austausch und einem gemeinsamen Erlebnis.{% if eventStats.henParty >= 5 %} {{ eventStats.henParty }} Ateliers sind darauf eingerichtet.{% endif %}</p>
   </section>
 
   <section class="event-section">
     <h2>Private Feiern &amp; Gruppenanlässe</h2>
-    <p>Auch für private Feiern, Vereinsanlässe oder einfach einen kreativen Abend mit Freund:innen eignet sich Keramik bemalen. {{ eventStats.themedEvents }} Ateliers bieten dafür eigene Themen-Abende an, viele weitere sind auch für spontane Gruppenanfragen offen.</p>
+    <p>Auch für private Feiern, Vereinsanlässe oder einfach einen kreativen Abend mit Freund:innen eignet sich Keramik bemalen.{% if eventStats.themedEvents >= 5 %} {{ eventStats.themedEvents }} Ateliers bieten dafür eigene Themen-Abende an, viele weitere sind auch für spontane Gruppenanfragen offen.{% endif %}</p>
   </section>
 
-  <p class="event-cta-wrap"><a class="button" href="/grosse-anfrage/" data-umami-event="event-cta-click" data-umami-event-quelle="events-seite">Event anfragen</a></p>
+  <p class="event-cta-wrap"><a class="button" href="{{ country.eventFormPath }}" data-umami-event="event-cta-click" data-umami-event-quelle="events-seite">Event anfragen</a></p>
 </article>

@@ -4,6 +4,8 @@
   title: "Atelier eintragen oder korrigieren | potterymaps",
   description: "Kennst du ein Atelier zum Keramik bemalen, das bei uns fehlt, oder ist ein Eintrag veraltet? Melde es uns hier.",
   pagination: { data: "countries", size: 1, alias: "country" },
+  // Gleichwertige Seite in den anderen Laendern (hreflang), siehe base.njk
+  pageKey: "studio-eintragen/",
   permalink: (data) => `${data.country.path}/studio-eintragen/`,
   eleventyComputed: {
     jsonLdBreadcrumb: (data) => ({
@@ -24,6 +26,7 @@
 
   <form class="entry-form" id="studio-form" action="https://formspree.io/f/xrpbzzvr" method="POST">
     <input type="hidden" name="_next" value="{{ site.url }}{{ country.path }}/studio-eintragen/danke/">
+    {% if countries.length > 1 %}<input type="hidden" name="land" value="{{ country.iso }}">{% endif %}
     <fieldset>
       <legend>Was möchtest du tun?</legend>
       <label class="radio-option">

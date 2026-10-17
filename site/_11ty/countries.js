@@ -8,6 +8,13 @@ const COUNTRIES = {
     path: "/ch",
     name: "Schweiz",
     nameIn: "in der Schweiz",
+    nameInAll: "in der ganzen Schweiz",
+    mapOf: "einer Karte der Schweiz",
+    regionsPhrase: "Regionen der Schweiz",
+    // Textbausteine fuer die Startseiten-FAQ (Preise/Beispielstaedte)
+    faqPriceLead: " und liegen meist zwischen CHF 15 und 50,",
+    faqExampleCities: ", u. a. in Zürich, Basel, Bern, Genf, Luzern und vielen weiteren Städten",
+    eventFormPath: "/grosse-anfrage/",
     currency: "CHF",
     lang: "de-CH",
     hreflang: "de-CH",
@@ -20,6 +27,12 @@ const COUNTRIES = {
     path: "/de",
     name: "Deutschland",
     nameIn: "in Deutschland",
+    nameInAll: "in ganz Deutschland",
+    mapOf: "einer Karte von Deutschland",
+    regionsPhrase: "Orten in Deutschland",
+    faqPriceLead: ",",
+    faqExampleCities: "",
+    eventFormPath: "/de/event-anfrage/",
     currency: "EUR",
     lang: "de-DE",
     hreflang: "de-DE",
@@ -41,4 +54,13 @@ function enabledCountries() {
 
 const byIso = (iso) => Object.values(COUNTRIES).find((c) => c.iso === String(iso || "").toUpperCase());
 
-module.exports = { COUNTRIES, byIso, enabledCountries };
+// Fuellt Platzhalter wie {{NAME_IN}} in landesneutral geschriebenen Texten.
+function fillCountryText(country, str) {
+  return String(str)
+    .replace("{{NAME_IN_ALL}}", country.nameInAll)
+    .replace("{{NAME_IN}}", country.nameIn)
+    .replace("{{EXAMPLE_CITIES}}", country.faqExampleCities)
+    .replace("{{PRICE_LEAD}}", country.faqPriceLead);
+}
+
+module.exports = { COUNTRIES, byIso, enabledCountries, fillCountryText };
