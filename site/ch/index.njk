@@ -111,7 +111,7 @@
 
   <section class="topic-intro">
     <h2>Teller, Ton oder Porzellan bemalen – oder einfach im Keramik-Café verweilen</h2>
-    <p>Bei potterymaps geht es um mehr als klassisches Keramik bemalen: Viele Ateliers bieten auch das Bemalen von Porzellan an{% if porzellanStudios.length %}, zum Beispiel {% for s in porzellanStudios %}<a href="/ch/studio/{{ s.slug }}/">{{ s.name }}</a>{% if not loop.last %}, {% endif %}{% endfor %}{% endif %}. Andere sind gemütliche Keramik-Cafés, in denen du bei einer Tasse Kaffee direkt vor Ort einen Teller zum Bemalen aussuchst oder dein Stück aus Ton bemalst{% if cafeStudios.length %} – etwa bei {% for s in cafeStudios %}<a href="/ch/studio/{{ s.slug }}/">{{ s.name }}</a>{% if not loop.last %}, {% endif %}{% endfor %}{% endif %}. Wähle unten deine Stadt und finde das passende Atelier in deiner Nähe.</p>
+    <p>Bei potterymaps geht es um mehr als klassisches Keramik bemalen: Viele Ateliers bieten auch das Bemalen von Porzellan an{% if porzellanStudios.length %}, zum Beispiel {% for s in porzellanStudios %}<a href="{{ country.path }}/studio/{{ s.slug }}/">{{ s.name }}</a>{% if not loop.last %}, {% endif %}{% endfor %}{% endif %}. Andere sind gemütliche Keramik-Cafés, in denen du bei einer Tasse Kaffee direkt vor Ort einen Teller zum Bemalen aussuchst oder dein Stück aus Ton bemalst{% if cafeStudios.length %} – etwa bei {% for s in cafeStudios %}<a href="{{ country.path }}/studio/{{ s.slug }}/">{{ s.name }}</a>{% if not loop.last %}, {% endif %}{% endfor %}{% endif %}. Wähle unten deine Stadt und finde das passende Atelier in deiner Nähe.</p>
   </section>
 
   <section class="how-it-works">
@@ -137,13 +137,13 @@
   </section>
 
   <section class="view-all-link">
-    <a href="/ch/alle-staedte/">Alle Städte & Karte ansehen →</a>
+    <a href="{{ country.path }}/alle-staedte/">Alle Städte & Karte ansehen →</a>
   </section>
 
   <section class="cta-missing">
     <h2>Dein Atelier fehlt?</h2>
     <p>Wir wachsen laufend weiter. Kennst du ein Atelier, das noch nicht gelistet ist?</p>
-    <a class="button" href="/ch/studio-eintragen/">Trag es ein</a>
+    <a class="button" href="{{ country.path }}/studio-eintragen/">Trag es ein</a>
   </section>
 
   <section class="home-faq">
@@ -189,7 +189,7 @@
       }
       matches.slice(0, 6).forEach(function (c) {
         var a = document.createElement("a");
-        a.href = c.hasOwn ? "/ch/staedte/" + c.slug + "/" : "/ch/studios-nahe/" + c.slug + "/";
+        a.href = c.hasOwn ? "{{ country.path }}/staedte/" + c.slug + "/" : "{{ country.path }}/studios-nahe/" + c.slug + "/";
         var note = c.note || (c.hasOwn ? null : "Ateliers in der Nähe");
         if (note) {
           a.innerHTML = c.name + ' <span class="suggestion-note">' + note + "</span>";
@@ -241,7 +241,7 @@
       }
       var matches = currentMatches();
       if (matches.length) {
-        window.location.href = matches[0].hasOwn ? "/ch/staedte/" + matches[0].slug + "/" : "/ch/studios-nahe/" + matches[0].slug + "/";
+        window.location.href = matches[0].hasOwn ? "{{ country.path }}/staedte/" + matches[0].slug + "/" : "{{ country.path }}/studios-nahe/" + matches[0].slug + "/";
       }
     });
 

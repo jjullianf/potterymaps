@@ -1,6 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const citySlug = require("./citySlug.js");
+const { COUNTRIES, byIso } = require("../_11ty/countries.js");
 const neighborMap = require("./neighborMap.js");
 const targetCities = require("./targetCities.js");
 const studioImage = require("../_11ty/studioImage.js");
@@ -246,7 +247,7 @@ function escapeHtml(str) {
 // js/map-popup.js), daher rohes HTML statt escaped Nunjucks-String.
 function buildMapPopupHtml(s, { thumbHtml, price, walkin }) {
   return (
-    '<a class="map-popup" href="/ch/studio/' + s.slug + '/">' +
+    '<a class="map-popup" href="' + s.pagePath + '">' +
     '<span class="map-popup-thumb">' + thumbHtml + "</span>" +
     '<span class="map-popup-body">' +
     '<strong class="map-popup-name">' + escapeHtml(s.name) + "</strong>" +
@@ -264,7 +265,7 @@ function buildMapPopupHtml(s, { thumbHtml, price, walkin }) {
 // wirkte. Nur Name, Preis und Walk-in-Badge.
 function buildMapPopupHtmlCompact(s, { price, walkin }) {
   return (
-    '<a class="map-popup map-popup-compact" href="/ch/studio/' + s.slug + '/">' +
+    '<a class="map-popup map-popup-compact" href="' + s.pagePath + '">' +
     '<strong class="map-popup-name">' + escapeHtml(s.name) + "</strong>" +
     (price ? '<span class="map-popup-price">' + escapeHtml(price) + "</span>" : "") +
     (walkin
@@ -277,7 +278,6 @@ function buildMapPopupHtmlCompact(s, { price, walkin }) {
 // Land pro Atelier (studios.json, Feld "country"); fehlt es, gilt "CH" - so
 // bleiben alle bisherigen Eintraege automatisch Schweizer Ateliers.
 const DEFAULT_COUNTRY = "CH";
-const DEFAULT_CURRENCY = { CH: "CHF", DE: "EUR" };
 
 function normalizeCountry(s) {
   return String(s.country || DEFAULT_COUNTRY).trim().toUpperCase();
@@ -293,7 +293,12 @@ async function loadStudios(country) {
   const studios = (raw.studios || [])
     .map((s) => {
       const c = normalizeCountry(s);
-      return Object.assign({}, s, { country: c, currency: s.currency || DEFAULT_CURRENCY[c] || "CHF" });
+      const cfg = byIso(c) || COUNTRIES.ch;
+      return Object.assign({}, s, {
+        country: c,
+        currency: s.currency || cfg.currency,
+        pagePath: `${cfg.path}/studio/${s.slug}/`,
+      });
     })
     .filter((s) => s.country === country);
 

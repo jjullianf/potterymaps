@@ -9,8 +9,8 @@
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Startseite", item: `${data.site.url}/ch/` },
-        { "@type": "ListItem", position: 2, name: "Events", item: `${data.site.url}/ch/events/` },
+        { "@type": "ListItem", position: 1, name: "Startseite", item: `${data.site.url}${data.country.path}/` },
+        { "@type": "ListItem", position: 2, name: "Events", item: `${data.site.url}${data.country.path}/events/` },
         { "@type": "ListItem", position: 3, name: "Event-Anfrage", item: `${data.site.url}/grosse-anfrage/` },
       ],
     }),
@@ -18,7 +18,7 @@
 }
 ---
 <article class="static-page">
-  <p class="breadcrumb"><a href="/ch/">Startseite</a> &raquo; <a href="/ch/events/">Events</a> &raquo; Event-Anfrage</p>
+  <p class="breadcrumb"><a href="{{ country.path }}/">Startseite</a> &raquo; <a href="{{ country.path }}/events/">Events</a> &raquo; Event-Anfrage</p>
   <h1>Event planen</h1>
   <p>Du möchtest mit einer Gruppe, für einen Anlass, einen Kindergeburtstag oder ein Firmenevent Keramik bemalen? Beschreib uns kurz, was du suchst – wir melden uns mit passenden Ateliers.</p>
   <p class="trust-hint"><i class="ti ti-clock"></i> Antwort innerhalb von 48 Stunden garantiert.</p>
@@ -51,14 +51,14 @@
 
     <label class="checkbox-option checkbox-option-consent">
       <input type="checkbox" id="a-consent" name="consent" required>
-      <span>Ich habe die <a href="/ch/datenschutz/" target="_blank">Datenschutzerklärung</a> gelesen und bin damit einverstanden, dass meine Angaben zur Bearbeitung dieser Anfrage verwendet und dafür an Formspree übermittelt werden.</span>
+      <span>Ich habe die <a href="{{ country.path }}/datenschutz/" target="_blank">Datenschutzerklärung</a> gelesen und bin damit einverstanden, dass meine Angaben zur Bearbeitung dieser Anfrage verwendet und dafür an Formspree übermittelt werden.</span>
     </label>
 
     <button type="submit">Anfrage senden</button>
     <p class="hint" id="form-error" hidden>Senden hat leider nicht geklappt. Bitte nochmal versuchen, oder direkt an <a href="mailto:info@potterymaps.com">info@potterymaps.com</a> schreiben.</p>
   </form>
 
-  <p class="alt-action-hint">Lieber selbst stöbern? <a href="/ch/alle-staedte/">Alle Ateliers ansehen</a>.</p>
+  <p class="alt-action-hint">Lieber selbst stöbern? <a href="{{ country.path }}/alle-staedte/">Alle Ateliers ansehen</a>.</p>
 </article>
 <script>
   (function () {

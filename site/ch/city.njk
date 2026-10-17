@@ -5,7 +5,7 @@
     size: 1,
     alias: "cityData",
   },
-  permalink: (data) => `/ch/staedte/${data.cityData.slug}/`,
+  permalink: (data) => `${data.country.path}/staedte/${data.cityData.slug}/`,
   layout: "base.njk",
   eleventyComputed: {
     title: (data) => `Keramik bemalen ${data.cityData.name} - ${data.cityData.count} ${data.pluralize(data.cityData.count, "Atelier", "Ateliers")} im Vergleich | potterymaps`,
@@ -28,7 +28,7 @@
 {% from "studio-card.njk" import card %}
 {% set c = cityData %}
 <article class="city-page">
-  <p class="breadcrumb"><a href="/ch/">Startseite</a> &raquo; <a href="/ch/alle-staedte/">Alle Städte</a> &raquo; {{ c.name }}</p>
+  <p class="breadcrumb"><a href="{{ country.path }}/">Startseite</a> &raquo; <a href="{{ country.path }}/alle-staedte/">Alle Städte</a> &raquo; {{ c.name }}</p>
 
   <div class="city-header{% if not c.hasPhoto %} city-header-placeholder{% endif %}">
     {% if c.hasPhoto %}{% optimizedImage "./images/cities/" + c.slug + ".jpg", "Stadtansicht von " + c.name, { widths: [500, 852], sizes: "(max-width: 900px) 100vw, 852px", loading: "eager", fetchpriority: "high", class: "city-header-img" } %}{% endif %}
@@ -39,8 +39,8 @@
 
   {% if c.hasAny and (c.cafeMatch or c.porzellanMatch) %}
   <p class="city-topic-intro">
-    {% if c.porzellanMatch %}Auch Porzellan bemalen ist in {{ c.name }} möglich, z. B. bei <a href="/ch/studio/{{ c.porzellanMatch.slug }}/">{{ c.porzellanMatch.name }}</a>.{% endif %}
-    {% if c.cafeMatch %}Wer es gemütlich mag, findet mit <a href="/ch/studio/{{ c.cafeMatch.slug }}/">{{ c.cafeMatch.name }}</a> auch ein Keramik-Café in {{ c.name }}.{% endif %}
+    {% if c.porzellanMatch %}Auch Porzellan bemalen ist in {{ c.name }} möglich, z. B. bei <a href="{{ country.path }}/studio/{{ c.porzellanMatch.slug }}/">{{ c.porzellanMatch.name }}</a>.{% endif %}
+    {% if c.cafeMatch %}Wer es gemütlich mag, findet mit <a href="{{ country.path }}/studio/{{ c.cafeMatch.slug }}/">{{ c.cafeMatch.name }}</a> auch ein Keramik-Café in {{ c.name }}.{% endif %}
   </p>
   {% endif %}
 
@@ -68,7 +68,7 @@
     <h2>Auch in der Nähe</h2>
     <ul class="town-chips">
       {% for t in c.nearbyTowns %}
-      <li><a class="town-chip" href="/ch/staedte/{{ t.slug }}/">{{ t.name }} <span class="count">{{ t.count }} {{ pluralize(t.count, "Atelier", "Ateliers") }}</span></a></li>
+      <li><a class="town-chip" href="{{ country.path }}/staedte/{{ t.slug }}/">{{ t.name }} <span class="count">{{ t.count }} {{ pluralize(t.count, "Atelier", "Ateliers") }}</span></a></li>
       {% endfor %}
     </ul>
   </section>
@@ -79,17 +79,17 @@
     <h2>Weitere Orte in der Region</h2>
     <ul class="town-chips">
       {% for t in townsWithoutStudio %}
-      <li><a class="town-chip" href="/ch/studios-nahe/{{ t.slug }}/">{{ t.name }}</a></li>
+      <li><a class="town-chip" href="{{ country.path }}/studios-nahe/{{ t.slug }}/">{{ t.name }}</a></li>
       {% endfor %}
     </ul>
-    <a class="back-to-map-link" href="/ch/karte/">← Zurück zur Karte</a>
+    <a class="back-to-map-link" href="{{ country.path }}/karte/">← Zurück zur Karte</a>
   </section>
   {% endif %}
 
   {% if not c.hasAny %}
   <section class="empty-city">
     <p>Aktuell ist uns in {{ c.name }} noch kein Atelier zum Keramik bemalen bekannt.</p>
-    <p>Kennst du ein Atelier hier? <a href="/ch/studio-eintragen/">Trag es ein</a> und hilf mit, das Verzeichnis zu vervollständigen.</p>
+    <p>Kennst du ein Atelier hier? <a href="{{ country.path }}/studio-eintragen/">Trag es ein</a> und hilf mit, das Verzeichnis zu vervollständigen.</p>
   </section>
   {% else %}
   <section class="cta-events">
@@ -100,7 +100,7 @@
   <section class="cta-missing">
     <h2>Dein Atelier fehlt?</h2>
     <p>Wir wachsen laufend weiter. Kennst du ein weiteres Atelier in {{ c.name }}, das hier noch nicht gelistet ist?</p>
-    <a class="button" href="/ch/studio-eintragen/">Trag es ein</a>
+    <a class="button" href="{{ country.path }}/studio-eintragen/">Trag es ein</a>
   </section>
   {% endif %}
 </article>

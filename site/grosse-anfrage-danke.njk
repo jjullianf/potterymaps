@@ -10,8 +10,8 @@
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Startseite", item: `${data.site.url}/ch/` },
-        { "@type": "ListItem", position: 2, name: "Events", item: `${data.site.url}/ch/events/` },
+        { "@type": "ListItem", position: 1, name: "Startseite", item: `${data.site.url}${data.country.path}/` },
+        { "@type": "ListItem", position: 2, name: "Events", item: `${data.site.url}${data.country.path}/events/` },
         { "@type": "ListItem", position: 3, name: "Event-Anfrage", item: `${data.site.url}/grosse-anfrage/` },
         { "@type": "ListItem", position: 4, name: "Danke", item: `${data.site.url}/grosse-anfrage/danke/` },
       ],
@@ -20,9 +20,9 @@
 }
 ---
 <article class="static-page thank-you-page">
-  <p class="breadcrumb"><a href="/ch/">Startseite</a> &raquo; <a href="/ch/events/">Events</a> &raquo; <a href="/grosse-anfrage/">Event-Anfrage</a> &raquo; Danke</p>
+  <p class="breadcrumb"><a href="{{ country.path }}/">Startseite</a> &raquo; <a href="{{ country.path }}/events/">Events</a> &raquo; <a href="/grosse-anfrage/">Event-Anfrage</a> &raquo; Danke</p>
   <h1><i class="ti ti-circle-check"></i> Danke für deine Anfrage!</h1>
   <p>Wir haben deine Anfrage erhalten und melden uns innerhalb von 48 Stunden mit passenden Ateliers für dein Event.</p>
   <p>Falls du in der Zwischenzeit noch etwas ergänzen möchtest, schreib uns einfach direkt an <a href="mailto:info@potterymaps.com">info@potterymaps.com</a>.</p>
-  <p><a class="button" href="/ch/">Zurück zur Startseite</a></p>
+  <p><a class="button" href="{{ country.path }}/">Zurück zur Startseite</a></p>
 </article>

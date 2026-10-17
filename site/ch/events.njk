@@ -3,21 +3,21 @@
   layout: "base.njk",
   title: "Keramik bemalen für Teamevents, Geburtstage & Gruppen | potterymaps",
   description: "Keramik bemalen als Firmenevent, Kindergeburtstag, Junggesellinnenabschied oder Gruppenanlass – finde ein passendes Atelier in der Schweiz und stelle eine unverbindliche Anfrage.",
-  permalink: "/ch/events/",
+  permalink: (data) => `${data.country.path}/events/`,
   eleventyComputed: {
     jsonLdBreadcrumb: (data) => ({
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Startseite", item: `${data.site.url}/ch/` },
-        { "@type": "ListItem", position: 2, name: "Events", item: `${data.site.url}/ch/events/` },
+        { "@type": "ListItem", position: 1, name: "Startseite", item: `${data.site.url}${data.country.path}/` },
+        { "@type": "ListItem", position: 2, name: "Events", item: `${data.site.url}${data.country.path}/events/` },
       ],
     }),
   },
 }
 ---
 <article class="static-page">
-  <p class="breadcrumb"><a href="/ch/">Startseite</a> &raquo; Events</p>
+  <p class="breadcrumb"><a href="{{ country.path }}/">Startseite</a> &raquo; Events</p>
   <h1>Keramik bemalen als Event - für Firmen, Geburtstage und Gruppen</h1>
   <p>Ob Firmenanlass, Kindergeburtstag, Junggesellinnenabschied oder einfach eine private Feier mit Freund:innen – Keramik bemalen eignet sich hervorragend als gemeinsames Erlebnis für Gruppen. Wir vermitteln dich kostenlos an ein passendes Atelier in deiner Region.</p>
 

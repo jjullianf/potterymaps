@@ -3,21 +3,21 @@
   layout: "base.njk",
   title: "Kontakt | potterymaps",
   description: "Kontaktiere potterymaps – melde ein neues Atelier oder stell eine Anfrage für ein Event.",
-  permalink: "/ch/kontakt/",
+  permalink: (data) => `${data.country.path}/kontakt/`,
   eleventyComputed: {
     jsonLdBreadcrumb: (data) => ({
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Startseite", item: `${data.site.url}/ch/` },
-        { "@type": "ListItem", position: 2, name: "Kontakt", item: `${data.site.url}/ch/kontakt/` },
+        { "@type": "ListItem", position: 1, name: "Startseite", item: `${data.site.url}${data.country.path}/` },
+        { "@type": "ListItem", position: 2, name: "Kontakt", item: `${data.site.url}${data.country.path}/kontakt/` },
       ],
     }),
   },
 }
 ---
 <article class="static-page">
-  <p class="breadcrumb"><a href="/ch/">Startseite</a> &raquo; Kontakt</p>
+  <p class="breadcrumb"><a href="{{ country.path }}/">Startseite</a> &raquo; Kontakt</p>
   <h1>Kontakt</h1>
   <p>Hast du Fragen oder Feedback? Schreib uns eine E-Mail:</p>
   <p><a href="mailto:info@potterymaps.com">info@potterymaps.com</a></p>
@@ -30,7 +30,7 @@
       <strong>Event-Anfrage stellen</strong>
       <span>Firmenevent, Kindergeburtstag, Gruppenanlass oder Junggesellinnenabschied.</span>
     </a>
-    <a class="contact-option" href="/ch/studio-eintragen/">
+    <a class="contact-option" href="{{ country.path }}/studio-eintragen/">
       <i class="ti ti-map-pin-plus"></i>
       <strong>Atelier eintragen oder korrigieren</strong>
       <span>Ein neues Atelier melden oder einen bestehenden Eintrag korrigieren.</span>

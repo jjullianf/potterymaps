@@ -3,6 +3,9 @@ const path = require("path");
 const targetCities = require("./targetCities.js");
 const studiosFn = require("./studios.js");
 const site = require("./site.js");
+const { COUNTRIES } = require("../_11ty/countries.js");
+
+const COUNTRY = COUNTRIES.ch;
 const citySlug = require("./citySlug.js");
 const pluralize = require("../_11ty/pluralize.js");
 const compareStudiosForListing = require("../_11ty/sortStudios.js");
@@ -83,7 +86,7 @@ module.exports = async function () {
       introDynamic = `Aktuell ${c.count === 1 ? "ist" : "sind"} hier ${c.count} ${pluralize(c.count, "Atelier", "Ateliers")} gelistet.`;
     }
 
-    const cityUrl = `${site.url}/ch/staedte/${c.slug}/`;
+    const cityUrl = `${site.url}${COUNTRY.path}/staedte/${c.slug}/`;
 
     const jsonLdItemList = c.direct.length
       ? {
@@ -93,7 +96,7 @@ module.exports = async function () {
             "@type": "ListItem",
             position: i + 1,
             name: s.name,
-            url: `${site.url}/ch/studio/${s.slug}/`,
+            url: `${site.url}${COUNTRY.path}/studio/${s.slug}/`,
           })),
         }
       : null;
@@ -102,8 +105,8 @@ module.exports = async function () {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Startseite", item: `${site.url}/ch/` },
-        { "@type": "ListItem", position: 2, name: "Alle Städte", item: `${site.url}/ch/alle-staedte/` },
+        { "@type": "ListItem", position: 1, name: "Startseite", item: `${site.url}${COUNTRY.path}/` },
+        { "@type": "ListItem", position: 2, name: "Alle Städte", item: `${site.url}${COUNTRY.path}/alle-staedte/` },
         { "@type": "ListItem", position: 3, name: c.name, item: cityUrl },
       ],
     };

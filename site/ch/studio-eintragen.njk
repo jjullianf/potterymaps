@@ -3,26 +3,26 @@
   layout: "base.njk",
   title: "Atelier eintragen oder korrigieren | potterymaps",
   description: "Kennst du ein Atelier zum Keramik bemalen, das bei uns fehlt, oder ist ein Eintrag veraltet? Melde es uns hier.",
-  permalink: "/ch/studio-eintragen/",
+  permalink: (data) => `${data.country.path}/studio-eintragen/`,
   eleventyComputed: {
     jsonLdBreadcrumb: (data) => ({
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Startseite", item: `${data.site.url}/ch/` },
-        { "@type": "ListItem", position: 2, name: "Atelier eintragen", item: `${data.site.url}/ch/studio-eintragen/` },
+        { "@type": "ListItem", position: 1, name: "Startseite", item: `${data.site.url}${data.country.path}/` },
+        { "@type": "ListItem", position: 2, name: "Atelier eintragen", item: `${data.site.url}${data.country.path}/studio-eintragen/` },
       ],
     }),
   },
 }
 ---
 <article class="static-page">
-  <p class="breadcrumb"><a href="/ch/">Startseite</a> &raquo; Atelier eintragen</p>
+  <p class="breadcrumb"><a href="{{ country.path }}/">Startseite</a> &raquo; Atelier eintragen</p>
   <h1>Atelier eintragen oder korrigieren</h1>
   <p>Kennst du ein Atelier zum Keramik bemalen, das bei uns noch fehlt? Oder ist ein bestehender Eintrag veraltet oder fehlerhaft? Wähle unten die passende Option – wir prüfen jede Meldung von Hand und tragen sie danach selbst im Verzeichnis nach. Es wird nichts automatisch veröffentlicht.</p>
 
   <form class="entry-form" id="studio-form" action="https://formspree.io/f/xrpbzzvr" method="POST">
-    <input type="hidden" name="_next" value="{{ site.url }}/ch/studio-eintragen/danke/">
+    <input type="hidden" name="_next" value="{{ site.url }}{{ country.path }}/studio-eintragen/danke/">
     <fieldset>
       <legend>Was möchtest du tun?</legend>
       <label class="radio-option">
@@ -104,7 +104,7 @@
 
       <label for="p-price-from">Preis ab</label>
       <input type="text" id="p-price-from" name="profil_price_from" placeholder="z.B. 15">
-      <p class="hint">Der günstigste Einstiegspreis, den ihr vor Ort verlangt – z. B. Eintritt + ein Stück Keramik. Nur die Zahl in CHF, ohne Text (wird bei uns als „ab CHF …“ angezeigt).</p>
+      <p class="hint">Der günstigste Einstiegspreis, den ihr vor Ort verlangt – z. B. Eintritt + ein Stück Keramik. Nur die Zahl in {{ country.currency }}, ohne Text (wird bei uns als „ab {{ country.currency }} …“ angezeigt).</p>
 
       <label for="p-price-note">Preis-Hinweis</label>
       <textarea id="p-price-note" name="profil_price_note" rows="2"></textarea>
