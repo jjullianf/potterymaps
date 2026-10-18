@@ -1133,6 +1133,9 @@ h1, h2 { font-family: var(--font-display); font-weight: 600; color: var(--color-
   cursor: pointer;
   font: inherit;
 }
+/* "Ablehnen" und "Akzeptieren" gleichwertig gestalten (gleiche Farbe, kein Nudging) */
+.cookie-banner-actions .button-secondary { background: var(--color-accent); }
+.cookie-banner-actions .button-secondary:hover { background: var(--color-accent-hover); }
 
 .map-consent-gate {
   background: var(--color-bg-alt);
