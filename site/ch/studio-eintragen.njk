@@ -136,6 +136,7 @@
     </div>
 
     <button type="submit">Absenden</button>
+    {% if country.code != "ch" %}<p class="hint">Mit dem Absenden werden deine Angaben über den Formular-Dienst Formspree an uns übermittelt. Mehr dazu in der <a href="{{ country.path }}/datenschutz/">Datenschutzerklärung</a>.</p>{% endif %}
     <p class="hint" id="form-error" hidden>Senden hat leider nicht geklappt. Bitte nochmal versuchen, oder direkt an <a href="mailto:info@potterymaps.com">info@potterymaps.com</a> schreiben.</p>
     <p class="form-footnote">Angaben können bei Bedarf von uns angepasst werden.</p>
   </form>
