@@ -1,0 +1,158 @@
+{
+ "0": {
+  "name": "ceramore - Keramik selber bemalen",
+  "site": "https://ceramore.de/",
+  "emails": {
+   "info@ceramore.de": [
+    "https://ceramore.de/",
+    "https://ceramore.de/impressum",
+    "https://ceramore.de/datenschutz"
+   ]
+  }
+ },
+ "1": {
+  "name": "Eigenlob Keramik Selbst Bemalen",
+  "site": "https://www.eigenlob-keramik.de/",
+  "emails": {
+   "info@eigenlob-keramik.de": [
+    "https://www.eigenlob-keramik.de/",
+    "https://www.eigenlob-keramik.de/impressum-2/",
+    "https://www.eigenlob-keramik.de/datenschutzerklaerung/"
+   ]
+  }
+ },
+ "3": {
+  "name": "DüsselLiebe - Keramik selbst bemalen- Events",
+  "site": "https://xn--dsselliebe-9db.de/",
+  "emails": {
+   "info@duessel-liebe.de": [
+    "https://xn--dsselliebe-9db.de/",
+    "https://xn--dsselliebe-9db.de/standortundKontakt"
+   ]
+  }
+ },
+ "4": {
+  "name": "Sponk Keramik bemalen und töpfern",
+  "site": "https://sponkkeramik.de/",
+  "emails": {
+   "info@sponkkeramik.de": [
+    "https://www.sponkkeramik.de/",
+    "https://www.sponkkeramik.de/kontakt-sponk-keramik",
+    "https://www.sponkkeramik.de/impressum",
+    "https://www.sponkkeramik.de/agb",
+    "https://www.sponkkeramik.de/datenschutz"
+   ]
+  }
+ },
+ "5": {
+  "name": "MANUFATTURA Keramik selbst bemalen",
+  "site": "https://www.manufattura-keramikbemalen.de/",
+  "emails": {}
+ },
+ "8": {
+  "name": "Keramik for Fun",
+  "site": "http://www.keramikforfun.de/",
+  "emails": {
+   "info@keramikforfun.de": [
+    "http://www.keramikforfun.de/",
+    "https://www.keramikforfun.de/kontakt",
+    "https://www.keramikforfun.de/impressum",
+    "https://www.keramikforfun.de/datenschutzerklaerung",
+    "https://www.keramikforfun.de/agb"
+   ]
+  }
+ },
+ "16": {
+  "name": "Studio Ami Malwerkstatt",
+  "site": "https://www.studioami.de/",
+  "emails": {
+   "info@studioton.de": [
+    "https://www.studioton.de/",
+    "https://www.studioton.de/kontakt",
+    "https://www.studioton.de/agb-und-datenschutz",
+    "https://www.studioton.de/kopie-von-agb-datenschutz",
+    "https://www.studioton.de/impressum"
+   ],
+   "info@studioami.de": [
+    "https://www.studioton.de/kontakt"
+   ]
+  }
+ },
+ "18": {
+  "name": "Meerwalt Studio - Keramik selbst bemalen in Meerbusch-Büderich",
+  "site": "https://www.meerwalt-studio.de/",
+  "emails": {}
+ },
+ "20": {
+  "name": "Studio Brick",
+  "site": "https://www.studio-brick.de/",
+  "emails": {}
+ },
+ "27": {
+  "name": "Mao Mao Keramik Atelier - Keramik bemalen",
+  "site": "http://www.maomao-keramik.de/",
+  "emails": {}
+ },
+ "28": {
+  "name": "Mao Mao Keramik Atelier - Keramik bemalen",
+  "site": "http://www.maomao-keramik.de/",
+  "emails": {}
+ },
+ "29": {
+  "name": "Paint your Style Schöneberg",
+  "site": "https://paintyourstyle.eu/category/berlin-schoeneberg-de/",
+  "emails": {
+   "datenschutz@paintyourstyle.de": [
+    "https://paintyourstyle.eu/category/berlin-schoeneberg-de/",
+    "https://paintyourstyle.eu/kontakt-anfahrt-sb/"
+   ],
+   "rhein48@paintyourstyle.de": [
+    "https://paintyourstyle.eu/category/berlin-schoeneberg-de/",
+    "https://paintyourstyle.eu/kontakt-anfahrt-sb/"
+   ],
+   "consulting@malstudio-eroeffnen.eu": [
+    "https://paintyourstyle.eu/impressum/"
+   ],
+   "mail@malstudio-eroeffnen.eu": [
+    "https://paintyourstyle.eu/datenschutz/"
+   ]
+  }
+ },
+ "30": {
+  "name": "Lamooi - Keramik selbst bemalen",
+  "site": "http://www.lamooi.de/",
+  "emails": {
+   "info@lamooi.de": [
+    "https://www.lamooi.de/",
+    "https://www.lamooi.de/agb/",
+    "https://www.lamooi.de/impressum/",
+    "https://www.lamooi.de/datenschutzerklaerung/"
+   ]
+  }
+ },
+ "32": {
+  "name": "LUMI | ceramics • events",
+  "site": "http://www.lumi-keramik.de/",
+  "emails": {}
+ },
+ "39": {
+  "name": "Ma Si I The Italian Experience",
+  "site": "http://www.ciao-masi.de/",
+  "emails": {}
+ },
+ "61": {
+  "name": "Call me Picasso - Keramikstudio und Cafe",
+  "site": "https://www.callmepicasso.de/",
+  "emails": {
+   "info@callmepicasso.de": [
+    "https://callmepicasso.de/",
+    "https://callmepicasso.de/kontakt",
+    "https://callmepicasso.de/datenschutz",
+    "https://callmepicasso.de/impressum"
+   ],
+   "mailbox@datenschutz-berlin.de": [
+    "https://callmepicasso.de/datenschutz"
+   ]
+  }
+ }
+}
