@@ -1002,7 +1002,7 @@ h1, h2 { font-family: var(--font-display); font-weight: 600; color: var(--color-
 .map-popup {
   display: flex;
   flex-direction: column;
-  width: 180px;
+  width: 210px;
   text-decoration: none;
   color: var(--color-text);
   font-family: var(--font-display);
@@ -1039,7 +1039,11 @@ h1, h2 { font-family: var(--font-display); font-weight: 600; color: var(--color-
   font-size: 0.95rem;
   font-weight: 600;
   color: var(--color-text);
-  line-height: 1.25;
+  line-height: 1.25;  /* Lange Namen auf 2 Zeilen kuerzen, damit das Popup nicht ausufert */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 .map-popup:hover .map-popup-name {
   color: var(--color-accent);

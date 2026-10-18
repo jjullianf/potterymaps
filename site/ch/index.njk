@@ -262,7 +262,7 @@
   window.__initHomeMap = function () {
     var studios = {{ homeMapStudios | dump | safe }};
 
-    var map = L.map('home-overview-map').setView([46.9, 8.2], 8);
+    var map = L.map('home-overview-map').setView([{{ country.mapView.lat }}, {{ country.mapView.lng }}], {{ country.mapView.zoom }});
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>-Mitwirkende',
       maxZoom: 18,
@@ -292,5 +292,6 @@
       clusterGroup.addLayer(marker);
     });
     map.addLayer(clusterGroup);
+    {% if country.mapFit %}if (studios.length) { map.fitBounds(clusterGroup.getBounds(), { padding: [40, 40], maxZoom: 11 }); }{% endif %}
   };
 </script>
