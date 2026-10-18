@@ -53,7 +53,7 @@
 
     <label class="checkbox-option checkbox-option-consent">
       <input type="checkbox" id="a-consent" name="consent" required>
-      <span>Ich habe die <a href="{{ country.path }}/datenschutz/" target="_blank">Datenschutzerklärung</a> gelesen und bin damit einverstanden, dass meine Angaben zur Bearbeitung dieser Anfrage verwendet und dafür an Formspree übermittelt werden.</span>
+      <span>Ich habe die <a href="{{ country.path }}/datenschutz/" target="_blank">Datenschutzerklärung</a> gelesen und bin damit einverstanden, dass meine Angaben zur Bearbeitung dieser Anfrage verwendet und dafür an Formspree{% if country.code != "ch" %} (USA){% endif %} übermittelt werden.</span>
     </label>
 
     <button type="submit">Anfrage senden</button>
