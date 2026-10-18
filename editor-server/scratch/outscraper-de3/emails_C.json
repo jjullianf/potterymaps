@@ -1,0 +1,88 @@
+{
+ "3": {
+  "name": "painted porcelain itself - Knutselwinkel Berlin",
+  "site": "http://www.knutselwinkel.de/",
+  "emails": {
+   "berlin@knutselwinkel.de": [
+    "http://knutselwinkel.de/impressum/"
+   ]
+  }
+ },
+ "4": {
+  "name": "Color Your Day",
+  "site": "http://www.colouryourday.de/",
+  "emails": {
+   "hello@colouryourday.de": [
+    "https://www.colouryourday.de/",
+    "https://www.colouryourday.de/seite/kontakt"
+   ]
+  }
+ },
+ "6": {
+  "name": "Keramik bemalen @ Keramino - Keramikmalstudio",
+  "site": "https://keramino.de/",
+  "emails": {
+   "hello@keramino.de": [
+    "https://keramino.de/",
+    "https://keramino.de/datenschutzerklaerung/",
+    "https://keramino.de/impressum/",
+    "https://keramino.de/agb/",
+    "https://keramino.de/kontakt/"
+   ]
+  }
+ },
+ "22": {
+  "name": "Keramikmalstudio Kaulsdorf",
+  "site": "http://www.keramikbemalen.berlin/",
+  "emails": {
+   "email@keramikbemalen.com": [
+    "https://keramikbemalen.com/",
+    "https://keramikbemalen.com/kontakt.html",
+    "https://keramikbemalen.com/impressum.html",
+    "https://keramikbemalen.com/datenschutzerklaerung.html"
+   ]
+  }
+ },
+ "27": {
+  "name": "Ceramic Club",
+  "site": "https://www.ceramicclub.de/",
+  "emails": {
+   "info@ceramicclub.de": [
+    "https://ceramicclub.de/",
+    "https://ceramicclub.de/datenschutz/",
+    "https://ceramicclub.de/impressum/"
+   ]
+  }
+ },
+ "55": {
+  "name": "MeetandMake - kreative Erlebnisse",
+  "site": "https://meetandmake.de/",
+  "emails": {
+   "hello@meetandmake.de": [
+    "https://meetandmake.de/policies/contact-information"
+   ]
+  }
+ },
+ "61": {
+  "name": "Kreativraum Berlin",
+  "site": "http://www.kreativraum-berlin.de/",
+  "emails": {
+   "info@kreativraum-berlin.de": [
+    "https://www.kreativraum-berlin.de/",
+    "https://www.kreativraum-berlin.de/impressum",
+    "https://www.kreativraum-berlin.de/agb",
+    "https://www.kreativraum-berlin.de/datenschutz"
+   ]
+  }
+ },
+ "71": {
+  "name": "KeraKunst Keramikstudio",
+  "site": "https://kerakunst.de/",
+  "emails": {
+   "info@kerakunst.de": [
+    "https://www.kerakunst.de/",
+    "https://www.kerakunst.de/pages/contact"
+   ]
+  }
+ }
+}
