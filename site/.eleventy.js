@@ -136,6 +136,7 @@ module.exports = function (eleventyConfig) {
     [/([Hh])eisst/g, "$1eißt"],
     [new RegExp("\\b([Ww])eiss" + NOT_WORD_OR_URL, "g"), "$1eiß"],
     [new RegExp("\\b([Ss])pass" + NOT_WORD_OR_URL, "g"), "$1paß"],
+    [/\bReservation\b/g, "Reservierung"],
   ];
   const toGerman = (s) => DE_SPELLING.reduce((acc, [re, rep]) => acc.replace(re, rep), s);
   eleventyConfig.addTransform("de-spelling", function (content, outputPath) {

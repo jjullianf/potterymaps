@@ -20,6 +20,27 @@ const targetSlugSet = new Set(targetCities.map((c) => c.slug));
 
 // Exakt portierte Logik aus editor-server/public/index.html (generateAutoFAQ / getCustomFaq),
 // damit die FAQ auf der oeffentlichen Seite identisch zum Editor ist.
+// CHF wird wie bisher vorangestellt ("CHF 20"), Euro nachgestellt mit Komma ("20,50 €").
+function money(currency, amount) {
+  return currency === "EUR" ? `${String(amount).replace(/(\d)\.(\d)/g, "$1,$2")} €` : `${currency} ${amount}`;
+}
+
+// Nur reine Zahlen/Bereiche ("20", "25-35") bekommen die Waehrung; Freitexte wie
+// "CHF 40 bis 2 Stunden" oder "ab 20" bleiben unveraendert, sonst entstehen
+// Doppelungen ("CHF CHF 40", "ab CHF ab 20").
+const PLAIN_NUMBER = /^\d+(?:[.,]\d+)?(?:\s*[-–]\s*\d+(?:[.,]\d+)?)?$/;
+function priceFrom(label, currency, value) {
+  const v = String(value).trim();
+  if (PLAIN_NUMBER.test(v)) return `${label} ab ${money(currency, v)}`;
+  const m = v.match(/^ab\s+(.+)$/i);
+  if (m && PLAIN_NUMBER.test(m[1])) return `${label} ab ${money(currency, m[1])}`;
+  return `${label} ${v}`;
+}
+function feeText(currency, value) {
+  const v = String(value).trim();
+  return PLAIN_NUMBER.test(v) ? `Ateliergebühr ${money(currency, v)}` : `Ateliergebühr: ${v}`;
+}
+
 function generateAutoFAQ(s) {
   const faqs = [];
   const name = s.name || "diesem Atelier";
@@ -31,9 +52,9 @@ function generateAutoFAQ(s) {
     (s.studio_fee && s.studio_fee.trim());
   if (hasPrice) {
     let parts = [];
-    if (s.price_mug) parts.push("Tasse ab " + currency + " " + s.price_mug);
-    if (s.price_plate) parts.push("Teller ab " + currency + " " + s.price_plate);
-    if (s.studio_fee) parts.push("Ateliergebühr " + currency + " " + s.studio_fee);
+    if (s.price_mug) parts.push(priceFrom("Tasse", currency, s.price_mug));
+    if (s.price_plate) parts.push(priceFrom("Teller", currency, s.price_plate));
+    if (s.studio_fee) parts.push(feeText(currency, s.studio_fee));
     let answer =
       "Bei " + name + (city ? " in " + city : "") + " kostet " + parts.join(", ") + ".";
     if (s.price_note) answer += " " + s.price_note;
@@ -113,7 +134,7 @@ function computePriceRangeText(s) {
     if (numbers.length) {
       const lowest = Math.min(...numbers);
       const formatted = Number.isInteger(lowest) ? lowest : lowest.toFixed(2).replace(/\.?0+$/, "");
-      return `ab ${s.currency || "CHF"} ${formatted}`;
+      return `ab ${money(s.currency || "CHF", formatted)}`;
     }
   }
   // studio_fee ist in den Rohdaten oft ein ganzer Beschreibungssatz statt einer
@@ -132,7 +153,7 @@ function formatPriceFrom(s) {
   const value = Number(s.price_from);
   if (Number.isNaN(value)) return null;
   const formatted = Number.isInteger(value) ? value : value.toFixed(2);
-  return `ab ${s.currency || "CHF"} ${formatted}`;
+  return `ab ${money(s.currency || "CHF", formatted)}`;
 }
 
 // Woerter/Zeichen, die alleinstehend am Ende einer gekuerzten Kartenzeile

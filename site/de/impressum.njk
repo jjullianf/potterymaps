@@ -1,66 +1,49 @@
 ---js
 {
-  title: "Impressum (Entwurf) | potterymaps",
-  description: "Impressum-Entwurf fuer die Deutschland-Version von potterymaps - noch nicht rechtlich geprueft.",
-  permalink: "/de/impressum/",
-  noindex: true,
+  layout: "base.njk",
+  title: "Impressum | potterymaps",
+  description: "Impressum von potterymaps.",
+  pagination: {
+    data: "countries",
+    size: 1,
+    alias: "country",
+    before: (items) => items.filter((c) => c.code === "de"),
+  },
+  permalink: (data) => `${data.country.path}/impressum/`,
 }
 ---
-<!DOCTYPE html>
-<html lang="de-DE">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ title }}</title>
-  <meta name="description" content="{{ description }}">
-  <meta name="robots" content="noindex">
-  <link rel="canonical" href="{{ site.url }}/de/impressum/">
-  <link rel="icon" href="/favicon.ico" sizes="48x48">
-  <link rel="preload" href="/fonts/fredoka-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/css/style.css">
-</head>
-<body>
-  <main class="static-page">
-    <div class="draft-banner">
-      <strong>Entwurf – noch nicht veroeffentlicht oder rechtlich geprueft.</strong>
-      <p>Diese Seite ist ein Geruest fuer die spaetere Deutschland-Version von potterymaps. Alle Angaben in eckigen Klammern sind Platzhalter und muessen durch die echten Angaben ersetzt werden, bevor diese Seite live geht. Inhaltlich wurde noch nichts rechtlich geprueft.</p>
-    </div>
+<article class="static-page">
+<h1>Impressum</h1>
+  <p>Angaben gemäß § 5 Digitale-Dienste-Gesetz (DDG):</p>
 
-    <h1>Impressum</h1>
-    <p>Angaben gemäss § 5 TMG (Telemediengesetz):</p>
+  <h2>Anbieter</h2>
+  <p>
+    Julian Frick<br>
+    Rudishaldenstrasse 14<br>
+    8800 Thalwil<br>
+    Schweiz
+  </p>
 
-    <h2>Anbieter</h2>
-    <p>
-      Julian Frick<br>
-      Rudishaldenstrasse 14<br>
-      8800 Thalwil<br>
-      Schweiz
-    </p>
+  <h2>Kontakt</h2>
+  <p>
+    E-Mail: <a href="mailto:info@potterymaps.com">info@potterymaps.com</a>
+  </p>
 
-    <h2>Kontakt</h2>
-    <p>
-      E-Mail: <a href="mailto:info@potterymaps.com">info@potterymaps.com</a>
-    </p>
+  <h2>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h2>
+  <p>
+    Julian Frick<br>
+    Rudishaldenstrasse 14, 8800 Thalwil, Schweiz
+  </p>
 
-    <h2>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h2>
-    <p>
-      Julian Frick<br>
-      Rudishaldenstrasse 14, 8800 Thalwil, Schweiz
-    </p>
+  <h2>Streitschlichtung</h2>
+  <p>Ich bin nicht bereit und nicht verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
 
-    <h2>Streitschlichtung</h2>
-    <p>Ich bin nicht bereit und nicht verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+  <h2>Haftungshinweis</h2>
+  <p>potterymaps ist ein unabhängiges Verzeichnis und steht in keiner geschäftlichen Verbindung zu den gelisteten Ateliers. Die aufgeführten Ateliers wurden kostenfrei aufgenommen.</p>
 
-    <h2>Haftungshinweis</h2>
-    <p>potterymaps ist ein unabhängiges Verzeichnis und steht in keiner geschäftlichen Verbindung zu den gelisteten Ateliers. Die aufgeführten Ateliers wurden kostenfrei aufgenommen.</p>
+  <h2>Haftung für Inhalte</h2>
+  <p>Als Diensteanbieter bin ich gemäß § 7 Abs. 1 DDG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 DDG bin ich als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen. Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden Rechtsverletzungen werde ich diese Inhalte umgehend entfernen.</p>
 
-    <h2>Haftung für Inhalte</h2>
-    <p>Als Diensteanbieter bin ich gemäß § 7 Abs. 1 DDG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 DDG bin ich als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen. Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden Rechtsverletzungen werde ich diese Inhalte umgehend entfernen.</p>
-
-    <h2>Haftung für Links</h2>
-    <p>Dieses Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte ich keinen Einfluss habe. Deshalb kann ich für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar. Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen werde ich derartige Links umgehend entfernen.</p>
-
-    <p><a href="/de/datenschutz/">Zur Datenschutzerklärung (Entwurf)</a> · <a href="/">Zur Startseite</a></p>
-  </main>
-</body>
-</html>
+  <h2>Haftung für Links</h2>
+  <p>Dieses Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte ich keinen Einfluss habe. Deshalb kann ich für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar. Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen werde ich derartige Links umgehend entfernen.</p>
+</article>

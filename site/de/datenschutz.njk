@@ -1,58 +1,41 @@
 ---js
 {
-  title: "Datenschutzerklärung (Entwurf) | potterymaps",
-  description: "Datenschutzerklärung-Entwurf fuer die Deutschland-Version von potterymaps - noch nicht rechtlich geprueft.",
-  permalink: "/de/datenschutz/",
-  noindex: true,
+  layout: "base.njk",
+  title: "Datenschutzerklärung | potterymaps",
+  description: "Datenschutzerklärung von potterymaps.",
+  pagination: {
+    data: "countries",
+    size: 1,
+    alias: "country",
+    before: (items) => items.filter((c) => c.code === "de"),
+  },
+  permalink: (data) => `${data.country.path}/datenschutz/`,
 }
 ---
-<!DOCTYPE html>
-<html lang="de-DE">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ title }}</title>
-  <meta name="description" content="{{ description }}">
-  <meta name="robots" content="noindex">
-  <link rel="canonical" href="{{ site.url }}/de/datenschutz/">
-  <link rel="icon" href="/favicon.ico" sizes="48x48">
-  <link rel="preload" href="/fonts/fredoka-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/css/style.css">
-</head>
-<body>
-  <main class="static-page">
-    <div class="draft-banner">
-      <strong>Entwurf – noch nicht veroeffentlicht oder rechtlich geprueft.</strong>
-      <p>Diese Seite ist ein Geruest fuer die spaetere Deutschland-Version von potterymaps, angelehnt an die bestehende Schweizer Datenschutzerklaerung, aber auf DSGVO-Begriffe umgestellt. Alle Angaben in eckigen Klammern sind Platzhalter. Inhaltlich wurde noch nichts rechtlich geprueft.</p>
-    </div>
+<article class="static-page">
+<h1>Datenschutzerklärung</h1>
+  <p><em>Stand: {{ year }}</em></p>
 
-    <h1>Datenschutzerklärung</h1>
-    <p><em>Stand: {{ year }}</em></p>
+  <h2>Verantwortlicher</h2>
+  <p>Verantwortlicher im Sinne der Datenschutz-Grundverordnung (DSGVO) ist die im <a href="/de/impressum/">Impressum</a> genannte Person/Stelle.</p>
 
-    <h2>Verantwortlicher</h2>
-    <p>Verantwortlicher im Sinne der Datenschutz-Grundverordnung (DSGVO) ist die im <a href="/de/impressum/">Impressum</a> genannte Person/Stelle.</p>
+  <h2>Erhebung und Verarbeitung von Daten</h2>
+  <p>Diese Website stellt ein Verzeichnis von Keramikmal-Ateliers dar. Beim Besuch der Website werden durch den Hosting-Anbieter automatisch technische Zugriffsdaten (z. B. IP-Adresse, Datum und Uhrzeit des Zugriffs, aufgerufene Seite) erfasst, wie dies bei jedem Website-Aufruf technisch üblich ist. Die Website wird über GitHub Pages (GitHub, Inc., USA) bereitgestellt, die Zugriffsdaten können dabei auf Servern in den USA verarbeitet werden. Weitere Informationen findest du in der <a href="https://docs.github.com/de/site-policy/privacy-policies/github-general-privacy-statement" rel="nofollow noopener" target="_blank">Datenschutzerklärung von GitHub</a>. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse am technisch fehlerfreien Betrieb der Website).</p>
 
-    <h2>Erhebung und Verarbeitung von Daten</h2>
-    <p>Diese Website stellt ein Verzeichnis von Keramikmal-Ateliers dar. Beim Besuch der Website werden durch den Hosting-Anbieter automatisch technische Zugriffsdaten (z. B. IP-Adresse, Datum und Uhrzeit des Zugriffs, aufgerufene Seite) erfasst, wie dies bei jedem Website-Aufruf technisch üblich ist. Die Website wird über GitHub Pages (GitHub, Inc., USA) bereitgestellt, die Zugriffsdaten können dabei auf Servern in den USA verarbeitet werden. Weitere Informationen findest du in der <a href="https://docs.github.com/de/site-policy/privacy-policies/github-general-privacy-statement" rel="nofollow noopener" target="_blank">Datenschutzerklärung von GitHub</a>. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse am technisch fehlerfreien Betrieb der Website).</p>
+  <h2>Kontaktaufnahme</h2>
+  <p>Wenn du uns per E-Mail kontaktierst, werden deine Angaben (z. B. Absenderadresse, Inhalt der Nachricht) zur Bearbeitung deiner Anfrage gespeichert. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b bzw. f DSGVO.</p>
 
-    <h2>Kontaktaufnahme</h2>
-    <p>Wenn du uns per E-Mail kontaktierst, werden deine Angaben (z. B. Absenderadresse, Inhalt der Nachricht) zur Bearbeitung deiner Anfrage gespeichert. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b bzw. f DSGVO.</p>
+  <h2>Formulare (Formspree)</h2>
+  <p>Für Formulare auf dieser Website (z. B. "Atelier eintragen" und "Event-Anfrage") nutzen wir den Dienst <a href="https://formspree.io/" rel="nofollow noopener" target="_blank">Formspree</a>, ein Angebot von Formspree, Inc. mit Sitz in den USA. Die im jeweiligen Formular eingegebenen Daten werden direkt an Formspree übermittelt. Es handelt sich dabei um eine Datenübermittlung in ein Drittland (USA) ausserhalb der EU/des EWR. Die Übermittlung erfolgt nur, wenn du das Formular selbst absendest, und beruht auf deiner Einwilligung (Art. 49 Abs. 1 lit. a DSGVO). Ohne Absenden werden keine Daten übermittelt. Du kannst uns auch jederzeit direkt per E-Mail schreiben. Weitere Informationen findest du in der <a href="https://formspree.io/legal/privacy-policy/" rel="nofollow noopener" target="_blank">Datenschutzerklärung von Formspree</a>.</p>
 
-    <h2>Formulare (Formspree)</h2>
-    <p>Für Formulare auf dieser Website (z. B. "Atelier eintragen" und "Event-Anfrage") nutzen wir den Dienst <a href="https://formspree.io/" rel="nofollow noopener" target="_blank">Formspree</a>, ein Angebot von Formspree, Inc. mit Sitz in den USA. Die im jeweiligen Formular eingegebenen Daten werden direkt an Formspree übermittelt. Es handelt sich dabei um eine Datenübermittlung in ein Drittland (USA) ausserhalb der EU/des EWR. Die Übermittlung erfolgt nur, wenn du das Formular selbst absendest, und beruht auf deiner Einwilligung (Art. 49 Abs. 1 lit. a DSGVO). Ohne Absenden werden keine Daten übermittelt. Du kannst uns auch jederzeit direkt per E-Mail schreiben. Weitere Informationen findest du in der <a href="https://formspree.io/legal/privacy-policy/" rel="nofollow noopener" target="_blank">Datenschutzerklärung von Formspree</a>.</p>
+  <h2>Cookies, Analytics und eingebettete Karten</h2>
+  <p>Beim ersten Besuch dieser Website fragen wir dich per Banner, ob du der Nutzung von Google Analytics sowie eingebetteten Google-Maps-Karten zustimmst. Deine Entscheidung wird lokal in deinem Browser (localStorage) gespeichert. Du kannst deine Entscheidung jederzeit über den Link "Cookie-Einstellungen" im Footer ändern.</p>
+  <p>Nur wenn du zustimmst, wird <strong>Google Analytics</strong> (Google Ireland Limited bzw. Google LLC, USA) geladen, ein Webanalyse-Dienst. Rechtsgrundlage ist Art. 6 Abs. 1 lit. a DSGVO (Einwilligung). Ohne deine Zustimmung wird kein Analytics-Skript geladen.</p>
+  <p>Zusätzlich nutzen wir <strong>Umami</strong> (Umami Software, Inc.), eine datenschutzfreundliche Besucherstatistik ohne Cookies. Umami speichert nichts in deinem Browser, erstellt keine Profile und erfasst keine vollständigen IP-Adressen; gezählt werden nur anonyme Angaben wie aufgerufene Seite, Herkunftsseite, Land, Gerätetyp und Browser. Rechtsgrundlage ist unser berechtigtes Interesse an einer anonymen Reichweitenmessung (Art. 6 Abs. 1 lit. f DSGVO); da nichts auf deinem Gerät gespeichert wird, ist keine Einwilligung nötig. Weitere Informationen findest du in der <a href="https://umami.is/privacy" rel="nofollow noopener" target="_blank">Datenschutzerklärung von Umami</a>.</p>
+  <p>Auf den Atelier-Detailseiten binden wir zur Standortanzeige eine <strong>Google-Maps</strong>-Karte ein, ebenfalls erst nach Zustimmung oder aktivem Klick auf "Karte laden". Beim Laden der Karte stellt dein Browser eine Verbindung zu Servern von Google (USA) her. Weitere Informationen findest du in der <a href="https://policies.google.com/privacy" rel="nofollow noopener" target="_blank">Datenschutzerklärung von Google</a>.</p>
+  <p>Die Übersichtskarten (Startseite, Stadt-Seiten) nutzen die freie Kartenbibliothek <strong>Leaflet</strong> mit Kartenmaterial von <strong>OpenStreetMap</strong>. Auch diese Karten laden erst, wenn du entweder generell zugestimmt hast oder aktiv auf "Karte laden" klickst, da dabei dein Browser eine Verbindung zu den Servern von OpenStreetMap herstellt und deine IP-Adresse übermittelt wird. Die Kartenbibliothek selbst (Leaflet) ist bei uns selbst gehostet, nicht bei einem Drittanbieter. Weitere Informationen findest du in der <a href="https://osmfoundation.org/wiki/Privacy_Policy" rel="nofollow noopener" target="_blank">Datenschutzerklärung der OpenStreetMap Foundation</a>.</p>
 
-    <h2>Cookies, Analytics und eingebettete Karten</h2>
-    <p>Beim ersten Besuch dieser Website fragen wir dich per Banner, ob du der Nutzung von Google Analytics sowie eingebetteten Google-Maps-Karten zustimmst. Deine Entscheidung wird lokal in deinem Browser (localStorage) gespeichert. Du kannst deine Entscheidung jederzeit über den Link "Cookie-Einstellungen" im Footer ändern.</p>
-    <p>Nur wenn du zustimmst, wird <strong>Google Analytics</strong> (Google Ireland Limited bzw. Google LLC, USA) geladen, ein Webanalyse-Dienst. Rechtsgrundlage ist Art. 6 Abs. 1 lit. a DSGVO (Einwilligung). Ohne deine Zustimmung wird kein Analytics-Skript geladen.</p>
-    <p>Zusätzlich nutzen wir <strong>Umami</strong> (Umami Software, Inc.), eine datenschutzfreundliche Besucherstatistik ohne Cookies. Umami speichert nichts in deinem Browser, erstellt keine Profile und erfasst keine vollständigen IP-Adressen; gezählt werden nur anonyme Angaben wie aufgerufene Seite, Herkunftsseite, Land, Gerätetyp und Browser. Rechtsgrundlage ist unser berechtigtes Interesse an einer anonymen Reichweitenmessung (Art. 6 Abs. 1 lit. f DSGVO); da nichts auf deinem Gerät gespeichert wird, ist keine Einwilligung nötig. Weitere Informationen findest du in der <a href="https://umami.is/privacy" rel="nofollow noopener" target="_blank">Datenschutzerklärung von Umami</a>.</p>
-    <p>Auf den Atelier-Detailseiten binden wir zur Standortanzeige eine <strong>Google-Maps</strong>-Karte ein, ebenfalls erst nach Zustimmung oder aktivem Klick auf "Karte laden". Beim Laden der Karte stellt dein Browser eine Verbindung zu Servern von Google (USA) her. Weitere Informationen findest du in der <a href="https://policies.google.com/privacy" rel="nofollow noopener" target="_blank">Datenschutzerklärung von Google</a>.</p>
-    <p>Die Übersichtskarten (Startseite, Stadt-Seiten) nutzen die freie Kartenbibliothek <strong>Leaflet</strong> mit Kartenmaterial von <strong>OpenStreetMap</strong>. Auch diese Karten laden erst, wenn du entweder generell zugestimmt hast oder aktiv auf "Karte laden" klickst, da dabei dein Browser eine Verbindung zu den Servern von OpenStreetMap herstellt und deine IP-Adresse übermittelt wird. Die Kartenbibliothek selbst (Leaflet) ist bei uns selbst gehostet, nicht bei einem Drittanbieter. Weitere Informationen findest du in der <a href="https://osmfoundation.org/wiki/Privacy_Policy" rel="nofollow noopener" target="_blank">Datenschutzerklärung der OpenStreetMap Foundation</a>.</p>
-
-    <h2>Deine Rechte</h2>
-    <p>Du hast nach der DSGVO das Recht auf Auskunft (Art. 15), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung der Verarbeitung (Art. 18), Datenübertragbarkeit (Art. 20) sowie Widerspruch (Art. 21) gegen die Verarbeitung deiner Daten. Wende dich dazu an die im <a href="/de/impressum/">Impressum</a> genannte Adresse.</p>
-    <p>Ausserdem hast du das Recht, dich bei einer Datenschutz-Aufsichtsbehörde zu beschweren. Du kannst dich an die Aufsichtsbehörde deines gewöhnlichen Aufenthaltsorts wenden, in Deutschland zum Beispiel an die Datenschutzbehörde deines Bundeslandes. Für den in der Schweiz ansässigen Verantwortlichen ist zudem der Eidgenössische Datenschutz- und Öffentlichkeitsbeauftragte (EDÖB) zuständig.</p>
-
-    <p><a href="/de/impressum/">Zum Impressum (Entwurf)</a> · <a href="/">Zur Startseite</a></p>
-  </main>
-</body>
-</html>
+  <h2>Deine Rechte</h2>
+  <p>Du hast nach der DSGVO das Recht auf Auskunft (Art. 15), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung der Verarbeitung (Art. 18), Datenübertragbarkeit (Art. 20) sowie Widerspruch (Art. 21) gegen die Verarbeitung deiner Daten. Wende dich dazu an die im <a href="/de/impressum/">Impressum</a> genannte Adresse.</p>
+  <p>Ausserdem hast du das Recht, dich bei einer Datenschutz-Aufsichtsbehörde zu beschweren. Du kannst dich an die Aufsichtsbehörde deines gewöhnlichen Aufenthaltsorts wenden, in Deutschland zum Beispiel an die Datenschutzbehörde deines Bundeslandes. Für den in der Schweiz ansässigen Verantwortlichen ist zudem der Eidgenössische Datenschutz- und Öffentlichkeitsbeauftragte (EDÖB) zuständig.</p>
+</article>

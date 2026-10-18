@@ -37,7 +37,7 @@ const COUNTRIES = {
     lang: "de-DE",
     hreflang: "de-DE",
     hasBlog: false,
-    enabled: false,
+    enabled: true,
   },
 };
 
