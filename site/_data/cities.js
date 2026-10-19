@@ -7,6 +7,8 @@ const { COUNTRIES, byIso } = require("../_11ty/countries.js");
 const citySlug = require("./citySlug.js");
 const pluralize = require("../_11ty/pluralize.js");
 const compareStudiosForListing = require("../_11ty/sortStudios.js");
+const { buildCityInsights } = require("../_11ty/cityInsights.js");
+const cityLeads = require("./cityLeads.js");
 
 const CITY_PHOTOS_DIR = path.join(__dirname, "..", "images", "cities");
 
@@ -118,6 +120,17 @@ async function loadCities(iso) {
     // Fuer die SEO-Zusatzsaetze auf den Stadtseiten: falls ein lokales Atelier
     // explizit Keramik-Cafe oder Porzellan bemalen in seiner Beschreibung erwaehnt,
     // dorthin verlinken statt eine generische, unverlinkte Floskel zu zeigen.
+    // Nur Laender mit richCityPages (derzeit Deutschland): datengetriebene Zusatztexte.
+    let insights = null;
+    if (COUNTRY.richCityPages && c.count > 0) {
+      const others = base
+        .filter((o) => o.count > 0)
+        .sort((x, y) => y.count - x.count || x.name.localeCompare(y.name, "de"))
+        .map((o) => ({ name: o.name, slug: o.slug, count: o.count }));
+      insights = buildCityInsights(c, others);
+      insights.lead = cityLeads[c.name] || "";
+    }
+
     const cafeMatch = c.direct.find((s) => /café|cafe/i.test(s.description || ""));
     const porzellanMatch = c.direct.find((s) => /porzellan/i.test(s.description || ""));
 
@@ -130,6 +143,7 @@ async function loadCities(iso) {
       // die Karte hier nur noch die eigenen Ateliers.
       mapStudios: c.direct.filter((s) => s.lat && s.lng),
       introDynamic,
+      insights,
       cafeMatch,
       porzellanMatch,
       jsonLdItemList,

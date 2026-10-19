@@ -10,8 +10,9 @@
   layout: "base.njk",
   eleventyComputed: {
     country: (data) => data.cityData.country,
-    title: (data) => `Keramik bemalen ${data.cityData.name} - ${data.cityData.count} ${data.pluralize(data.cityData.count, "Atelier", "Ateliers")} im Vergleich | potterymaps`,
-    description: (data) => `Keramik bemalen in ${data.cityData.name}: Ateliers für Teller-, Ton- und Porzellan bemalen sowie Keramik-Cafés – mit Preisen und Öffnungszeiten auf einen Blick.`,
+    title: (data) => (data.cityData.insights ? data.cityData.insights.title : `Keramik bemalen ${data.cityData.name} - ${data.cityData.count} ${data.pluralize(data.cityData.count, "Atelier", "Ateliers")} im Vergleich | potterymaps`),
+    jsonLdFaq: (data) => (data.cityData.insights ? data.cityData.insights.jsonLdFaq : null),
+    description: (data) => (data.cityData.insights ? data.cityData.insights.description : `Keramik bemalen in ${data.cityData.name}: Ateliers für Teller-, Ton- und Porzellan bemalen sowie Keramik-Cafés – mit Preisen und Öffnungszeiten auf einen Blick.`),
     noindex: (data) => data.cityData.noindex,
     jsonLdItemList: (data) => data.cityData.jsonLdItemList,
     jsonLdBreadcrumb: (data) => data.cityData.jsonLdBreadcrumb,
@@ -37,7 +38,11 @@
     <h1>Keramik bemalen {{ c.name }}</h1>
   </div>
 
+  {% if c.insights %}
+  <p class="city-intro">{% if c.insights.lead %}{{ c.insights.lead }} {% endif %}{{ c.insights.summary }}</p>
+  {% else %}
   <p class="city-intro">{{ c.intro }}{% if c.introDynamic %} {{ c.introDynamic }}{% endif %}</p>
+  {% endif %}
 
   {% if c.hasAny and (c.cafeMatch or c.porzellanMatch) %}
   <p class="city-topic-intro">
@@ -65,6 +70,44 @@
   </section>
   {% endif %}
 
+  {% if c.insights %}
+  <section class="city-facts">
+    <h2>Keramik bemalen in {{ c.name }} auf einen Blick</h2>
+    <ul class="city-facts-list">
+      {% for f in c.insights.facts %}<li>{{ f }}</li>{% endfor %}
+    </ul>
+  </section>
+
+  {% if c.insights.table.length > 1 %}
+  <section class="city-compare">
+    <h2>Ateliers in {{ c.name }} im Vergleich</h2>
+    <div class="city-compare-scroll">
+      <table>
+        <thead><tr><th>Atelier</th><th>Preis</th><th>Termin</th><th>Kinder</th><th>Gruppen</th></tr></thead>
+        <tbody>
+          {% for r in c.insights.table %}
+          <tr><td><a href="{{ r.url }}">{{ r.name }}</a></td><td>{{ r.price or "–" }}</td><td>{{ r.booking or "–" }}</td><td>{{ r.kids or "–" }}</td><td>{{ r.groups or "–" }}</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <p class="city-compare-note">Angaben laut Websites der Ateliers. Preise und Zeiten können sich ändern, bitte vor dem Besuch kurz prüfen.</p>
+  </section>
+  {% endif %}
+
+  {% if c.insights.faqs.length %}
+  <section class="city-faq">
+    <h2>Häufige Fragen zu Keramik bemalen in {{ c.name }}</h2>
+    {% for f in c.insights.faqs %}
+    <div class="faq-item">
+      <h3 class="faq-q">{{ f.q }}</h3>
+      <p>{{ f.a }}</p>
+    </div>
+    {% endfor %}
+  </section>
+  {% endif %}
+  {% endif %}
+
   {% if c.nearbyTowns.length %}
   <section class="nearby-towns">
     <h2>Auch in der Nähe</h2>
@@ -85,6 +128,18 @@
       {% endfor %}
     </ul>
     <a class="back-to-map-link" href="{{ country.path }}/karte/">← Zurück zur Karte</a>
+  </section>
+  {% endif %}
+
+  {% if c.insights and c.insights.otherCities.length %}
+  <section class="nearby-towns">
+    <h2>Keramik bemalen in anderen Städten</h2>
+    <ul class="town-chips">
+      {% for t in c.insights.otherCities %}
+      <li><a class="town-chip" href="{{ country.path }}/staedte/{{ t.slug }}/">{{ t.name }} <span class="count">{{ t.count }} {{ pluralize(t.count, "Atelier", "Ateliers") }}</span></a></li>
+      {% endfor %}
+    </ul>
+    <a class="back-to-map-link" href="{{ country.path }}/alle-staedte/">Alle Städte ansehen →</a>
   </section>
   {% endif %}
 

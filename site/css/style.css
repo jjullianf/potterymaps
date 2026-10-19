@@ -1200,3 +1200,14 @@ h1, h2 { font-family: var(--font-display); font-weight: 600; color: var(--color-
 .blog-table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
 .blog-table th, .blog-table td { text-align: left; padding: 0.55rem 0.7rem; border-bottom: 1px solid var(--color-border); vertical-align: top; }
 .blog-table th { font-family: var(--font-display); font-weight: 600; color: var(--color-text); white-space: nowrap; }
+
+/* Stadtseiten (Deutschland): Kennzahlen, Vergleichstabelle, FAQ */
+.city-facts, .city-compare, .city-faq { margin: 2rem 0; }
+.city-facts-list { display: flex; flex-wrap: wrap; gap: 0.5rem 0.6rem; list-style: none; padding: 0; margin: 0.8rem 0 0; }
+.city-facts-list li { background: var(--color-card); border: 1px solid var(--color-border); border-radius: 999px; padding: 0.35rem 0.85rem; font-size: 0.9rem; }
+.city-compare-scroll { overflow-x: auto; margin-top: 0.8rem; }
+.city-compare table { width: 100%; border-collapse: collapse; font-size: 0.92rem; min-width: 520px; background: var(--color-card); }
+.city-compare th, .city-compare td { text-align: left; padding: 0.55rem 0.7rem; border-bottom: 1px solid var(--color-border); vertical-align: top; }
+.city-compare th { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.03em; color: var(--color-text); }
+.city-compare-note { font-size: 0.8rem; opacity: 0.75; margin-top: 0.5rem; }
+.city-faq .faq-item p { margin: 0.2rem 0 0; }
