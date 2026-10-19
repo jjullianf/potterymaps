@@ -3,9 +3,16 @@
 // Alle Aussagen werden aus den Atelier-Daten abgeleitet, nichts wird frei erfunden.
 const pluralize = require("./pluralize.js");
 
-const eur = (n) => `${String(Number.isInteger(n) ? n : n.toFixed(2)).replace(".", ",")} €`;
+// Waehrung wie auf den Atelier-Seiten: CHF vorangestellt, Euro nachgestellt mit Komma.
+let CURRENCY = "EUR";
+const eur = (n) =>
+  CURRENCY === "EUR"
+    ? `${String(Number.isInteger(n) ? n : n.toFixed(2)).replace(".", ",")} €`
+    : `CHF ${Number.isInteger(n) ? n : n.toFixed(2)}`;
+// Kurzname fuer Fliesstext: viele Atelier-Namen enthalten SEO-Anhaengsel ("... | Keramik bemalen")
+const shortName = (name) => String(name).split(/\s+[|–-]\s+/)[0].trim();
 const names = (list, max = 6) => {
-  const n = list.slice(0, max).map((s) => s.name);
+  const n = list.slice(0, max).map((s) => shortName(s.name));
   const more = list.length - n.length;
   const txt = n.length > 1 ? `${n.slice(0, -1).join(", ")} und ${n[n.length - 1]}` : n[0] || "";
   return more > 0 ? `${txt} sowie ${more} weitere` : txt;
@@ -24,6 +31,7 @@ function bookingLabel(s) {
 
 function buildCityInsights(city, otherCities) {
   const list = city.direct || [];
+  CURRENCY = (list[0] && list[0].currency) || "EUR";
   const n = list.length;
   if (!n) return null;
   const name = city.name;
@@ -48,7 +56,7 @@ function buildCityInsights(city, otherCities) {
   // Kennzahlen als Aufzaehlung "Auf einen Blick"
   const facts = [];
   facts.push(`${n} ${atelierWord(n)} in ${name}`);
-  if (priced.length) facts.push(`Preise ab ${eur(priced[0].p)} (${priced[0].s.name})`);
+  if (priced.length) facts.push(`Preise ab ${eur(priced[0].p)} (${shortName(priced[0].s.name)})`);
   if (noFee.length) facts.push(`${noFee.length} von ${n} ohne separate Studiogebühr`);
   if (walkin.length) facts.push(`${walkin.length} mit Walk-in ohne Termin`);
   if (only.length) facts.push(`${only.length} nur mit Reservierung`);
@@ -59,7 +67,7 @@ function buildCityInsights(city, otherCities) {
 
   // Vergleichstabelle
   const table = list.map((s) => ({
-    name: s.name,
+    name: shortName(s.name),
     url: `${s.countryConfig.path}/studio/${s.slug}/`,
     price: s.price_from !== "" && !Number.isNaN(Number(s.price_from)) ? `ab ${eur(Number(s.price_from))}` : "",
     booking: bookingLabel(s),
@@ -70,23 +78,32 @@ function buildCityInsights(city, otherCities) {
   // FAQ (reiner Text, auch fuer FAQPage-JSON-LD)
   const faqs = [];
   if (priced.length) {
-    let a = `Keramik bemalen kostet in ${name} ab ${eur(priced[0].p)} pro Stück (${priced[0].s.name}).`;
-    if (noFee.length) a += ` ${noFee.length} von ${n} ${atelierWord(n)} berechnen keine separate Studiogebühr, bezahlt wird nur das gewählte Keramikstück.`;
-    if (minSpend.length) a += ` ${minSpend.length === 1 ? "Ein Atelier verlangt" : `${minSpend.length} Ateliers verlangen`} einen Mindestumsatz pro Person.`;
-    a += " Farben, Glasur und Brand sind bei den meisten Ateliers im Preis enthalten, Details stehen auf den einzelnen Atelier-Seiten.";
+    let a = `Die Preise für Keramik bemalen beginnen in ${name} bei ${eur(priced[0].p)} (${shortName(priced[0].s.name)}).`;
+    if (n === 1) {
+      if (noFee.length) a += " Das Atelier berechnet keine separate Studiogebühr, bezahlt wird nur das gewählte Keramikstück.";
+      if (minSpend.length) a += " Es gilt ein Mindestumsatz pro Person.";
+    } else {
+      if (noFee.length) a += ` ${noFee.length} von ${n} ${atelierWord(n)} ${noFee.length === 1 ? "berechnet" : "berechnen"} keine separate Studiogebühr, bezahlt wird nur das gewählte Keramikstück.`;
+      if (minSpend.length) a += ` ${minSpend.length === 1 ? "Ein Atelier verlangt" : `${minSpend.length} Ateliers verlangen`} einen Mindestumsatz pro Person.`;
+    }
+    a += " Was im Preis enthalten ist (Farben, Glasur, Brand, Getränke), steht auf den einzelnen Atelier-Seiten.";
     faqs.push({ q: `Was kostet Keramik bemalen in ${name}?`, a });
   }
   if (walkin.length || only.length || empf.length) {
     const parts = [];
-    if (walkin.length) parts.push(`Ohne Termin vorbeikommen ist laut Angabe der Ateliers möglich bei ${names(walkin, 4)}.`);
-    if (empf.length) parts.push(`Eine Reservierung wird empfohlen bei ${names(empf, 4)}.`);
+    const walkOnly = walkin.filter((s) => !has(s, "reservation-empfohlen"));
+    const both = walkin.filter((s) => has(s, "reservation-empfohlen"));
+    const empfOnly = empf.filter((s) => !has(s, "walk-in"));
+    if (walkOnly.length) parts.push(`Ohne Termin vorbeikommen ist laut Angabe der Ateliers möglich bei ${names(walkOnly, 4)}.`);
+    if (both.length) parts.push(`Walk-in ist möglich, eine Reservierung wird aber empfohlen bei ${names(both, 4)}.`);
+    if (empfOnly.length) parts.push(`Eine Reservierung wird empfohlen bei ${names(empfOnly, 4)}.`);
     if (only.length) parts.push(`Nur mit Reservierung geht es bei ${names(only, 4)}.`);
     faqs.push({ q: `Muss ich in ${name} für Keramik bemalen reservieren?`, a: parts.join(" ") });
   }
   if (birthday.length) {
     faqs.push({
       q: `Wo kann ich in ${name} einen Kindergeburtstag mit Keramik bemalen feiern?`,
-      a: `Kindergeburtstage mit Keramik bemalen bieten in ${name} ${names(birthday, 6)} an. Altersgrenzen, Preise pro Kind und Gruppengrößen stehen auf den jeweiligen Atelier-Seiten.`,
+      a: `Kindergeburtstage mit Keramik bemalen bieten in ${name} ${names(birthday, 6)} an. Altersgrenzen, Preise pro Kind und Gruppengrössen stehen auf den jeweiligen Atelier-Seiten.`,
     });
   }
   if (hen.length || corp.length) {
@@ -97,7 +114,7 @@ function buildCityInsights(city, otherCities) {
   }
   const withPickup = list.filter((s) => s.pickup_time);
   if (withPickup.length) {
-    const ex = withPickup.slice(0, 3).map((s) => `${s.name}: ${firstSentence(s.pickup_time)}`).join("; ");
+    const ex = withPickup.slice(0, 3).map((s) => `${shortName(s.name)}: ${firstSentence(s.pickup_time)}`).join("; ");
     faqs.push({
       q: `Wie lange dauert es, bis die bemalte Keramik in ${name} fertig ist?`,
       a: `Nach dem Bemalen glasiert und brennt das Atelier dein Stück. Die Wartezeit unterscheidet sich je nach Atelier, zum Beispiel ${ex}. Die genaue Abholzeit steht auf der jeweiligen Atelier-Seite.`,

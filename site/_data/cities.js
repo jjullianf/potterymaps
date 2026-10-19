@@ -128,7 +128,7 @@ async function loadCities(iso) {
         .sort((x, y) => y.count - x.count || x.name.localeCompare(y.name, "de"))
         .map((o) => ({ name: o.name, slug: o.slug, count: o.count }));
       insights = buildCityInsights(c, others);
-      insights.lead = cityLeads[c.name] || "";
+      insights.lead = cityLeads[c.name] || (c.isHub ? c.intro : "");
     }
 
     const cafeMatch = c.direct.find((s) => /café|cafe/i.test(s.description || ""));

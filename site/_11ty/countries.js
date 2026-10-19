@@ -17,7 +17,7 @@ const COUNTRIES = {
     eventFormPath: "/grosse-anfrage/",
     currency: "CHF",
     mapView: { lat: 46.9, lng: 8.2, zoom: 8 },
-    richCityPages: false,
+    richCityPages: true,
     lang: "de-CH",
     hreflang: "de-CH",
     hasBlog: true,
