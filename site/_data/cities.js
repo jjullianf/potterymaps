@@ -9,6 +9,7 @@ const pluralize = require("../_11ty/pluralize.js");
 const compareStudiosForListing = require("../_11ty/sortStudios.js");
 const { buildCityInsights } = require("../_11ty/cityInsights.js");
 const cityLeads = require("./cityLeads.js");
+const CITY_CENTERS = { DE: require("./cityCentersDe.js") };
 
 const CITY_PHOTOS_DIR = path.join(__dirname, "..", "images", "cities");
 
@@ -45,6 +46,11 @@ async function loadCities(iso) {
 
     let lat = hubInfo ? hubInfo.lat : null;
     let lng = hubInfo ? hubInfo.lng : null;
+    const knownCenter = (CITY_CENTERS[COUNTRY.iso] || {})[name];
+    if ((lat === null || lng === null) && knownCenter) {
+      lat = knownCenter.lat;
+      lng = knownCenter.lng;
+    }
     if (lat === null || lng === null) {
       const withCoords = direct.filter((s) => s.lat && s.lng);
       if (withCoords.length) {

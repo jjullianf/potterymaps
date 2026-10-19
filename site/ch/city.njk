@@ -195,6 +195,12 @@
       var marker = L.marker([s.lat, s.lng], { icon: dotIcon }).addTo(map).bindPopup(s.popupHtml);
       window.potterymapsAttachHoverPopup(marker);
     });
+    {% if country.mapFit %}
+    // Deutschland: Kartenausschnitt so waehlen, dass Stadtzentrum und alle Ateliers der Stadt sichtbar sind.
+    var bounds = L.latLngBounds([[townCenter.lat, townCenter.lng]]);
+    studios.forEach(function (s) { bounds.extend([s.lat, s.lng]); });
+    map.fitBounds(bounds, { padding: [30, 30], maxZoom: 14 });
+    {% endif %}
   };
 </script>
 {% endif %}
