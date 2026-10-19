@@ -181,7 +181,7 @@ h1, h2 { font-family: var(--font-display); font-weight: 600; color: var(--color-
 }
 .city-header h1 { position: relative; z-index: 2; color: #fff; margin: 0; }
 .city-header-placeholder {
-  background-image: linear-gradient(135deg, var(--color-accent), var(--color-accent-2));
+  background-image: linear-gradient(135deg, #3e2a1e, #5c4030);
 }
 .city-header-placeholder::before { content: none; }
 
