@@ -10,5 +10,8 @@ module.exports = {
   Bremen: "Bremen bietet Keramik bemalen in einer Markthalle, einem Kreativstudio im Tabakquartier und in kleinen Ateliers, teils mit Kursen zum Töpfern.",
   Oldenburg: "In Oldenburg kannst du Keramik in Malstudios und Kreativcafés bemalen, mit Terminen für Einzelgäste, Gruppen und Feiern.",
   Nürnberg: "In Nürnberg kannst du Keramik in einem Malstudio oder in Kursen bemalen, einzeln, mit Freunden oder bei einer Feier.",
+  Hamburg: "In Hamburg kannst du Keramik in Malstudios in vielen Stadtteilen bemalen, von Eimsbüttel über Blankenese bis Bergedorf, teils auch mobil oder zuhause.",
+  München: "München hat viele Keramik-Malstudios, von Haidhausen und Schwabing bis Laim und Neuhausen, meist mit Online-Reservierung und Angeboten für Gruppen und Feiern.",
+  "Frankfurt am Main": "In Frankfurt kannst du Keramik in Studios in Bornheim, im Nordend, in Sachsenhausen und im Zentrum bemalen, teils mit Töpferkursen und Kinderangeboten.",
   Hannover: "In Hannover gibt es mit dem Porzellancafé ein Atelier zum Keramik selbst bemalen.",
 };
