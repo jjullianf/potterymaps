@@ -1,0 +1,179 @@
+0 Keramikmalstudio Bunte Kuh | Mannheim | 68199 | https://buntekuh-keramik.de/
+1 Made by You Chemnitz | None | 09111 | https://www.madebyyou-chemnitz.de/ [SCHON IM PROJEKT]
+2 Made By You – Dresden-Neustadt | None | 01099 | http://www.madebyyou-dresden.de/ [SCHON IM PROJEKT]
+3 Made by you - Dresden Striesen | Dresden | 01277 | http://www.madebyyou-dresden.de/ [SCHON IM PROJEKT]
+4 Made by you | None | 20253 | http://www.madebyyou.de/ [SCHON IM PROJEKT]
+5 Belle Façon KERAMIKATELIER | Mannheim | 68229 | http://bellefacon.de/
+6 Paint your Style Hermsdorf | Berlin | 13467 | http://www.paintyourstyle.eu/
+7 Made by you - Frankfurt | Frankfurt am Main | 60385 | http://www.madebyyou-frankfurt.de/ [SCHON IM PROJEKT]
+8 La Mi Studio | Mannheim | 68159 | http://la-mi-studio.com/
+9 Made by you Leipzig | Leipzig | 04107 | http://www.madebyyou-leipzig.de/ [SCHON IM PROJEKT]
+10 Selbstgemacht - Das Keramik Café | Kleinmachnow | 14532 | http://www.selbstgemacht-kleinmachnow. [SCHON IM PROJEKT]
+11 KeramiCasa - Keramik selbst bemalen | Mannheim | 68165 | http://www.keramicasa.de/
+12 Keramik-Töpfle Freiburg | Freiburg im Breisgau | 79104 | https://www.keramik-toepfle.de/
+13 de Hoog - Keramik | Berlin | 10783 | https://www.dehoog-keramik.de/
+14 "Viva Freiburg" Keramik und Geschenkartikel | Freiburg im Breisgau | 79098 | http://www.keramik-viva.de/
+15 Keramikatelier ananda | Freiburg im Breisgau | 79115 | http://ananda-keramik.com/
+16 Keramikwerkstatt in der FABRIK e.V. | Freiburg im Breisgau | 79104 | http://www.keramikwerkstatt.fabrik-fre
+17 Keramik Suzanne Friedrich | Freiburg im Breisgau | 79100 | http://www.suzannefriedrich.com/
+18 wein & werk | Freiburg im Breisgau | 79102 | https://weinundwerk.de/
+19 Heber-Keramik | Freiburg im Breisgau | 79100 | http://heber-keramik.com/
+20 Dirty-Potter | Krefeld | 47798 | http://www.dirty-potter.de/
+21 Keramia - Keramik selbst bemalen Augsburg | Augsburg | 86161 | http://www.keramia-augsburg.de/
+22 Mal-Werk Mainz | Mainz | 55116 | http://www.mal-werk.com/
+23 Clayworks | Mainz | 55116 | http://www.clayworks-mainz.de/
+24 Kera Terra Keramikstudio Mainz | Mainz | 55116 | https://www.kera-terra-mainz.com/
+25 Steph's Pinselbar | Mainz | 55116 | https://www.pinselbar-mainz.de/
+26 Stephs Handmade Pottery | Mainz | 55126 | http://www.stephs-handmade-pottery.de/
+27 Stephs Clay Corner / offene Keramik- und Töp | Mainz | 55116 | https://www.stephs-handmade-pottery.de
+28 Studio Nebel | Keramiknebel | Mainz | 55118 | https://www.franziskamarienebel.de/
+29 Objektnormal | Mainz | 55116 | http://www.objektnormal.de/
+30 Der Keramikofen KO | Heidelberg | 69117 | http://www.derkeramikofen.de/
+31 Paint your Style Charlottenburg - Wilmersdor | Berlin | 10623 | https://paintyourstyle.eu/category/ber [SCHON IM PROJEKT]
+32 Paint your Style Schöneberg | Berlin | 12161 | https://paintyourstyle.eu/category/ber [SCHON IM PROJEKT]
+33 Paint your Style | Berlin | 10965 | https://paintyourstyle.eu/category/ber [SCHON IM PROJEKT]
+34 Paint your Style | Berlin | 10439 | https://paintyourstyle.eu/category/ber [SCHON IM PROJEKT]
+35 Paint your Style | Berlin | 10245 | https://paintyourstyle.eu/category/ber [SCHON IM PROJEKT]
+36 Paint your Style - Zehlendorf | Berlin | 14169 | https://paintyourstyle.eu/category/ber [SCHON IM PROJEKT]
+37 Paint your Style Falkensee | Falkensee | 14612 | https://paintyourstyle.eu/category/fal [SCHON IM PROJEKT]
+38 mal wieder - Keramik selbst bemalen | None | 65199 | https://www.mal-wieder-keramik.de/
+39 Kunst und Zauber - Keramikmalwerkstatt und C | Duisburg | 47057 | https://www.kunstundzauber.de/
+40 Marou Studio Duisburg | Duisburg | 47051 | https://www.maroustudio.de/
+41 Paint Your Style Potsdam | Potsdam | 14469 | https://paintyourstyle.eu/category/pot
+42 Antje Heidermann Malerei & Keramik Atelier | Wuppertal | 42369 | http://www.antjeheidermann.de/
+43 Moody Clay Ceramics - Töpferstudio - Töpferk | Wiesbaden | 65185 | https://www.moodyclay.de/
+44 Schön Bunt Malkeramikstudio | Wiesbaden | 65183 | https://www.schoenbunt-keramik.de/
+45 Porzellanikum | Event- und Kreativstudio Aug | Augsburg | 86150 | https://www.porzellanikum.de/%3Fmtm_ca
+46 Clay House Augsburg | Keramikmalstudio | Gersthofen | 86368 | https://brand.site/clayhouse-augsburg
+47 Kreativo Keramikmalen | None | 86179 | http://kreativo-keramik.de/
+48 Keramikstudio Einzigartig | Bobingen | 86399 | https://www.keramikstudio-einzigartig.
+49 Die Töpferei | Augsburg | 86150 | http://www.die-toepferei.net/
+50 Milchberg 17 Atelier | None | 86150 | http://milchberg17.de/
+51 Werkraum Augsburg - deine offene Werkstatt | Augsburg | 86153 | http://www.werkraum-augsburg.de/
+52 MalUnikat | M. Gladbach | 41061 | https://www.malunikat.de/
+53 Selbstbemalt das Keramik Malstudio | None | 41189 | https://www.selbstbemalt.de/
+54 Keramik Malstudio | Korschenbroich | 41352 | https://keramikmalen.info/
+55 Kunst und Keramik | None | 41238 | http://ceramiga.de/
+56 Ton Leimert | None | 41238 | http://www.ton-leimert.de/
+57 painted porcelain itself - Knutselwinkel Ber | Berlin | 10435 | http://www.knutselwinkel.de/ [SCHON IM PROJEKT]
+58 Keramik for Fun | Berlin | 12205 | http://www.keramikforfun.de/ [SCHON IM PROJEKT]
+59 Kreativstudio Raum & Zeit | None | 41199 | https://www.kreativstudio-raumundzeit.
+60 einMalig das Keramikmalstudio | Willich | 47877 | https://www.einmalig-keramikmalstudio.
+61 WERKSTATT studio | M. Gladbach | 41061 | https://www.werkstattstudio.com/
+62 Töpfer Tobi | M. Gladbach | 41179 | https://www.online-toepferkurse.de/%3F
+63 Porzellansalon Sparrenburg | Bielefeld | 33602 | https://www.porzellansalon.de/
+64 Porzellansalon Crüwell | Bielefeld | 33615 | http://www.porzellansalon.de/
+65 Studio Tekmen | Bielefeld | 33739 | https://www.studiotekmen.de/
+66 helloclay | Bielefeld | 33615 | https://www.helloclay.de/
+67 Atelier Plaza | Bielefeld | 33602 | https://www.instagram.com/atelier_plaz
+68 Töpferei im Werkhaus | Bielefeld | 33615 | http://www.toepferei-im-werkhaus.de/
+69 Ruhrpottery Bochum - Keramik selber bemalen | Bochum | 44793 | https://ruhrpottery-bochum.de/
+70 Keramchen | Bochum | 44789 | https://www.keramchen.de/
+71 Kö Keramik | None | 44803 | http://www.koekeramik.de/
+72 Made By You | Zwickau | 08056 | https://www.madebyyou-zwickau.de/ [SCHON IM PROJEKT]
+73 Detailreich | Wiesbaden | 65185 | http://www.detailreich-wiesbaden.de/
+74 CASSELMANN Ceramic Art | None | 65187 | http://ceramic-workshops.com/
+75 Keramikatelier - Gabriela Hein | Wiesbaden | 65183 | http://www.keramikatelier-hein.de/
+76 MU Cafe | Wiesbaden | 65195 | http://www.mymucafe.com/
+77 Pepé - Ceramica de Portugal | Wiesbaden | 65183 | https://www.instagram.com/pepe_ceramic
+78 Clay Circle Wiesbaden - Töpferstudio, Brenns | Wiesbaden | 65183 | https://clay-circle.com/
+79 Pottery & Gallery Ile 22 | Wiesbaden | 65183 | http://www.ile22.de/
+80 dorritochan pottery | None | 65207 | https://dorritochan.com/
+81 Mao Mao Keramik Atelier - Keramik bemalen | Berlin | 10963 | http://www.maomao-keramik.de/ [SCHON IM PROJEKT]
+82 Studio CLAY | Aachen | 52062 | http://studioclay.de/
+83 Paint your style | None | 60486 | https://paintyourstyle.eu/category/fra [SCHON IM PROJEKT]
+84 Ceramic-Atelier | Heidelberg | 69121 | https://www.ceramic-atelier.de/
+85 KERAMIK Susanne Schmitt | Heidelberg | 69115 | http://www.susanneschmitt.com/
+86 neyuQ ceramics | Heidelberg | 69115 | https://neyuqceramics.com/
+87 Drehwerk Keramik GmbH | ceramic manufacturer | Heidelberg | 69120 | https://www.drehwerk-keramik.de/
+88 tonstudio Drehwerk Keramik | Heidelberg | 69115 | https://www.drehwerk-keramik.de/
+89 WerkStaat | Heidelberg | 69117 | http://werkstaat-design.com/
+90 Kleine Keramik | Neckargemünd | 69151 | https://www.kleinekeramik.de/
+91 Südseite - Specialty Coffee Roasters and Sou | Heidelberg | 69117 | https://suedseite.coffee/pages/altstad
+92 middedrin - handgemachte Keramik, Veranstalt | Reilingen | 68799 | http://www.middedrin-reilingen.de/
+93 Sweet Home Café | Heidelberg | 69117 | https://www.sweethome-cafe.de/
+94 KERAMIK-KRAFT GmbH Store Aachen | Aachen | 52078 | https://www.keramik-kraft.com/
+95 MAL' MAL Kunst | Mannheim | 68165 | https://www.malmalkunst.com/
+96 ceramore Krefeld - Keramik selber bemalen | Krefeld | 47798 | https://ceramore.de/krefeld
+97 Atelier N³ | Bochum | 44809 | http://www.atelier-n3.de/
+98 Niko Ceramic Studio | None | 44805 | http://www.nikoceramicstudio.com/
+99 mooka. | Bochum | 44789 | https://mooka-keramik.de/
+100 Atelier Gluecksmagnet | None | 44789 | http://ateliergluecksmagnet.de/
+101 Christel Humpert | Bochum | 44793 | http://landhauskeramik-humpert.de/
+102 ruhrpottery - Keramik selber bemalen | Herne | 44623 | https://ruhrpottery.com/
+103 POTTEERY - Tee und Keramik bemalen | Hattingen | 45525 | http://www.die-potteery.de/
+104 Secco Studios | Bochum | 44789 | https://seccohandmade.com/
+105 MAYA ART Studio e.V Bochum | Bochum | 44789 | https://www.instagram.com/maya_dance_t
+106 Barbara Barthel | None | 44866 | https://www.barbara-barthel.com/
+107 Farbenspiel -einfach malen- Langendreer | None | 44892 | http://www.farbenspielbochum.de/
+108 Sophie Stoll Keramik | Hattingen | 45527 | https://sophiestoll.de/
+109 Paint your Style - Köpenick | Berlin | 12587 | https://paintyourstyle.eu/category/ber [SCHON IM PROJEKT]
+110 Café Künstlerei | Bielefeld | 33615 | http://www.cafe-kuenstlerei.de/impress
+111 WishPaint | Aachen | 52062 | https://www.aachen-farbenfleck.de/
+112 ZAAND Studio | Aachen | 52070 | http://www.zaand.de/
+113 ZQTL ceramics | Aachen | 52062 | https://zqtl.de/
+114 Kunststube | Aachen | 52062 | http://www.zqtl.de/kunststube
+115 Mit Ton | Aachen | 52066 | http://www.mit-ton.de/
+116 Keramik Hof Aachen | Aachen | 52066 | http://www.keramikhof.studio/
+117 Tonstube Aachen | Aachen | 52066 | http://tonstube-aachen.de/
+118 Central Kreativraum | Aachen | 52070 | https://www.facebook.com/centralkreati
+119 Keramik Barbara Reiter | Aachen | 52066 | http://www.keramik-b-reiter.de/
+120 Atelier Irmgard Berbuer | Malerei und Kerami | Aachen | 52074 | https://atelier-berbuer.de/
+121 Mal-Laden / Atelier und Malort in Aachen-Bur | Aachen | 52066 | http://mal-laden.de/
+122 Perlenzauber Kreativstudio | Aachen | 52064 | https://www.perlenzauber-kreativstudio
+123 Lysbo Kreativwerkstatt | Aachen | 52062 | https://lysbo.de/
+124 GALERIA | Berlin | 10719 | https://www.galeria.de/filialen/l/berl
+125 Bleiberger Fabrik | Aachen | 52074 | http://www.bleiberger.de/
+126 Listmann - Das Haus für Kreative | Aachen | 52062 | http://www.listmann-aachen.de/
+127 pottery art cafe (center) | Cologne | 50676 | http://www.pottery-art-cafe.de/ [SCHON IM PROJEKT]
+128 Sophie Keramik | Freiburg im Breisgau | 79106 | https://sophiekeramik.de/
+129 FABRIK e.V. | Freiburg im Breisgau | 79104 | http://fabrik-freiburg.de/
+130 Keramik-Töpfle | Müllheim | 79379 | http://www.keramik-toepfle.de/
+131 heuslerkeramik | Freiburg im Breisgau | 79111 | http://www.heuslerkeramik.de/
+132 Ton-Art - Keramik & Töpferkurse Irmgard Wani | Freiburg im Breisgau | 79115 | https://www.waning-skulpturen.de/
+133 Annette Schwarte | Freiburg im Breisgau | 79104 | http://www.annetteschwarte.de/
+134 ceramore - Keramik selber bemalen | Düsseldorf | 40237 | https://ceramore.de/ [SCHON IM PROJEKT]
+135 Celines Keramik - Keramik bemalen | Oberhausen | 46045 | http://celineskeramik.de/
+136 coco ceramics - Keramik bemalen Essen | Essen | 45128 | http://cococeramics.de/ [SCHON IM PROJEKT]
+137 Pottzauberei | Oberhausen | 46147 | https://www.pottzauberei.de/
+138 Meerwalt Studio - Keramik selbst bemalen in  | Meerbusch | 40667 | https://www.meerwalt-studio.de/
+139 MANUFATTURA Keramik selbst bemalen | Düsseldorf | 40477 | https://www.manufattura-keramikbemalen [SCHON IM PROJEKT]
+140 Ceramaze Studio | Moers | 47441 | https://ceramaze-studio.com/
+141 Keramikkurse DW | Berlin | 10405 | http://keramikkurse-berlin.de/
+142 Pottery Oberhausen | Oberhausen | 46045 | https://www.pottery-oberhausen.de/
+143 The Breathe - Kreativ Studio | None | 47198 | https://www.sumupbookings.com/the-brea
+144 Vernice Keramikmalwerkstatt | Xanten | 46509 | http://www.vernice-xanten.de/
+145 Fileli Keramik Malstudio | Mülheim | 45478 | https://www.fileli-keramik.com/
+146 glazed. Dein Keramik Bemal Studio | Düsseldorf | 40476 | https://www.glazeddus.de/
+147 KunstWerk Mülheim | Mülheim | 45475 | https://www.kunstwerk-mh.com/
+148 Pottery Essen | Essen | 45145 | https://pottery-essen.de/ [SCHON IM PROJEKT]
+149 Marou Studio Dinslaken | Dinslaken | 46535 | https://www.maroustudio.de/
+150 MALA by Laura - Keramik selbst bemalen | Essen | 45219 | https://www.mala-by-laura.de/ [SCHON IM PROJEKT]
+151 Belle Façon Studio | Mannheim | 68159 | http://bellefacon.de/
+152 Mura Mura Ceramics | Töpferei Mannheim | Mannheim | 68165 | https://www.muramuraceramics.de/
+153 Dripdrop Ceramics | Keramik Töpferei | Mannheim | 68169 | https://dripdropceramics.com/
+154 Keramikmalstudio Malerische Auszeit | Bad Salzuflen | 32108 | https://www.malerischeauszeit.de/
+155 Künstlerei Maurer | Freiburg im Breisgau | 79115 | http://www.xn--knstlerei-maurer-jzb.de
+156 Keramikwerkstatt Katrin Kaiser | Wuppertal | 42369 | https://instagram.com/keramikwerkstatt
+157 Töpferstation Standort Aue | Wuppertal | 42103 | http://www.toepferstation-wuppertal.de
+158 Die Tonzeche | Krefeld | 47799 | https://www.tonzeche.de/
+159 Pottery & Paper | Kempen | 47906 | https://www.pottery-paper.de/
+160 Kai Clausen | Krefeld | 47800 | http://www.clausen-keramik.de/
+161 Keramikatelier Habermann Karin | Krefeld | 47809 | http://www.keramik-art-habermann.de/
+162 Art Lab Oppum | Krefeld | 47809 | http://www.art-lab-oppum.de/
+163 ARTYCLUB | Krefeld | 47799 | https://www.artyclub.de/
+164 STUDIO STAUB | Krefeld | 47798 | https://www.studiostaub.de/
+165 Maleramik-DÜREN | Düren | 52349 | https://www.maleramik.de/
+166 tonami | Aachen | 52074 | https://tonami.de/
+167 Dein Raum der Wünsche | Stolberg (Rhineland) | 52222 | https://www.deinraumderwuensche.de/
+168 La KARamica | Aachen | 52062 | https://laura-kargoll.de/
+169 N8Raum - NachtRaum | Augsburg | 86153 | https://www.n8raum.de/
+170 Handvoll Ton Töpferstudio | None | 86179 | https://www.handvollton-studio.de/
+171 Malma Atelier Augsburg | None | 86153 | https://www.malmaatelier.com/
+172 Conno Keramik | Augsburg | 86150 | http://www.connokeramik.de/
+173 Ceramicalista | Augsburg | 86156 | http://ceramicalista.com/
+174 Villamarie | Augsburg | 86152 | https://www.villamariekeramik.de/
+175 idee. Creativmarkt Berlin Wilmersdorfer Stra | Berlin | 10627 | https://www.idee-shop.com/bastelladen-
+176 Perlipop DIY | Augsburg | 86152 | https://www.instagram.com/perlipop.aug
+177 Roman Lappat Miniature Art | Augsburg | 86165 | https://www.romanlappat.com/
+178 arthouse. by Jelly Art | Augsburg | 86153 | https://www.jelly-art.com/
