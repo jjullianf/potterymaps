@@ -41,8 +41,6 @@
        nachladen (preload + onload-Swap), damit sie das Rendern des restlichen
        Inhalts nicht blockiert. Icons poppen minimal verzoegert ein, statt die
        ganze Seite zu verzoegern. -->
-  <link rel="preload" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.46.0/dist/tabler-icons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.46.0/dist/tabler-icons.min.css"></noscript>
   {% if jsonLd %}
   <script type="application/ld+json">{{ jsonLd | dump | safe }}</script>
   {% endif %}
