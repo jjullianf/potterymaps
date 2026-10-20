@@ -11,7 +11,6 @@ const { buildCityInsights } = require("../_11ty/cityInsights.js");
 const cityLeads = require("./cityLeads.js");
 const CITY_CENTERS = { DE: require("./cityCentersDe.js") };
 
-const CITY_PHOTOS_DIR = path.join(__dirname, "..", "images", "cities");
 
 // Garantierte Hauptstaedte (mit eigenen Texten) je Land; Deutschland startet ohne
 // feste Hauptstaedte - dort entstehen Stadtseiten nur fuer Orte mit Atelier.
@@ -42,7 +41,8 @@ async function loadCities(iso) {
     // eigene Bilder, danach alphabetisch (siehe _11ty/sortStudios.js).
     const direct = (studiosByCityName[name] || []).slice().sort(compareStudiosForListing);
     const hasAny = direct.length > 0;
-    const hasPhoto = isHub && fs.existsSync(path.join(CITY_PHOTOS_DIR, `${slug}.jpg`));
+    // Stadtfotos sind entfernt (Lizenzgruende): die Stadtseiten nutzen den braunen Verlauf.
+    const hasPhoto = false;
 
     let lat = hubInfo ? hubInfo.lat : null;
     let lng = hubInfo ? hubInfo.lng : null;
