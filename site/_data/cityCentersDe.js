@@ -195,4 +195,5 @@ module.exports = {
   "Kempten": { lat: 47.7267, lng: 10.3169 },
   "Obertshausen": { lat: 50.0731, lng: 8.8733 },
   "Ochsenhausen": { lat: 48.0711, lng: 9.9512 },
+  "Moers": { lat: 51.4513, lng: 6.6284 },
 };
