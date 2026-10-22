@@ -189,4 +189,5 @@ module.exports = {
   "Trostberg": { lat: 48.0321, lng: 12.5654 },
   "Welzheim": { lat: 48.8749, lng: 9.6347 },
   "Westoverledingen": { lat: 53.15, lng: 7.4667 },
+  "Westerland": { lat: 54.9065, lng: 8.3072 },
 };
