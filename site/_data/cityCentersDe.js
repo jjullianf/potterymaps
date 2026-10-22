@@ -133,4 +133,12 @@ module.exports = {
   "Weyhausen": { lat: 52.4628, lng: 10.7193 },
   "Wolfsburg": { lat: 52.4206, lng: 10.7862 },
   "Würzburg": { lat: 49.778, lng: 9.9435 },
+  "Böblingen": { lat: 48.685, lng: 9.0113 },
+  "Fulda": { lat: 50.5515, lng: 9.6762 },
+  "Göppingen": { lat: 48.7031, lng: 9.6541 },
+  "Kaiserslautern": { lat: 49.4432, lng: 7.769 },
+  "Kierspe": { lat: 51.1279, lng: 7.6007 },
+  "Kreuztal": { lat: 50.9599, lng: 7.9896 },
+  "Siegen": { lat: 50.8751, lng: 8.0256 },
+  "Sindelfingen": { lat: 48.7084, lng: 9.0035 },
 };
