@@ -102,4 +102,7 @@ module.exports = {
   "Weimar (Lahn)": { lat: 50.7577, lng: 8.7029 },
   "Westerstetten": { lat: 48.5185, lng: 9.9543 },
   "Willich": { lat: 51.2641, lng: 6.5447 },
+  "Marburg": { lat: 50.809, lng: 8.7705 },
+  "Sprockhövel": { lat: 51.3667, lng: 7.2486 },
+  "Vechelde": { lat: 52.2609, lng: 10.3694 },
 };
