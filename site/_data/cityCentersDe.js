@@ -190,4 +190,9 @@ module.exports = {
   "Welzheim": { lat: 48.8749, lng: 9.6347 },
   "Westoverledingen": { lat: 53.15, lng: 7.4667 },
   "Westerland": { lat: 54.9065, lng: 8.3072 },
+  "Bergisch Gladbach": { lat: 50.9929, lng: 7.1277 },
+  "Fürholzen": { lat: 48.3327, lng: 11.6183 },
+  "Kempten": { lat: 47.7267, lng: 10.3169 },
+  "Obertshausen": { lat: 50.0731, lng: 8.8733 },
+  "Ochsenhausen": { lat: 48.0711, lng: 9.9512 },
 };
