@@ -196,4 +196,9 @@ module.exports = {
   "Obertshausen": { lat: 50.0731, lng: 8.8733 },
   "Ochsenhausen": { lat: 48.0711, lng: 9.9512 },
   "Moers": { lat: 51.4513, lng: 6.6284 },
+  "Aichach": { lat: 48.4591, lng: 11.131 },
+  "Freudenstadt": { lat: 48.4638, lng: 8.4112 },
+  "Höxter": { lat: 51.7939, lng: 9.3489 },
+  "Mettendorf": { lat: 49.9446, lng: 6.333 },
+  "Prüm": { lat: 50.2069, lng: 6.4249 },
 };
