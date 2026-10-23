@@ -140,7 +140,10 @@ function computePriceRangeText(s) {
   // studio_fee ist in den Rohdaten oft ein ganzer Beschreibungssatz statt einer
   // reinen Zahl (z.B. "CHF 15 pro Person - 2 Stunden") - unveraendert uebernehmen
   // statt mit "CHF ... Ateliergebühr" zu verfaelschen.
-  if (fee) return fee;
+  // Nur echte Gebuehren mit Betrag anzeigen, keine reinen Dauer-/Hinweistexte
+  // ("ca. 2 Stunden"); bei mehreren Teilen mit " · " nur den ersten (den Betrag).
+  if (s.country !== "DE") return fee || null;
+  if (fee && /\d/.test(fee) && /(€|Euro)/i.test(fee)) return fee.split(" · ")[0];
   return null;
 }
 
