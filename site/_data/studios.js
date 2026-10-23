@@ -143,7 +143,16 @@ function computePriceRangeText(s) {
   // Nur echte Gebuehren mit Betrag anzeigen, keine reinen Dauer-/Hinweistexte
   // ("ca. 2 Stunden"); bei mehreren Teilen mit " · " nur den ersten (den Betrag).
   if (s.country !== "DE") return fee || null;
-  if (fee && /\d/.test(fee) && /(€|Euro)/i.test(fee)) return fee.split(" · ")[0];
+  // Deutschland: nur ein Mindestumsatz ist ein Preis auf einen Blick, reine
+  // Studiogebuehren (Pauschale, Malgebuehr, Anmeldegebuehr) nicht. Gruppen- und
+  // Eventbetraege ("ab 5 Personen", "Kindergeburtstag") ebenfalls nicht.
+  if (fee) {
+    for (const part of fee.split(" · ")) {
+      if (/(Kindergeburtstag|Event|Gruppe|\bab \d+ Personen)/i.test(part)) continue;
+      const m = part.match(/(Mindest\w*umsatz|Mindestabnahme)[^,.(;]*?(?:€|Euro)[^,.(;]*/i);
+      if (m && /\d/.test(m[0])) return m[0].trim();
+    }
+  }
   return null;
 }
 
