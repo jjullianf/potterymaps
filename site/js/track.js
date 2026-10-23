@@ -98,7 +98,7 @@
       marks.forEach(function (m) {
         if (pct >= m - 1 && !sent[m]) {
           sent[m] = true;
-          track("scrolltiefe", { prozent: m, seite: pageType() });
+          track("scrolltiefe_" + m, { prozent: m, seite: pageType() });
         }
       });
     });
