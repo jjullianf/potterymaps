@@ -168,6 +168,77 @@ function formatPriceFrom(s) {
   return `ab ${money(s.currency || "CHF", formatted)}`;
 }
 
+
+// ---------- "Auf einen Blick"-Karte der Atelier-Seite ----------
+// Vier gleich aufgebaute Felder (Preis, Termin, Öffnungszeiten, Abholzeit) mit je
+// einem kurzen Wert und einer kurzen Zusatzzeile. Lange Texte stehen unten in
+// "Weitere Infos"; hier wird nur eine gekuerzte Fassung gezeigt.
+const DAYS = "(?:Mo|Di|Mi|Do|Fr|Sa|So)";
+const HOURS_RE = new RegExp(
+  `(${DAYS}(?:\\s*[–-]\\s*${DAYS})?(?:,\\s*${DAYS})*)\\s+(\\d{1,2}[.:]?\\d{0,2}\\s*(?:Uhr)?\\s*[–-]\\s*\\d{1,2}[.:]?\\d{0,2}(?:\\s*Uhr)?(?:\\s*(?:und|,)\\s*\\d{1,2}[.:]?\\d{0,2}\\s*(?:Uhr)?\\s*[–-]\\s*\\d{1,2}[.:]?\\d{0,2})?)`,
+  "g"
+);
+const BY_APPOINTMENT = /(nach|auf)\s+(Terminvereinbarung|Vereinbarung|Absprache|Termin|Anfrage)|nur (zu|nach|mit) Termin|Kurszeiten|Termine?\s+(nach|per|über)/i;
+
+function glanceHours(hours, tags) {
+  const h = String(hours || "").trim();
+  if (!h) return tags.includes("reservation-only") ? { value: "Nach Buchung", sub: "freie Termine online" } : null;
+  const found = [];
+  let m;
+  HOURS_RE.lastIndex = 0;
+  while ((m = HOURS_RE.exec(h)) && found.length < 3) {
+    found.push(`${m[1].replace(/\s+/g, " ")} ${m[2].replace(/\s*Uhr/g, "").replace(/\s+/g, " ").trim()}`);
+  }
+  if (found.length) {
+    const more = found.length > 2 || h.length > found.slice(0, 2).join(" ").length + 25;
+    const sub = [found[1] || "", more ? "weitere Zeiten unten" : ""].filter(Boolean).join(" · ");
+    return { value: found[0], sub };
+  }
+  if (BY_APPOINTMENT.test(h)) return { value: "Nach Termin", sub: "Zeiten nach Absprache" };
+  return null;
+}
+
+function glancePickup(pickup) {
+  const first = String(pickup || "").split(" · ")[0].trim();
+  if (!first) return null;
+  const WORDS = { ein: "1", eine: "1", einer: "1", einem: "1", zwei: "2", drei: "3", vier: "4", fünf: "5" };
+  const m = first.match(/((?:ca\.?\s*)?(?:\d+(?:\s*[–-]\s*\d+)?|ein(?:e|er|em)?|zwei|drei|vier|fünf)\s*(?:Werktage?|Tage?|Wochen?|Stunden?))/i);
+  if (m) {
+    const value = m[1].replace(/\s+/g, " ").replace(/^(ca\.?\s*)?(ein(?:e|er|em)?|zwei|drei|vier|fünf)\b/i, (_, ca, w) => `${ca || ""}${WORDS[w.toLowerCase()]}`);
+    return { value, sub: "" };
+  }
+  return null;
+}
+
+function glancePrice(s, priceAtAGlance, priceRangeText) {
+  const note = String(s.price_note || "").replace(/\b(inkl|ca|bzw|ggf|max|min|zzgl|evtl|ab)\./gi, "$1§");
+  const pieces = note.split(/(?<=[.!?])\s+|\s·\s/).map((x) => x.replace(/§/g, ".").trim());
+  let sub = (pieces.find((x) => /inkl|enthalten|all[- ]?inclusive/i.test(x) && x.length <= 110) || "").replace(/[.!?]$/, "");
+  if (sub.length > 60) sub = sub.split(", ")[0];
+  if (sub.length > 70) sub = "";
+  if (priceAtAGlance) return { value: priceAtAGlance, sub };
+  if (priceRangeText && priceRangeText.length <= 42) return { value: priceRangeText, sub };
+  return null;
+}
+
+function glanceTermin(tags) {
+  if (tags.includes("walk-in")) {
+    return { value: "Walk-in möglich", sub: tags.includes("reservation-empfohlen") ? "Reservierung empfohlen" : "ohne Reservierung", green: true };
+  }
+  if (tags.includes("reservation-empfohlen")) return { value: "Reservierung empfohlen", sub: "Platz vorab sichern", green: false };
+  if (tags.includes("reservation-only")) return { value: "Nur mit Reservierung", sub: "Platz vorab buchen", green: false };
+  return null;
+}
+
+function buildGlance(s, tags, priceAtAGlance, priceRangeText) {
+  return {
+    price: glancePrice(s, priceAtAGlance, priceRangeText),
+    termin: glanceTermin(tags),
+    hours: glanceHours(s.opening_hours, tags),
+    pickup: glancePickup(s.pickup_time),
+  };
+}
+
 // Woerter/Zeichen, die alleinstehend am Ende einer gekuerzten Kartenzeile
 // wie ein Abbruch mitten im Sinn wirken (z.B. ein "CHF" ohne folgende Zahl) -
 // werden nach dem Kuerzen zusaetzlich entfernt.
@@ -436,6 +507,7 @@ async function buildStudios(country) {
       priceRangeShort: truncate(priceRangeText, 42),
       priceAtAGlance,
       priceIncludes,
+      glance: buildGlance(s, tags, priceAtAGlance, priceRangeText),
       faqs,
       citySlug: cSlug,
       targetCityName: cityName,

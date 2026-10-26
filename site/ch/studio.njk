@@ -91,27 +91,31 @@
 
   <div class="studio-hero">
     <div class="studio-hero-main">
-      {% if s.priceAtAGlance %}
-      <div class="price-at-a-glance">
-        <span class="price-at-a-glance-value">{{ s.priceAtAGlance }}</span>
-        {% if s.priceIncludes %}<span class="price-at-a-glance-includes">{{ s.priceIncludes }}</span>{% endif %}
+      <div class="glance">
+        <div class="glance-grid">
+          {% if s.glance.price %}
+          <div class="fact fact-price"><div class="fact-k"><i class="ti ti-tag"></i>Preis</div><div class="fact-v">{{ s.glance.price.value }}</div>{% if s.glance.price.sub %}<div class="fact-s">{{ s.glance.price.sub }}</div>{% endif %}</div>
+          {% endif %}
+          {% if s.glance.termin %}
+          <div class="fact{% if s.glance.termin.green %} fact-green{% endif %}"><div class="fact-k"><i class="ti ti-door-enter"></i>Termin</div><div class="fact-v">{{ s.glance.termin.value }}</div><div class="fact-s">{{ s.glance.termin.sub }}</div></div>
+          {% endif %}
+          {% if s.glance.hours %}
+          <div class="fact"><div class="fact-k"><i class="ti ti-clock"></i>Öffnungszeiten</div><div class="fact-v">{{ s.glance.hours.value }}</div>{% if s.glance.hours.sub %}<div class="fact-s">{{ s.glance.hours.sub }}</div>{% endif %}</div>
+          {% endif %}
+          {% if s.glance.pickup %}
+          <div class="fact"><div class="fact-k"><i class="ti ti-package"></i>Abholzeit</div><div class="fact-v">{{ s.glance.pickup.value }}</div>{% if s.glance.pickup.sub %}<div class="fact-s">{{ s.glance.pickup.sub }}</div>{% endif %}</div>
+          {% endif %}
+        </div>
+        <div class="glance-actions">
+          {% if s.phone %}<a class="glance-btn glance-btn-primary" href="tel:{{ s.phone }}"><i class="ti ti-phone"></i>Anrufen</a>{% endif %}
+          <a class="glance-btn" href="https://www.google.com/maps/dir/?api=1&destination={{ (s.address + ' ' + s.city) | urlencode }}" target="_blank" rel="noopener"><i class="ti ti-map-pin"></i>Route</a>
+          {% if s.website %}<a class="glance-btn studio-website-link" href="{{ s.website | withUtm }}" rel="nofollow noopener" target="_blank" data-studio-slug="{{ s.slug }}" data-studio-name="{{ s.name | e }}"><i class="ti ti-world"></i>Website</a>{% endif %}
+        </div>
+        <p class="glance-more">Mehr Details weiter unten <i class="ti ti-arrow-down"></i></p>
       </div>
-      {% elif s.priceRangeText %}
-      <div class="price-at-a-glance">
-        <span class="price-at-a-glance-value qf-price">{{ s.priceRangeText }}</span>
-      </div>
-      {% endif %}
-
-      {% if s.walkinBadge %}
-      <p class="studio-walkin-badge studio-walkin-badge-{{ s.walkinBadge.cls }}"><i class="ti {{ s.walkinBadge.icon }}"></i>{{ s.walkinBadge.label }}</p>
-      {% endif %}
-
-      {% if s.opening_hours %}
-      <p class="studio-hours"><span class="qf-label">Öffnungszeiten</span><span class="qf-value">{{ s.opening_hours | linkify | safe }}</span></p>
-      {% endif %}
 
       {% if s.tagsObjectsNoWalkin.length %}
-      <div class="tags">
+      <div class="tags tags-small">
         {% for tag in s.tagsObjectsNoWalkin %}<span class="tag tag-{{ tag.category }}"><i class="ti {{ tag.icon }}"></i>{{ tag.label }}</span>{% endfor %}
       </div>
       {% endif %}
@@ -122,6 +126,20 @@
     </div>
   </div>
 
+  {% if s.description %}<p class="studio-description">{{ s.description | linkify | safe }}</p>{% endif %}
+
+  {% if s.opening_hours or s.price_note or s.pickup_time or s.special_events %}
+  <section class="studio-info">
+    <h2>Weitere Infos</h2>
+    <ul>
+      {% if s.opening_hours %}<li><strong>Öffnungszeiten:</strong> {{ s.opening_hours | linkify | safe }}</li>{% endif %}
+      {% if s.price_note %}<li>{{ s.price_note | linkify | safe }}</li>{% endif %}
+      {% if s.pickup_time %}<li><strong>Abholzeit:</strong> {{ s.pickup_time | linkify | safe }}</li>{% endif %}
+      {% if s.special_events %}<li><strong>Besondere Events:</strong> {{ s.special_events | linkify | safe }}</li>{% endif %}
+    </ul>
+  </section>
+  {% endif %}
+
   <p class="studio-address"><i class="ti ti-map-pin"></i> {{ s.address }}</p>
   <div class="studio-map">
     <div class="map-consent-gate" data-map-src="https://www.google.com/maps?q={{ (s.address + ' ' + s.city) | urlencode }}&output=embed" data-map-title="Karte: {{ s.name }}">
@@ -129,19 +147,6 @@
       <button type="button" class="button map-consent-load-btn">Karte laden</button>
     </div>
   </div>
-
-  {% if s.description %}<p class="studio-description">{{ s.description | linkify | safe }}</p>{% endif %}
-
-  {% if s.price_note or s.pickup_time or s.special_events %}
-  <section class="studio-info">
-    <h2>Weitere Infos</h2>
-    <ul>
-      {% if s.price_note %}<li>{{ s.price_note | linkify | safe }}</li>{% endif %}
-      {% if s.pickup_time %}<li><strong>Abholzeit:</strong> {{ s.pickup_time | linkify | safe }}</li>{% endif %}
-      {% if s.special_events %}<li><strong>Besondere Events:</strong> {{ s.special_events | linkify | safe }}</li>{% endif %}
-    </ul>
-  </section>
-  {% endif %}
 
   <section class="studio-contact">
     <h2>Kontakt</h2>

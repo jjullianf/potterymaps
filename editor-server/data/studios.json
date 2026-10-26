@@ -8397,7 +8397,7 @@
       "phone": "+49 361 21697251",
       "website": "http://andreas-auszeit.de/",
       "email": "andreas-auszeit@web.de",
-      "opening_hours": "",
+      "opening_hours": "Nach Absprache",
       "tags": "reservation-only, kids-friendly, birthday-parties, hen-party",
       "price_from": "",
       "price_mug": "",
@@ -8419,8 +8419,7 @@
       "country": "DE",
       "currency": "EUR",
       "postcode": "99091",
-      "region": "TH",
-      "hours": "Nach Absprache"
+      "region": "TH"
     },
     {
       "slug": "be-mal-keramikstudio-paderborn",
@@ -12334,7 +12333,7 @@
       "phone": "+49 40 30609686",
       "website": "https://www.porzellanlaedchen-hamburg.de/",
       "email": "info@porzellanlaedchen-hamburg.de",
-      "opening_hours": "",
+      "opening_hours": "Mo, Di geschlossen, Mi 17–20 Uhr, Do, Fr 14–20 Uhr, Sa 11–20 Uhr, So 11–17 Uhr, an Feiertagen geschlossen",
       "tags": "reservation-only, kids-friendly, birthday-parties, hen-party, corporate-events",
       "price_from": "8",
       "price_mug": "",
@@ -12356,8 +12355,7 @@
       "country": "DE",
       "currency": "EUR",
       "postcode": "22419",
-      "region": "HH",
-      "hours": "Mo, Di geschlossen, Mi 17–20 Uhr, Do, Fr 14–20 Uhr, Sa 11–20 Uhr, So 11–17 Uhr, an Feiertagen geschlossen"
+      "region": "HH"
     },
     {
       "slug": "kreativspass-buchholz",
