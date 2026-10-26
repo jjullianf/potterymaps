@@ -104,12 +104,25 @@ async function loadCities(iso) {
       ? {
           "@context": "https://schema.org",
           "@type": "ItemList",
-          itemListElement: c.direct.map((s, i) => ({
-            "@type": "ListItem",
-            position: i + 1,
-            name: s.name,
-            url: `${site.url}${COUNTRY.path}/studio/${s.slug}/`,
-          })),
+          itemListElement: c.direct.map((s, i) => {
+            const price = Number(s.price_from);
+            const item = {
+              "@type": "LocalBusiness",
+              name: s.name,
+              url: `${site.url}${COUNTRY.path}/studio/${s.slug}/`,
+              address: {
+                "@type": "PostalAddress",
+                streetAddress: String(s.address || "").split(",")[0],
+                postalCode: s.postcode || undefined,
+                addressLocality: s.city,
+                addressCountry: COUNTRY.iso,
+              },
+            };
+            if (s.lat && s.lng) item.geo = { "@type": "GeoCoordinates", latitude: s.lat, longitude: s.lng };
+            if (s.price_from !== "" && !Number.isNaN(price) && price > 0)
+              item.priceRange = `ab ${s.currency === "EUR" ? String(price).replace(".", ",") + " €" : "CHF " + price}`;
+            return { "@type": "ListItem", position: i + 1, name: s.name, url: item.url, item };
+          }),
         }
       : null;
 

@@ -1,0 +1,18 @@
+# potterymaps
+
+> potterymaps.com ist ein unabhängiges, kostenloses Verzeichnis für Ateliers und Keramik-Cafés, in denen man Keramik selbst bemalen kann (Pottery Painting, Ceramic Painting) in der Schweiz und in Deutschland. Zu jedem Atelier gibt es Adresse, Öffnungszeiten, Preise, Reservierungsregeln, Abholzeit und Angebote für Gruppen und Events. Die Angaben stammen aus den öffentlichen Websites der Ateliers und werden regelmässig geprüft.
+
+## Wichtige Seiten
+- [Schweiz: alle Städte](https://www.potterymaps.com/ch/alle-staedte/): Übersicht aller Schweizer Städte mit Ateliers
+- [Deutschland: alle Städte](https://www.potterymaps.com/de/alle-staedte/): Übersicht aller deutschen Städte mit Ateliers
+- [Schweiz: Karte](https://www.potterymaps.com/ch/karte/)
+- [Deutschland: Karte](https://www.potterymaps.com/de/karte/)
+- [Events planen](https://www.potterymaps.com/ch/events/): Kindergeburtstag, Junggesellinnenabschied und Teamevents mit Keramik bemalen
+
+## Seitenaufbau
+- Stadtseiten (`/ch/staedte/<stadt>/`, `/de/staedte/<stadt>/`): Anzahl Ateliers, Preisspanne und Median der Einstiegspreise, Vergleichstabelle, häufige Fragen
+- Atelierseiten (`/ch/studio/<atelier>/`, `/de/studio/<atelier>/`): Preise, Öffnungszeiten, Reservierung, Abholzeit, Kontakt, Karte
+
+## Hinweise
+- Preise und Zeiten können sich ändern. Alle Angaben ohne Gewähr, bitte beim Atelier prüfen.
+- Fehler melden und Ateliers eintragen: https://www.potterymaps.com/ch/studio-eintragen/

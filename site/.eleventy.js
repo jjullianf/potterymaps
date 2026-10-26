@@ -182,6 +182,7 @@ module.exports = function (eleventyConfig) {
     "node_modules/leaflet.markercluster/dist/MarkerCluster.Default.css": "js/vendor/leaflet/MarkerCluster.Default.css",
   });
   eleventyConfig.addPassthroughCopy("robots.txt");
+  eleventyConfig.addPassthroughCopy("llms.txt");
   eleventyConfig.addPassthroughCopy("favicon.ico");
   eleventyConfig.addPassthroughCopy("favicon-16x16.png");
   eleventyConfig.addPassthroughCopy("favicon-32x32.png");

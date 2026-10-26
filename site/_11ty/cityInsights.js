@@ -53,10 +53,50 @@ function buildCityInsights(city, otherCities) {
   const noFee = list.filter((s) => /keine (separate )?(studio|tisch|malplatz|mal)gebühr/i.test(s.studio_fee || ""));
   const minSpend = list.filter((s) => /mindest/i.test(`${s.studio_fee || ""} ${s.price_note || ""}`));
 
+  // Preisstatistik (aus price_from) und Beispielpreise (price_mug / price_plate)
+  const median = (a) => {
+    const s = [...a].sort((x, y) => x - y);
+    const m = Math.floor(s.length / 2);
+    return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2;
+  };
+  const lowNum = (v) => {
+    const m = String(v || "").replace(",", ".").match(/\d+(?:\.\d+)?/);
+    return m ? Number(m[0]) : null;
+  };
+  const roundHalf = (x) => (Number.isInteger(x) ? x : Math.round(x * 10) / 10);
+  const pvals = priced.map((x) => x.p);
+  const pMin = pvals.length ? Math.min(...pvals) : null;
+  const pMax = pvals.length ? Math.max(...pvals) : null;
+  const pMed = pvals.length ? roundHalf(median(pvals)) : null;
+  const mugVals = list.map((s) => lowNum(s.price_mug)).filter((x) => x > 0);
+  const plateVals = list.map((s) => lowNum(s.price_plate)).filter((x) => x > 0);
+  const stand = new Date().toLocaleDateString("de-DE", { month: "long", year: "numeric" });
+
+  let priceAnswer = "";
+  if (priced.length) {
+    priceAnswer =
+      n === 1
+        ? `Keramik bemalen kostet bei ${shortName(priced[0].s.name)} in ${name} ab ${eur(pMin)}.`
+        : `Keramik bemalen in ${name} kostet je nach Atelier ab ${eur(pMin)}.`;
+    if (priced.length >= 5) priceAnswer += ` Die Einstiegspreise der ${priced.length} ${atelierWord(priced.length)} mit Preisangabe liegen zwischen ${eur(pMin)} und ${eur(pMax)}, der mittlere Wert (Median) liegt bei ${eur(pMed)}.`;
+    else if (priced.length >= 3) priceAnswer += ` Die Einstiegspreise der ${priced.length} ${atelierWord(priced.length)} mit Preisangabe liegen zwischen ${eur(pMin)} und ${eur(pMax)}.`;
+    else if (priced.length === 2) priceAnswer += ` Die Einstiegspreise liegen bei ${eur(pMin)} und ${eur(pMax)}.`;
+    const ex = [];
+    if (mugVals.length >= 2) ex.push(`Eine Tasse kostet ${eur(Math.min(...mugVals))} bis ${eur(Math.max(...mugVals))}`);
+    if (plateVals.length >= 2) ex.push(`ein Teller ${eur(Math.min(...plateVals))} bis ${eur(Math.max(...plateVals))}`);
+    if (ex.length) priceAnswer += ` ${ex.join(", ")} (je nach Atelier und Modell).`;
+    priceAnswer += ` Was im Preis enthalten ist (Farben, Glasur, Brand), steht ${n === 1 ? "auf der Atelier-Seite" : "bei den einzelnen Ateliers"}. Stand: ${stand}.`;
+  }
+
+  // Englische Suchbegriffe (Pottery Painting) fuer internationale Suchen
+  const priceEn = priced.length ? `, with prices starting at ${eur(pMin)}` : "";
+  const englishBlock = `Pottery painting (also called ceramic painting) means you choose an unpainted ceramic piece such as a mug or plate, paint it yourself, and the studio glazes and fires it for you. potterymaps lists ${n} pottery painting ${n === 1 ? "studio" : "studios"} in ${name}${priceEn}. Many studios ask you to book ahead, so check the individual pages for opening hours, prices and booking.`;
+
   // Kennzahlen als Aufzaehlung "Auf einen Blick"
   const facts = [];
   facts.push(`${n} ${atelierWord(n)} in ${name}`);
   if (priced.length) facts.push(`Preise ab ${eur(priced[0].p)} (${shortName(priced[0].s.name)})`);
+  if (priced.length >= 3) facts.push(priced.length >= 5 ? `Einstiegspreise zwischen ${eur(pMin)} und ${eur(pMax)}, Median ${eur(pMed)}` : `Einstiegspreise zwischen ${eur(pMin)} und ${eur(pMax)}`);
   if (noFee.length) facts.push(`${noFee.length} von ${n} ohne separate Studiogebühr`);
   if (walkin.length) facts.push(`${walkin.length} mit Walk-in ohne Termin`);
   if (only.length) facts.push(`${only.length} nur mit Reservierung`);
@@ -70,6 +110,7 @@ function buildCityInsights(city, otherCities) {
     name: shortName(s.name),
     url: `${s.countryConfig.path}/studio/${s.slug}/`,
     price: s.price_from !== "" && !Number.isNaN(Number(s.price_from)) ? `ab ${eur(Number(s.price_from))}` : "",
+    example: [lowNum(s.price_mug) ? `Tasse ab ${eur(lowNum(s.price_mug))}` : "", lowNum(s.price_plate) ? `Teller ab ${eur(lowNum(s.price_plate))}` : ""].filter(Boolean).join(", "),
     booking: bookingLabel(s),
     kids: has(s, "kids-friendly") || has(s, "birthday-parties") ? "ja" : "",
     groups: [has(s, "hen-party") ? "JGA" : "", has(s, "corporate-events") ? "Firmenevent" : ""].filter(Boolean).join(", "),
@@ -78,7 +119,7 @@ function buildCityInsights(city, otherCities) {
   // FAQ (reiner Text, auch fuer FAQPage-JSON-LD)
   const faqs = [];
   if (priced.length) {
-    let a = `Die Preise für Keramik bemalen beginnen in ${name} bei ${eur(priced[0].p)} (${shortName(priced[0].s.name)}).`;
+    let a = `${priceAnswer} Am günstigsten startet ${shortName(priced[0].s.name)}.`;
     if (n === 1) {
       if (noFee.length) a += " Das Atelier berechnet keine separate Studiogebühr, bezahlt wird nur das gewählte Keramikstück.";
       if (minSpend.length) a += " Es gilt ein Mindestumsatz pro Person.";
@@ -86,7 +127,6 @@ function buildCityInsights(city, otherCities) {
       if (noFee.length) a += ` ${noFee.length} von ${n} ${atelierWord(n)} ${noFee.length === 1 ? "berechnet" : "berechnen"} keine separate Studiogebühr, bezahlt wird nur das gewählte Keramikstück.`;
       if (minSpend.length) a += ` ${minSpend.length === 1 ? "Ein Atelier verlangt" : `${minSpend.length} Ateliers verlangen`} einen Mindestumsatz pro Person.`;
     }
-    a += " Was im Preis enthalten ist (Farben, Glasur, Brand, Getränke), steht auf den einzelnen Atelier-Seiten.";
     faqs.push({ q: `Was kostet Keramik bemalen in ${name}?`, a });
   }
   if (walkin.length || only.length || empf.length) {
@@ -125,13 +165,15 @@ function buildCityInsights(city, otherCities) {
   }
 
   // Metatexte
-  const title = n === 1 ? `Keramik bemalen in ${name}: Atelier, Preise & Öffnungszeiten | potterymaps` : `Keramik bemalen in ${name}: ${n} ${atelierWord(n)}, Preise & Öffnungszeiten | potterymaps`;
+  const pp = priced.length ? ` ab ${eur(pMin)}` : "";
+  let title = `Keramik bemalen / Pottery Painting in ${name}: ${n} ${atelierWord(n)}${pp}`;
+  if (title.length < 58) title += " | potterymaps";
   const bits = [n === 1 ? "1 Atelier" : `${n} ${atelierWord(n)} im Vergleich`];
   if (priced.length) bits.push(`ab ${eur(priced[0].p)}`);
   if (walkin.length) bits.push("Walk-in");
   if (birthday.length) bits.push("Kindergeburtstag");
-  let description = `Keramik bemalen in ${name}: ${bits.join(", ")} – mit Preisen, Öffnungszeiten, Karte und Tipps für Gruppen und Events.`;
-  if (description.length > 158) description = `Keramik bemalen in ${name}: ${n === 1 ? "Atelier" : `${n} ${atelierWord(n)} im Vergleich`} – Preise, Öffnungszeiten, Karte und Tipps für Gruppen und Events.`;
+  let description = `Keramik bemalen (Pottery Painting) in ${name}: ${bits.join(", ")} – mit Preisen, Öffnungszeiten, Karte und Tipps für Gruppen und Events.`;
+  if (description.length > 158) description = `Keramik bemalen (Pottery Painting) in ${name}: ${n === 1 ? "Atelier" : `${n} ${atelierWord(n)} im Vergleich`} – Preise, Öffnungszeiten, Karte, Tipps für Gruppen.`;
 
   // Dynamischer Absatz zur Intro
   let summary = `potterymaps listet aktuell ${n} ${atelierWord(n)} zum Keramik bemalen in ${name}`;
@@ -149,11 +191,16 @@ function buildCityInsights(city, otherCities) {
     title,
     description,
     summary,
+    priceAnswer,
+    englishBlock,
     jsonLdFaq: faqs.length
       ? {
           "@context": "https://schema.org",
           "@type": "FAQPage",
-          mainEntity: faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+          mainEntity: [
+            ...faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+            { "@type": "Question", name: `Where can I go pottery painting in ${name}?`, acceptedAnswer: { "@type": "Answer", text: englishBlock } },
+          ],
         }
       : null,
     otherCities: (otherCities || []).filter((o) => o.slug !== city.slug).slice(0, 12),

@@ -44,6 +44,13 @@
   <p class="city-intro">{{ c.intro }}{% if c.introDynamic %} {{ c.introDynamic }}{% endif %}</p>
   {% endif %}
 
+  {% if c.insights and c.insights.priceAnswer %}
+  <section class="city-price-answer">
+    <h2>Was kostet Keramik bemalen in {{ c.name }}?</h2>
+    <p>{{ c.insights.priceAnswer }}</p>
+  </section>
+  {% endif %}
+
   {% if c.hasAny and (c.cafeMatch or c.porzellanMatch) %}
   <p class="city-topic-intro">
     {% if c.porzellanMatch %}Auch Porzellan bemalen ist in {{ c.name }} möglich, z. B. bei <a href="{{ country.path }}/studio/{{ c.porzellanMatch.slug }}/">{{ c.porzellanMatch.name }}</a>.{% endif %}
@@ -87,7 +94,7 @@
         <thead><tr><th>Atelier</th><th>Preis</th><th>Termin</th><th>Kinder</th><th>Gruppen</th></tr></thead>
         <tbody>
           {% for r in c.insights.table %}
-          <tr><td><a href="{{ r.url }}">{{ r.name }}</a></td><td>{{ r.price or "–" }}</td><td>{{ r.booking or "–" }}</td><td>{{ r.kids or "–" }}</td><td>{{ r.groups or "–" }}</td></tr>
+          <tr><td><a href="{{ r.url }}">{{ r.name }}</a></td><td>{{ r.price or "–" }}{% if r.example %}<br><small>{{ r.example }}</small>{% endif %}</td><td>{{ r.booking or "–" }}</td><td>{{ r.kids or "–" }}</td><td>{{ r.groups or "–" }}</td></tr>
           {% endfor %}
         </tbody>
       </table>
@@ -107,6 +114,11 @@
     {% endfor %}
   </section>
   {% endif %}
+
+  <section class="city-english" lang="en">
+    <h2>Pottery painting in {{ c.name }}</h2>
+    <p>{{ c.insights.englishBlock }}</p>
+  </section>
   {% endif %}
 
   {% if c.nearbyTowns.length %}
