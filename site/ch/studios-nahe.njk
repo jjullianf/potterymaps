@@ -109,8 +109,8 @@
     });
 
     studios.forEach(function (s) {
-      var marker = L.marker([s.lat, s.lng], { icon: dotIcon }).addTo(map).bindPopup(s.popupHtml);
-      window.potterymapsAttachHoverPopup(marker);
+      var marker = L.marker([s.lat, s.lng], { icon: dotIcon }).addTo(map);
+      window.potterymapsBindCard(marker, map, s.popupHtml);
     });
   };
 </script>

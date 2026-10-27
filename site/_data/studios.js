@@ -344,38 +344,35 @@ function escapeHtml(str) {
     .replace(/>/g, "&gt;");
 }
 
-// Fertiges HTML fuer das Leaflet-Popup auf allen Kartenseiten (Startseite,
-// Karte, Stadtseiten, Umgebungs-Seiten) - hier einmal zentral gebaut statt in
-// jedem der 5 Kartentemplates einzeln, damit Bild/Preis/Badge ueberall gleich
-// aussehen. Wird als JSON in die Karten-Templates eingebettet (siehe
-// js/map-popup.js), daher rohes HTML statt escaped Nunjucks-String.
-function buildMapPopupHtml(s, { thumbHtml, price, walkin }) {
-  return (
-    '<a class="map-popup" href="' + s.pagePath + '">' +
-    '<span class="map-popup-thumb">' + thumbHtml + "</span>" +
-    '<span class="map-popup-body">' +
-    '<strong class="map-popup-name">' + escapeHtml(s.name) + "</strong>" +
-    (price ? '<span class="map-popup-price">' + escapeHtml(price) + "</span>" : "") +
-    (walkin
-      ? '<span class="map-popup-badge map-popup-badge-' + walkin.cls + '">' + walkin.label + "</span>"
-      : "") +
-    "</span>" +
-    "</a>"
-  );
+// Fertiges HTML fuer die feste Info-Karte unten auf allen Kartenseiten
+// (Startseite, Karte, Stadtseiten, Umgebungs-Seiten) - hier einmal zentral
+// gebaut, damit sie ueberall gleich aussieht. Wird als JSON in die Karten-
+// Templates eingebettet (siehe js/map-popup.js), daher rohes HTML. Die ganze
+// Karte ist ueber den Namenslink anklickbar (::after deckt sie ab), Anrufen
+// und Route liegen darueber.
+function mapCardBadge(tags) {
+  if (tags.includes("walk-in") && tags.includes("reservation-empfohlen")) return { label: "Walk-in & Reservation empfohlen", cls: "mix" };
+  if (tags.includes("walk-in")) return { label: "Walk-in", cls: "walkin" };
+  if (tags.includes("reservation-empfohlen")) return { label: "Reservation empfohlen", cls: "empfohlen" };
+  if (tags.includes("reservation-only")) return { label: "Reservation Pflicht", cls: "only" };
+  return null;
 }
 
-// Kompakte Variante ohne Bild - fuer die kleinen 280px-Karten (Stadtseite,
-// Umgebungs-Seiten), wo das volle Popup mit Bild hoeher als die Karte selbst
-// wirkte. Nur Name, Preis und Walk-in-Badge.
-function buildMapPopupHtmlCompact(s, { price, walkin }) {
+function buildMapCardHtml(s, { price, tags }) {
+  const badge = mapCardBadge(tags);
+  const route = "https://www.google.com/maps/dir/?api=1&destination=" + encodeURIComponent((s.address || "") + " " + (s.city || ""));
+  const tel = String(s.phone || "").replace(/[^\d+]/g, "");
   return (
-    '<a class="map-popup map-popup-compact" href="' + s.pagePath + '">' +
-    '<strong class="map-popup-name">' + escapeHtml(s.name) + "</strong>" +
-    (price ? '<span class="map-popup-price">' + escapeHtml(price) + "</span>" : "") +
-    (walkin
-      ? '<span class="map-popup-badge map-popup-badge-' + walkin.cls + '">' + walkin.label + "</span>"
-      : "") +
-    "</a>"
+    '<div class="map-card-inner">' +
+    '<a class="map-card-name" href="' + s.pagePath + '">' + escapeHtml(s.name) + "</a>" +
+    '<div class="map-card-meta"><span class="map-card-city">' + escapeHtml(s.city) + "</span>" +
+    (price ? '<span class="map-card-price">' + escapeHtml(price) + "</span>" : "") +
+    (badge ? '<span class="map-card-badge map-card-badge-' + badge.cls + '">' + badge.label + "</span>" : "") +
+    "</div>" +
+    '<div class="map-card-actions"><span class="map-card-btn map-card-btn-primary">Details</span>' +
+    (tel ? '<a class="map-card-btn" href="tel:' + tel + '">Anrufen</a>' : "") +
+    '<a class="map-card-btn" href="' + route + '" target="_blank" rel="noopener">Route</a></div>' +
+    "</div>"
   );
 }
 
@@ -466,24 +463,8 @@ async function buildStudios(country) {
       wrapClass: "studio-card-thumb",
     });
 
-    // Kleineres Bild eigens fuers Karten-Popup (200px reicht dort, siehe
-    // .map-popup-thumb in style.css - gleiches Seitenverhaeltnis/object-fit
-    // wie auf den Listing-Karten, nur schmaler).
-    const mapPopupThumbHtml = await studioImage(studioForImage, {
-      widths: [220],
-      sizes: "220px",
-      loading: "lazy",
-      wrapClass: "map-popup-thumb",
-    });
-    const mapPopupHtml = buildMapPopupHtml(s, {
-      thumbHtml: mapPopupThumbHtml,
-      price: priceAtAGlance,
-      walkin: computeWalkinBadge(tags),
-    });
-    const mapPopupHtmlCompact = buildMapPopupHtmlCompact(s, {
-      price: priceAtAGlance,
-      walkin: computeWalkinBadge(tags),
-    });
+    const mapPopupHtml = buildMapCardHtml(s, { price: priceAtAGlance, tags });
+    const mapPopupHtmlCompact = mapPopupHtml;
 
     // hat_instagram steht als "ja, https://www.instagram.com/<handle>/" (oder
     // "nein"/leer) - daraus Link und @handle fuer die Detailseite ziehen.

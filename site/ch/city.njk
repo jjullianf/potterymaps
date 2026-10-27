@@ -205,8 +205,8 @@
     });
 
     studios.forEach(function (s) {
-      var marker = L.marker([s.lat, s.lng], { icon: dotIcon }).addTo(map).bindPopup(s.popupHtml);
-      window.potterymapsAttachHoverPopup(marker);
+      var marker = L.marker([s.lat, s.lng], { icon: dotIcon }).addTo(map);
+      window.potterymapsBindCard(marker, map, s.popupHtml);
     });
     {% if country.mapFit %}
     // Deutschland: Kartenausschnitt so waehlen, dass Stadtzentrum und alle Ateliers der Stadt sichtbar sind.

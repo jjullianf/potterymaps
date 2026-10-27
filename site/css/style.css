@@ -1264,3 +1264,52 @@ h1, h2 { font-family: var(--font-display); font-weight: 600; color: var(--color-
 .ti-phone{--ti:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2224%22 height=%2224%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23000%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 %3E %3Cpath d=%22M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2%22 /%3E %3C/svg%3E")}
 .ti-world{--ti:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2224%22 height=%2224%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23000%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 %3E %3Cpath d=%22M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0%22 /%3E %3Cpath d=%22M3.6 9h16.8%22 /%3E %3Cpath d=%22M3.6 15h16.8%22 /%3E %3Cpath d=%22M11.5 3a17 17 0 0 0 0 18%22 /%3E %3Cpath d=%22M12.5 3a17 17 0 0 1 0 18%22 /%3E %3C/svg%3E")}
 .ti-arrow-down{--ti:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2224%22 height=%2224%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23000%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 %3E %3Cpath d=%22M12 5l0 14%22 /%3E %3Cpath d=%22M18 13l-6 6%22 /%3E %3Cpath d=%22M6 13l6 6%22 /%3E %3C/svg%3E")}
+
+/* Feste Info-Karte unten mittig in der Karte (ersetzt das Leaflet-Popup,
+   siehe js/map-popup.js und buildMapCardHtml in _data/studios.js). */
+.map-card {
+  position: absolute;
+  left: 50%;
+  bottom: 26px;
+  transform: translateX(-50%);
+  z-index: 1000;
+  width: calc(100% - 20px);
+  max-width: 520px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.22);
+  font-family: var(--font-display);
+}
+.map-card[hidden] { display: none; }
+.map-card-inner { position: relative; display: flex; flex-direction: column; gap: 0.4rem; padding: 0.75rem 0.9rem 0.8rem; }
+.map-card-close {
+  position: absolute; top: 4px; right: 6px; z-index: 3;
+  width: 28px; height: 28px; border: 0; background: transparent;
+  font-size: 1.4rem; line-height: 1; color: var(--color-text-muted); cursor: pointer;
+}
+.map-card-name {
+  font-size: 1.05rem; font-weight: 600; color: var(--color-text); text-decoration: none;
+  margin-right: 1.6rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.map-card-name::after { content: ""; position: absolute; inset: 0; border-radius: 16px; }
+.map-card:hover .map-card-name { color: var(--color-accent); }
+.map-card-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem 0.6rem; font-size: 0.82rem; }
+.map-card-city { color: var(--color-text-muted); }
+.map-card-price { color: var(--color-price); font-weight: 700; }
+.map-card-badge { padding: 0.12rem 0.55rem; border-radius: 999px; font-size: 0.72rem; font-weight: 600; white-space: nowrap; }
+.map-card-badge-walkin { background: var(--tag-green-bg); color: var(--tag-green-text); }
+.map-card-badge-mix, .map-card-badge-empfohlen { background: var(--tag-gold-bg); color: var(--tag-gold-text); }
+.map-card-badge-only { background: var(--tag-blue-bg); color: var(--tag-blue-text); }
+.map-card-actions { display: flex; gap: 0.4rem; position: relative; z-index: 2; pointer-events: none; }
+.map-card-btn {
+  flex: 1 1 0; text-align: center; font-size: 0.85rem; font-weight: 600; padding: 0.4rem 0.5rem;
+  border-radius: 999px; border: 1px solid var(--color-border); background: var(--color-card);
+  color: var(--color-text); text-decoration: none; pointer-events: auto; white-space: nowrap;
+}
+.map-card-btn-primary { background: var(--color-accent); border-color: var(--color-accent); color: #fff; pointer-events: none; }
+.map-card-btn:not(.map-card-btn-primary):hover { border-color: var(--color-accent); }
+.leaflet-container .map-card-name { color: var(--color-text); }
+.leaflet-container .map-card:hover .map-card-name { color: var(--color-accent); }
+.leaflet-container .map-card-btn { color: var(--color-text); }
+.leaflet-container .map-card-btn-primary { color: #fff; }

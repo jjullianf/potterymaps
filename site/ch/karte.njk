@@ -59,8 +59,8 @@
       },
     });
     studios.forEach(function (s) {
-      var marker = L.marker([s.lat, s.lng], { icon: dotIcon }).bindPopup(s.popupHtml);
-      window.potterymapsAttachHoverPopup(marker);
+      var marker = L.marker([s.lat, s.lng], { icon: dotIcon });
+      window.potterymapsBindCard(marker, map, s.popupHtml);
       clusterGroup.addLayer(marker);
     });
     map.addLayer(clusterGroup);

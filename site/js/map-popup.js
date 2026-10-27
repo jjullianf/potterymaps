@@ -1,36 +1,29 @@
-// Gemeinsames Hover-Verhalten fuer alle Leaflet-Karten der Seite (Startseite,
+// Gemeinsame Info-Karte fuer alle Leaflet-Karten der Seite (Startseite,
 // /ch/karte/, Stadtseiten, Alle-Staedte-Uebersicht, Studios-in-der-Naehe).
-// Auf Desktop (Hover verfuegbar) oeffnet sich das Popup beim Ueberfahren des
-// Pins und schliesst sich wieder, sobald die Maus Pin UND Popup verlassen hat
-// - kein Klick noetig. Auf Touch-Geraeten gibt es keinen Hover, dort bleibt es
-// beim Standard-Leaflet-Verhalten (Popup oeffnet sich per Tap).
-window.potterymapsAttachHoverPopup = function (marker) {
-  var supportsHover = window.matchMedia && window.matchMedia("(hover: hover)").matches;
-  if (!supportsHover) return;
-
-  var closeTimer = null;
-  function cancelClose() {
-    if (closeTimer) {
-      clearTimeout(closeTimer);
-      closeTimer = null;
-    }
+// Statt eines Popups ueber dem Pin erscheint beim Antippen/Anklicken eines
+// Pins eine feste Karte unten mittig in der Karte; Klick auf die Karte
+// oeffnet die Atelier-Seite. Klick auf die Karte (Hintergrund) oder auf das
+// x schliesst sie, ein anderer Pin tauscht den Inhalt.
+window.potterymapsBindCard = function (marker, map, html) {
+  var container = map.getContainer();
+  var card = container.querySelector(".map-card");
+  if (!card) {
+    card = document.createElement("div");
+    card.className = "map-card";
+    card.hidden = true;
+    container.appendChild(card);
+    L.DomEvent.disableClickPropagation(card);
+    L.DomEvent.disableScrollPropagation(card);
+    map.on("click", function () {
+      card.hidden = true;
+      card.removeAttribute("data-active");
+    });
   }
-  function scheduleClose() {
-    cancelClose();
-    closeTimer = setTimeout(function () {
-      marker.closePopup();
-    }, 200);
-  }
-
-  marker.on("mouseover", function () {
-    cancelClose();
-    marker.openPopup();
-  });
-  marker.on("mouseout", scheduleClose);
-  marker.on("popupopen", function (e) {
-    var el = e.popup.getElement();
-    if (!el) return;
-    el.addEventListener("mouseenter", cancelClose);
-    el.addEventListener("mouseleave", scheduleClose);
+  marker.on("click", function () {
+    card.innerHTML = '<button type="button" class="map-card-close" aria-label="Schliessen">×</button>' + html;
+    card.querySelector(".map-card-close").addEventListener("click", function () {
+      card.hidden = true;
+    });
+    card.hidden = false;
   });
 };
