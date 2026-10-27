@@ -54,7 +54,7 @@
       // kam (siehe compareStudiosForListing).
       return (data.studios || [])
         .filter((s) => s.topTags.length)
-        .sort(data.country.iso === "CH" ? data.compareStudiosForListing : data.compareStudiosForListing.byCompleteness)
+        .sort(data.compareStudiosForListing)
         .slice(0, 3);
     },
     cafeStudios: (data) => {

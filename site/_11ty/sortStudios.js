@@ -3,7 +3,7 @@
 // kostenpflichtige Featured-Listings), danach Studios mit eigenen Bildern vor
 // Studios ohne eigene Bilder (reine Stockfoto-/Platzhalter-Eintraege), danach
 // alphabetisch innerhalb jeder Gruppe.
-function compareStudiosForListing(a, b) {
+function compareBasic(a, b) {
   const featuredA = a.featured ? 1 : 0;
   const featuredB = b.featured ? 1 : 0;
   if (featuredA !== featuredB) return featuredB - featuredA;
@@ -29,7 +29,14 @@ function compareByCompleteness(a, b) {
   if (featuredA !== featuredB) return featuredB - featuredA;
   const diff = completeness(b) - completeness(a);
   if (diff) return diff;
-  return compareStudiosForListing(a, b);
+  return compareBasic(a, b);
+}
+
+// Deutsche Ateliers: vollstaendigere Eintraege zuerst (auch in den Stadtlisten).
+// Schweizer Ateliers behalten die bisherige Reihenfolge.
+function compareStudiosForListing(a, b) {
+  if (a.country === "DE" && b.country === "DE") return compareByCompleteness(a, b);
+  return compareBasic(a, b);
 }
 
 compareStudiosForListing.byCompleteness = compareByCompleteness;
