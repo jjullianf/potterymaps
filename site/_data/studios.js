@@ -78,7 +78,7 @@ function generateAutoFAQ(s) {
     tags.includes("reservation-only")
   ) {
     let answer;
-    if (tags.includes("walk-in")) {
+    if (tags.includes("walk-in") && !tags.includes("reservation-empfohlen")) {
       answer = "Spontanes Vorbeikommen ist möglich, keine Reservation nötig.";
     } else if (tags.includes("reservation-empfohlen")) {
       answer =
