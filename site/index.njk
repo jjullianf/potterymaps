@@ -11,7 +11,14 @@
   <meta name="robots" content="noindex">
   <link rel="canonical" href="{{ site.url }}/ch/">
   <meta http-equiv="refresh" content="0; url=/ch/">
-  <script>location.replace("/ch/" + location.search + location.hash);</script>
+  <script>
+    (function () {
+      var langs = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || ""];
+      var german = langs.some(function (l) { return /^de-(DE|AT|LU)$/i.test(l); });
+      var swiss = langs.some(function (l) { return /^(de|fr|it|rm|gsw)-(CH|LI)$/i.test(l); });
+      location.replace((german && !swiss ? "/de/" : "/ch/") + location.search + location.hash);
+    })();
+  </script>
   <style>html,body{background:#fdf6e8;margin:0}</style>
   <title>potterymaps – Keramik bemalen Schweiz</title>
   <meta name="description" content="Finde Ateliers zum Keramik bemalen in der ganzen Schweiz – Teller, Ton und Porzellan bemalen, plus gemütliche Keramik-Cafés. Alle Städte im Überblick.">
