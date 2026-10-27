@@ -84,6 +84,14 @@
       {% if country.hasBlog %}<a href="{{ country.path }}/blog/">Blog</a>{% endif %}
       <a href="{{ country.path }}/ueber-uns/">Über uns</a>
       <a href="{{ country.path }}/kontakt/">Kontakt</a>
+      {% if countries.length > 1 %}
+      <div class="nav-country" id="nav-country">
+        <button type="button" class="nav-country-btn" id="nav-country-btn" aria-expanded="false" aria-controls="nav-country-menu" aria-label="Land wählen, aktuell {{ country.name }}">{{ country.iso }} <span aria-hidden="true">&#9662;</span></button>
+        <div class="nav-country-menu" id="nav-country-menu" role="group" aria-label="Land wählen">
+          {% for c in countries %}<a href="{{ c.path }}/"{% if c.code == country.code %} aria-current="true"{% endif %} hreflang="{{ c.hreflang }}">{{ c.name }}</a>{% endfor %}
+        </div>
+      </div>
+      {% endif %}
     </nav>
   </header>
   <main>

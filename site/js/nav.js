@@ -1,6 +1,29 @@
 (function () {
   "use strict";
 
+  // Laenderauswahl (Desktop: Dropdown, Mobile: im Menue als Link-Liste, siehe CSS)
+  var countryBox = document.getElementById("nav-country");
+  var countryBtn = document.getElementById("nav-country-btn");
+  function setCountryOpen(open) {
+    if (!countryBox) return;
+    countryBox.classList.toggle("open", open);
+    countryBtn.setAttribute("aria-expanded", open ? "true" : "false");
+  }
+  if (countryBtn) {
+    countryBtn.addEventListener("click", function () {
+      setCountryOpen(!countryBox.classList.contains("open"));
+    });
+    document.addEventListener("click", function (e) {
+      if (!countryBox.contains(e.target)) setCountryOpen(false);
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && countryBox.classList.contains("open")) {
+        setCountryOpen(false);
+        countryBtn.focus();
+      }
+    });
+  }
+
   var toggle = document.getElementById("nav-toggle");
   var nav = document.getElementById("site-nav");
   var backdrop = document.getElementById("nav-backdrop");
