@@ -15,4 +15,22 @@ function compareStudiosForListing(a, b) {
   return (a.name || "").localeCompare(b.name || "", "de");
 }
 
+// Wie vollstaendig ein Eintrag ist (Preis, Termin, Oeffnungszeiten, Abholzeit
+// auf einen Blick + Telefon + eigenes Foto). Fuer die Auswahl der empfohlenen
+// Ateliers auf der Startseite: nur Eintraege mit moeglichst allen Angaben.
+function completeness(s) {
+  const g = s.glance || {};
+  return (g.price ? 1 : 0) + (g.termin ? 1 : 0) + (g.hours ? 1 : 0) + (g.pickup ? 1 : 0) + (s.phone ? 1 : 0) + (s.images && s.images.length ? 1 : 0);
+}
+
+function compareByCompleteness(a, b) {
+  const featuredA = a.featured ? 1 : 0;
+  const featuredB = b.featured ? 1 : 0;
+  if (featuredA !== featuredB) return featuredB - featuredA;
+  const diff = completeness(b) - completeness(a);
+  if (diff) return diff;
+  return compareStudiosForListing(a, b);
+}
+
+compareStudiosForListing.byCompleteness = compareByCompleteness;
 module.exports = compareStudiosForListing;
