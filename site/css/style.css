@@ -1313,3 +1313,16 @@ h1, h2 { font-family: var(--font-display); font-weight: 600; color: var(--color-
 .leaflet-container .map-card:hover .map-card-name { color: var(--color-accent); }
 .leaflet-container .map-card-btn { color: var(--color-text); }
 .leaflet-container .map-card-btn-primary { color: #fff; }
+
+/* Hinweisband auf der Schweizer Startseite fuer Besucher mit deutscher
+   Browsersprache (siehe ch/index.njk). */
+.region-hint {
+  position: relative; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0.2rem 0.6rem;
+  padding: 0.6rem 2.5rem; background: var(--tag-green-bg); color: var(--tag-green-text); font-size: 0.92rem; text-align: center;
+}
+.region-hint[hidden] { display: none; }
+.region-hint a { color: var(--tag-green-text); font-weight: 600; text-decoration: underline; }
+.region-hint-close {
+  position: absolute; right: 0.5rem; top: 50%; transform: translateY(-50%); width: 28px; height: 28px;
+  border: 0; background: transparent; color: var(--tag-green-text); font-size: 1.4rem; line-height: 1; cursor: pointer;
+}

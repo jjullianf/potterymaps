@@ -92,6 +92,24 @@
 }
 ---
 {% from "studio-card.njk" import card %}
+{% if country.iso == "CH" %}
+<div class="region-hint" id="region-hint" hidden>
+  <span>Du suchst Ateliers in Deutschland?</span>
+  <a href="/de/">Zu potterymaps Deutschland &rarr;</a>
+  <button type="button" class="region-hint-close" id="region-hint-close" aria-label="Hinweis schliessen">&times;</button>
+</div>
+<script>
+  (function () {
+    var langs = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || ""];
+    var german = langs.some(function (l) { return /^de-(DE|AT|LU)$/i.test(l); });
+    var swiss = langs.some(function (l) { return /^(de|fr|it|rm|gsw)-(CH|LI)$/i.test(l); });
+    if (!german || swiss) return;
+    var box = document.getElementById("region-hint");
+    box.hidden = false;
+    document.getElementById("region-hint-close").addEventListener("click", function () { box.hidden = true; });
+  })();
+</script>
+{% endif %}
 <article class="home">
 
   <section class="hero" style="background-image: url('{{ heroImageUrl }}');">
