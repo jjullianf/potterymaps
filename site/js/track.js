@@ -33,9 +33,11 @@
     if (!t || !t.closest) return;
 
     // Karte: Klick auf Pin und auf Link im Popup
-    var popupLink = t.closest(".leaflet-popup a[href]");
+    var popupLink = t.closest(".leaflet-popup a[href], .map-card a[href]");
     if (popupLink) {
-      track("karte_popup_klick", { studio: slugOf(popupLink.getAttribute("href")), seite: pageType() });
+      var card = popupLink.closest(".map-card");
+      var nameLink = card ? card.querySelector(".map-card-name") : popupLink;
+      track("karte_popup_klick", { studio: slugOf(nameLink.getAttribute("href")), seite: pageType() });
       return;
     }
     if (t.closest(".leaflet-marker-icon")) {
