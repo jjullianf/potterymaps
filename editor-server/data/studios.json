@@ -13298,7 +13298,7 @@
       "website": "https://www.baobab-kreativcafe.ch/",
       "email": "baobab.menzingen@gmail.com",
       "opening_hours": "Mo 8–16 Uhr (Frühstück & Backwaren ab 8 Uhr), Di geschlossen, Mi 10:30–16 Uhr, Do geschlossen, Fr 10:30–19 Uhr (Apéro 17:30–19 Uhr), Sa nach Ankündigung, So 10:30–16 Uhr (dreimonatige Testphase, Zeiten können sich noch ändern)",
-      "tags": "birthday-parties, kids-friendly",
+      "tags": "kids-friendly, birthday-parties",
       "price_from": "",
       "price_mug": "",
       "price_plate": "",
@@ -13387,6 +13387,7 @@
     "ceramic-malbar-zuerich": true,
     "toepferei-rundwerk-winterthur": true,
     "die-werkerei-villmergen": true,
-    "atelier-kugelfisch-kreuzlingen": true
+    "atelier-kugelfisch-kreuzlingen": true,
+    "baobab-kreativ-cafe-menzingen": false
   }
 }
